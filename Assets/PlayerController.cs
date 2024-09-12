@@ -62,13 +62,25 @@ public class PlayerController : MonoBehaviour
         }
 
         // Jumping
-        if (Input.GetButtonDown("Jump") && isGrounded)
-        {
-            velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
+        if (Input.GetButtonDown("Jump")){
+            Jump();
         }
+        Fall();
 
-        // Apply gravity
-        velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
     }
+
+    void Jump(){
+        if (isGrounded){
+            velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
+        }
+    }
+
+    void Fall(){
+         // Apply gravity
+        if (! isGrounded){
+            velocity.y += gravity * Time.deltaTime;
+        }
+    }
+
 }
