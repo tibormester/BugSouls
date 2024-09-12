@@ -15,6 +15,9 @@ public class PlayerController : MonoBehaviour
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
 
+    // Rigidbody Variables
+    public float pushPower = 2.0f;
+
     private Vector3 velocity;
     private bool isGrounded;
 
@@ -66,7 +69,8 @@ public class PlayerController : MonoBehaviour
         }
 
         // Jumping
-        if (Input.GetButtonDown("Jump")){
+        if (Input.GetButtonDown("Jump"))
+        {
             Jump();
         }
         Fall();
@@ -74,17 +78,45 @@ public class PlayerController : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
     }
 
-    void Jump(){
-        if (isGrounded){
+    void Jump()
+    {
+        if (isGrounded)
+        {
             velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
         }
     }
 
-    void Fall(){
-         // Apply gravity
-        if (! isGrounded){
+    void Fall()
+    {
+        // Apply gravity
+        if (!isGrounded)
+        {
             velocity.y += gravity * Time.deltaTime;
         }
+    }
+
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        Rigidbody body = hit.collider.attachedRigidbody;
+
+        // no rigidbody
+        if (body == null || body.isKinematic)
+            return;
+
+        // We dont want to push objects below us
+        if (hit.moveDirection.y < -0.3f)
+            return;
+
+        // Calculate push direction from move direction,
+        // we only push objects to the sides never up and down
+        Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
+
+        // If you know how fast your character is trying to move,
+        // then you can also multiply the push velocity by that.
+
+        // Apply the push
+        body.velocity = pushDir * pushPower;
+
     }
 
 }
