@@ -28,6 +28,10 @@ public class PlayerController : MonoBehaviour
     {
         // Get the CharacterController component attached to the player
         controller = GetComponent<CharacterController>();
+
+        // Lock and hide Cursor
+        //Cursor.visible = false; // Not needed with CursorLockMode.Locked
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
