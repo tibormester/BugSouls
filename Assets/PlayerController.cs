@@ -43,6 +43,9 @@ public class PlayerController : MonoBehaviour
     private Vector3 groundNormal;
     private Rigidbody ground;
     private float groundDistance;
+
+    //TODO: Consider changing approach from raycasting to the ground, doing a shape cast at the feet and using the closest terrain as an object
+    //Then we can raycast to the center of the terain object, and using the surface normal at that position for our orientation...? its likely to be approximately the surface we are standing on
     void GroundedRaycast(){
         RaycastHit hitInfo;
         Vector3 globalHorizontal = body.transform.TransformDirection(new Vector3(velocity.x, -0.025f, velocity.z));
