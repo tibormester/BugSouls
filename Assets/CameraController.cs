@@ -6,18 +6,20 @@ public class CameraController : MonoBehaviour
 {
     // Variables for camera movement and control
     public Transform target; // The character transform to follow
+    public PlayerController player; //The player's script so we can send inputs maybe?
     public float distance = 5.0f; // Distance between the camera and the target
     public float height = 2.0f; // Height above the character
-    public float rotationSpeed = 5.0f; // Speed of camera rotation based on mouse movement
-    public float minYAngle = -40f; // Minimum vertical angle for camera rotation
+    public float rotationSpeed = 100.0f; // Speed the camera attempts to match the pitch and yaw
+    public float cameraSpeed = 45f;
+    public float minYAngle = -75f; // Minimum vertical angle for camera rotation
     public float maxYAngle = 80f; // Maximum vertical angle for camera rotation
 
     private float currentYaw = 0f; // Current horizontal angle (yaw)
-    private float currentPitch = 0f; // Current vertical angle (pitch)
+    private float currentPitch = -15f; // Current vertical angle (pitch)
 
     // Sensitivity for mouse movement
-    public float mouseSensitivityX = 100f;
-    public float mouseSensitivityY = 80f;
+    public float mouseSensitivityX = 2560f;
+    public float mouseSensitivityY = 2560f;
 
     void LateUpdate()
     {
@@ -38,14 +40,19 @@ public class CameraController : MonoBehaviour
         currentPitch = Mathf.Clamp(currentPitch, minYAngle, maxYAngle);
 
         // Rotate the camera around the target based on yaw (horizontal rotation)
+        Quaternion refrenceRotation = Quaternion.FromToRotation(Vector3.up, target.transform.up);
         Quaternion rotation = Quaternion.Euler(currentPitch, currentYaw, 0f);
 
         // Calculate the new camera position behind and above the target
+        Quaternion cameraTargetRotation = refrenceRotation * rotation;
         Vector3 offset = new Vector3(0f, height, -distance);
-        Vector3 newPosition = target.position + rotation * offset;
 
-        // Set the camera position and rotation
-        transform.position = newPosition;
-        transform.LookAt(target.position + Vector3.up * height); // Look slightly above the target
+        // Set the camera position
+        transform.position = Vector3.Slerp(transform.position, target.position + cameraTargetRotation * offset, cameraSpeed * Time.deltaTime);
+
+        // LERPS to the target rotation
+        transform.rotation = Quaternion.Slerp(transform.rotation, cameraTargetRotation, rotationSpeed * Time.deltaTime);
+
+        
     }
 }
