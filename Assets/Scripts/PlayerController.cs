@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.ConstrainedExecution;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,6 +15,7 @@ public class PlayerController : MonoBehaviour
     public float jumpForce = 1.5f;
     public float gravity = -1028f;
     public float feetDistance = 0.2f; // Distance from the feet's position to the outside of the player model
+    public float groundedDistance = 0.1f; // Maximum distance from the feet distance to the ground to be considered grounded
 
     private Vector3 velocity;
 
@@ -36,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
     // Ground detection paramters
     public Transform groundCheck; //Where to start the ground raycast from
-    public float checkDistance = 1.2f; //How far down to check
+    public float checkDistance = 10f; //How far down to check
     public LayerMask groundMask; //The terrain's layer mask
     // Ground Raycast results
     private bool isGrounded; 
@@ -50,36 +53,22 @@ public class PlayerController : MonoBehaviour
         RaycastHit hitInfo;
         Vector3 globalHorizontal = body.transform.TransformDirection(new Vector3(velocity.x, -0.025f, velocity.z));
         //Starts at the feet position and checks down from their orientation by ground distance for terrain
-        if (Physics.Raycast(groundCheck.position,  -body.transform.up, out hitInfo, checkDistance, groundMask)){
-            
-            isGrounded = true;
-            groundNormal = hitInfo.normal;
-            ground = hitInfo.rigidbody;
-            groundDistance = hitInfo.distance - feetDistance;
-        //Check towards the global velocity direction
-        } else if (Physics.Raycast(groundCheck.position, globalHorizontal, out hitInfo, checkDistance * 1.7f, groundMask)){
-            
-            isGrounded = true;
-            groundNormal = hitInfo.normal;
-            ground = hitInfo.rigidbody;
-            groundDistance = hitInfo.distance - feetDistance;
-        //Check back from the global velocity direction
-        }else if (Physics.Raycast(groundCheck.position,  globalHorizontal, out hitInfo, checkDistance * 1.7f, groundMask)){
-            
-            isGrounded = true;
-            groundNormal = hitInfo.normal;
-            ground = hitInfo.rigidbody;
-            groundDistance = hitInfo.distance - feetDistance;
-        //Otherwise say we have fallen off
-        //This is where we could implement some coyote time to tick the timer later, but a tiny bit is built into the check distance
-        //This is because as long as ur feet are within check distance of the terrain, ur considered grounded, this doesnt work as well if u run off a ledge
-        //But thats why we are checking in the direction of the velocity (also to get around the capsule collider getting stuck on edges)
-        } else{
-            Debug.DrawRay(groundCheck.position, -transform.up * checkDistance, Color.red);
-            Debug.DrawRay(groundCheck.position, (-transform.up + transform.TransformDirection(velocity.normalized)) * checkDistance, Color.blue);
-            Debug.DrawRay(groundCheck.position, (-transform.up - transform.TransformDirection(velocity.normalized)) * checkDistance, Color.green);
+        if (Physics.Raycast(groundCheck.position,  -body.transform.up, out hitInfo, checkDistance, groundMask)
+            || Physics.Raycast(groundCheck.position, globalHorizontal, out hitInfo, checkDistance, groundMask)){
 
+            groundNormal = hitInfo.normal;
+            ground = hitInfo.rigidbody;
+            groundDistance = hitInfo.distance - feetDistance;
+
+            if (groundDistance < groundedDistance){
+                isGrounded = true;
+            } else{
+                isGrounded = false;
+            }
+
+        } else {
             isGrounded = false;
+            groundNormal = Vector3.up;
         }
     }
     void AlignSurface(){
@@ -173,7 +162,8 @@ public class PlayerController : MonoBehaviour
         if (!isGrounded){
             RaycastHit hitInfo;
             //Check if we are balancing ontop of something that isnt terraint
-            if (Physics.Raycast(groundCheck.position,  -body.transform.up, out hitInfo, checkDistance)){
+            if (Physics.Raycast(groundCheck.position,  -body.transform.up, out hitInfo, checkDistance)
+                    && hitInfo.distance - feetDistance < groundedDistance){
                 isGrounded = true;
                 groundDistance = hitInfo.distance - feetDistance;
             }else{

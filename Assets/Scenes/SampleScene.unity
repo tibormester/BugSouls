@@ -251,9 +251,10 @@ MonoBehaviour:
   jumpForce: 1.5
   gravity: -10
   feetDistance: 0.2
+  groundedDistance: 0.1
   cameraTransform: {fileID: 963194228}
   groundCheck: {fileID: 1911350331}
-  checkDistance: 1
+  checkDistance: 15
   groundMask:
     serializedVersion: 2
     m_Bits: 8
