@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -20,6 +18,12 @@ public class CameraController : MonoBehaviour
     public float mouseSensitivityX = 2560f;
     public float mouseSensitivityY = 2560f;
 
+    private Vector3 front;
+
+
+    void Start(){
+        front = target.transform.forward;
+    }
     void LateUpdate()
     {
         if (target == null)
@@ -39,12 +43,12 @@ public class CameraController : MonoBehaviour
         currentPitch = Mathf.Clamp(currentPitch, minYAngle, maxYAngle);
 
         // Rotate the camera around the target based on yaw (horizontal rotation)
-        //Quaternion refrenceRotation = Quaternion.LookRotation(Vector3.forward, target.transform.up);
-        Vector3 right = Vector3.Cross(Vector3.forward, target.transform.up).normalized;
-        Vector3 forward = Vector3.Cross(right, target.transform.up).normalized;
-        Quaternion refrenceRotation = Quaternion.LookRotation(forward, target.transform.up);
-        //Quaternion refrenceRotation = target.transform.rotation;
-        Quaternion rotation = Quaternion.Euler(currentPitch, currentYaw, 0f);
+        Vector3 right = Vector3.Cross(front, target.transform.up).normalized; //Use the character's up and the previous forward to get the right angle
+        front = -Vector3.Cross(right, target.transform.up).normalized; //set the forward based on how the up has changed
+        Quaternion refrenceRotation = Quaternion.LookRotation(front, target.transform.up); //get the orientation based on previous forward and up
+
+
+        Quaternion rotation = Quaternion.Euler(currentPitch, currentYaw, 0f); //get mouse pitch and raw quaterion
 
         // Calculate the new camera position behind and above the target
         Quaternion cameraTargetRotation = refrenceRotation * rotation;
