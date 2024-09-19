@@ -53,8 +53,9 @@ public class PlayerController : MonoBehaviour
         RaycastHit hitInfo;
         Vector3 globalHorizontal = body.transform.TransformDirection(new Vector3(velocity.x, -0.025f, velocity.z));
         //Starts at the feet position and checks down from their orientation by ground distance for terrain
-        if (Physics.Raycast(groundCheck.position,  -body.transform.up, out hitInfo, checkDistance, groundMask)
-            || Physics.Raycast(groundCheck.position, globalHorizontal, out hitInfo, checkDistance, groundMask)){
+        if (Physics.Raycast(groundCheck.position, globalHorizontal, out hitInfo, 1f, groundMask) ||
+                Physics.Raycast(groundCheck.position,  -body.transform.up, out hitInfo, checkDistance, groundMask)
+                ){
 
             groundNormal = hitInfo.normal;
             ground = hitInfo.rigidbody;

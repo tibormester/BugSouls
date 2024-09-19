@@ -6,7 +6,6 @@ public class CameraController : MonoBehaviour
 {
     // Variables for camera movement and control
     public Transform target; // The character transform to follow
-    public PlayerController player; //The player's script so we can send inputs maybe?
     public float distance = 5.0f; // Distance between the camera and the target
     public float height = 2.0f; // Height above the character
     public float rotationSpeed = 100.0f; // Speed the camera attempts to match the pitch and yaw
@@ -15,7 +14,7 @@ public class CameraController : MonoBehaviour
     public float maxYAngle = 80f; // Maximum vertical angle for camera rotation
 
     private float currentYaw = 0f; // Current horizontal angle (yaw)
-    private float currentPitch = -15f; // Current vertical angle (pitch)
+    private float currentPitch = 35f; // Current vertical angle (pitch)
 
     // Sensitivity for mouse movement
     public float mouseSensitivityX = 2560f;
@@ -40,7 +39,9 @@ public class CameraController : MonoBehaviour
         currentPitch = Mathf.Clamp(currentPitch, minYAngle, maxYAngle);
 
         // Rotate the camera around the target based on yaw (horizontal rotation)
-        Quaternion refrenceRotation = Quaternion.LookRotation(Vector3.forward, target.transform.up);
+        //Quaternion refrenceRotation = Quaternion.LookRotation(Vector3.forward, target.transform.up);
+        Quaternion refrenceRotation = Quaternion.FromToRotation(Vector3.up, target.transform.up);
+        //Quaternion refrenceRotation = target.transform.rotation;
         Quaternion rotation = Quaternion.Euler(currentPitch, currentYaw, 0f);
 
         // Calculate the new camera position behind and above the target
@@ -48,11 +49,11 @@ public class CameraController : MonoBehaviour
         Vector3 offset = new Vector3(0f, height, -distance);
 
         // Set the camera position
-        transform.position = Vector3.Slerp(transform.position, target.position + cameraTargetRotation * offset, cameraSpeed * Time.deltaTime);
-        //transform.position = target.position + cameraTargetRotation * offset;
+        //transform.position = Vector3.Slerp(transform.position, target.position + cameraTargetRotation * offset, cameraSpeed * Time.deltaTime);
+        transform.position = target.position + cameraTargetRotation * offset;
         // LERPS to the target rotation
-        transform.rotation = Quaternion.Slerp(transform.rotation, cameraTargetRotation, rotationSpeed * Time.deltaTime);
-        //transform.rotation = cameraTargetRotation;
+        //transform.rotation = Quaternion.Slerp(transform.rotation, cameraTargetRotation, rotationSpeed * Time.deltaTime);
+        transform.rotation = cameraTargetRotation;
         
     }
 }
