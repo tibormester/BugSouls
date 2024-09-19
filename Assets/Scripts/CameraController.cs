@@ -40,7 +40,9 @@ public class CameraController : MonoBehaviour
 
         // Rotate the camera around the target based on yaw (horizontal rotation)
         //Quaternion refrenceRotation = Quaternion.LookRotation(Vector3.forward, target.transform.up);
-        Quaternion refrenceRotation = Quaternion.FromToRotation(Vector3.up, target.transform.up);
+        Vector3 right = Vector3.Cross(Vector3.forward, target.transform.up).normalized;
+        Vector3 forward = Vector3.Cross(right, target.transform.up).normalized;
+        Quaternion refrenceRotation = Quaternion.LookRotation(forward, target.transform.up);
         //Quaternion refrenceRotation = target.transform.rotation;
         Quaternion rotation = Quaternion.Euler(currentPitch, currentYaw, 0f);
 
