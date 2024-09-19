@@ -25,11 +25,11 @@ Material:
     m_TexEnvs:
     - _BumpMap:
         m_Texture: {fileID: 2800000, guid: bef601a267154d74e9a7f90ee0bdee70, type: 3}
-        m_Scale: {x: 4, y: 2}
+        m_Scale: {x: 2, y: 10}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: f6a139e5a1255564ea3cf18f7b29e075, type: 3}
-        m_Scale: {x: 4, y: 2}
+        m_Scale: {x: 2, y: 10}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
