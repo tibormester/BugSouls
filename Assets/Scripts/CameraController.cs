@@ -40,7 +40,7 @@ public class CameraController : MonoBehaviour
         currentPitch = Mathf.Clamp(currentPitch, minYAngle, maxYAngle);
 
         // Rotate the camera around the target based on yaw (horizontal rotation)
-        Quaternion refrenceRotation = Quaternion.FromToRotation(Vector3.up, target.transform.up);
+        Quaternion refrenceRotation = Quaternion.LookRotation(Vector3.forward, target.transform.up);
         Quaternion rotation = Quaternion.Euler(currentPitch, currentYaw, 0f);
 
         // Calculate the new camera position behind and above the target
@@ -48,11 +48,11 @@ public class CameraController : MonoBehaviour
         Vector3 offset = new Vector3(0f, height, -distance);
 
         // Set the camera position
-        transform.position = Vector3.Slerp(transform.position, target.position + cameraTargetRotation * offset, cameraSpeed * Time.deltaTime);
-
+        //transform.position = Vector3.Slerp(transform.position, target.position + cameraTargetRotation * offset, cameraSpeed * Time.deltaTime);
+        transform.position = target.position + cameraTargetRotation * offset;
         // LERPS to the target rotation
-        transform.rotation = Quaternion.Slerp(transform.rotation, cameraTargetRotation, rotationSpeed * Time.deltaTime);
-
+        //transform.rotation = Quaternion.Slerp(transform.rotation, cameraTargetRotation, rotationSpeed * Time.deltaTime);
+        transform.rotation = cameraTargetRotation;
         
     }
 }
