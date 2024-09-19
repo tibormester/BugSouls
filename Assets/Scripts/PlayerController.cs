@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour
     }
     void StickingForce(){
         if (isGrounded && velocity.y <= 0){
-            velocity.y = -5f * groundDistance * groundDistance * groundDistance; // Small value to stick the player to the ground scales with distance to the ground, needs to maintain sign so is x^3, could use sign(x)*x^2
+            velocity.y = gravity * groundDistance * Mathf.Sign(groundDistance); // Small value to stick the player to the ground scales with distance to the ground, needs to maintain sign so is x^3, could use sign(x)*x^2
         }
     }
     void Movement(){

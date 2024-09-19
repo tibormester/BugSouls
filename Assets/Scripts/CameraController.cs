@@ -48,11 +48,11 @@ public class CameraController : MonoBehaviour
         Vector3 offset = new Vector3(0f, height, -distance);
 
         // Set the camera position
-        //transform.position = Vector3.Slerp(transform.position, target.position + cameraTargetRotation * offset, cameraSpeed * Time.deltaTime);
-        transform.position = target.position + cameraTargetRotation * offset;
+        transform.position = Vector3.Slerp(transform.position, target.position + cameraTargetRotation * offset, cameraSpeed * Time.deltaTime);
+        //transform.position = target.position + cameraTargetRotation * offset;
         // LERPS to the target rotation
-        //transform.rotation = Quaternion.Slerp(transform.rotation, cameraTargetRotation, rotationSpeed * Time.deltaTime);
-        transform.rotation = cameraTargetRotation;
+        transform.rotation = Quaternion.Slerp(transform.rotation, cameraTargetRotation, rotationSpeed * Time.deltaTime);
+        //transform.rotation = cameraTargetRotation;
         
     }
 }
