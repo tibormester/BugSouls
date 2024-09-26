@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
     // Ground Raycast results
     private bool isGrounded; 
     private Vector3 groundNormal;
-    private Rigidbody ground;
+    private Vector3 groundFlatNormal;
     private float groundDistance;
 
     //TODO: Consider changing approach from raycasting to the ground, doing a shape cast at the feet and using the closest terrain as an object
@@ -57,8 +57,8 @@ public class PlayerController : MonoBehaviour
                 Physics.Raycast(groundCheck.position,  -body.transform.up, out hitInfo, checkDistance, groundMask)
                 ){
 
-            groundNormal = hitInfo.normal;
-            ground = hitInfo.rigidbody;
+            groundNormal = hitInfo.SmoothedNormal();
+            groundFlatNormal = hitInfo.normal;
             groundDistance = hitInfo.distance - feetDistance;
 
             if (groundDistance < groundedDistance){
@@ -70,6 +70,7 @@ public class PlayerController : MonoBehaviour
         } else {
             isGrounded = false;
             groundNormal = Vector3.up;
+            groundFlatNormal = Vector3.up;
         }
     }
     void AlignSurface(){
@@ -94,6 +95,7 @@ public class PlayerController : MonoBehaviour
         StickingForce();
         Movement();
         AlignSurface();
+        //Quaternion flatten = Quaternion.FromToRotation(body.transform.up, groundFlatNormal);
         body.velocity =  body.transform.TransformDirection(velocity);
     }
 
