@@ -4,6 +4,7 @@ public class CameraController : MonoBehaviour
 {
     // Variables for camera movement and control
     public Transform target; // The character transform to follow
+    private CharacterMovement targetMovement; //The target's movement script to call movement functions on
     public float distance = 5.0f; // Distance between the camera and the target
     public float height = 2.0f; // Height above the character
     public float rotationSpeed = 100.0f; // Speed the camera attempts to match the pitch and yaw
@@ -23,14 +24,18 @@ public class CameraController : MonoBehaviour
 
     void Start(){
         front = target.transform.forward;
+        targetMovement = target.gameObject.GetComponent<CharacterMovement>();
+        Cursor.lockState = CursorLockMode.Locked;// Lock and hide Cursor
     }
-    void LateUpdate()
-    {
-        if (target == null)
-        {
-            return;
+    void LateUpdate(){
+        
+        MouseInputs();
+        Movement();
+        if(Input.GetButtonDown("Jump")){
+            targetMovement.Jump();
         }
-
+    }
+    void MouseInputs(){
         // Get mouse input for rotation
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivityX * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivityY * Time.deltaTime;
@@ -60,6 +65,27 @@ public class CameraController : MonoBehaviour
         // LERPS to the target rotation
         //transform.rotation = Quaternion.Slerp(transform.rotation, cameraTargetRotation, rotationSpeed * Time.deltaTime);
         transform.rotation = cameraTargetRotation;
-        
+    }
+
+
+
+    void Movement(){
+        // Get input for movement
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+        // Calculate the movement direction relative to the camera
+        Vector3 camera_relative = ((vertical * transform.forward) + (horizontal * transform.right)).normalized;
+
+        if (moved || camera_relative.sqrMagnitude < 0.1f){//Some script so that the movement gets accumulated until the fixed update frame, but if the movement is stopped, cancel the accumulation
+            moved = false;
+            accum = Vector3.zero;
+        }
+        accum += camera_relative;
+    }
+    private bool moved = false;
+    private Vector3 accum = Vector3.zero;
+    void FixedUpdate(){
+        moved = true;
+        targetMovement.Move(accum);
     }
 }
