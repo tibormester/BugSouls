@@ -10,7 +10,7 @@ public class CustomPhysicsBody : MonoBehaviour
     public bool IsGrounded() => timer < coyoteTime;
     public void Start(){
         this.body = GetComponent<Rigidbody>();
-        body.freezeRotation = true;
+        //body.freezeRotation = true;
     }
 
     [Header("Global Velocity")]
@@ -29,7 +29,7 @@ public class CustomPhysicsBody : MonoBehaviour
         //Do stuff that might change the unpowered velocity (like gravity or drag)
         Fall();
         //Sets the rigid bodies velocity to the sum of powered + unpowered velocity
-        body.velocity = body.transform.TransformDirection(unpoweredVelocity) + poweredVelocity;
+        body.velocity = unpoweredVelocity + poweredVelocity;
         prevVelocity = body.velocity;
         
         prevPoweredVelocity = poweredVelocity;
@@ -44,7 +44,7 @@ public class CustomPhysicsBody : MonoBehaviour
     //PRIVATE VARIABLES
     private bool isGrounded = true; //If theres a ground within ground distance
     private bool freeFall = false; //If there isnt a ground within check distance
-    private Vector3 groundNormal; //The ground's normal 
+    private Vector3 groundNormal = Vector3.up; //The ground's normal 
     private float groundDistance; //How far from the terrain or an object, not really useful rn tbh
 
     public void GroundedRaycast()
@@ -59,7 +59,9 @@ public class CustomPhysicsBody : MonoBehaviour
         RaycastHit hitInfo;
         //We want to check infront of the player to enable them to climb up walls
         Debug.DrawRay(transform.position, body.velocity.normalized * velocityCheckDistance, Color.red);
-        if (Physics.Raycast(transform.position, body.velocity.normalized, out hitInfo, velocityCheckDistance, groundMask) ||
+        if (Physics.Raycast(transform.position, body.velocity.normalized, out hitInfo, velocityCheckDistance, groundMask) ||//Forward
+            Physics.Raycast(transform.position, -groundNormal, out hitInfo, checkDistance, groundMask) ||//Ground Down
+            Physics.Raycast(transform.position, body.velocity.normalized -body.transform.up, out hitInfo, velocityCheckDistance, groundMask) ||//Diaganol down
             Physics.Raycast(transform.position, -body.transform.up, out hitInfo, checkDistance, groundMask)) //Terrain underneath the player or in their direction
         {
             groundNormal = hitInfo.normal;
@@ -91,12 +93,7 @@ public class CustomPhysicsBody : MonoBehaviour
     public float drag = 0.25f;
     private void ApplyDrag(){
         if (inertial){
-            unpoweredVelocity = body.transform.InverseTransformDirection(body.velocity - prevPoweredVelocity);
-            //Vector3 physicsDelta = body.velocity - prevVelocity;
-            //if(physicsDelta.sqrMagnitude < 0.00001f ){
-            //    physicsDelta = Vector3.zero;
-            //}
-            //unpoweredVelocity = unpoweredVelocity + body.transform.InverseTransformDirection(physicsDelta);
+            unpoweredVelocity = body.velocity - prevPoweredVelocity;
         }
         unpoweredVelocity -= drag * unpoweredVelocity * Time.fixedDeltaTime;
     }
@@ -104,7 +101,7 @@ public class CustomPhysicsBody : MonoBehaviour
     [Header("Grounded Alignment")]
     [Tooltip("How long in the air before the player is considered not grounded. If it is 0f, this is immediately. If it is <0f, then the character is never grounded.")]
     public float coyoteTime = 0.1f;
-    public float orientationSpeed = 4f;
+    public float orientationSpeed = 1f;
     public void AlignSurface(){
         Quaternion targetRotation = Quaternion.FromToRotation(body.transform.up, groundNormal) * body.rotation;
         body.MoveRotation(Quaternion.Slerp(body.rotation, targetRotation, orientationSpeed * Time.fixedDeltaTime));
@@ -142,9 +139,15 @@ public class CustomPhysicsBody : MonoBehaviour
         groundNormal = Vector3.up;
     }
     private void ApplyGravity(){
-        unpoweredVelocity.y += gravity * Time.fixedDeltaTime;
+        
         if (IsGrounded()){
-            unpoweredVelocity.y = gravity * Time.fixedDeltaTime * groundDistance;
+            float dot = Vector3.Dot(unpoweredVelocity, groundNormal);
+            if (0.1f > dot || -5f < dot){
+                unpoweredVelocity +=  groundNormal * (-0.5f -Vector3.Dot(unpoweredVelocity, groundNormal));
+            }
+            //unpoweredVelocity = gravity * Time.fixedDeltaTime * groundDistance * groundNormal;
+        }else{
+            unpoweredVelocity += gravity * Time.fixedDeltaTime * groundNormal;
         }
     }
 }

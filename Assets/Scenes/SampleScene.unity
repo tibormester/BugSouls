@@ -1318,14 +1318,14 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 8
-  checkDistance: 100
-  velocityCheckDistance: 5
+  checkDistance: 150
+  velocityCheckDistance: 15
   groundedDistance: 0.05
   feetDistance: 0.5
   inertial: 1
   drag: 0.25
   coyoteTime: 0.1
-  orientationSpeed: 4
+  orientationSpeed: 1
   gravity: -9.8
   coyoteOrientationTime: 2
   aerialTimeLimit: 0
@@ -1339,7 +1339,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -1354,7 +1354,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!135 &1157069491
 SphereCollider:
@@ -2224,7 +2224,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -2239,7 +2239,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!114 &1955482961
 MonoBehaviour:
@@ -2258,14 +2258,14 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 8
-  checkDistance: 100
-  velocityCheckDistance: 5
+  checkDistance: 150
+  velocityCheckDistance: 15
   groundedDistance: 0.05
   feetDistance: 0.5
   inertial: 1
   drag: 0.25
   coyoteTime: 0.1
-  orientationSpeed: 4
+  orientationSpeed: 1
   gravity: -9.8
   coyoteOrientationTime: 2
   aerialTimeLimit: 0

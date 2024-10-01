@@ -16,6 +16,8 @@ public class Throwable : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate() {
         if (held){
+            transform.rotation = holder.transform.rotation;
+
             transform.position = holder.transform.position + holder.transform.TransformDirection(relative);
         }
     }
@@ -24,13 +26,11 @@ public class Throwable : MonoBehaviour
     private Vector3 relative = Vector3.zero;
     public void PickedUp(GameObject parent, Vector3 localPosition){
         held = true;
-        rb.isKinematic = true;
         holder = parent;
         relative = localPosition;
     }
     public void Thrown(Vector3 velocity){
         held = false;
-        rb.isKinematic = false;
         rb.velocity = velocity;
     }
 }
