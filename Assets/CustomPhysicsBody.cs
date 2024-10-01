@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class CustomPhysicsBody : MonoBehaviour
@@ -9,21 +10,29 @@ public class CustomPhysicsBody : MonoBehaviour
     public bool IsGrounded() => timer < coyoteTime;
     public void Start(){
         this.body = GetComponent<Rigidbody>();
+        body.freezeRotation = true;
     }
 
     [Header("Global Velocity")]
     private Vector3 prevPoweredVelocity = Vector3.zero;//Store between fixed updates
     [Tooltip("This velocity is applied to the object each frame but in a non cumulative fashion. That is, at the start of a frame, the previous frames powered velocity is set to zero")]
     public Vector3 poweredVelocity = Vector3.zero; //Velocity to apply each frame in world coordinates
+    [Tooltip("Do not change this, it is public only for debuging with the editor")]
     public Vector3 unpoweredVelocity = Vector3.zero; //Rigidbody velocity - poweredVelocity, so we can 
-
+    private Vector3 prevVelocity = Vector3.zero;
+    //TODO: Implement a way to have inertial objects with unfrozen rotations
     public void FixedUpdate(){//PoweredVelocity may change between frames due to player/AI inputs, while unpoweredVelocity changes due to the physics simulation (collisions)
-        //Do stuff that might change the unpowered velocity (like gravity or drag)
-        GroundedRaycast();
         AlignSurface();
+        GroundedRaycast();
+        //Find the physics velocity changes and add it to the unpowered velocity
+        ApplyDrag();
+        //Do stuff that might change the unpowered velocity (like gravity or drag)
         Fall();
         //Sets the rigid bodies velocity to the sum of powered + unpowered velocity
         body.velocity = body.transform.TransformDirection(unpoweredVelocity) + poweredVelocity;
+        prevVelocity = body.velocity;
+        
+        prevPoweredVelocity = poweredVelocity;
     }
     [Header("Ground Detection")]
     public LayerMask groundMask;
@@ -74,6 +83,21 @@ public class CustomPhysicsBody : MonoBehaviour
             isGrounded = false;
         }
         return false;
+    }
+    [Header("Drag")]
+    [Tooltip("If inertial, velocities from collisions are maintained in the next frame. WARNING inertial objects are a bit buggy when under powered movement... maybe adding drag will mitigate this issue?")]
+    public bool inertial = true;
+    [Tooltip("Drag coefficient is only applied to the unpowered velocity. if 0 no drag, <0 speeds up, 1 stops in 1 second")]
+    public float drag = 0.25f;
+    private void ApplyDrag(){
+        if (inertial){
+            Vector3 physicsDelta = body.velocity - prevVelocity;
+            if(physicsDelta.sqrMagnitude < 0.00001f ){
+                physicsDelta = Vector3.zero;
+            }
+            unpoweredVelocity = unpoweredVelocity + body.transform.InverseTransformDirection(physicsDelta);
+        }
+        unpoweredVelocity -= drag * unpoweredVelocity * Time.fixedDeltaTime;
     }
 
     [Header("Grounded Alignment")]
