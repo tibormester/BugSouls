@@ -54,9 +54,10 @@ public class CameraController : MonoBehaviour
         }
         
     }
+    public float throwStrength = 25f;
     private void Throw(){
         if(holding){
-            held.GetComponent<Throwable>().Thrown(cam.ScreenPointToRay(Input.mousePosition).direction.normalized * 25f);
+            held.GetComponent<Throwable>().Thrown(cam.ScreenPointToRay(Input.mousePosition).direction.normalized * throwStrength);
             holding = false;
 
         }

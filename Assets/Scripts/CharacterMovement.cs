@@ -32,8 +32,8 @@ public class CharacterMovement : MonoBehaviour
     public float rotationSpeed = 32;
     public float aerialSpeedCoefficient = 0.1f;
     //Takes in a desired input vector in world coordinates, projects it into local coordinates, removes vertical velocity, scales to movement speed, rotates towards movement direction
-    public void Move(Vector3 world_vector){
-        moveDirection += world_vector;
+    public void Move(Vector3 world_vector, float distance = 999f){
+        moveDirection += world_vector.normalized * distance;
     }
     private void horizontalVelocity(Vector3 world_vector){
         float distance = world_vector.magnitude;
