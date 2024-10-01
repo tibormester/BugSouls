@@ -456,7 +456,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveDirection: {x: 0, y: 0, z: 0}
-  moveSpeed: 24
+  moveSpeed: 12
   rotationSpeed: 32
   aerialSpeedCoefficient: 0.1
   jumpForce: 3
@@ -1399,6 +1399,7 @@ MonoBehaviour:
   terrain:
     serializedVersion: 2
     m_Bits: 8
+  throwStrength: 25
 --- !u!1 &1157069488
 GameObject:
   m_ObjectHideFlags: 0
@@ -1966,7 +1967,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveDirection: {x: 0, y: 0, z: 0}
-  moveSpeed: 24
+  moveSpeed: 8
   rotationSpeed: 32
   aerialSpeedCoefficient: 0.1
   jumpForce: 3
@@ -2101,8 +2102,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 251732937}
-  speedMultiplier: 1
   minDistance: 2
+  maxDistance: 3
 --- !u!1 &1451468389
 GameObject:
   m_ObjectHideFlags: 0
