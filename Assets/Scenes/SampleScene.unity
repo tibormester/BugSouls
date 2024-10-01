@@ -456,7 +456,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveDirection: {x: 0, y: 0, z: 0}
-  moveSpeed: 12
+  moveSpeed: 16
   rotationSpeed: 32
   aerialSpeedCoefficient: 0.1
   jumpForce: 3
@@ -1319,7 +1319,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   checkDistance: 150
-  velocityCheckDistance: 15
+  velocityCheckDistance: 5
   groundedDistance: 0.05
   feetDistance: 0.5
   inertial: 1
@@ -2259,7 +2259,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   checkDistance: 150
-  velocityCheckDistance: 15
+  velocityCheckDistance: 5
   groundedDistance: 0.05
   feetDistance: 0.5
   inertial: 1
