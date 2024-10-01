@@ -3,6 +3,8 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     // Variables for camera movement and control
+    public LayerMask ignorePlayerLayerMask; // Assign a layer mask to ignore the player's layer
+
     public Transform target; // The character transform to follow
     private CharacterMovement targetMovement; //The target's movement script to call movement functions on
     public float distance = 5.0f; // Distance between the camera and the target
@@ -21,14 +23,64 @@ public class CameraController : MonoBehaviour
 
     private Vector3 front;
 
-
+    private Camera cam;
     void Start(){
         front = target.transform.forward;
         targetMovement = target.gameObject.GetComponent<CharacterMovement>();
+        cam = GetComponent<Camera>();
         Cursor.lockState = CursorLockMode.Locked;// Lock and hide Cursor
     }
-    void LateUpdate(){
+    public Transform crossHair;
+    public LayerMask throwable;
+    public LayerMask terrain;
+    private bool holding = false;
+    private GameObject held;
+    void Update(){
+        // Perform raycast from the camera
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition); // Cast ray from camera, can also use cam.transform.forward for a different direction
+        RaycastHit hit;
+
+        // Raycast using the mask to ignore the player's layer
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, ~ignorePlayerLayerMask))
+        {
+            crossHair.position = hit.point;
+        }
+        if (Input.GetMouseButtonDown(0)){
+            if (holding){
+                Throw();
+            }else{
+                PickUp();
+            }
+        }
         
+    }
+    private void Throw(){
+        if(holding){
+            held.GetComponent<Throwable>().Thrown(cam.ScreenPointToRay(Input.mousePosition).direction.normalized * 25f);
+            holding = false;
+
+        }
+    }
+    private void PickUp(){
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition); // Cast ray from camera, can also use cam.transform.forward for a different direction
+        RaycastHit hit;
+
+        // Raycast using the mask to ignore the player's layer
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, throwable))
+        {
+            // If we hit something that is not the player
+            if (hit.transform != target.transform)
+            {
+                // Log or do something with the hit object
+                Debug.Log("picked object: " + hit.transform.name);
+                holding = true;
+                held = hit.rigidbody.gameObject;
+                held.GetComponent<Throwable>().PickedUp(target.gameObject, new Vector3(1.1f, 0.2f, 1.1f));
+            }
+        }
+    }
+
+    void LateUpdate(){
         MouseInputs();
         Movement();
         if(Input.GetButtonDown("Jump")){
@@ -82,6 +134,7 @@ public class CameraController : MonoBehaviour
         }
         accum += camera_relative;
     }
+
     private bool moved = false;
     private Vector3 accum = Vector3.zero;
     void FixedUpdate(){

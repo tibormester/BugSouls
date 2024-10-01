@@ -36,7 +36,7 @@ public class CustomPhysicsBody : MonoBehaviour
     }
     [Header("Ground Detection")]
     public LayerMask groundMask;
-    public float checkDistance = 10f;
+    public float checkDistance = 150f;
     public float velocityCheckDistance = 2f;
     public float groundedDistance = 0.1f;
     public float feetDistance = 1f;
@@ -91,11 +91,12 @@ public class CustomPhysicsBody : MonoBehaviour
     public float drag = 0.25f;
     private void ApplyDrag(){
         if (inertial){
-            Vector3 physicsDelta = body.velocity - prevVelocity;
-            if(physicsDelta.sqrMagnitude < 0.00001f ){
-                physicsDelta = Vector3.zero;
-            }
-            unpoweredVelocity = unpoweredVelocity + body.transform.InverseTransformDirection(physicsDelta);
+            unpoweredVelocity = body.transform.InverseTransformDirection(body.velocity - prevPoweredVelocity);
+            //Vector3 physicsDelta = body.velocity - prevVelocity;
+            //if(physicsDelta.sqrMagnitude < 0.00001f ){
+            //    physicsDelta = Vector3.zero;
+            //}
+            //unpoweredVelocity = unpoweredVelocity + body.transform.InverseTransformDirection(physicsDelta);
         }
         unpoweredVelocity -= drag * unpoweredVelocity * Time.fixedDeltaTime;
     }
