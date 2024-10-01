@@ -28,10 +28,18 @@ public class CustomPhysicsBody : MonoBehaviour
         ApplyDrag();
         //Do stuff that might change the unpowered velocity (like gravity or drag)
         Fall();
-        //Sets the rigid bodies velocity to the sum of powered + unpowered velocity
-        body.velocity = unpoweredVelocity + poweredVelocity;
+        //
+        // Smooth transition between powered and unpowered velocity to avoid snapping
+        poweredVelocity = SmoothPoweredMovement(poweredVelocity);
+        if (poweredVelocity.magnitude > 0){
+            // When powered velocity is active, smoothly blend with unpowered velocity
+            body.velocity = Vector3.Lerp(unpoweredVelocity + poweredVelocity, poweredVelocity, 0.1f);
+        }
+        else{
+            // No powered velocity, use only unpowered velocity
+            body.velocity = unpoweredVelocity;
+        }
         prevVelocity = body.velocity;
-        
         prevPoweredVelocity = poweredVelocity;
     }
     [Header("Ground Detection")]
@@ -62,7 +70,7 @@ public class CustomPhysicsBody : MonoBehaviour
         if (Physics.Raycast(transform.position, body.velocity.normalized, out hitInfo, velocityCheckDistance, groundMask) ||//Forward
             Physics.Raycast(transform.position, -groundNormal, out hitInfo, checkDistance, groundMask) ||//Ground Down
             Physics.Raycast(transform.position, body.velocity.normalized -body.transform.up, out hitInfo, velocityCheckDistance, groundMask) ||//Diaganol down
-            Physics.Raycast(transform.position, -body.transform.up, out hitInfo, checkDistance, groundMask)) //Terrain underneath the player or in their direction
+            Physics.Raycast(transform.position, -body.transform.up, out hitInfo, velocityCheckDistance, groundMask)) //Terrain underneath the player or in their direction
         {
             groundNormal = hitInfo.normal;
             groundDistance = hitInfo.distance - feetDistance;
@@ -92,10 +100,15 @@ public class CustomPhysicsBody : MonoBehaviour
     [Tooltip("Drag coefficient is only applied to the unpowered velocity. if 0 no drag, <0 speeds up, 1 stops in 1 second")]
     public float drag = 0.25f;
     private void ApplyDrag(){
-        if (inertial){
-            unpoweredVelocity = body.velocity - prevPoweredVelocity;
+        if (inertial){// Only update unpowered velocity when the object is not actively moving via powered velocity
+            unpoweredVelocity = body.velocity - prevPoweredVelocity;  // Separate out powered motion from unpowered
+        }// Apply drag only if the object is in motion from unpowered velocity
+        if (unpoweredVelocity.sqrMagnitude > 0.01f){
+            unpoweredVelocity -= drag * unpoweredVelocity * Time.fixedDeltaTime;
+        }// Smoothly transition between powered and unpowered velocity if needed
+        if (poweredVelocity.sqrMagnitude > 0){
+            unpoweredVelocity = Vector3.Lerp(unpoweredVelocity, Vector3.zero, drag * Time.fixedDeltaTime);
         }
-        unpoweredVelocity -= drag * unpoweredVelocity * Time.fixedDeltaTime;
     }
 
     [Header("Grounded Alignment")]
@@ -139,15 +152,19 @@ public class CustomPhysicsBody : MonoBehaviour
         groundNormal = Vector3.up;
     }
     private void ApplyGravity(){
-        
         if (IsGrounded()){
+            // Apply gravity along the ground normal when grounded
             float dot = Vector3.Dot(unpoweredVelocity, groundNormal);
             if (0.1f > dot || -5f < dot){
-                unpoweredVelocity +=  groundNormal * (-0.5f -Vector3.Dot(unpoweredVelocity, groundNormal));
+                unpoweredVelocity += groundNormal * (-0.5f - dot);
             }
-            //unpoweredVelocity = gravity * Time.fixedDeltaTime * groundDistance * groundNormal;
-        }else{
+        }
+        else{// Apply gravity normally when in free fall
             unpoweredVelocity += gravity * Time.fixedDeltaTime * groundNormal;
         }
+    }
+    private Vector3 SmoothPoweredMovement(Vector3 targetVelocity, float rate = 0.5f){
+        // Smoothly accelerate or decelerate towards the target powered velocity
+        return Vector3.Lerp(prevPoweredVelocity, targetVelocity, rate);
     }
 }

@@ -14,7 +14,7 @@ public class Throwable : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate() {
+    void Update() {
         if (held){
             transform.rotation = holder.transform.rotation;
 
