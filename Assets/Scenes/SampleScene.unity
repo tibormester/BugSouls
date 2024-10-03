@@ -512,8 +512,6 @@ MonoBehaviour:
   feetDistance: 1
   groundNormal: {x: 0, y: 1, z: 0}
   groundDistance: 0
-  character: 0
-  drag: 0.25
   coyoteTime: 0.1
   gravity: -32
   coyoteOrientationTime: 2
@@ -1445,8 +1443,6 @@ MonoBehaviour:
   feetDistance: 0.5
   groundNormal: {x: 0, y: 1, z: 0}
   groundDistance: 0
-  character: 0
-  drag: 0.25
   coyoteTime: 0.1
   gravity: -32
   coyoteOrientationTime: 2
@@ -1969,7 +1965,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   physicsBody: {fileID: 0}
   moveDirection: {x: 0, y: 0, z: 0}
-  moveSpeed: 1
+  moveSpeed: 0.5
   rotationSpeed: 32
   aerialSpeedCoefficient: 0.1
   jumpForce: 0.5
@@ -1997,8 +1993,6 @@ MonoBehaviour:
   feetDistance: 1
   groundNormal: {x: 0, y: 1, z: 0}
   groundDistance: 0
-  character: 0
-  drag: 0.25
   coyoteTime: 0.1
   gravity: -9.8
   coyoteOrientationTime: 2
@@ -2105,8 +2099,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 251732937}
-  minDistance: 3
-  maxDistance: 5
+  minEngageDistance: 3
+  maxEngageDistance: 5
+  backupSpeedMultiplier: 2
+  maxChaseDistance: 50
 --- !u!1 &1451468389
 GameObject:
   m_ObjectHideFlags: 0
@@ -2618,8 +2614,6 @@ MonoBehaviour:
   feetDistance: 0.5
   groundNormal: {x: 0, y: 1, z: 0}
   groundDistance: 0
-  character: 0
-  drag: 0.25
   coyoteTime: 0.1
   gravity: -32
   coyoteOrientationTime: 2
