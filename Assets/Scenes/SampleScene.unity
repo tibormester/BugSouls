@@ -455,12 +455,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5e2f908878444795b552d5a1eb1ea38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  physicsBody: {fileID: 0}
   moveDirection: {x: 0, y: 0, z: 0}
-  moveSpeed: 12
+  moveSpeed: 1
   rotationSpeed: 32
   aerialSpeedCoefficient: 0.1
-  jumpForce: 3
-  jumpTime: 0.4
+  jumpForce: 0.5
+  jumpTime: 0.2
+  orientationStrength: 0.3
+  orientationDampening: -0.1
 --- !u!54 &251732939
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -469,15 +472,15 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 251732933}
   serializedVersion: 4
-  m_Mass: 3
+  m_Mass: 1
   m_Drag: 1
-  m_AngularDrag: 5
+  m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -485,9 +488,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 112
-  m_CollisionDetection: 2
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
 --- !u!114 &251732941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -500,8 +503,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ec40ad7cf03041c19d1774c2b469dd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poweredVelocity: {x: 0, y: 0, z: 0}
-  unpoweredVelocity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
     m_Bits: 8
@@ -509,11 +510,12 @@ MonoBehaviour:
   velocityCheckDistance: 2
   groundedDistance: 0.1
   feetDistance: 1
-  inertial: 0
+  groundNormal: {x: 0, y: 1, z: 0}
+  groundDistance: 0
+  character: 0
   drag: 0.25
   coyoteTime: 0.1
-  orientationSpeed: 4
-  gravity: -9.8
+  gravity: -32
   coyoteOrientationTime: 2
   aerialTimeLimit: 0
 --- !u!1 &262645812
@@ -1434,8 +1436,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ec40ad7cf03041c19d1774c2b469dd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poweredVelocity: {x: 0, y: 0, z: 0}
-  unpoweredVelocity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
     m_Bits: 8
@@ -1443,11 +1443,12 @@ MonoBehaviour:
   velocityCheckDistance: 15
   groundedDistance: 0.05
   feetDistance: 0.5
-  inertial: 1
+  groundNormal: {x: 0, y: 1, z: 0}
+  groundDistance: 0
+  character: 0
   drag: 0.25
   coyoteTime: 0.1
-  orientationSpeed: 1
-  gravity: -9.8
+  gravity: -32
   coyoteOrientationTime: 2
   aerialTimeLimit: 0
 --- !u!54 &1157069490
@@ -1935,15 +1936,15 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1407379960}
   serializedVersion: 4
-  m_Mass: 3
+  m_Mass: 5
   m_Drag: 1
-  m_AngularDrag: 5
+  m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1951,9 +1952,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 112
-  m_CollisionDetection: 2
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
 --- !u!114 &1407379963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1966,12 +1967,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5e2f908878444795b552d5a1eb1ea38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  physicsBody: {fileID: 0}
   moveDirection: {x: 0, y: 0, z: 0}
-  moveSpeed: 8
+  moveSpeed: 1
   rotationSpeed: 32
   aerialSpeedCoefficient: 0.1
-  jumpForce: 3
-  jumpTime: 0.4
+  jumpForce: 0.5
+  jumpTime: 0.2
+  orientationStrength: 0.3
+  orientationDampening: -0.1
 --- !u!114 &1407379964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1984,8 +1988,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ec40ad7cf03041c19d1774c2b469dd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poweredVelocity: {x: 0, y: 0, z: 0}
-  unpoweredVelocity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
     m_Bits: 8
@@ -1993,10 +1995,11 @@ MonoBehaviour:
   velocityCheckDistance: 2
   groundedDistance: 0.1
   feetDistance: 1
-  inertial: 0
+  groundNormal: {x: 0, y: 1, z: 0}
+  groundDistance: 0
+  character: 0
   drag: 0.25
   coyoteTime: 0.1
-  orientationSpeed: 4
   gravity: -9.8
   coyoteOrientationTime: 2
   aerialTimeLimit: 0
@@ -2102,8 +2105,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 251732937}
-  minDistance: 2
-  maxDistance: 3
+  minDistance: 3
+  maxDistance: 5
 --- !u!1 &1451468389
 GameObject:
   m_ObjectHideFlags: 0
@@ -2606,8 +2609,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ec40ad7cf03041c19d1774c2b469dd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poweredVelocity: {x: 0, y: 0, z: 0}
-  unpoweredVelocity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
     m_Bits: 8
@@ -2615,11 +2616,12 @@ MonoBehaviour:
   velocityCheckDistance: 15
   groundedDistance: 0.05
   feetDistance: 0.5
-  inertial: 1
+  groundNormal: {x: 0, y: 1, z: 0}
+  groundDistance: 0
+  character: 0
   drag: 0.25
   coyoteTime: 0.1
-  orientationSpeed: 1
-  gravity: -9.8
+  gravity: -32
   coyoteOrientationTime: 2
   aerialTimeLimit: 0
 --- !u!114 &1955482962

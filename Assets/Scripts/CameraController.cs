@@ -101,9 +101,12 @@ public class CameraController : MonoBehaviour
         currentPitch = Mathf.Clamp(currentPitch, minYAngle, maxYAngle);
 
         // Rotate the camera around the target based on yaw (horizontal rotation)
-        Vector3 right = Vector3.Cross(front, target.transform.up).normalized; //Use the character's up and the previous forward to get the right angle
-        front = -Vector3.Cross(right, target.transform.up).normalized; //set the forward based on how the up has changed
-        Quaternion refrenceRotation = Quaternion.LookRotation(front, target.transform.up); //get the orientation based on previous forward and up
+        Vector3 right = Vector3.Cross(front, targetMovement.physicsBody.groundNormal).normalized; //Use the character's up and the previous forward to get the right angle
+        if(right == Vector3.zero){
+            right = Vector3.Cross(front, target.transform.up).normalized;
+        }
+        front = -Vector3.Cross(right, targetMovement.physicsBody.groundNormal).normalized; //set the forward based on how the up has changed
+        Quaternion refrenceRotation = Quaternion.LookRotation(front, targetMovement.physicsBody.groundNormal); //get the orientation based on previous forward and up
 
 
         Quaternion rotation = Quaternion.Euler(currentPitch, currentYaw, 0f); //get mouse pitch and raw quaterion
@@ -114,10 +117,11 @@ public class CameraController : MonoBehaviour
 
         // Set the camera position
         //transform.position = Vector3.Slerp(transform.position, target.position + cameraTargetRotation * offset, cameraSpeed * Time.deltaTime);
-        transform.position = target.position + cameraTargetRotation * offset;
+        transform.rotation = Quaternion.Slerp(transform.rotation, cameraTargetRotation, rotationSpeed * Time.deltaTime);
+        transform.position = target.position + transform.rotation * offset;
         // LERPS to the target rotation
-        //transform.rotation = Quaternion.Slerp(transform.rotation, cameraTargetRotation, rotationSpeed * Time.deltaTime);
-        transform.rotation = cameraTargetRotation;
+        
+        //transform.rotation = cameraTargetRotation;
     }
 
 
