@@ -10,6 +10,7 @@ public class CameraController : MonoBehaviour
     public float distance = 5.0f; // Distance between the camera and the target
     public float height = 2.0f; // Height above the character
     public float rotationSpeed = 100.0f; // Speed the camera attempts to match the pitch and yaw
+    public float normalRotationSpeed = 2f; // Speed the camera attempts to match the pitch and yaw
     public float cameraSpeed = 45f;
     public float minYAngle = -75f; // Minimum vertical angle for camera rotation
     public float maxYAngle = 80f; // Maximum vertical angle for camera rotation
@@ -22,6 +23,7 @@ public class CameraController : MonoBehaviour
     public float mouseSensitivityY = 2560f;
 
     private Vector3 front;
+    private Vector3 prevNormal;
 
     private Camera cam;
     void Start(){
@@ -29,6 +31,7 @@ public class CameraController : MonoBehaviour
         targetMovement = target.gameObject.GetComponent<CharacterMovement>();
         cam = GetComponent<Camera>();
         Cursor.lockState = CursorLockMode.Locked;// Lock and hide Cursor
+        prevNormal = targetMovement.physicsBody.groundNormal;
     }
     public Transform crossHair;
     public LayerMask throwable;
@@ -100,13 +103,17 @@ public class CameraController : MonoBehaviour
         currentPitch -= mouseY;
         currentPitch = Mathf.Clamp(currentPitch, minYAngle, maxYAngle);
 
+        //Set the prev normal to be normalRotationSpeed%/second towards ground normal each frame
+        prevNormal = Vector3.Slerp(prevNormal, targetMovement.physicsBody.groundNormal, normalRotationSpeed * Time.deltaTime);
+
+
         // Rotate the camera around the target based on yaw (horizontal rotation)
-        Vector3 right = Vector3.Cross(front, targetMovement.physicsBody.groundNormal).normalized; //Use the character's up and the previous forward to get the right angle
+        Vector3 right = Vector3.Cross(front, prevNormal).normalized; //Use the character's up and the previous forward to get the right angle
         if(right == Vector3.zero){
             right = Vector3.Cross(front, target.transform.up).normalized;
         }
-        front = -Vector3.Cross(right, targetMovement.physicsBody.groundNormal).normalized; //set the forward based on how the up has changed
-        Quaternion refrenceRotation = Quaternion.LookRotation(front, targetMovement.physicsBody.groundNormal); //get the orientation based on previous forward and up
+        front = -Vector3.Cross(right, prevNormal).normalized; //set the forward based on how the up has changed
+        Quaternion refrenceRotation = Quaternion.LookRotation(front, prevNormal); //get the orientation based on previous forward and up
 
 
         Quaternion rotation = Quaternion.Euler(currentPitch, currentYaw, 0f); //get mouse pitch and raw quaterion
