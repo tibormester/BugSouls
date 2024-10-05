@@ -30,8 +30,8 @@ public class CharacterMovement : MonoBehaviour
     public float rotationSpeed = 32;
     public float aerialSpeedCoefficient = 0.1f;
     //Takes in a desired input vector in world coordinates, projects it into local coordinates, removes vertical velocity, scales to movement speed, rotates towards movement direction
-    public void Move(Vector3 world_vector, float distance = 999f){
-        moveDirection += world_vector.normalized * distance;
+    public void Move(Vector3 world_direction, float distance = 999f){
+        moveDirection += world_direction.normalized * distance;
     }
     private void horizontalVelocity(Vector3 world_vector){
         float distance = world_vector.magnitude;
@@ -55,7 +55,7 @@ public class CharacterMovement : MonoBehaviour
                 horizontalVelocity = Vector3.ClampMagnitude( horizontalVelocity + (localDirection * aerialSpeedCoefficient), moveSpeed);
                 velocity = horizontalVelocity +  new Vector3(0, velocity.y, 0);
                 // LERPS forward axis to movement axis
-                if (horizontalVelocity.magnitude > 1f){
+                if (horizontalVelocity.magnitude > 0.2f){
                     float angle = Vector3.SignedAngle(body.transform.forward, moveDirection, body.transform.up);
                     angle = Mathf.LerpAngle(0, angle, rotationSpeed * aerialSpeedCoefficient * Time.fixedDeltaTime);
                     body.AddTorque(body.transform.up * angle, ForceMode.Impulse);
