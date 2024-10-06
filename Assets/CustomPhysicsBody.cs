@@ -112,7 +112,7 @@ public class CustomPhysicsBody : MonoBehaviour
     }
     private void ApplyGravity(){
         if (IsGrounded()){//Apply a small sticking force 
-            body.AddForce(groundNormal *0.1f*gravity*Time.fixedDeltaTime, ForceMode.VelocityChange);
+            //body.AddForce(groundNormal *0.1f*gravity*Time.fixedDeltaTime, ForceMode.VelocityChange);
         }else{// Apply gravity normally when in free fall
             body.AddForce(groundNormal *gravity * Time.fixedDeltaTime, ForceMode.VelocityChange);
             //body.velocity += gravity * Time.fixedDeltaTime * groundNormal;

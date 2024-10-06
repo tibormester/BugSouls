@@ -26,12 +26,16 @@ public class CameraController : MonoBehaviour
     private Vector3 prevNormal;
 
     private Camera cam;
+
+    public float sprintFactor = 2.5f;
+    private float runSpeed;
     void Start(){
         front = target.transform.forward;
         targetMovement = target.gameObject.GetComponent<CharacterMovement>();
         cam = GetComponent<Camera>();
         Cursor.lockState = CursorLockMode.Locked;// Lock and hide Cursor
         prevNormal = targetMovement.physicsBody.groundNormal;
+        runSpeed = targetMovement.moveSpeed;
     }
     public Transform crossHair;
     public LayerMask throwable;
@@ -143,12 +147,15 @@ public class CameraController : MonoBehaviour
 
     void Movement(){
         // Get input for movement
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
         // Calculate the movement direction relative to the camera
         Vector3 camera_relative = ((vertical * transform.forward) + (horizontal * transform.right)).normalized;
         if(sprinting){
             targetMovement.look_direction = camera_relative;
+            targetMovement.moveSpeed = sprintFactor * runSpeed;
+        } else{
+            targetMovement.moveSpeed = runSpeed;
         }
         if (moved || camera_relative.sqrMagnitude < 0.1f){//Some script so that the movement gets accumulated until the fixed update frame, but if the movement is stopped, cancel the accumulation
             moved = false;
