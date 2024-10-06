@@ -58,6 +58,7 @@ public class NavMeshAgentChaser : MonoBehaviour
                 if (Vector3.Distance(target.position, transform.position) > maxEngageDistance)
                 {
                     charMovement.Move((target.position - transform.position).normalized);
+                    charMovement.look_direction = target.position - transform.position;
                     
                     if (Vector3.Distance(stuckPos, transform.position) < maxStuckDistance)
                     {

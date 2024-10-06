@@ -455,14 +455,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5e2f908878444795b552d5a1eb1ea38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  physicsBody: {fileID: 0}
+  physicsBody: {fileID: 251732941}
   moveDirection: {x: 0, y: 0, z: 0}
-  moveSpeed: 1
-  rotationSpeed: 32
+  moveSpeed: 32
+  acceleration: 12
+  additional_deacceleration: 12
+  rotationSpeed: 45
   aerialSpeedCoefficient: 0.1
-  jumpForce: 0.5
+  look_direction: {x: 0, y: 0, z: 1}
+  jumpVelocity: 16
   jumpTime: 0.2
-  orientationStrength: 0.3
+  orientationSpeed: 360
   orientationDampening: -0.1
 --- !u!54 &251732939
 Rigidbody:
@@ -506,15 +509,15 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 8
-  checkDistance: 10
+  checkDistance: 150
   velocityCheckDistance: 2
   groundedDistance: 0.1
   feetDistance: 1
   groundNormal: {x: 0, y: 1, z: 0}
   groundDistance: 0
   coyoteTime: 0.1
-  gravity: -32
-  coyoteOrientationTime: 2
+  gravity: -10
+  coyoteOrientationTime: 0.3
   aerialTimeLimit: 0
 --- !u!1 &262645812
 GameObject:
@@ -1373,9 +1376,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   target: {fileID: 251732937}
-  distance: 6
-  height: 1.5
-  rotationSpeed: 50
+  distance: 5
+  height: 2
+  rotationSpeed: 100
+  normalRotationSpeed: 2
   cameraSpeed: 45
   minYAngle: -75
   maxYAngle: 80
@@ -1952,12 +1956,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   physicsBody: {fileID: 0}
   moveDirection: {x: 0, y: 0, z: 0}
-  moveSpeed: 0.7
-  rotationSpeed: 32
+  moveSpeed: 120
+  acceleration: 12
+  additional_deacceleration: 4
+  rotationSpeed: 45
   aerialSpeedCoefficient: 0.1
-  jumpForce: 0.5
+  look_direction: {x: 0, y: 0, z: 1}
+  jumpVelocity: 16
   jumpTime: 0.2
-  orientationStrength: 0.3
+  orientationSpeed: 360
   orientationDampening: -0.1
 --- !u!114 &1407379964
 MonoBehaviour:
@@ -1976,12 +1983,12 @@ MonoBehaviour:
     m_Bits: 8
   checkDistance: 150
   velocityCheckDistance: 10
-  groundedDistance: 0.2
-  feetDistance: 1.5
+  groundedDistance: 0.3
+  feetDistance: 1.6
   groundNormal: {x: 0, y: 1, z: 0}
   groundDistance: 0
   coyoteTime: 0.1
-  gravity: -9.8
+  gravity: -3
   coyoteOrientationTime: 2
   aerialTimeLimit: 0
 --- !u!136 &1407379965
@@ -2036,11 +2043,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 251732937}
-  minEngageDistance: 6
-  maxEngageDistance: 10
-  backupSpeedMultiplier: 2
-  maxChaseDistance: 50
-  maxStuckTime: 4
+  minEngageDistance: 4
+  maxEngageDistance: 7
+  backupSpeedMultiplier: 5
+  maxChaseDistance: 255
+  maxStuckTime: 6
   maxStuckDistance: 1
 --- !u!1 &1451468389
 GameObject:

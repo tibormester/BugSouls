@@ -38,11 +38,14 @@ public class CameraController : MonoBehaviour
     public LayerMask terrain;
     private bool holding = false;
     private GameObject held;
+    private bool sprinting = false;
     void Update(){
         // Perform raycast from the camera
         Ray ray = cam.ScreenPointToRay(Input.mousePosition); // Cast ray from camera, can also use cam.transform.forward for a different direction
         RaycastHit hit;
-
+        if(!sprinting){
+            targetMovement.look_direction = ray.direction;
+        }
         // Raycast using the mask to ignore the player's layer
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, ~ignorePlayerLayerMask))
         {
@@ -89,6 +92,11 @@ public class CameraController : MonoBehaviour
         Movement();
         if(Input.GetButtonDown("Jump")){
             targetMovement.Jump();
+        }
+        if(Input.GetKey(KeyCode.LeftShift)){
+            sprinting = true;
+        } else{
+            sprinting = false;
         }
     }
     void MouseInputs(){
@@ -139,7 +147,9 @@ public class CameraController : MonoBehaviour
         float vertical = Input.GetAxis("Vertical");
         // Calculate the movement direction relative to the camera
         Vector3 camera_relative = ((vertical * transform.forward) + (horizontal * transform.right)).normalized;
-
+        if(sprinting){
+            targetMovement.look_direction = camera_relative;
+        }
         if (moved || camera_relative.sqrMagnitude < 0.1f){//Some script so that the movement gets accumulated until the fixed update frame, but if the movement is stopped, cancel the accumulation
             moved = false;
             accum = Vector3.zero;

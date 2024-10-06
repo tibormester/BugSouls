@@ -111,15 +111,11 @@ public class CustomPhysicsBody : MonoBehaviour
         groundNormal = Vector3.up;
     }
     private void ApplyGravity(){
-        if (IsGrounded()){
-            // Apply gravity along the ground normal when grounded
-            float dot = Vector3.Dot(body.velocity, groundNormal);
-            if (0.1f > dot || -5f < dot){
-                body.velocity += groundNormal * (-0.5f - dot);
-            }
-        }
-        else{// Apply gravity normally when in free fall
-            body.velocity += gravity * Time.fixedDeltaTime * groundNormal;
+        if (IsGrounded()){//Apply a small sticking force 
+            body.AddForce(groundNormal *0.1f*gravity*Time.fixedDeltaTime, ForceMode.VelocityChange);
+        }else{// Apply gravity normally when in free fall
+            body.AddForce(groundNormal *gravity * Time.fixedDeltaTime, ForceMode.VelocityChange);
+            //body.velocity += gravity * Time.fixedDeltaTime * groundNormal;
         }
     }
 }
