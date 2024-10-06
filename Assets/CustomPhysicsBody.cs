@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CustomPhysicsBody : MonoBehaviour
@@ -71,18 +72,36 @@ public class CustomPhysicsBody : MonoBehaviour
                 return true;
         } else { //Nothing beneath the player, so cannot be grounded
             isGrounded = false;
+            ground = null;
         }
         return false;
     }
-
+    public List<Status> statuses = new();
+    private GameObject prevGround;
     private void ApplySurfaceForces(){
         //check the surface and if grounded, depending on the result, do something...
         if(ground){
             Surface surface = ground.GetComponent<Surface>();
-            if(surface != null){
-                surface.OnEnter(this);
+            if(surface && surface.GetStatus(statuses) == null){
+                Status status = surface.MakeStatus(gameObject);
+                status.Start();
+                statuses.Add(status);
             }
         }
+        foreach (Status status in statuses){
+            status.Tick();
+        }
+        if (prevGround && prevGround != ground){
+            Surface surface = prevGround.GetComponent<Surface>();
+            if (surface){
+                Status status = surface.GetStatus(statuses);
+                if(status != null){
+                    status.Stop();
+                    statuses.Remove(status);
+                }
+            }
+        }
+        prevGround = ground;
     }
 
 

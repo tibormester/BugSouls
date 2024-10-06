@@ -7,8 +7,7 @@ public class Throwable : MonoBehaviour
     // Start is called before the first frame update
     private CustomPhysicsBody physicsBody;
     private Rigidbody rb;
-    void Start()
-    {
+    void Start(){
         rb = GetComponent<Rigidbody>();
         physicsBody = GetComponent<CustomPhysicsBody>();
     }
@@ -16,21 +15,25 @@ public class Throwable : MonoBehaviour
     // Update is called once per frame
     void Update() {
         if (held){
-            transform.rotation = holder.transform.rotation;
+            rb.rotation = holderrb.rotation;
 
-            transform.position = holder.transform.position + holder.transform.TransformDirection(relative);
+            rb.position = holderrb.position + holderrb.transform.TransformDirection(relative);
+            rb.velocity = holderrb.velocity;
+            rb.angularVelocity = holderrb.angularVelocity;
         }
     }
     private bool held = false;
     private GameObject holder;
     private Vector3 relative = Vector3.zero;
+    private Rigidbody holderrb;
     public void PickedUp(GameObject parent, Vector3 localPosition){
         held = true;
         holder = parent;
         relative = localPosition;
+        holderrb = holder.GetComponent<Rigidbody>();
     }
     public void Thrown(Vector3 velocity){
         held = false;
-        rb.velocity = velocity;
+        rb.AddForce(velocity, ForceMode.VelocityChange);
     }
 }
