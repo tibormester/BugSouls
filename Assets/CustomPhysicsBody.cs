@@ -58,6 +58,7 @@ public class CustomPhysicsBody : MonoBehaviour
         }
         return false;
     }
+    public GameObject ground;
     private bool GeneralRaycast(){ //Returns true when finding any object, false if not
         RaycastHit hitInfo;
         //We also want to check without the mask and update ground distance with the closest object
@@ -66,6 +67,7 @@ public class CustomPhysicsBody : MonoBehaviour
                 groundDistance = hitInfo.distance - feetDistance;
                 isGrounded = true;
                 freeFall = false;
+                ground = hitInfo.transform.gameObject;
                 return true;
         } else { //Nothing beneath the player, so cannot be grounded
             isGrounded = false;
@@ -75,6 +77,12 @@ public class CustomPhysicsBody : MonoBehaviour
 
     private void ApplySurfaceForces(){
         //check the surface and if grounded, depending on the result, do something...
+        if(ground){
+            Surface surface = ground.GetComponent<Surface>();
+            if(surface != null){
+                surface.OnEnter(this);
+            }
+        }
     }
 
 

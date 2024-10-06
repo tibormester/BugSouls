@@ -239,6 +239,7 @@ GameObject:
   - component: {fileID: 178735124}
   - component: {fileID: 178735123}
   - component: {fileID: 178735122}
+  - component: {fileID: 178735126}
   m_Layer: 3
   m_Name: Ramp (1)
   m_TagString: Untagged
@@ -326,12 +327,24 @@ Transform:
   m_GameObject: {fileID: 178735121}
   serializedVersion: 2
   m_LocalRotation: {x: 0.3535534, y: -0.61237246, z: 0.3535534, w: 0.61237246}
-  m_LocalPosition: {x: 24.7, y: 1.11, z: 1.42}
+  m_LocalPosition: {x: 24.71, y: 1.3, z: 0.67}
   m_LocalScale: {x: 2, y: 6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 60, y: -90, z: 0}
+--- !u!114 &178735126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178735121}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1059bdaffcbd84d0b98a34f6309a15a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &251732933
 GameObject:
   m_ObjectHideFlags: 0
@@ -457,19 +470,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   physicsBody: {fileID: 251732941}
   moveDirection: {x: 0, y: 0, z: 0}
-  moveSpeed: 32
+  moveSpeed: 12
   acceleration: 12
   additional_deacceleration: 12
-  rotationSpeed: 45
-  aerialSpeedCoefficient: 0.1
   rotationSpringForce: 2
-  rotationSpringDampen: 0.95
+  drag: 0.3
   look_direction: {x: 0, y: 0, z: 1}
-  jumpVelocity: 16
+  jumpVelocity: 32
   jumpTime: 0.2
   groundSpringStrength: 5
   groundSpringDampen: -0.3
-  orientationDampening: -0.95
   orientationSpringStrength: 20
 --- !u!54 &251732939
 Rigidbody:
@@ -481,7 +491,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 10
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -513,12 +523,13 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 8
-  checkDistance: 150
-  velocityCheckDistance: 2
-  groundedDistance: 0.1
+  checkDistance: 500
+  velocityCheckDistance: 3
+  groundedDistance: 0.2
   feetDistance: 1
   groundNormal: {x: 0, y: 1, z: 0}
   groundDistance: 0
+  ground: {fileID: 0}
   coyoteTime: 0.1
   gravity: -16
   coyoteOrientationTime: 0.3
@@ -718,6 +729,7 @@ GameObject:
   - component: {fileID: 355271044}
   - component: {fileID: 355271043}
   - component: {fileID: 355271042}
+  - component: {fileID: 355271046}
   m_Layer: 3
   m_Name: Ramp (4)
   m_TagString: Untagged
@@ -805,12 +817,24 @@ Transform:
   m_GameObject: {fileID: 355271041}
   serializedVersion: 2
   m_LocalRotation: {x: 0.3535534, y: -0.61237246, z: 0.3535534, w: 0.61237246}
-  m_LocalPosition: {x: 25.82, y: 1.49, z: 4.11}
+  m_LocalPosition: {x: 25.83, y: 1.48, z: 5.04}
   m_LocalScale: {x: 5, y: 8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 60, y: -90, z: 0}
+--- !u!114 &355271046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 355271041}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1059bdaffcbd84d0b98a34f6309a15a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &375916072
 GameObject:
   m_ObjectHideFlags: 0
@@ -823,6 +847,7 @@ GameObject:
   - component: {fileID: 375916075}
   - component: {fileID: 375916074}
   - component: {fileID: 375916073}
+  - component: {fileID: 375916077}
   m_Layer: 3
   m_Name: Ramp (5)
   m_TagString: Untagged
@@ -910,12 +935,24 @@ Transform:
   m_GameObject: {fileID: 375916072}
   serializedVersion: 2
   m_LocalRotation: {x: 0.3535534, y: -0.61237246, z: 0.3535534, w: 0.61237246}
-  m_LocalPosition: {x: 25.82, y: 1.49, z: 9.04}
+  m_LocalPosition: {x: 25.49, y: 1.68, z: 10.93}
   m_LocalScale: {x: 5, y: 8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 60, y: -90, z: 0}
+--- !u!114 &375916077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375916072}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1059bdaffcbd84d0b98a34f6309a15a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &397694670
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1599,6 +1636,7 @@ MonoBehaviour:
   maxYAngle: 80
   mouseSensitivityX: 2560
   mouseSensitivityY: 2560
+  sprintFactor: 2.5
   crossHair: {fileID: 2046042192}
   throwable:
     serializedVersion: 2
@@ -1650,6 +1688,7 @@ MonoBehaviour:
   feetDistance: 0.5
   groundNormal: {x: 0, y: 1, z: 0}
   groundDistance: 0
+  ground: {fileID: 0}
   coyoteTime: 0.1
   gravity: -32
   coyoteOrientationTime: 2
@@ -1978,6 +2017,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1203051298}
+  - component: {fileID: 1203051299}
   m_Layer: 0
   m_Name: Stairs
   m_TagString: Untagged
@@ -2003,111 +2043,18 @@ Transform:
   - {fileID: 645259483}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1385072076
-GameObject:
+--- !u!114 &1203051299
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1385072080}
-  - component: {fileID: 1385072079}
-  - component: {fileID: 1385072078}
-  - component: {fileID: 1385072077}
-  m_Layer: 0
-  m_Name: Ramp
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!65 &1385072077
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1385072076}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
+  m_GameObject: {fileID: 1203051297}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &1385072078
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1385072076}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1385072079
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1385072076}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1385072080
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1385072076}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.3535534, y: 0.61237246, z: -0.3535534, w: 0.61237246}
-  m_LocalPosition: {x: 40, y: 0.81, z: 4.69}
-  m_LocalScale: {x: 2, y: 6, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 60, y: 90, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1059bdaffcbd84d0b98a34f6309a15a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1407379960
 GameObject:
   m_ObjectHideFlags: 0
@@ -2139,7 +2086,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0
+  m_AngularDrag: 10
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -2170,20 +2117,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   physicsBody: {fileID: 0}
   moveDirection: {x: 0, y: 0, z: 0}
-  moveSpeed: 120
-  acceleration: 12
-  additional_deacceleration: 4
-  rotationSpeed: 45
-  aerialSpeedCoefficient: 0.1
+  moveSpeed: 50
+  acceleration: 8
+  additional_deacceleration: 100
   rotationSpringForce: 2
-  rotationSpringDampen: 7
+  drag: 0.3
   look_direction: {x: 0, y: 0, z: 1}
   jumpVelocity: 16
   jumpTime: 0.2
-  groundSpringStrength: 1
-  groundSpringDampen: 0.5
-  orientationDampening: -0.1
-  orientationSpringStrength: 10
+  groundSpringStrength: 2
+  groundSpringDampen: -0.2
+  orientationSpringStrength: 15
 --- !u!114 &1407379964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2199,12 +2143,13 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 8
-  checkDistance: 150
-  velocityCheckDistance: 10
-  groundedDistance: 0.3
-  feetDistance: 1.6
+  checkDistance: 250
+  velocityCheckDistance: 5
+  groundedDistance: 0.2
+  feetDistance: 1.5
   groundNormal: {x: 0, y: 1, z: 0}
   groundDistance: 0
+  ground: {fileID: 0}
   coyoteTime: 0.1
   gravity: -16
   coyoteOrientationTime: 2
@@ -2633,6 +2578,7 @@ GameObject:
   - component: {fileID: 1945086990}
   - component: {fileID: 1945086989}
   - component: {fileID: 1945086988}
+  - component: {fileID: 1945086992}
   m_Layer: 3
   m_Name: Ramp (3)
   m_TagString: Untagged
@@ -2720,12 +2666,24 @@ Transform:
   m_GameObject: {fileID: 1945086987}
   serializedVersion: 2
   m_LocalRotation: {x: 0.3535534, y: -0.61237246, z: 0.3535534, w: 0.61237246}
-  m_LocalPosition: {x: 25.82, y: 1.49, z: -0.91}
+  m_LocalPosition: {x: 25.61, y: 1.61, z: -4.21}
   m_LocalScale: {x: 5, y: 8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 60, y: -90, z: 0}
+--- !u!114 &1945086992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945086987}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1059bdaffcbd84d0b98a34f6309a15a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1955482955
 GameObject:
   m_ObjectHideFlags: 0
@@ -2883,6 +2841,7 @@ MonoBehaviour:
   feetDistance: 0.5
   groundNormal: {x: 0, y: 1, z: 0}
   groundDistance: 0
+  ground: {fileID: 0}
   coyoteTime: 0.1
   gravity: -32
   coyoteOrientationTime: 2
@@ -2911,6 +2870,7 @@ GameObject:
   - component: {fileID: 1990437072}
   - component: {fileID: 1990437071}
   - component: {fileID: 1990437070}
+  - component: {fileID: 1990437074}
   m_Layer: 3
   m_Name: Ramp (2)
   m_TagString: Untagged
@@ -2998,12 +2958,24 @@ Transform:
   m_GameObject: {fileID: 1990437069}
   serializedVersion: 2
   m_LocalRotation: {x: 0.3535534, y: -0.61237246, z: 0.3535534, w: 0.61237246}
-  m_LocalPosition: {x: 25.82, y: 1.49, z: -5.95}
+  m_LocalPosition: {x: 25.33, y: 1.77, z: -11.91}
   m_LocalScale: {x: 5, y: 8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 60, y: -90, z: 0}
+--- !u!114 &1990437074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990437069}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1059bdaffcbd84d0b98a34f6309a15a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2046042189
 GameObject:
   m_ObjectHideFlags: 0
@@ -3206,7 +3178,6 @@ SceneRoots:
   - {fileID: 1157069494}
   - {fileID: 950142399}
   - {fileID: 1203051298}
-  - {fileID: 1385072080}
   - {fileID: 178735125}
   - {fileID: 1990437073}
   - {fileID: 1945086991}

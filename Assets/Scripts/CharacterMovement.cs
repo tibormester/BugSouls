@@ -63,7 +63,7 @@ public class CharacterMovement : MonoBehaviour
         }
         localHorizontalVelocity += -currentSpeed * targetHorizontalVelocity.normalized;
         localHorizontalVelocity *= -drag;
-        rb.AddForce(localHorizontalVelocity, ForceMode.Acceleration);
+        rb.AddForce(rb.transform.TransformDirection(localHorizontalVelocity), ForceMode.Acceleration);
         moveDirection = Vector3.zero;
     }
     public float drag = 0.3f;
