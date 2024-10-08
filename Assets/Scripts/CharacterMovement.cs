@@ -37,6 +37,9 @@ public class CharacterMovement : MonoBehaviour
     public void Move(Vector3 world_direction, float distance = 999f){
         moveDirection += world_direction.normalized * distance;
     }
+    public Vector3 GetHorizontalVelocity(){
+        return rb.velocity - Vector3.Dot(rb.velocity, physicsBody.groundNormal) * physicsBody.groundNormal;
+    }
     private void horizontalVelocity(Vector3 world_vector){
         //Take a global direction and get the local horizontal component as a target horizontal velocity
         Vector3 localDirection = rb.transform.InverseTransformDirection(world_vector);  //Make it local
