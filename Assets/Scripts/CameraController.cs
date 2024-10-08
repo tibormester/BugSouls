@@ -79,14 +79,15 @@ public class CameraController : MonoBehaviour
         // Raycast using the mask to ignore the player's layer
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, throwable))
         {
+            Throwable throwableC = hit.rigidbody.gameObject.GetComponent<Throwable>();
             // If we hit something that is not the player
-            if (hit.transform != target.transform)
+            if (hit.transform != target.transform && throwableC)
             {
                 // Log or do something with the hit object
                 Debug.Log("picked object: " + hit.transform.name);
                 holding = true;
                 held = hit.rigidbody.gameObject;
-                held.GetComponent<Throwable>().PickedUp(target.gameObject, new Vector3(1.1f, 0.2f, 1.1f));
+                throwableC.PickedUp(target.gameObject, new Vector3(1.1f, 0.2f, 1.1f));
             }
         }
     }
