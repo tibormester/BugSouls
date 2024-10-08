@@ -500,8 +500,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 251732937}
-  minEngageDistance: 4
-  maxEngageDistance: 8
+  minEngageDistance: 3
+  maxEngageDistance: 5
   backupSpeedMultiplier: 1.5
   maxChaseDistance: 150
   maxStuckTime: 4
@@ -565,9 +565,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 212118663}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 15
   m_Drag: 1
-  m_AngularDrag: 1
+  m_AngularDrag: 5
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -679,14 +679,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 251732933}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0.0013810878, w: 0.99999905}
   m_LocalPosition: {x: 37.36, y: 1.46, z: 0.19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1172630155}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.158}
 --- !u!114 &251732938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -701,8 +701,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   physicsBody: {fileID: 251732941}
   moveDirection: {x: 0, y: 0, z: 0}
-  moveSpeed: 12
-  acceleration: 12
+  moveSpeed: 10
+  acceleration: 18
   additional_deacceleration: 12
   rotationSpringForce: 2
   drag: 0.3
@@ -2170,14 +2170,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1407379960}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 32.88, y: 2.11, z: 17.37}
+  m_LocalRotation: {x: 0.4907456, y: 0.7529769, z: 0.14366245, w: 0.4141927}
+  m_LocalPosition: {x: -25.4, y: 104.7, z: 8.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 483960515}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 10.963, y: 128.833, z: 60.927}
 --- !u!114 &1407379970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2194,7 +2194,7 @@ MonoBehaviour:
   minEngageDistance: 4
   maxEngageDistance: 7
   backupSpeedMultiplier: 5
-  maxChaseDistance: 255
+  maxChaseDistance: 50
   maxStuckTime: 6
   maxStuckDistance: 1
 --- !u!1 &1451468389

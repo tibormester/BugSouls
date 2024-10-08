@@ -78,8 +78,8 @@ public class NavMeshAgentChaser : MonoBehaviour
                 else
                 {
                     stuckTime = 0f;
-
-                    transform.LookAt(target, physicsBody.groundNormal);
+                    
+                    charMovement.look_direction = target.position - transform.position;
 
                     if (Vector3.Distance(target.position, transform.position) < minEngageDistance)
                     {
