@@ -502,7 +502,7 @@ MonoBehaviour:
   target: {fileID: 251732937}
   minEngageDistance: 3
   maxEngageDistance: 5
-  backupSpeedMultiplier: 1.5
+  backupAccelMultiplier: 2
   maxChaseDistance: 150
   maxStuckTime: 4
   maxStuckDistance: 1
@@ -2055,7 +2055,7 @@ GameObject:
   - component: {fileID: 1407379963}
   - component: {fileID: 1407379964}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Giant Enemy Spider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2193,7 +2193,7 @@ MonoBehaviour:
   target: {fileID: 251732937}
   minEngageDistance: 4
   maxEngageDistance: 7
-  backupSpeedMultiplier: 5
+  backupAccelMultiplier: 2
   maxChaseDistance: 50
   maxStuckTime: 6
   maxStuckDistance: 1

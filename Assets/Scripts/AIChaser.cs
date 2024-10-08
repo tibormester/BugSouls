@@ -15,8 +15,8 @@ public class NavMeshAgentChaser : MonoBehaviour
     private float minEngageDistance = 2f, maxEngageDistance = 3f;
 
     [SerializeField]
-    [Tooltip("The speed multiplier the AI uses to back up from the target when too close")]
-    private float backupSpeedMultiplier = 4f;
+    [Tooltip("The acceleration multiplier the AI uses to back up from the target when too close")]
+    private float backupAccelMultiplier = 2f;
 
     [SerializeField]
     [Tooltip("The maximum distance the AI has to be to the target in order to chase it")]
@@ -30,10 +30,9 @@ public class NavMeshAgentChaser : MonoBehaviour
     [Tooltip("This is the distance the AI has to move while chasing the player to be considered not stuck")]
     private float maxStuckDistance = 1f;
 
-
+    private float originalAccel;
     private float stuckTime = 0f;                       //Elapsed time "stuck"
     private Vector3 stuckPos;                           //Position to test if stuck
-    private bool chasing = false;                       //True if within range and thus chasing player
     private CharacterMovement charMovement;             //The AI's movement script to call movement functions on
     private CustomPhysicsBody physicsBody;              //The AI's physics script to find gravity
 
@@ -42,6 +41,8 @@ public class NavMeshAgentChaser : MonoBehaviour
     {
         charMovement = GetComponent<CharacterMovement>();
         physicsBody = GetComponent<CustomPhysicsBody>();
+
+        originalAccel = charMovement.acceleration;
         stuckPos = transform.position;
     }
 
@@ -51,8 +52,7 @@ public class NavMeshAgentChaser : MonoBehaviour
         {
             if (Vector3.Distance(target.position, transform.position) < maxChaseDistance)
             {
-                chasing = true;
-
+                charMovement.acceleration = originalAccel;
                 
 
                 if (Vector3.Distance(target.position, transform.position) > maxEngageDistance)
@@ -83,16 +83,11 @@ public class NavMeshAgentChaser : MonoBehaviour
 
                     if (Vector3.Distance(target.position, transform.position) < minEngageDistance)
                     {
-                        charMovement.Move((transform.position - target.position).normalized, backupSpeedMultiplier);
+                        charMovement.acceleration = originalAccel * backupAccelMultiplier;
+                        charMovement.Move((transform.position - target.position).normalized);
                     }
                 }
-            }
-            else
-            {
-                chasing = false;
-            }
-
-            
+            }            
         }
     }
 
