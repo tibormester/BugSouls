@@ -33,6 +33,7 @@ public class CustomPhysicsBody : MonoBehaviour
     public Vector3 groundNormal = Vector3.up; //The ground's normal 
     public float groundDistance; //How far from the terrain or an object, not really useful rn tbh
 
+
     public void GroundedRaycast()
     {
         bool terrain = TerrainRaycast();//Check for terrain and store the normal

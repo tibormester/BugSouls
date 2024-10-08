@@ -15,7 +15,7 @@ public class Throwable : MonoBehaviour
     // Update is called once per frame
     void Update() {
         if (held){
-            rb.rotation = holderrb.rotation;
+            //rb.rotation = holderrb.rotation;
 
             rb.position = holderrb.position + holderrb.transform.TransformDirection(relative);
             rb.velocity = holderrb.velocity;
