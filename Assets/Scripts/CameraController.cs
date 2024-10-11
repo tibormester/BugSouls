@@ -138,7 +138,15 @@ public class CameraController : MonoBehaviour
         // Set the camera position
         //transform.position = Vector3.Slerp(transform.position, target.position + cameraTargetRotation * offset, cameraSpeed * Time.deltaTime);
         transform.rotation = Quaternion.Slerp(transform.rotation, cameraTargetRotation, rotationSpeed * Time.deltaTime);
-        transform.position = target.position + transform.rotation * offset;
+
+        RaycastHit hitinfo; 
+        if(Physics.Raycast(target.position, transform.rotation*offset, out hitinfo, offset.magnitude)){
+            transform.position = target.position + transform.rotation * (offset.normalized * (hitinfo.distance - 0.1f));
+        }else{
+            transform.position = target.position + transform.rotation * offset;
+        }
+
+        
         // LERPS to the target rotation
         
         //transform.rotation = cameraTargetRotation;
