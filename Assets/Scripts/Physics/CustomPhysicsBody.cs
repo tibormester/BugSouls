@@ -28,7 +28,7 @@ public class CustomPhysicsBody : MonoBehaviour
     public float feetDistance = 1f;
 
     //PRIVATE VARIABLES
-    private bool isGrounded = true; //If theres a ground within ground distance
+    public bool isGrounded = true; //If theres a ground within ground distance
     private bool freeFall = false; //If there isnt a ground within check distance
     public Vector3 groundNormal = Vector3.up; //The ground's normal 
     public float groundDistance; //How far from the terrain or an object, not really useful rn tbh
