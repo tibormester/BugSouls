@@ -19,7 +19,11 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: 
+    animationImportWarnings: "\nClip 'Aleko_stun_backwards002_mcp' has import animation
+      warnings that might lower retargeting quality:\nNote: Activate translation
+      DOF on avatar to improve retargeting quality.\n\t'Aleko:Spine3' is inbetween
+      humanoid transforms and has rotation animation that will be discarded.\n\t'Aleko:Neck1'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -81,8 +85,614 @@ ModelImporter:
   importAnimation: 1
   humanDescription:
     serializedVersion: 3
-    human: []
-    skeleton: []
+    human:
+    - boneName: Aleko:Hips
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:LeftUpLeg
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:RightUpLeg
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:LeftLeg
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:RightLeg
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:LeftFoot
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:RightFoot
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:Spine
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:Spine1
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:Neck
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:Head
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:LeftShoulder
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:RightShoulder
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:LeftArm
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:RightArm
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:LeftForeArm
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:RightForeArm
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:LeftHand
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:RightHand
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:LeftToeBase
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:RightToeBase
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:Spine2
+      humanName: UpperChest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: Aleko stun backwards002(Clone)
+      parentName: 
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:ARIEL
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.3502298, y: 0.4624686, z: 1.7485148}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LFHD
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.43924552, y: 0.61795795, z: 1.713353}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LBHD
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.43112063, y: 0.4576632, z: 1.6195778}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RFHD
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.2966943, y: 0.6279702, z: 1.7092607}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RBHD
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.26826888, y: 0.49181494, z: 1.6432725}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:C7
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.35202047, y: 0.3935221, z: 1.4808028}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:T10
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.36026916, y: 0.38946798, z: 1.1854827}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:CLAV
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.36243233, y: 0.6029233, z: 1.4395126}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:STRN
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.3688169, y: 0.6660731, z: 1.2250893}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LFSH
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.488823, y: 0.53748685, z: 1.4549502}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LBSH
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.4359751, y: 0.36140993, z: 1.3867483}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LUPA
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.64484346, y: 0.42272952, z: 1.3304138}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LELB
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.73539597, y: 0.429643, z: 1.2116667}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LIEL
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.7171362, y: 0.51839733, z: 1.1775223}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LFRM
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.78909093, y: 0.46204093, z: 1.1249903}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LIWR
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.94717735, y: 0.44020057, z: 1.0968951}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LOWR
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.9019675, y: 0.49706313, z: 1.0381054}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LIHAND
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 1.0568472, y: 0.43192598, z: 1.0130893}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LOHAND
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 1.0141617, y: 0.5205712, z: 0.9793021}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RFSH
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.23875816, y: 0.5659608, z: 1.438733}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RBSH
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.24965842, y: 0.37480968, z: 1.4061745}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RUPA
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.06376997, y: 0.44975805, z: 1.2950654}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RELB
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: -0.00005770854, y: 0.45571485, z: 1.1802905}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RIEL
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.025576076, y: 0.54812884, z: 1.1540929}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RFRM
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: -0.06995062, y: 0.46268442, z: 1.0822662}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RIWR
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: -0.20000112, y: 0.4813474, z: 1.061189}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:ROWR
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: -0.131987, y: 0.49980834, z: 0.9884388}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RIHAND
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: -0.2779593, y: 0.44468868, z: 0.9597673}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:ROHAND
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: -0.21462978, y: 0.5311415, z: 0.9157672}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LFWT
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.5022691, y: 0.6309286, z: 0.9848996}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:MFWT
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.37478787, y: 0.7061066, z: 1.0319657}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RFWT
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.222148, y: 0.6350023, z: 0.9958061}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LBWT
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.49018463, y: 0.41780213, z: 1.0361937}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:MBWT
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.35486743, y: 0.41031036, z: 1.0410243}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RBWT
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.23455933, y: 0.43181023, z: 1.0484282}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LTHI
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.5811628, y: 0.57164997, z: 0.78991485}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LKNE
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.5437397, y: 0.53752005, z: 0.4650415}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LKNI
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.44649726, y: 0.5465756, z: 0.46362373}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LSHN
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.57923126, y: 0.44754446, z: 0.31836817}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LANK
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.588508, y: 0.45367053, z: 0.07532963}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LHEL
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.5170122, y: 0.40231627, z: 0.04437187}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LMT5
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.66409874, y: 0.53308606, z: 0.034949396}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LMT1
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.5581333, y: 0.61661226, z: 0.0148999095}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LTOE
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.6358634, y: 0.6117323, z: 0.051327594}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RTHI
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.1438214, y: 0.57597935, z: 0.75006473}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RKNE
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.16383001, y: 0.5233055, z: 0.48734477}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RKNI
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.26157826, y: 0.5614691, z: 0.47159857}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RSHN
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.13015327, y: 0.46828285, z: 0.25968787}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RANK
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.13136218, y: 0.46503368, z: 0.08859677}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RHEL
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.2125138, y: 0.42006078, z: 0.054619968}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RMT5
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.053623375, y: 0.5582745, z: 0.041182727}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RMT1
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.16300693, y: 0.614496, z: 0.02428424}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RTOE
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0.08507746, y: 0.6363501, z: 0.055981535}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:Hips
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: 0, y: -0.00000011920929, z: 0.9071784}
+      rotation: {x: 0.015325701, y: -0.0019878442, z: -0.9998658, w: -0.0054441243}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:Spine
+      parentName: Aleko:Hips
+      position: {x: -0, y: 0, z: 0.10876605}
+      rotation: {x: 0.088674776, y: -0.0002821895, z: 0.0031014557, w: 0.9960558}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:Spine1
+      parentName: Aleko:Spine
+      position: {x: -0, y: 0, z: 0.10876605}
+      rotation: {x: -0.04209527, y: 0.00012504609, z: 0.0031117557, w: 0.9991088}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:Spine2
+      parentName: Aleko:Spine1
+      position: {x: -0, y: 0, z: 0.10876605}
+      rotation: {x: -0.093389526, y: -0.024706826, z: 0.004194325, w: 0.99531424}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:Spine3
+      parentName: Aleko:Spine2
+      position: {x: -0, y: 0, z: 0.10876605}
+      rotation: {x: -0.04988562, y: -0.024866262, z: 0.0031126353, w: 0.9984405}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:Neck
+      parentName: Aleko:Spine3
+      position: {x: -0, y: 0.013984207, z: 0.13984206}
+      rotation: {x: -0.10697829, y: -0.016440054, z: 0.0054678773, w: 0.9941104}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:Neck1
+      parentName: Aleko:Neck
+      position: {x: -0, y: 0, z: 0.044096325}
+      rotation: {x: -0.065179475, y: 0.016114322, z: 0.0040493724, w: 0.99773526}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:Head
+      parentName: Aleko:Neck1
+      position: {x: -0, y: 0, z: 0.044096325}
+      rotation: {x: 0.12286602, y: 0.060053058, z: 0.010017123, w: 0.99055403}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:HeadEnd
+      parentName: Aleko:Head
+      position: {x: -0, y: 0, z: 0.08974689}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RightShoulder
+      parentName: Aleko:Spine3
+      position: {x: -0, y: 0, z: 0.09788945}
+      rotation: {x: -0.018000685, y: -0.7441268, z: -0.01614949, w: 0.6676006}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RightArm
+      parentName: Aleko:RightShoulder
+      position: {x: -0, y: 0, z: 0.17728867}
+      rotation: {x: -0.01261399, y: 0.06905828, z: -0.45754611, w: 0.8864105}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RightForeArm
+      parentName: Aleko:RightArm
+      position: {x: -0, y: 0, z: 0.29384965}
+      rotation: {x: 0.0012357471, y: 0.00089168333, z: -0.5851446, w: 0.8109276}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RightHand
+      parentName: Aleko:RightForeArm
+      position: {x: -0, y: 0, z: 0.22270429}
+      rotation: {x: -0.02860421, y: -0.11971461, z: -0.0034506002, w: 0.9923902}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RightHandThumb1
+      parentName: Aleko:RightHand
+      position: {x: -0.013209962, y: 0.035046753, z: 0.047131836}
+      rotation: {x: -0.38480818, y: 0, z: -0, w: 0.9229966}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RightHandMiddle1
+      parentName: Aleko:RightHand
+      position: {x: -0, y: -0.0012085086, z: 0.1256849}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LeftShoulder
+      parentName: Aleko:Spine3
+      position: {x: -0, y: 0, z: 0.09788945}
+      rotation: {x: -0.021412434, y: 0.79168284, z: 0.016507532, w: 0.61033374}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LeftArm
+      parentName: Aleko:LeftShoulder
+      position: {x: -0, y: 0, z: 0.17728867}
+      rotation: {x: -0.006469505, y: -0.071950175, z: 0.4874059, w: 0.87018204}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LeftForeArm
+      parentName: Aleko:LeftArm
+      position: {x: -0, y: 0, z: 0.29384965}
+      rotation: {x: 0.011104745, y: -0.009042037, z: 0.631345, w: 0.77536994}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LeftHand
+      parentName: Aleko:LeftForeArm
+      position: {x: -0, y: 0, z: 0.22270429}
+      rotation: {x: -0.037359167, y: 0.2152872, z: 0.008242408, w: 0.9758011}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LeftHandThumb1
+      parentName: Aleko:LeftHand
+      position: {x: 0.013209962, y: 0.035046753, z: 0.047131836}
+      rotation: {x: -0.38480818, y: 0, z: -0, w: 0.9229966}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LeftHandMiddle1
+      parentName: Aleko:LeftHand
+      position: {x: -0, y: -0.0012085086, z: 0.1256849}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RightUpLeg
+      parentName: Aleko:Hips
+      position: {x: -0.11339317, y: 0, z: 0}
+      rotation: {x: -0.12077946, y: 0.029040363, z: 0.18772997, w: 0.9743338}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RightLeg
+      parentName: Aleko:RightUpLeg
+      position: {x: -0, y: 0, z: -0.45122555}
+      rotation: {x: 0.09934575, y: -0, z: -0, w: 0.995053}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RightFoot
+      parentName: Aleko:RightLeg
+      position: {x: -0, y: 0, z: -0.41968063}
+      rotation: {x: -0.13955228, y: 0.04610409, z: -0.020290157, w: 0.98893267}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RightToeBase
+      parentName: Aleko:RightFoot
+      position: {x: -0, y: 0.12190833, z: 0}
+      rotation: {x: 0.16092813, y: -0, z: -0, w: 0.98696613}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RightToeBaseEnd
+      parentName: Aleko:RightToeBase
+      position: {x: -0, y: 0.05954151, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LeftUpLeg
+      parentName: Aleko:Hips
+      position: {x: 0.11339317, y: 0, z: 0}
+      rotation: {x: -0.11725298, y: -0.060866263, z: -0.12849854, w: 0.98287094}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LeftLeg
+      parentName: Aleko:LeftUpLeg
+      position: {x: -0, y: 0, z: -0.45122555}
+      rotation: {x: 0.09871043, y: -0, z: -0, w: 0.99511623}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LeftFoot
+      parentName: Aleko:LeftLeg
+      position: {x: -0, y: 0, z: -0.41968063}
+      rotation: {x: -0.12601082, y: -0.05330672, z: -0.034072585, w: 0.99000955}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LeftToeBase
+      parentName: Aleko:LeftFoot
+      position: {x: -0, y: 0.12190833, z: 0}
+      rotation: {x: 0.22122277, y: -0, z: -0, w: 0.9752233}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LeftToeBaseEnd
+      parentName: Aleko:LeftToeBase
+      position: {x: -0, y: 0.051257376, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:Position
+      parentName: Aleko stun backwards002(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
