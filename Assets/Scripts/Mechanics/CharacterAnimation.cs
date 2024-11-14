@@ -14,6 +14,8 @@ public class CharacterAnimation : MonoBehaviour
 
     private float currSpeed;
     private bool backwards;
+    private bool strafeLeft;
+    private bool strafeRight;
 
 
     [SerializeField]
@@ -39,10 +41,15 @@ public class CharacterAnimation : MonoBehaviour
     void Update()
     {
         string debug = "null";
+        float angle = Vector3.Angle(charMove.GetHorizontalVelocity(), charMove.look_direction);
 
         currSpeed = charMove.GetHorizontalVelocity().magnitude;
+
+        Debug.Log("Horizontal velocity: " + charMove.GetHorizontalVelocity().ToString());
+
         
-        backwards = Vector3.Angle(charMove.GetHorizontalVelocity(), charMove.look_direction) > 90f;
+        backwards = angle > 90f;
+        strafeLeft = strafeRight = angle > 50f && !backwards;
 
 
         if (charAnimator != null)
