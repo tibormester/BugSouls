@@ -49,9 +49,12 @@ public class CharacterAnimation : MonoBehaviour
 
         
         backwards = angle > 90f;
-        strafeLeft = strafeRight = angle > 50f && !backwards;
 
 
+        strafeRight = Vector3.Angle(charMove.GetHorizontalVelocity(), transform.right) < 50f;
+        strafeLeft = Vector3.Angle(charMove.GetHorizontalVelocity(), -transform.right) < 50f;
+
+        Debug.Log("Strafing: left: " + strafeLeft + ", Right: " + strafeRight);
         if (charAnimator != null)
         {
             if (currSpeed > minRunningSpeed)
@@ -69,6 +72,8 @@ public class CharacterAnimation : MonoBehaviour
                 charAnimator.SetBool("isRunning", false);
 
                 charAnimator.SetFloat("speed", (currSpeed/minRunningSpeed)*(backwards ? -1.5f : 1.5f));
+
+
 
                 debug = "walking";
             }
