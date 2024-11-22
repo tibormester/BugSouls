@@ -23,27 +23,27 @@ ModelImporter:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: f2db905d3f3ff5b5ab87bad267a36868eb966253_2000x2000
-    second: {fileID: 2800000, guid: 8ba0ea1a5ba7fb348a3adccdf08936e2, type: 3}
+    second: {fileID: 2800000, guid: 32814e44b22764247896dde72253b6a6, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: kkk_diffuseOriginal
-    second: {fileID: 2800000, guid: f7ec448525934a343ba69ca2ffeb6ee8, type: 3}
+    second: {fileID: 2800000, guid: 5054e2350975b3f46a662f3a7b727c1b, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: kkk_normal
-    second: {fileID: 2800000, guid: db89b31221e35454ea24b0671c25c082, type: 3}
+    second: {fileID: 2800000, guid: 42fb805edff652048ac0220f65da41c9, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: oooo_diffuseOriginal
-    second: {fileID: 2800000, guid: 47501fe17d14c114892437efaf0b2f01, type: 3}
+    second: {fileID: 2800000, guid: baa5b68da6d0c454190bb1efdbbabee2, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: oooo_normal
-    second: {fileID: 2800000, guid: d55e641907f52c547a9906f0c4c30ae6, type: 3}
+    second: {fileID: 2800000, guid: 5bedb90ad7442fb48b735a3d06d38332, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
