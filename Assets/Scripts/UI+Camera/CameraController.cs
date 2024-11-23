@@ -37,7 +37,7 @@ public class CameraController : MonoBehaviour
         prevNormal = targetMovement.physicsBody.groundNormal;
         runSpeed = targetMovement.moveSpeed;
     }
-    public Transform crossHair;
+    public Vector3 crossHair;
     public LayerMask throwable;
     public LayerMask terrain;
     private bool holding = false;
@@ -53,7 +53,7 @@ public class CameraController : MonoBehaviour
         // Raycast using the mask to ignore the player's layer
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, ~ignorePlayerLayerMask))
         {
-            crossHair.position = hit.point;
+            crossHair = hit.point;
         }
         if (Input.GetMouseButtonDown(0)){
             if (holding){

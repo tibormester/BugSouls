@@ -24,8 +24,24 @@ ModelImporter:
       to improve retargeting quality.\n\t'Aleko:Spine3' is inbetween humanoid transforms
       and has rotation animation that will be discarded.\n\t'Aleko:Neck1' is inbetween
       humanoid transforms and has rotation animation that will be discarded.\n"
-    animationRetargetingWarnings: 
-    animationDoRetargetingWarnings: 0
+    animationRetargetingWarnings: "\nRetargeting quality report for clip 'Aleko_run_mcp':\n\tLeftLowerLeg
+      average position error 20.4 mm and maximum position error 53.2 mm at time 5:58
+      (54.1%) Frame 658\n\tLeftFoot average position error 1.4 mm and maximum position
+      error 5.1 mm at time 5:58 (54.1%) Frame 658\n\tRightLowerLeg average position
+      error 19.1 mm and maximum position error 49.4 mm at time 9:73 (94.9%) Frame
+      1153\n\tRightFoot average position error 1.5 mm and maximum position error
+      5.2 mm at time 9:73 (94.9%) Frame 1153\n\tLeftUpperArm average position error
+      1.4 mm and maximum position error 4.1 mm at time 1:117 (19.4%) Frame 237\n\tLeftLowerArm
+      average position error 1.5 mm and maximum position error 3.2 mm at time 2:76
+      (25.9%) Frame 316\n\tLeftHand average position error 0.7 mm and maximum position
+      error 2.7 mm at time 2:72 (25.6%) Frame 312\n\tRightUpperArm average position
+      error 1.4 mm and maximum position error 4.1 mm at time 1:117 (19.4%) Frame
+      237\n\tRightLowerArm average position error 1.3 mm and maximum position error
+      2.6 mm at time 6:115 (68.7%) Frame 835\n\tRightHand average position error
+      0.6 mm and maximum position error 2.0 mm at time 5:60 (54.3%) Frame 660\n\tHead
+      average position error 3.5 mm and maximum position error 11.4 mm at time 2:75
+      (25.9%) Frame 315\n"
+    animationDoRetargetingWarnings: 1
     importAnimatedCustomProperties: 0
     importConstraints: 0
     animationCompression: 3
@@ -35,7 +51,36 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Aleko_run_mcp
+      takeName: Aleko_run_mcp
+      internalID: -4263287883967992130
+      firstFrame: 288
+      lastFrame: 377
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 0
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 1
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:
     lODScreenPercentages: []
