@@ -86,8 +86,13 @@ public class CharacterAnimation : MonoBehaviour
             }
             
         }
-
+        if (!cusPhysBod.IsGrounded()){
+            charAnimator.SetBool("isGrounded", false);
+        } else{
+            charAnimator.SetBool("isGrounded", true);
+        }
         Debug.Log("Min Running Speed: " + minRunningSpeed + " and "+ debug + " at speed of " + currSpeed);
         
     }
+    
 }
