@@ -1835,7 +1835,12 @@ MonoBehaviour:
   grappleStrength: 40
   grappleDistance: 1
   grappleMaximum: 20
+  webPrototype: {fileID: 0}
+  currentWeb: {fileID: 0}
   grappleTicks: 0
+  LaunchSpeed: 15
+  maxLaunchTicks: 120
+  launching: 0
 --- !u!1001 &834309844
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2012,7 +2017,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 07bfa13824441e3409eda2d655367f82, type: 2}
+  - {fileID: 2100000, guid: db058dbe1ef48d7499a37b28c8ca77de, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4167,7 +4172,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 610d18812799a39498b9d76d4ca5b9cb, type: 2}
+  - {fileID: 2100000, guid: db058dbe1ef48d7499a37b28c8ca77de, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5609,7 +5614,7 @@ MonoBehaviour:
   mouseSensitivityX: 2560
   mouseSensitivityY: 2560
   sprintFactor: 2.5
-  crossHair: {fileID: 1992507192}
+  crossHair: {x: 0, y: 0, z: 0}
   throwable:
     serializedVersion: 2
     m_Bits: 128
