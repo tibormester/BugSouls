@@ -1,0 +1,748 @@
+fileFormatVersion: 2
+guid: d39ab1e69a87831419e41ff5ed6c0bd2
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: "\nClip 'Aleko_walk_mcp' has import animation warnings
+      that might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'Aleko:Spine3' is inbetween humanoid transforms
+      and has rotation animation that will be discarded.\n\t'Aleko:Neck1' is inbetween
+      humanoid transforms and has rotation animation that will be discarded.\n"
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Aleko_walk_mcp
+      takeName: Aleko_walk_mcp
+      internalID: 2482445425139060425
+      firstFrame: 412
+      lastFrame: 576
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 0
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 1
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human:
+    - boneName: Aleko:Hips
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:LeftUpLeg
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:RightUpLeg
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:LeftLeg
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:RightLeg
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:LeftFoot
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:RightFoot
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:Spine
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:Spine1
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:Neck
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:Head
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:LeftShoulder
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:RightShoulder
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:LeftArm
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:RightArm
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:LeftForeArm
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:RightForeArm
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:LeftHand
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:RightHand
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:LeftToeBase
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:RightToeBase
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Aleko:Spine2
+      humanName: UpperChest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: Aleko walk(Clone)
+      parentName: 
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:ARIEL
+      parentName: Aleko walk(Clone)
+      position: {x: 0.27101898, y: -0.5590958, z: 1.7640752}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LFHD
+      parentName: Aleko walk(Clone)
+      position: {x: 0.36795512, y: -0.41631556, z: 1.7011683}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LBHD
+      parentName: Aleko walk(Clone)
+      position: {x: 0.34163204, y: -0.5868495, z: 1.6324096}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RFHD
+      parentName: Aleko walk(Clone)
+      position: {x: 0.22936617, y: -0.3969021, z: 1.7079362}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RBHD
+      parentName: Aleko walk(Clone)
+      position: {x: 0.18519089, y: -0.5367879, z: 1.6617148}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:C7
+      parentName: Aleko walk(Clone)
+      position: {x: 0.2472416, y: -0.6559813, z: 1.49269}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:T10
+      parentName: Aleko walk(Clone)
+      position: {x: 0.2440052, y: -0.66218305, z: 1.2052324}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:CLAV
+      parentName: Aleko walk(Clone)
+      position: {x: 0.27590784, y: -0.44857392, z: 1.447283}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:STRN
+      parentName: Aleko walk(Clone)
+      position: {x: 0.27875185, y: -0.38938862, z: 1.2310774}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LFSH
+      parentName: Aleko walk(Clone)
+      position: {x: 0.39308074, y: -0.524374, z: 1.4622667}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LBSH
+      parentName: Aleko walk(Clone)
+      position: {x: 0.32941693, y: -0.69507885, z: 1.3993433}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LUPA
+      parentName: Aleko walk(Clone)
+      position: {x: 0.5528361, y: -0.64219457, z: 1.3511344}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LELB
+      parentName: Aleko walk(Clone)
+      position: {x: 0.6574581, y: -0.6349005, z: 1.2417417}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LIEL
+      parentName: Aleko walk(Clone)
+      position: {x: 0.64679366, y: -0.5483313, z: 1.2077771}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LFRM
+      parentName: Aleko walk(Clone)
+      position: {x: 0.7239511, y: -0.60200095, z: 1.161915}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LIWR
+      parentName: Aleko walk(Clone)
+      position: {x: 0.88605934, y: -0.6254623, z: 1.1643882}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LOWR
+      parentName: Aleko walk(Clone)
+      position: {x: 0.84727776, y: -0.5721849, z: 1.0936953}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LIHAND
+      parentName: Aleko walk(Clone)
+      position: {x: 1.0013282, y: -0.64285254, z: 1.1005151}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LOHAND
+      parentName: Aleko walk(Clone)
+      position: {x: 0.9520687, y: -0.55554074, z: 1.0460117}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RFSH
+      parentName: Aleko walk(Clone)
+      position: {x: 0.15401366, y: -0.47476822, z: 1.4571642}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RBSH
+      parentName: Aleko walk(Clone)
+      position: {x: 0.13863786, y: -0.6621677, z: 1.4254193}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RUPA
+      parentName: Aleko walk(Clone)
+      position: {x: -0.059966814, y: -0.56376654, z: 1.3429238}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RELB
+      parentName: Aleko walk(Clone)
+      position: {x: -0.14948268, y: -0.5423953, z: 1.2462556}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RIEL
+      parentName: Aleko walk(Clone)
+      position: {x: -0.11117735, y: -0.4549099, z: 1.2165186}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RFRM
+      parentName: Aleko walk(Clone)
+      position: {x: -0.23494911, y: -0.5163639, z: 1.1644026}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RIWR
+      parentName: Aleko walk(Clone)
+      position: {x: -0.3604589, y: -0.48625836, z: 1.1775236}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:ROWR
+      parentName: Aleko walk(Clone)
+      position: {x: -0.3081965, y: -0.46024176, z: 1.0932633}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RIHAND
+      parentName: Aleko walk(Clone)
+      position: {x: -0.45783362, y: -0.5017174, z: 1.0927511}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:ROHAND
+      parentName: Aleko walk(Clone)
+      position: {x: -0.401754, y: -0.41360936, z: 1.047698}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LFWT
+      parentName: Aleko walk(Clone)
+      position: {x: 0.3954221, y: -0.44664225, z: 0.98617077}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:MFWT
+      parentName: Aleko walk(Clone)
+      position: {x: 0.27645203, y: -0.35642055, z: 1.0342264}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RFWT
+      parentName: Aleko walk(Clone)
+      position: {x: 0.11629643, y: -0.42846167, z: 1.0037224}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LBWT
+      parentName: Aleko walk(Clone)
+      position: {x: 0.36635536, y: -0.65680015, z: 1.0441865}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:MBWT
+      parentName: Aleko walk(Clone)
+      position: {x: 0.23495449, y: -0.6542439, z: 1.0507927}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RBWT
+      parentName: Aleko walk(Clone)
+      position: {x: 0.11866805, y: -0.6293154, z: 1.0579177}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LTHI
+      parentName: Aleko walk(Clone)
+      position: {x: 0.46203765, y: -0.5187387, z: 0.7898528}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LKNE
+      parentName: Aleko walk(Clone)
+      position: {x: 0.39352748, y: -0.54997045, z: 0.46722594}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LKNI
+      parentName: Aleko walk(Clone)
+      position: {x: 0.29965162, y: -0.5273067, z: 0.47191557}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LSHN
+      parentName: Aleko walk(Clone)
+      position: {x: 0.40625367, y: -0.6393175, z: 0.31596473}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LANK
+      parentName: Aleko walk(Clone)
+      position: {x: 0.39069054, y: -0.6245919, z: 0.074344344}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LHEL
+      parentName: Aleko walk(Clone)
+      position: {x: 0.30658945, y: -0.6700991, z: 0.04647042}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LMT5
+      parentName: Aleko walk(Clone)
+      position: {x: 0.47337064, y: -0.54543835, z: 0.03618029}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LMT1
+      parentName: Aleko walk(Clone)
+      position: {x: 0.3648761, y: -0.4580055, z: 0.015322013}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LTOE
+      parentName: Aleko walk(Clone)
+      position: {x: 0.44132867, y: -0.46797934, z: 0.054397956}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RTHI
+      parentName: Aleko walk(Clone)
+      position: {x: 0.028200455, y: -0.484502, z: 0.7529875}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RKNE
+      parentName: Aleko walk(Clone)
+      position: {x: 0.03402605, y: -0.5345887, z: 0.48891866}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RKNI
+      parentName: Aleko walk(Clone)
+      position: {x: 0.13183421, y: -0.49707508, z: 0.46883038}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RSHN
+      parentName: Aleko walk(Clone)
+      position: {x: -0.0112886485, y: -0.58446056, z: 0.26248714}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RANK
+      parentName: Aleko walk(Clone)
+      position: {x: -0.020366646, y: -0.5813752, z: 0.08956325}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RHEL
+      parentName: Aleko walk(Clone)
+      position: {x: 0.058342565, y: -0.6375971, z: 0.05699875}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RMT5
+      parentName: Aleko walk(Clone)
+      position: {x: -0.08451933, y: -0.4846424, z: 0.0426069}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RMT1
+      parentName: Aleko walk(Clone)
+      position: {x: 0.031401515, y: -0.4381288, z: 0.024526868}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RTOE
+      parentName: Aleko walk(Clone)
+      position: {x: -0.045033608, y: -0.40962893, z: 0.05400982}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:Hips
+      parentName: Aleko walk(Clone)
+      position: {x: 0, y: -0.00000011920929, z: 0.910474}
+      rotation: {x: -0.004489723, y: -0.008185773, z: -0.99995303, w: 0.0026212118}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:Spine
+      parentName: Aleko:Hips
+      position: {x: -0, y: 0, z: 0.10876605}
+      rotation: {x: 0.08119326, y: 0.013549815, z: -0.0020619447, w: 0.99660414}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:Spine1
+      parentName: Aleko:Spine
+      position: {x: -0, y: 0, z: 0.10876605}
+      rotation: {x: -0.049584378, y: 0.013164758, z: -0.003812911, w: 0.99867594}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:Spine2
+      parentName: Aleko:Spine1
+      position: {x: -0, y: 0, z: 0.10876605}
+      rotation: {x: -0.07809942, y: -0.024875471, z: -0.002151177, w: 0.9966329}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:Spine3
+      parentName: Aleko:Spine2
+      position: {x: -0, y: 0, z: 0.10876605}
+      rotation: {x: -0.03455255, y: -0.024757965, z: -0.0032341832, w: 0.99909097}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:Neck
+      parentName: Aleko:Spine3
+      position: {x: -0, y: 0.013984207, z: 0.13984206}
+      rotation: {x: -0.104893066, y: -0.015066557, z: 0.009109738, w: 0.99432766}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:Neck1
+      parentName: Aleko:Neck
+      position: {x: -0, y: 0, z: 0.044096325}
+      rotation: {x: -0.0818045, y: 0.018996337, z: 0.007625625, w: 0.99643815}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:Head
+      parentName: Aleko:Neck1
+      position: {x: -0, y: 0, z: 0.044096325}
+      rotation: {x: 0.08060226, y: 0.06452161, z: 0.014120585, w: 0.99455565}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:HeadEnd
+      parentName: Aleko:Head
+      position: {x: -0, y: 0, z: 0.08974689}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RightShoulder
+      parentName: Aleko:Spine3
+      position: {x: -0, y: 0, z: 0.09788945}
+      rotation: {x: -0.018010544, y: -0.72860634, z: -0.016919946, w: 0.68448687}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RightArm
+      parentName: Aleko:RightShoulder
+      position: {x: -0, y: 0, z: 0.17728867}
+      rotation: {x: 0.013155227, y: 0.0403503, z: -0.45507297, w: 0.8894422}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RightForeArm
+      parentName: Aleko:RightArm
+      position: {x: -0, y: 0, z: 0.29384965}
+      rotation: {x: -0.017785925, y: -0.014869562, z: -0.6412321, w: 0.76699674}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RightHand
+      parentName: Aleko:RightForeArm
+      position: {x: -0, y: 0, z: 0.22270429}
+      rotation: {x: -0.02518464, y: -0.114711836, z: -0.0029091213, w: 0.99307525}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RightHandThumb1
+      parentName: Aleko:RightHand
+      position: {x: -0.013209962, y: 0.035046753, z: 0.047131836}
+      rotation: {x: -0.38480818, y: 0, z: -0, w: 0.9229966}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RightHandMiddle1
+      parentName: Aleko:RightHand
+      position: {x: -0, y: -0.0012085086, z: 0.1256849}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LeftShoulder
+      parentName: Aleko:Spine3
+      position: {x: -0, y: 0, z: 0.09788945}
+      rotation: {x: -0.028126383, y: 0.7747368, z: 0.022916889, w: 0.6312421}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LeftArm
+      parentName: Aleko:LeftShoulder
+      position: {x: -0, y: 0, z: 0.17728867}
+      rotation: {x: -0.0029914775, y: -0.051587526, z: 0.5045335, w: 0.86184436}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LeftForeArm
+      parentName: Aleko:LeftArm
+      position: {x: -0, y: 0, z: 0.29384965}
+      rotation: {x: 0.004443264, y: -0.0031277514, z: 0.5756092, w: 0.8177069}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LeftHand
+      parentName: Aleko:LeftForeArm
+      position: {x: -0, y: 0, z: 0.22270429}
+      rotation: {x: -0.04940043, y: 0.185126, z: 0.009318365, w: 0.9814281}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LeftHandThumb1
+      parentName: Aleko:LeftHand
+      position: {x: 0.013209962, y: 0.035046753, z: 0.047131836}
+      rotation: {x: -0.38480818, y: 0, z: -0, w: 0.9229966}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LeftHandMiddle1
+      parentName: Aleko:LeftHand
+      position: {x: -0, y: -0.0012085086, z: 0.1256849}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RightUpLeg
+      parentName: Aleko:Hips
+      position: {x: -0.11339317, y: 0, z: 0}
+      rotation: {x: -0.12242501, y: 0.060285736, z: 0.1934647, w: 0.97157043}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RightLeg
+      parentName: Aleko:RightUpLeg
+      position: {x: -0, y: 0, z: -0.45122555}
+      rotation: {x: 0.08495291, y: -0, z: -0, w: 0.996385}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RightFoot
+      parentName: Aleko:RightLeg
+      position: {x: -0, y: 0, z: -0.41968063}
+      rotation: {x: -0.115383185, y: 0.011120223, z: -0.025866237, w: 0.99292195}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RightToeBase
+      parentName: Aleko:RightFoot
+      position: {x: -0, y: 0.12190833, z: 0}
+      rotation: {x: 0.14398119, y: -0, z: -0, w: 0.98958045}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:RightToeBaseEnd
+      parentName: Aleko:RightToeBase
+      position: {x: -0, y: 0.05954151, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LeftUpLeg
+      parentName: Aleko:Hips
+      position: {x: 0.11339317, y: 0, z: 0}
+      rotation: {x: -0.12797257, y: -0.006771453, z: -0.15634961, w: 0.9793529}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LeftLeg
+      parentName: Aleko:LeftUpLeg
+      position: {x: -0, y: 0, z: -0.45122555}
+      rotation: {x: 0.10013028, y: -0, z: -0, w: 0.9949743}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LeftFoot
+      parentName: Aleko:LeftLeg
+      position: {x: -0, y: 0, z: -0.41968063}
+      rotation: {x: -0.09223618, y: -0.080019884, z: -0.01869826, w: 0.99234056}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LeftToeBase
+      parentName: Aleko:LeftFoot
+      position: {x: -0, y: 0.12190833, z: 0}
+      rotation: {x: 0.2542181, y: -0, z: -0, w: 0.96714693}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:LeftToeBaseEnd
+      parentName: Aleko:LeftToeBase
+      position: {x: -0, y: 0.051257376, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Aleko:Position
+      parentName: Aleko walk(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 3
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

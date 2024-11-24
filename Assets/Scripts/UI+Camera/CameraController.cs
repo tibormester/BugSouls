@@ -114,7 +114,7 @@ public class CameraController : MonoBehaviour
 
 
     void Movement(){
-        // Get input for movement
+        // Get input for movement, use raw so that there is no input delay with switching directions
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         // Calculate the movement direction relative to the camera

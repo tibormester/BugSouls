@@ -111,8 +111,9 @@ public class GrappleScript : MonoBehaviour
                     launching = false;
                     yield break;
                 }//If its a weapon or a throwable start grabbing it and bring it to the hand 
-                else if(hit.rigidbody.gameObject.GetComponent<Weapon>() != null ||
-                        hit.rigidbody.gameObject.GetComponent<Throwable>() != null){
+                else if(hit.rigidbody != null &&  (
+                        hit.rigidbody.gameObject.GetComponent<Weapon>() != null ||
+                        hit.rigidbody.gameObject.GetComponent<Throwable>() != null)  ){
                     //Update the web to go to the hit location
                     newWeb.transform.LookAt(hit.point);
                     difference = (hit.point- transform.position).magnitude;

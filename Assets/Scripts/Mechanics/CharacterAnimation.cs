@@ -40,6 +40,8 @@ public class CharacterAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //COuld be optimized by cachine some values and only doing the vector operaitons a single time instead of for each direction
+
         string debug = "null";
         float angle = Vector3.Angle(charMove.GetHorizontalVelocity(), charMove.look_direction);
 
@@ -47,38 +49,44 @@ public class CharacterAnimation : MonoBehaviour
 
         Debug.Log("Horizontal velocity: " + charMove.GetHorizontalVelocity().ToString());
 
-        
-        backwards = angle > 90f;
+        var verticalVelocity = Vector3.Dot(GetComponent<Rigidbody>().velocity, charMove.transform.up);
+        if (verticalVelocity > 1f){
+            charAnimator.SetBool("isJumping", true);
+        } else{
+            charAnimator.SetBool("isJumping", false);
+        }
+        backwards = angle > 90f + 30f;
 
 
-        strafeRight = Vector3.Angle(charMove.GetHorizontalVelocity(), transform.right) < 50f;
-        strafeLeft = Vector3.Angle(charMove.GetHorizontalVelocity(), -transform.right) < 50f;
+        strafeRight = Vector3.Angle(charMove.GetHorizontalVelocity(), transform.right) < 30f;
+        strafeLeft = Vector3.Angle(charMove.GetHorizontalVelocity(), -transform.right) < 30f;
+        if(backwards){
+            charAnimator.SetInteger("direction", 2);
+        }
+        else if (strafeRight){
+            charAnimator.SetInteger("direction", 1);
+        }
+        else if (strafeLeft){
+            charAnimator.SetInteger("direction", -1);
+        }else{
+            charAnimator.SetInteger("direction", 0);
+        }
 
         Debug.Log("Strafing: left: " + strafeLeft + ", Right: " + strafeRight);
         if (charAnimator != null)
         {
-            if (currSpeed > minRunningSpeed)
-            {
+            if (currSpeed > minRunningSpeed){
                 charAnimator.SetBool("isRunning", true);
-                //charAnimator.SetBool("isWalking", false);
-
-
+                charAnimator.SetBool("isWalking", false);
 
                 debug = "running";
             }
-            else if (currSpeed > minWalkingSpeed)
-            {
+            else if (currSpeed > minWalkingSpeed){
                 charAnimator.SetBool("isWalking", true);
                 charAnimator.SetBool("isRunning", false);
 
-                charAnimator.SetFloat("speed", (currSpeed/minRunningSpeed)*(backwards ? -1.5f : 1.5f));
-
-
-
                 debug = "walking";
-            }
-            else
-            {
+            }else{
                 charAnimator.SetBool("isRunning", false);
                 charAnimator.SetBool("isWalking", false);
 
