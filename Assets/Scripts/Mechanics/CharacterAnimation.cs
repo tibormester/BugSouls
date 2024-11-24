@@ -38,38 +38,45 @@ public class CharacterAnimation : MonoBehaviour
 
 
     // Update is called once per frame
+    private int isJumping = -1;
+
     void Update()
     {
         //COuld be optimized by cachine some values and only doing the vector operaitons a single time instead of for each direction
 
         string debug = "null";
+        currSpeed = charMove.GetHorizontalVelocity().magnitude;
         float angle = Vector3.Angle(charMove.GetHorizontalVelocity(), charMove.look_direction);
 
-        currSpeed = charMove.GetHorizontalVelocity().magnitude;
-
-        Debug.Log("Horizontal velocity: " + charMove.GetHorizontalVelocity().ToString());
-
+        //Detect if we are moving up and try to jump if we havent already done so in the past few frames
         var verticalVelocity = Vector3.Dot(GetComponent<Rigidbody>().velocity, charMove.transform.up);
-        if (verticalVelocity > 1f){
+        if (verticalVelocity > 1f && isJumping == -1){
             charAnimator.SetBool("isJumping", true);
+            isJumping = 0;
         } else{
             charAnimator.SetBool("isJumping", false);
+            if(isJumping > 0){
+                isJumping++;
+            }
+            if(isJumping > 80){
+                isJumping = -1;
+            }
         }
         backwards = angle > 90f + 30f;
 
-
+        Debug.Log("angle to right: " + Vector3.Angle(charMove.GetHorizontalVelocity(), transform.right));
         strafeRight = Vector3.Angle(charMove.GetHorizontalVelocity(), transform.right) < 30f;
         strafeLeft = Vector3.Angle(charMove.GetHorizontalVelocity(), -transform.right) < 30f;
         if(backwards){
-            charAnimator.SetInteger("direction", 2);
+            charAnimator.SetInteger("walkDirection", 2);
         }
         else if (strafeRight){
-            charAnimator.SetInteger("direction", 1);
+            charAnimator.SetInteger("walkDirection", 1);
         }
         else if (strafeLeft){
-            charAnimator.SetInteger("direction", -1);
+            charAnimator.SetInteger("walkDirection", -1);
         }else{
-            charAnimator.SetInteger("direction", 0);
+            charAnimator.SetInteger("walkDirection", 0);
         }
 
         Debug.Log("Strafing: left: " + strafeLeft + ", Right: " + strafeRight);
@@ -80,8 +87,7 @@ public class CharacterAnimation : MonoBehaviour
                 charAnimator.SetBool("isWalking", false);
 
                 debug = "running";
-            }
-            else if (currSpeed > minWalkingSpeed){
+            }else if (currSpeed > minWalkingSpeed){
                 charAnimator.SetBool("isWalking", true);
                 charAnimator.SetBool("isRunning", false);
 
@@ -99,7 +105,7 @@ public class CharacterAnimation : MonoBehaviour
         } else{
             charAnimator.SetBool("isGrounded", true);
         }
-        Debug.Log("Min Running Speed: " + minRunningSpeed + " and "+ debug + " at speed of " + currSpeed);
+        Debug.Log("direction: " + charAnimator.GetInteger("walkDirection") + " and "+ debug + " at speed of " + currSpeed);
         
     }
     
