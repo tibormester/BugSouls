@@ -14,6 +14,8 @@ public class GrappleScript : MonoBehaviour
     public float grappleMaximum = 20f;
     public GameObject webPrototype;
     public GameObject currentWeb;
+    public Throwable currentHeld;
+    public Weapon currentWeapon;
     
     public int grappleTicks = 0;
     void Start()
@@ -51,56 +53,95 @@ public class GrappleScript : MonoBehaviour
     public int maxLaunchTicks = 120;
     public bool launching = false;
     IEnumerator LaunchGrappleHook(){
+        //Create the web
+        GameObject newWeb = Instantiate(webPrototype, transform);
+        launching = true;
+
+        //Get the initial direction vector
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // Cast ray from camera, can also use cam.transform.forward for a different direction
-
-        //TODO: Refactor so that we ray cast each frame... ?
-
         RaycastHit hit;
-        // Raycast using the mask to ignore the player's layer
-        if (Physics.Raycast(ray, out hit, grappleMaximum,~LayerMask.NameToLayer("Player")))
-        {
-            //Spawn a web prototype, start a corountine for a few frames where it extends towards the contact point
-            //If there is an existing web, we want to delete it
-            //If the player moves, we gotta keep reorientating and updating the length, lets spawn this fromm the center of the player?
-            //After it full extends, stat grapping
-            GameObject newWeb = Instantiate(webPrototype, transform);
-            launching = true;
-            
-            newWeb.transform.LookAt(hit.point);
-            float difference = (hit.point - transform.position).magnitude;
-            float traveled = newWeb.transform.localScale.z;
-            int launchTicks = 0;
-            while(traveled < difference -0.2f){
-                traveled = Mathf.Min(traveled + LaunchSpeed, difference);
-                newWeb.transform.localScale = new Vector3(1,1,traveled);
+        //Ray cast to see if we are looking at something and then construct a ray from the player to that
+        if (Physics.Raycast(ray, out hit, maxLaunchTicks * LaunchSpeed, ~LayerMask.NameToLayer("Player"))){
+            ray.direction = (hit.point - transform.position).normalized;
+            ray.origin = transform.position;
+        } else{ //Change the ray to point at the maximum launch distance
+            ray.direction = (ray.GetPoint(LaunchSpeed * maxLaunchTicks) - transform.position).normalized;
+            ray.origin = transform.position;
+        }
 
-                yield return null;
-                newWeb.transform.LookAt(hit.point);
-                difference = (hit.point - transform.position).magnitude;
-                traveled = newWeb.transform.localScale.z;
-                launchTicks++;
-                //If we launch the web and move away fast enough so that it cant land at the hit target in time, then return null
-                if(launchTicks > maxLaunchTicks){
+        //TODO: initialize local variables
+        float distance = 0f;
+        Vector3 targetLocation = ray.origin;
+        float difference;
+        int launchTicks = 0;
+        
+        //Initial web orientation
+        targetLocation = ray.origin + distance * ray.direction; 
+        newWeb.transform.LookAt(targetLocation);
+        difference = (targetLocation- transform.position).magnitude;
+        newWeb.transform.localScale = new Vector3(1,1, difference);
+
+        //Each tick, check the ray cast towards the target location for the object 
+        while(launchTicks < maxLaunchTicks){
+            // Raycast from the current target Location out by the launch speed to the new target location
+            if (Physics.Raycast(targetLocation, ray.direction, out hit, LaunchSpeed, ~LayerMask.NameToLayer("Player"))){
+                //Check what we hit, if its the terrain start grappling to it
+                if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Terrain")){ 
+                    if(currentWeb != null){
+                        Destroy(currentWeb);
+                    }
+                    //Update the web to go to the hit location
+                    newWeb.transform.LookAt(hit.point);
+                    difference = (hit.point- transform.position).magnitude;
+                    newWeb.transform.localScale = new Vector3(1,1, difference);
+                    //Store the hit location
+                    currentWeb = newWeb;
+                    hookedObject = hit.collider.gameObject.transform;
+                    hookedOffset = hookedObject.InverseTransformPoint(hit.point);
+                    //Start the grappling with a tiny hop
+                    grappling = true;
+                    rb.AddForce(rb.transform.up * 4f, ForceMode.VelocityChange);
+                    grappleTicks = 0;
+                    //We are finished so return early
+                    launching = false;
+                    yield break;
+                }//If its a wepon start grabbing it and bring it to the hand
+                else if(hit.rigidbody.gameObject.GetComponent<Weapon>() != null){
+                    //Update the web to go to the hit location
+                    newWeb.transform.LookAt(hit.point);
+                    difference = (hit.point- transform.position).magnitude;
+                    newWeb.transform.localScale = new Vector3(1,1, difference);
+                    //We are finished so return early
+                    launching = false;
+                    yield break;
+                }//If its a throwable bring it to the throwable location 
+                else if(hit.rigidbody.gameObject.GetComponent<Throwable>() != null){
+                    //Update the web to go to the hit location
+                    newWeb.transform.LookAt(hit.point);
+                    difference = (hit.point- transform.position).magnitude;
+                    newWeb.transform.localScale = new Vector3(1,1, difference);
+                    //We are finished so return early
+                    launching = false;
+                    yield break;
+                } //Otherwise it was something that we cannot travel to and we need to abort the launch
+                else {
+                    Destroy(newWeb);
                     launching = false;
                     yield break;
                 }
+            } //If we didnt hit anything keep moving the target location forward
+            else{ 
+                targetLocation += ray.direction * LaunchSpeed;
+                launchTicks++;
             }
-
-            if(currentWeb != null){
-                Destroy(currentWeb);
-            }
-            currentWeb = newWeb;
-
-            //TODO: Implement some code that detects if its a terrain with a grappleable component then start grappling, otherwise if its an object with the throwable component,
-            //Start pulling it in with another coroutine. If that throwable is a weapon than equip it, if its not than let it be thrown...
-
-            hookedObject = hit.collider.gameObject.transform;
-            hookedOffset = hookedObject.InverseTransformPoint(hit.point);
-            grappling = true;
-            rb.AddForce(rb.transform.up * 2f, ForceMode.VelocityChange);
-            grappleTicks = 0;
-            
+            //Reorientate the web from the players new position to the new target location
+            newWeb.transform.LookAt(targetLocation);
+            difference = (targetLocation- transform.position).magnitude;
+            newWeb.transform.localScale = new Vector3(1,1, difference);
+            yield return null;
         }
+        //If the launch process times out, destroy the web
+        Destroy(newWeb);
         launching = false;
         yield return null;
     }
