@@ -56,6 +56,7 @@ public class CharacterAnimation : MonoBehaviour
                 }
                 charAnimator.SetBool("attacking", true);
                 charAnimator.SetInteger("combo", combo);
+                Debug.LogWarning("We are ATTACKING!");
                 combo += 1;
 
                 expiration = 0;
