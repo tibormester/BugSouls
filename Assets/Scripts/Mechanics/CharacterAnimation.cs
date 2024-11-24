@@ -40,8 +40,38 @@ public class CharacterAnimation : MonoBehaviour
     // Update is called once per frame
     private int isJumping = -1;
 
+    private int combo = 0;
+    private int cooldown = -1;
+    private int expiration = -1;
     void Update()
-    {
+    {    
+        //TODO implement an input buffer
+        //If the user clicks, if we arent in cooldown, attack
+        //If we are expired, reset the combo, otherwise incrmenet the combo
+        if(Input.GetKeyDown(KeyCode.Mouse0)){
+            
+            if(cooldown < 0){
+                if(expiration > 50 || combo > 2){
+                    combo = 0;
+                }
+                charAnimator.SetBool("attacking", true);
+                charAnimator.SetInteger("combo", combo);
+                combo += 1;
+
+                expiration = 0;
+                cooldown = 15;
+            } else {
+                charAnimator.SetBool("attacking", false);
+                expiration++;
+                cooldown--;
+            }
+        } else{
+            charAnimator.SetBool("attacking", false);
+            expiration++;
+            cooldown--;
+        }
+
+
         //COuld be optimized by cachine some values and only doing the vector operaitons a single time instead of for each direction
 
         string debug = "null";
