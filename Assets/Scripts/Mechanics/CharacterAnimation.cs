@@ -21,6 +21,7 @@ public class CharacterAnimation : MonoBehaviour
     private float minRunningSpeed2 = 2f;
 
 
+    private GrappleScript gs;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,7 @@ public class CharacterAnimation : MonoBehaviour
         charAnimator = GetComponentInChildren<Animator>();
 
         minRunningSpeed2 = (charMove.moveSpeed * 1.1f) * (charMove.moveSpeed * 1.1f);
+        gs = GetComponent<GrappleScript>();
     }
 
 
@@ -41,12 +43,13 @@ public class CharacterAnimation : MonoBehaviour
         //TODO implement an input buffer
         //If the user clicks, if we arent in cooldown, attack
         //If we are expired, reset the combo, otherwise incrmenet the combo
-        if(Input.GetKeyDown(KeyCode.Mouse0)){    
+        if(Input.GetKeyDown(KeyCode.Mouse0) && gs.currentWeapon != null){    
             //Reset the combo if it expired or u reach the max
             if(expiration < 0 || combo > 3){
                 combo = 1;
             }//If we aren't stuck in an animation, it should play the next one
             if (ChangeAnimation("1handed combo " + combo)){
+                gs.currentWeapon.ToggleActive(true);
                 combo += 1;
                 //Set the expiration and cooldown timers, maybe add code so this is unique per attack
                 expiration = 500;
@@ -116,6 +119,8 @@ public class CharacterAnimation : MonoBehaviour
                     return false;
                 }
             }
+            //We are cancelling a weapon animation so turn off the colliders
+            gs.currentWeapon.ToggleActive(false);
         }
         charAnimator.CrossFade(animationName, 0.1f,0);
         currentAnimation = animationName;

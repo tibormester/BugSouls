@@ -29,6 +29,7 @@ public class Throwable : MonoBehaviour
     private GameObject holder;
     private Vector3 relative = Vector3.zero;
     private Rigidbody holderrb;
+
     public void PickedUp(GameObject parent, Vector3 localPosition){
         held = true;
         holder = parent;
