@@ -15,7 +15,7 @@ public class Throwable : MonoBehaviour
         
     }
 
-    // Update is called once per frame
+    // This probably needs to be fixed update since its a rigidbody
     void Update() {
         if (held){
             //rb.rotation = holderrb.rotation;
@@ -39,9 +39,10 @@ public class Throwable : MonoBehaviour
         held = false;
         rb.AddForce(velocity, ForceMode.VelocityChange);
     }
-        private static int player_layer = 6;
     
-
+    //For some reason i was struggling to use LayerMask.name to layer (player)
+    private static int player_layer = 6;
+    //When thrown deal damage based on the force it collides with
     private void OnCollisionEnter(Collision collision)
     {
         if(held){return;}

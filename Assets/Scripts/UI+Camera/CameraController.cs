@@ -37,59 +37,18 @@ public class CameraController : MonoBehaviour
         prevNormal = targetMovement.physicsBody.groundNormal;
         runSpeed = targetMovement.moveSpeed;
     }
-    public Vector3 crossHair;
     public LayerMask throwable;
     public LayerMask terrain;
-    private bool holding = false;
-    private GameObject held;
+    public Weapon weapon;
     private bool sprinting = false;
     void Update(){
-        // Perform raycast from the camera
         Ray ray = cam.ScreenPointToRay(Input.mousePosition); // Cast ray from camera, can also use cam.transform.forward for a different direction
-        RaycastHit hit;
         if(!sprinting){
             targetMovement.look_direction = ray.direction;
         }
-        // Raycast using the mask to ignore the player's layer
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, ~ignorePlayerLayerMask))
-        {
-            crossHair = hit.point;
-        }
-        if (Input.GetMouseButtonDown(0)){
-            if (holding){
-                Throw();
-            }else{
-                PickUp();
-            }
-        }
+        //Change swinging a sword to mouse button 0 and throwing gets moved to the grapple script
+
         
-    }
-    public float throwStrength = 25f;
-    private void Throw(){
-        if(holding){
-            held.GetComponent<Throwable>().Thrown(cam.ScreenPointToRay(Input.mousePosition).direction.normalized * throwStrength);
-            holding = false;
-
-        }
-    }
-    private void PickUp(){
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition); // Cast ray from camera, can also use cam.transform.forward for a different direction
-        RaycastHit hit;
-
-        // Raycast using the mask to ignore the player's layer
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, throwable))
-        {
-            Throwable throwableC = hit.rigidbody.gameObject.GetComponent<Throwable>();
-            // If we hit something that is not the player
-            if (hit.transform != target.transform && throwableC)
-            {
-                // Log or do something with the hit object
-                Debug.Log("picked object: " + hit.transform.name);
-                holding = true;
-                held = hit.rigidbody.gameObject;
-                throwableC.PickedUp(target.gameObject, new Vector3(1.1f, 0.2f, 1.1f));
-            }
-        }
     }
 
     void LateUpdate(){

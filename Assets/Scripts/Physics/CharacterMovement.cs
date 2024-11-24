@@ -96,6 +96,7 @@ public class CharacterMovement : MonoBehaviour
     public float groundSpringStrength = 5f;
     public float groundSpringDampen = -0.3f;
     public float orientationSpringStrength = 10f;
+    public float RideHeight = 0f;
     private void verticalVelocity(){//Called each frame to either apply the jump velocity or to reset the vertical velocity
 
         //Get the local horizontal rb velocity
@@ -111,8 +112,8 @@ public class CharacterMovement : MonoBehaviour
         } else{ //Not jumping, so gravity takes over...
             timer = -1f;
             if(physicsBody.IsGrounded()){//If we are grounded add a spring force to keep it at ground height
-                //We want neutral to be 80% of the maximum grounded distance away
-                float displacement = -physicsBody.groundDistance + (physicsBody.groundedDistance * 0.5f);
+                //We want neutral to be at the rideheight, it used to be pb.groundedDistance * 50% 
+                float displacement = -physicsBody.groundDistance + (RideHeight);
                 //spring acceleration = strength * displacement -  dampen * velocity
                 if (displacement >= (physicsBody.groundedDistance * 0.5f)){
                     displacement *= 5f;
