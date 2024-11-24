@@ -84,9 +84,9 @@ public class CharacterAnimation : MonoBehaviour
                 if (angle < -120 || angle > 120){
                 ChangeAnimation("Back Strafe");
                 } else if ( angle < -30) {
-                    ChangeAnimation("Right Strafe");
-                } else if (angle > 30){
                     ChangeAnimation("Left Strafe");
+                } else if (angle > 30){
+                    ChangeAnimation("Right Strafe");
                 } else {
                     ChangeAnimation("Walk Forward");
                 }
