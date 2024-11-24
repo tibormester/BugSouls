@@ -113,6 +113,12 @@ public class CameraController : MonoBehaviour
     }
 
 
+    private KeyCode lastMove;
+    private int doubleTapTimer = 0;
+    public int doubleTapLimit = 30;
+    public int dashCooldown = 500;
+    public float dashStrength = 10f;
+    private int dashTimer = 0;
 
     void Movement(){
         // Get input for movement, use raw so that there is no input delay with switching directions
@@ -131,6 +137,44 @@ public class CameraController : MonoBehaviour
             accum = Vector3.zero;
         }
         accum += camera_relative;
+
+        dashTimer = dashTimer < 0 ? 0 : dashTimer - 1; 
+        doubleTapTimer = doubleTapTimer < 0 ? 0 : doubleTapTimer - 1; 
+        if(dashTimer == 0){
+            if (Input.GetKeyDown(KeyCode.S)){
+                if(lastMove == KeyCode.S && doubleTapTimer > 0){
+                    targetMovement.GetComponent<Rigidbody>().AddForce(target.transform.up + target.transform.forward * -dashStrength , ForceMode.VelocityChange);
+                    doubleTapTimer = 0;
+                    dashTimer = dashCooldown;
+                }
+                doubleTapTimer = doubleTapLimit;
+                lastMove = KeyCode.S;
+            } else if (Input.GetKeyDown(KeyCode.A)){
+                if(lastMove == KeyCode.A && doubleTapTimer > 0){
+                    targetMovement.GetComponent<Rigidbody>().AddForce(target.transform.up + target.transform.right * -dashStrength, ForceMode.VelocityChange);
+                    doubleTapTimer = 0;
+                    dashTimer = dashCooldown;
+                }
+                doubleTapTimer = doubleTapLimit;
+                lastMove = KeyCode.A;
+            } else if (Input.GetKeyDown(KeyCode.D)){
+                if(lastMove == KeyCode.D && doubleTapTimer > 0){
+                    targetMovement.GetComponent<Rigidbody>().AddForce(target.transform.up + target.transform.right * dashStrength, ForceMode.VelocityChange);
+                    doubleTapTimer = 0;
+                    dashTimer = dashCooldown;
+                }
+                doubleTapTimer = doubleTapLimit;
+                lastMove = KeyCode.D;
+            } else if (Input.GetKeyDown(KeyCode.W)){
+                if(lastMove == KeyCode.W && doubleTapTimer > 0){
+                    targetMovement.GetComponent<Rigidbody>().AddForce(target.transform.up + target.transform.forward * dashStrength, ForceMode.VelocityChange);
+                    dashTimer = dashCooldown;
+                }
+                doubleTapTimer = doubleTapLimit;
+                lastMove = KeyCode.W;
+            }
+        }
+        
     }
 
     private bool moved = false;
