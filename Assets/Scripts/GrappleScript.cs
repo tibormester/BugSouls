@@ -247,13 +247,22 @@ public class GrappleScript : MonoBehaviour
             //They need to apply damage, trigger particle affects, and do a little stagger
             currentWeapon = weapon;
             rb.isKinematic = true;
+            /**
             //Otherwise the weapon collides with the player and and the ground
             //I wish unity had a better way of dyanmically adjusting colliders
             //IK it is porbably because of the backend collider data structure but it would be convenient
+
+            //SO the bug where even after adding these exlusions is that the player rigidbody inherits all child colliders
+            //This means collision has to be excluding at the collider level, not the rigidbody level
             string[] layers = new string[2];
             layers[0] = "Player";
             layers[1] = "Terrain";
             rb.excludeLayers = LayerMask.GetMask(layers);
+            **/
+            //Dont forget to renable when dropping
+            foreach (var collider in rb.GetComponentsInChildren<Collider>()){
+                collider.enabled = false;
+            }
             //Relocate to the player
             weapon.transform.SetParent(targetTransform, false);
             weapon.transform.localPosition = Vector3.zero;
