@@ -22,4 +22,8 @@ public class Weapon : MonoBehaviour
             }
         }
     }
+    public GameObject windTrail;
+    public void ToggleActive(){
+        windTrail.SetActive(!windTrail.activeSelf);
+    }
 }

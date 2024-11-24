@@ -35,7 +35,6 @@ public class CharacterAnimation : MonoBehaviour
 
     // Update is called once per fram
     private int combo = 1;//1,2,3
-    private int cooldown = -1;//goes down by one per frame until it is -1
     private int expiration = -1;//goes down by one per frame until it is -1
     void Update()
     {    
@@ -43,22 +42,18 @@ public class CharacterAnimation : MonoBehaviour
         //If the user clicks, if we arent in cooldown, attack
         //If we are expired, reset the combo, otherwise incrmenet the combo
         if(Input.GetKeyDown(KeyCode.Mouse0)){    
-            if(cooldown < 0){
-                //Reset the combo if it expired or u reach the max
-                if(expiration < 0 || combo > 3){
-                    combo = 1;
-                }
-                ChangeAnimation("1handed combo " + combo);
+            //Reset the combo if it expired or u reach the max
+            if(expiration < 0 || combo > 3){
+                combo = 1;
+            }//If we aren't stuck in an animation, it should play the next one
+            if (ChangeAnimation("1handed combo " + combo)){
                 combo += 1;
-
                 //Set the expiration and cooldown timers, maybe add code so this is unique per attack
                 expiration = 500;
-                cooldown = 200;
                 return;
-            } 
+            }
         } 
         expiration = expiration < 0 ? -1 : expiration - 1;
-        cooldown = cooldown < 0 ? -1 : cooldown - 1;
         
 
         var horizontalVelocity = charMove.GetHorizontalVelocity();
@@ -105,20 +100,26 @@ public class CharacterAnimation : MonoBehaviour
     public string currentAnimation;
     public static string[] nonCancellable = new string[] {"1handed combo 1", "1handed combo 2","1handed combo 3"};
 
-    public void ChangeAnimation(string animationName){
+    public bool ChangeAnimation(string animationName){
         if( currentAnimation == animationName){
-            return;
+            return false;
         }
-        //If its a unCancellable check to see if its almost done before aborting
         if (nonCancellable.Contains(currentAnimation)){
+            //non cancellables can only be canceled by other non cancellables after they have played most of their animaiton
             var state = charAnimator.GetCurrentAnimatorStateInfo(0);
-            if (state.normalizedTime < 0.9){
-                return;
+            if( nonCancellable.Contains(animationName)){
+                if (state.normalizedTime < 0.9){
+                    return false;
+                }
+            } else{
+                if (state.normalizedTime < 0.9){
+                    return false;
+                }
             }
         }
-
-        charAnimator.Play(animationName);
+        charAnimator.CrossFade(animationName, 0.1f,0);
         currentAnimation = animationName;
+        return true;
     }
     
 }

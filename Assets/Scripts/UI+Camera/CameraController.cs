@@ -9,6 +9,7 @@ public class CameraController : MonoBehaviour
     private CharacterMovement targetMovement; //The target's movement script to call movement functions on
     public float distance = 5.0f; // Distance between the camera and the target
     public float height = 2.0f; // Height above the character
+    public float shoulder = 1f; //Offset from shoulder
     public float rotationSpeed = 100.0f; // Speed the camera attempts to match the pitch and yaw
     public float normalRotationSpeed = 2f; // Speed the camera attempts to match the pitch and yaw
     public float cameraSpeed = 45f;
@@ -92,7 +93,7 @@ public class CameraController : MonoBehaviour
 
         // Calculate the new camera position behind and above the target
         Quaternion cameraTargetRotation = refrenceRotation * rotation;
-        Vector3 offset = new Vector3(0f, height, -distance);
+        Vector3 offset = new Vector3(shoulder, height, -distance);
 
         // Set the camera position
         //transform.position = Vector3.Slerp(transform.position, target.position + cameraTargetRotation * offset, cameraSpeed * Time.deltaTime);

@@ -37,11 +37,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Aleko_1_handed_attacks001_mcp
+      name: Aleko_1_handed_attacks001_mcp (1)
       takeName: Aleko_1_handed_attacks001_mcp
-      internalID: 4161253541284959359
-      firstFrame: 418
-      lastFrame: 758
+      internalID: -8489451958994903332
+      firstFrame: 494
+      lastFrame: 700
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
