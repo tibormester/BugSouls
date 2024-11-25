@@ -6,6 +6,8 @@ using UnityEditorInternal;
 using TMPro;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Runtime.CompilerServices;
+using System;
 
 
 public class CharacterAnimation : MonoBehaviour
@@ -23,6 +25,10 @@ public class CharacterAnimation : MonoBehaviour
 
     private GrappleScript gs;
 
+    [SerializeField]
+    private const string oneHandAttackStringPrefix = "1handed combo ";
+    private float[] oneHandAttackTimes = new float[] {1.3f, 1.717f, 2.417f};
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,31 +38,63 @@ public class CharacterAnimation : MonoBehaviour
 
         minRunningSpeed2 = (charMove.moveSpeed * 1.1f) * (charMove.moveSpeed * 1.1f);
         gs = GetComponent<GrappleScript>();
+
     }
 
 
     // Update is called once per fram
     private int combo = 1;//1,2,3
-    private int expiration = -1;//goes down by one per frame until it is -1
+    private float expiration = -1f; //counts down seconds until it is below zero
+    private bool comboQueued = false;
     void Update()
     {    
         //TODO implement an input buffer
         //If the user clicks, if we arent in cooldown, attack
         //If we are expired, reset the combo, otherwise incrmenet the combo
-        if(Input.GetKeyDown(KeyCode.Mouse0) && gs.currentWeapon != null){    
-            //Reset the combo if it expired or u reach the max
-            if(expiration < 0 || combo > 3){
-                combo = 1;
-            }//If we aren't stuck in an animation, it should play the next one
-            if (ChangeAnimation("1handed combo " + combo)){
-                gs.currentWeapon.ToggleActive(true);
-                combo += 1;
-                //Set the expiration and cooldown timers, maybe add code so this is unique per attack
-                expiration = 500;
-                return;
+        if (gs.currentWeapon != null)
+        {
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                //If we aren't stuck in an animation, it should play the next one
+                if (ChangeAnimation(oneHandAttackStringPrefix + combo))
+                {
+                    gs.currentWeapon.ToggleActive(true);
+                    expiration = oneHandAttackTimes[combo - 1];
+                    combo = combo < 3 ? combo + 1 : 1;
+                    //Set the expiration and cooldown timers, maybe add code so this is unique per attack
+                    comboQueued = false;
+                    return;
+                }
+                else if (expiration > 0)
+                {
+                    comboQueued = true;
+                }
             }
-        } 
-        expiration = expiration < 0 ? -1 : expiration - 1;
+            else if (comboQueued && expiration < 0)
+            {
+                if (ChangeAnimation(oneHandAttackStringPrefix + combo))
+                {
+                    Debug.Log("Queued attacking working");
+                    gs.currentWeapon.ToggleActive(true);
+                    combo = combo < 3 ? combo + 1 : 1;
+                    //Set the expiration and cooldown timers, maybe add code so this is unique per attack
+                    expiration = 1f;
+                    comboQueued = false;
+                    return;
+                }
+                else
+                {
+                    Debug.Log("Queued attack can't yet");
+                }
+
+            }
+        }
+        
+         
+        expiration = expiration < 0 ? -1f : expiration - Time.deltaTime;
+        combo = expiration < 0 && !comboQueued ? 1 : combo;
+
+        Debug.Log("Combo: " + combo + ", Expiration: " + expiration + " , Combo Queued: " + comboQueued + ", Anim time: " + oneHandAttackTimes[combo - 1]);
         
 
         var horizontalVelocity = charMove.GetHorizontalVelocity();
@@ -67,7 +105,7 @@ public class CharacterAnimation : MonoBehaviour
         bool grounded = cusPhysBod.IsGrounded();
         bool jumping = verticalVelocity > 3f;
 
-        Debug.Log("angle from straight: " + angle);
+        // Debug.Log("angle from straight: " + angle);
         
         var speed2 = horizontalVelocity.sqrMagnitude;
         //Are we on the ground?
@@ -111,11 +149,11 @@ public class CharacterAnimation : MonoBehaviour
             //non cancellables can only be canceled by other non cancellables after they have played most of their animaiton
             var state = charAnimator.GetCurrentAnimatorStateInfo(0);
             if( nonCancellable.Contains(animationName)){
-                if (state.normalizedTime < 0.9){
+                if (state.normalizedTime < 0.9f){
                     return false;
                 }
             } else{
-                if (state.normalizedTime < 0.9){
+                if (state.normalizedTime < 0.9f){
                     return false;
                 }
             }
