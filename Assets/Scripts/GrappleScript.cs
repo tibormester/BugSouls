@@ -243,7 +243,17 @@ public class GrappleScript : MonoBehaviour
             rb.isKinematic = false;
         }
         if(weapon != null){
-            //TODO: Implement a system for detecting if there is a current weapon and dropping it
+            //Implement a system for detecting if there is a current weapon and dropping it
+            if (currentWeapon != null)
+            {
+                Rigidbody currentWeaponRb = currentWeapon.GetComponent<Rigidbody>();
+                currentWeapon.transform.SetParent(null);
+                currentWeaponRb.isKinematic = false;
+                foreach (var collider in currentWeaponRb.GetComponentsInChildren<Collider>())
+                {
+                    collider.enabled = true;
+                }
+            }
             //Weapons need to just get swung, and only during their swing should they detect collisions, aftwerwards
             //They need to apply damage, trigger particle affects, and do a little stagger
             currentWeapon = weapon;
