@@ -6,6 +6,8 @@ public class Weapon : MonoBehaviour
 {
     public float damage = 10f; // Damage amount
     public GameObject player; //Could do get component in parent since weapons get reparented to the player
+    public enum WeaponType {dagger, twoHandSword}; // Type of sword, used for animations
+    public WeaponType type;
 
     private void OnCollisionEnter(Collision collision)
     {

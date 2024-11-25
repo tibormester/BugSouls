@@ -53,10 +53,9 @@ public class CharacterAnimation : MonoBehaviour
         //If we are expired, reset the combo, otherwise incrmenet the combo
         if (gs.currentWeapon != null)
         {
-            string weaponType = gs.currentWeapon.tag;
-
-
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            string weaponType = gs.currentWeapon.type.ToString();
+            
+            if (Input.GetKeyDown(KeyCode.Mouse0) || (comboQueued && expiration < 0))
             {
                 //If we aren't stuck in an animation, it should play the next one
                 if (ChangeAnimation(weaponType + "Combo" + combo))
@@ -72,33 +71,20 @@ public class CharacterAnimation : MonoBehaviour
                     comboQueued = false;
                     return;
                 }
-                else if (expiration > 0)
+                else if (expiration > 0 && !comboQueued)
                 {
                     comboQueued = true;
                 }
             }
-            else if (comboQueued && expiration < 0)
-            {
-                if (ChangeAnimation(weaponType + "Combo" + combo))
-                {
-                    gs.currentWeapon.ToggleActive(true);
-                    if (!animationDurations.TryGetValue(weaponType + "Combo" + combo + "Speed", out expiration))
-                    {
-                        expiration = 1f;
-                    }
-                    combo = combo < 3 ? combo + 1 : 1;
-                    //Set the expiration and cooldown timers, maybe add code so this is unique per attack
-                    comboQueued = false;
-                    return;
-                }
-            }
+
+
+            Debug.Log("Combo: " + combo + ", Expiration: " + expiration + " , Combo Queued: " + comboQueued + ", Weapon: " + weaponType);
         }
         
          
         expiration = expiration < 0 ? -1f : expiration - Time.deltaTime;
         combo = expiration < 0 && !comboQueued ? 1 : combo;
 
-        Debug.Log("Combo: " + combo + ", Expiration: " + expiration + " , Combo Queued: " + comboQueued + ", Anim time: ");
         
 
         var horizontalVelocity = charMove.GetHorizontalVelocity();
