@@ -27,7 +27,6 @@ public class CharacterAnimation : MonoBehaviour
 
     [SerializeField]
     private const string oneHandAttackStringPrefix = "1handed combo ";
-    private float[] oneHandAttackTimes = new float[] {1.3f, 1.717f, 2.417f};
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +38,7 @@ public class CharacterAnimation : MonoBehaviour
         minRunningSpeed2 = (charMove.moveSpeed * 1.1f) * (charMove.moveSpeed * 1.1f);
         gs = GetComponent<GrappleScript>();
 
+        UpdateAnimData();
     }
 
 
@@ -53,13 +53,20 @@ public class CharacterAnimation : MonoBehaviour
         //If we are expired, reset the combo, otherwise incrmenet the combo
         if (gs.currentWeapon != null)
         {
+            string weaponType = gs.currentWeapon.tag;
+
+
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 //If we aren't stuck in an animation, it should play the next one
-                if (ChangeAnimation(oneHandAttackStringPrefix + combo))
+                if (ChangeAnimation(weaponType + "Combo" + combo))
                 {
                     gs.currentWeapon.ToggleActive(true);
-                    expiration = oneHandAttackTimes[combo - 1];
+                    if (!animationDurations.TryGetValue(weaponType + "Combo" + combo + "Speed", out expiration))
+                    {
+                        expiration = 1f; //Can't find animation duration
+                    }
+                    
                     combo = combo < 3 ? combo + 1 : 1;
                     //Set the expiration and cooldown timers, maybe add code so this is unique per attack
                     comboQueued = false;
@@ -72,21 +79,18 @@ public class CharacterAnimation : MonoBehaviour
             }
             else if (comboQueued && expiration < 0)
             {
-                if (ChangeAnimation(oneHandAttackStringPrefix + combo))
+                if (ChangeAnimation(weaponType + "Combo" + combo))
                 {
-                    Debug.Log("Queued attacking working");
                     gs.currentWeapon.ToggleActive(true);
+                    if (!animationDurations.TryGetValue(weaponType + "Combo" + combo + "Speed", out expiration))
+                    {
+                        expiration = 1f;
+                    }
                     combo = combo < 3 ? combo + 1 : 1;
                     //Set the expiration and cooldown timers, maybe add code so this is unique per attack
-                    expiration = 1f;
                     comboQueued = false;
                     return;
                 }
-                else
-                {
-                    Debug.Log("Queued attack can't yet");
-                }
-
             }
         }
         
@@ -94,7 +98,7 @@ public class CharacterAnimation : MonoBehaviour
         expiration = expiration < 0 ? -1f : expiration - Time.deltaTime;
         combo = expiration < 0 && !comboQueued ? 1 : combo;
 
-        Debug.Log("Combo: " + combo + ", Expiration: " + expiration + " , Combo Queued: " + comboQueued + ", Anim time: " + oneHandAttackTimes[combo - 1]);
+        Debug.Log("Combo: " + combo + ", Expiration: " + expiration + " , Combo Queued: " + comboQueued + ", Anim time: ");
         
 
         var horizontalVelocity = charMove.GetHorizontalVelocity();
@@ -122,9 +126,9 @@ public class CharacterAnimation : MonoBehaviour
                 if (angle < -120 || angle > 120){
                 ChangeAnimation("Back Strafe");
                 } else if ( angle < -30) {
-                    ChangeAnimation("Left Strafe");
-                } else if (angle > 30){
                     ChangeAnimation("Right Strafe");
+                } else if (angle > 30){
+                    ChangeAnimation("Left Strafe");
                 } else {
                     ChangeAnimation("Walk Forward");
                 }
@@ -139,7 +143,8 @@ public class CharacterAnimation : MonoBehaviour
 
     //Swaps into the new animation only if its not already playing and if its not one of the unCancellable
     public string currentAnimation;
-    public static string[] nonCancellable = new string[] {"1handed combo 1", "1handed combo 2","1handed combo 3"};
+    //Sets list in "UpdateAnimData" function
+    public static List<string> nonCancellable = new List<string>();
 
     public bool ChangeAnimation(string animationName){
         if( currentAnimation == animationName){
@@ -164,5 +169,29 @@ public class CharacterAnimation : MonoBehaviour
         currentAnimation = animationName;
         return true;
     }
-    
+
+    // Updates the dictionary of animation clip times, mainly for attack animations
+    private Dictionary<string, float> animationDurations = new Dictionary<string, float>();
+    public void UpdateAnimData()
+    {
+        AnimationClip[] clips = charAnimator.runtimeAnimatorController.animationClips;
+        foreach (AnimationClip clip in clips)
+        {
+            charAnimator.logWarnings = false;
+            float speedMultiplier = charAnimator.GetFloat(clip.name + "Speed");
+            charAnimator.logWarnings = true;
+
+            speedMultiplier = speedMultiplier == 0 ? 1f : speedMultiplier;
+
+            animationDurations.Add(clip.name, clip.length / speedMultiplier);
+
+            if (clip.name.Contains("Combo"))
+            {
+                nonCancellable.Add(clip.name);
+            }
+
+            Debug.Log("Animation: " + clip.name + ", Duration: " + (clip.length / speedMultiplier));
+        }
+    }
+
 }
