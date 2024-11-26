@@ -15,6 +15,7 @@ public class CameraController : MonoBehaviour
     public float cameraSpeed = 45f;
     public float minYAngle = -75f; // Minimum vertical angle for camera rotation
     public float maxYAngle = 80f; // Maximum vertical angle for camera rotation
+    public LayerMask cameraColiderIgnore;
 
     private float currentYaw = 0f; // Current horizontal angle (yaw)
     private float currentPitch = 35f; // Current vertical angle (pitch)
@@ -100,7 +101,8 @@ public class CameraController : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, cameraTargetRotation, rotationSpeed * Time.deltaTime);
 
         RaycastHit hitinfo; 
-        if(Physics.Raycast(target.position, transform.rotation*offset, out hitinfo, offset.magnitude)){
+        if(Physics.Raycast(target.position, transform.rotation*offset, out hitinfo, offset.magnitude, ~cameraColiderIgnore))
+        {
             transform.position = target.position + transform.rotation * (offset.normalized * (hitinfo.distance - 0.1f));
         }else{
             transform.position = target.position + transform.rotation * offset;
