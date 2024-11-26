@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 4d5e96e56e71e6d488aa227e1e1d1ce5, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -2989,6 +2989,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   player: {fileID: 0}
+  type: 0
 --- !u!114 &1391297488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5350,6 +5351,9 @@ MonoBehaviour:
   cameraSpeed: 45
   minYAngle: -75
   maxYAngle: 80
+  cameraColiderIgnore:
+    serializedVersion: 2
+    m_Bits: 0
   mouseSensitivityX: 2560
   mouseSensitivityY: 2560
   sprintFactor: 2.5
