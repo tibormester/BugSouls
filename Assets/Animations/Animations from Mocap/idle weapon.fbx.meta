@@ -40,19 +40,19 @@ ModelImporter:
       name: Aleko_idle_with_weapon_mcp
       takeName: Aleko_idle_with_weapon_mcp
       internalID: -4537807659193587211
-      firstFrame: 661
-      lastFrame: 1355
+      firstFrame: 825
+      lastFrame: 1069
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
+      loopTime: 1
+      loopBlend: 1
       loopBlendOrientation: 1
       loopBlendPositionY: 1
-      loopBlendPositionXZ: 0
+      loopBlendPositionXZ: 1
       keepOriginalOrientation: 0
       keepOriginalPositionY: 0
       keepOriginalPositionXZ: 0

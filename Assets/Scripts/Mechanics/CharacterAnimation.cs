@@ -54,29 +54,31 @@ public class CharacterAnimation : MonoBehaviour
         if (gs.currentWeapon != null)
         {
             string weaponType = gs.currentWeapon.type.ToString();
-            
-            if (Input.GetKeyDown(KeyCode.Mouse0) || (comboQueued && expiration < 0))
-            {
+            //Detect if theres an input or an attack
+            if (Input.GetKeyDown(KeyCode.Mouse0) || comboQueued){
+                //clear the queue
+                comboQueued = false;
+                //If the combo is expired restart it
+                if(expiration < 0f){
+                    combo = 1;
+                }
                 //If we aren't stuck in an animation, it should play the next one
-                if (ChangeAnimation(weaponType + "Combo" + combo))
-                {
+                if (ChangeAnimation(weaponType + "Combo" + combo)){
                     gs.currentWeapon.ToggleActive(true);
-                    if (animationDurations.TryGetValue(weaponType + "Combo" + combo, out expiration))
-                    {
-                        expiration += 0.1f; //Buffer for animation time
+                    if (animationDurations.TryGetValue(weaponType + "Combo" + combo, out expiration)){
+                        expiration += 0.75f; //flat padding for maintaining a combo
                     }
-                    else
-                    {
-                        expiration = 1f; //Can't find animation duration
+                    else{
+                        Debug.Log("Couldn't find animaiton expiration: " + weaponType + "Combo" + combo);
+                        expiration = 2.75f; //Default combo timer
                     }
-                    
+                    //Increment the combo
                     combo = combo < 3 ? combo + 1 : 1;
-                    //Set the expiration and cooldown timers, maybe add code so this is unique per attack
                     comboQueued = false;
                     return;
-                }
-                else if (expiration > 0 && !comboQueued)
-                {
+                //If we couldnt play the animation, queue the next one if we are close to expiring
+                }else if (expiration > 0f && expiration < 0.75f){
+                    //The expiration < 0.75f is so that we only queue animations near the end of the expiration timer
                     comboQueued = true;
                 }
             }
@@ -88,8 +90,6 @@ public class CharacterAnimation : MonoBehaviour
         
          
         expiration = expiration < 0 ? -1f : expiration - Time.deltaTime;
-        combo = expiration < 0 && !comboQueued ? 1 : combo;
-
         
 
         var horizontalVelocity = charMove.GetHorizontalVelocity();
@@ -145,7 +145,7 @@ public class CharacterAnimation : MonoBehaviour
             //non cancellables can only be canceled by other non cancellables after they have played most of their animaiton
             var state = charAnimator.GetCurrentAnimatorStateInfo(0);
             if( nonCancellable.Contains(animationName)){
-                if (state.normalizedTime < 0.9f){
+                if (state.normalizedTime < 0.75f){
                     return false;
                 }
             } else{
