@@ -25,8 +25,6 @@ public class CharacterAnimation : MonoBehaviour
 
     private GrappleScript gs;
 
-    [SerializeField]
-    private const string oneHandAttackStringPrefix = "1handed combo ";
 
     // Start is called before the first frame update
     void Start()
