@@ -61,7 +61,11 @@ public class CharacterAnimation : MonoBehaviour
                 if (ChangeAnimation(weaponType + "Combo" + combo))
                 {
                     gs.currentWeapon.ToggleActive(true);
-                    if (!animationDurations.TryGetValue(weaponType + "Combo" + combo + "Speed", out expiration))
+                    if (animationDurations.TryGetValue(weaponType + "Combo" + combo, out expiration))
+                    {
+                        expiration += 0.1f; //Buffer for animation time
+                    }
+                    else
                     {
                         expiration = 1f; //Can't find animation duration
                     }
@@ -77,8 +81,9 @@ public class CharacterAnimation : MonoBehaviour
                 }
             }
 
-
-            Debug.Log("Combo: " + combo + ", Expiration: " + expiration + " , Combo Queued: " + comboQueued + ", Weapon: " + weaponType);
+            float debugAnimDuration;
+            
+            Debug.Log("Combo: " + combo + ", Expiration: " + expiration + " , Combo Queued: " + comboQueued + ", Animation: " + currentAnimation + ", Duration: " + (animationDurations.TryGetValue(currentAnimation, out debugAnimDuration) ? debugAnimDuration : "Unkown"));
         }
         
          
