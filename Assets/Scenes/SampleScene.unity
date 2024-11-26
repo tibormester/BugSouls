@@ -5747,7 +5747,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   imagesToShow:
-  - {fileID: 21300000, guid: baa409cc33a3aeb449e204410f72d811, type: 3}
+  - {fileID: 21300000, guid: e2e43d8f9988e7a4aa9f38da3694d03c, type: 3}
   - {fileID: 21300000, guid: b025ead2b2e980c49b9fb42a65dae717, type: 3}
   - {fileID: 21300000, guid: 878197e785fcc0f4b8388ff23483abe2, type: 3}
   - {fileID: 21300000, guid: 95a809b67e21b474ba0e77381c003b0a, type: 3}
@@ -5772,7 +5772,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: baa409cc33a3aeb449e204410f72d811, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e2e43d8f9988e7a4aa9f38da3694d03c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
