@@ -1605,7 +1605,7 @@ GameObject:
   - component: {fileID: 380591253}
   - component: {fileID: 380591252}
   - component: {fileID: 380591251}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2644,7 +2644,7 @@ GameObject:
   - component: {fileID: 894372454}
   - component: {fileID: 894372453}
   - component: {fileID: 894372452}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
