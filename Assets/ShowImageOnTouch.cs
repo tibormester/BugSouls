@@ -5,10 +5,10 @@ using System.Collections;
 public class ShowImageOnTouch : MonoBehaviour
 {
     [Header("UI Image to Display")]
-    public GameObject imageToShow; // Assign your UI Image GameObject here
+    public GameObject imageToShow; //you needa uhhh. Assign the ui image from the canvas
 
     [Header("Player Settings")]
-    public string playerTag = "Player"; // Tag assigned to your player object
+    public string playerTag = "Player"; // assign to player tag
 
     private bool hasDisplayed = false; // Prevents multiple triggers
 

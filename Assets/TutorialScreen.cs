@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class TutorialScreen : MonoBehaviour
 {
-    // Assign your images in the Inspector
     public Sprite[] imagesToShow; // Array of images to display
 
     private Image uiImage;         // Reference to the UI Image component
@@ -11,7 +10,6 @@ public class TutorialScreen : MonoBehaviour
 
     void Start()
     {
-        // Find the UI Image component on this GameObject
         uiImage = GetComponent<Image>();
 
         if (uiImage == null)
