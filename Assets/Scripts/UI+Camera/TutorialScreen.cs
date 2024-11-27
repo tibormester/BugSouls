@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections; // Add this to use IEnumerator
+using System.Collections; 
 
 public class TutorialScreen : MonoBehaviour
 {
@@ -55,7 +55,7 @@ public class TutorialScreen : MonoBehaviour
     void Update()
     {
         // Check for left mouse button click
-        if (currentImageIndex == 0 && Input.GetMouseButtonDown(0))
+        if (currentImageIndex == 0 && Input.GetMouseButtonDown(0)) //start
         {
             ShowNextImage();
         }
@@ -66,14 +66,14 @@ public class TutorialScreen : MonoBehaviour
                 StartCoroutine(WaitAndShowNextImage(3f));
             }
         }
-        else if (currentImageIndex == 2 && Input.GetKeyDown(KeyCode.Space))
+        else if (currentImageIndex == 2 && Input.GetKeyDown(KeyCode.Space)) //jump
         {
             if (!isWaiting)
             {
                 StartCoroutine(WaitAndShowNextImage(2f));
             }
         }
-        else if (currentImageIndex == 3 && playerGrappleScript.currentWeapon != null)
+        else if (currentImageIndex == 3 && playerGrappleScript.currentWeapon != null) //equip weapon
         {
         
                 Debug.Log("Player has a weapon equipped.");
@@ -83,14 +83,22 @@ public class TutorialScreen : MonoBehaviour
             }
             
         }
-        else if (currentImageIndex == 4 && Input.GetMouseButtonDown(0))
+        else if (currentImageIndex == 4 && Input.GetKeyDown(KeyCode.I)) //inventory
+        {
+            
+            if (!isWaiting)
+            {
+                StartCoroutine(WaitAndShowNextImage(4f));
+            }
+        }
+        else if (currentImageIndex == 5 && Input.GetMouseButtonDown(0)) //attack
         {
             if (!isWaiting)
             {
                 StartCoroutine(WaitAndShowNextImage(2f));
             }
         }
-        else if (currentImageIndex == 5 && playerGrappleScript.grappling)
+        else if (currentImageIndex == 6 && playerGrappleScript.grappling) //grapple
         {
             if (!isWaiting)
             {

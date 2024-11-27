@@ -4,7 +4,7 @@ public class CameraController : MonoBehaviour
 {
     // Variables for camera movement and control
     public LayerMask ignorePlayerLayerMask; // Assign a layer mask to ignore the player's layer
-
+    public bool allowMovement = true;
     public Transform target; // The character transform to follow
     private CharacterMovement targetMovement; //The target's movement script to call movement functions on
     public float distance = 5.0f; // Distance between the camera and the target
@@ -54,8 +54,11 @@ public class CameraController : MonoBehaviour
     }
 
     void LateUpdate(){
+        if (allowMovement)
+        {
         MouseInputs();
         Movement();
+        
         if(Input.GetButtonDown("Jump")){
             targetMovement.Jump();
         }
@@ -63,6 +66,7 @@ public class CameraController : MonoBehaviour
             sprinting = true;
         } else{
             sprinting = false;
+        }
         }
     }
     void MouseInputs(){
