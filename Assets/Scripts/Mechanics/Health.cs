@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Health : MonoBehaviour
@@ -5,9 +6,12 @@ public class Health : MonoBehaviour
     public float maxHealth = 100f;
     public float currentHealth;
 
+    private ParticleSystem particleSystem;
+
     private void Start()
     {
         currentHealth = maxHealth; // Initialize health
+        particleSystem = GetComponent<ParticleSystem>();
     }
 
     public void ApplyDamage(float damageAmount)
@@ -19,6 +23,13 @@ public class Health : MonoBehaviour
         {
             Die();
         }
+        StartCoroutine(PlayHitParticles());
+        
+    }
+    private IEnumerator PlayHitParticles(){
+        particleSystem?.Play();
+        yield return new WaitForSeconds(0.3f);
+        particleSystem?.Stop();
     }
 
     private void Die()
