@@ -5845,6 +5845,8 @@ MonoBehaviour:
   damage: 20
   player: {fileID: 251732933}
   type: 1
+  knockBack: 1
+  windTrail: {fileID: 0}
 --- !u!114 &294451394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6019,6 +6021,8 @@ MonoBehaviour:
   damage: 10
   player: {fileID: 251732933}
   type: 0
+  knockBack: 1
+  windTrail: {fileID: 0}
 --- !u!4 &348304710 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 12e3bc20d77552241be20892cbd8f6d7, type: 3}
@@ -7399,6 +7403,7 @@ MonoBehaviour:
   ignorePlayerLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  allowMovement: 1
   target: {fileID: 251732937}
   distance: 4
   height: 1.8
@@ -7452,7 +7457,7 @@ Transform:
   m_GameObject: {fileID: 973540140}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 278.76, y: 51.082, z: -377.732}
+  m_LocalPosition: {x: 278.31, y: 51.47, z: -377.732}
   m_LocalScale: {x: 0.66306585, y: 0.49441, z: 2.58466}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7477,8 +7482,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.0081096, y: 1, z: 1}
+  m_Center: {x: 0.0040550055, y: 0, z: 0}
 --- !u!23 &973540143
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9302,6 +9307,8 @@ MonoBehaviour:
   damage: 20
   player: {fileID: 251732933}
   type: 1
+  knockBack: 1
+  windTrail: {fileID: 0}
 --- !u!114 &1862326318
 MonoBehaviour:
   m_ObjectHideFlags: 0
