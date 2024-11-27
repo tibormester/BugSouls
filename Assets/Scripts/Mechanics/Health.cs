@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Health : MonoBehaviour
@@ -49,9 +50,21 @@ public class Health : MonoBehaviour
         if (gameObject.layer == LayerMask.NameToLayer("Player")){
             yield return null;
         } else{
-            yield return new WaitForSeconds(0.5f);
-        gameObject.SetActive(false); // Example action on death
+            yield return new WaitForSeconds(0.01f);
+
+            Corpsify(gameObject); //Removes this script btw
+            //gameObject.SetActive(false); // Example action on death
         }
         
+    }
+    public void Corpsify(GameObject enemy){
+        enemy.AddComponent<Throwable>();
+        enemy.layer = LayerMask.NameToLayer("Throwable");
+
+        Destroy(enemy.GetComponent<CharacterMovement>());
+        Destroy(enemy.GetComponent<Health>());
+        Destroy(enemy.GetComponent<ParticleSystem>());
+
+
     }
 }
