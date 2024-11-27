@@ -1,12 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Assertions.Must;
 
-public class MushroomGuyScript : MonoBehaviour
-{
-    public GameObject hat;
+public class MeleeSpiderlingAI : MonoBehaviour{
     public Health health;
     public CharacterMovement charMovement;
     public CustomPhysicsBody pb;
@@ -32,9 +27,10 @@ public class MushroomGuyScript : MonoBehaviour
     public float damage = 5f;
 
     public void FixedUpdate(){
-        if(health.currentHealth <= 0.5f * health.maxHealth && hat){
-            DropHat();
+        /** Maybe have them be suicide bombers?
+        if(health.currentHealth <= 0.5f * health.maxHealth && ){
         }
+        **/
         if (target != null){
             //The target is close enoguh to chase
             if (Vector3.Distance(target.position, transform.position) < maxChaseDistance){
@@ -78,20 +74,20 @@ public class MushroomGuyScript : MonoBehaviour
     public IEnumerator LeapAttack(){
         //Tilt head down
         for (int i = 0; i < 10; i++){
-            rb.AddTorque(Vector3.right * -25f, ForceMode.Impulse);
+            rb.AddTorque(Vector3.right * 5f, ForceMode.Impulse);
             yield return null;
         }
         //Launch forward
         hit = null;
         Vector3 direction = target.transform.position - transform.position;
         for (int i = 0; i < 25; i++){
-            rb.AddForce(direction.normalized * 10f, ForceMode.Impulse);
+            rb.AddForce(direction.normalized * 1f, ForceMode.Impulse);
             yield return null;
         }
         //Apply damage and knockback
         if(hit){
             hit.ApplyDamage(damage);
-            target.GetComponent<Rigidbody>()?.AddForce(direction.normalized * 5f, ForceMode.Impulse);
+            target.GetComponent<Rigidbody>()?.AddForce(direction.normalized * 1f, ForceMode.Impulse);
             hit = null;
         }
         yield return null;
@@ -108,20 +104,6 @@ public class MushroomGuyScript : MonoBehaviour
     private float  attackTimer = 0;
     public float attackCooldown = 1.5f;
 
-    public void DropHat(){
-        hat.layer = LayerMask.NameToLayer("Throwable");
-        hat.transform.SetParent(this.gameObject.transform.parent);
-        Rigidbody rb = hat.AddComponent<Rigidbody>();
-        hat.AddComponent<Throwable>();
-        hat.transform.localScale = transform.localScale;
-        rb.useGravity = false;
-        rb.drag = 0.5f;
-        rb.angularDrag = 1f;
-        rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
-        CustomPhysicsBody pb = hat.GetComponent<CustomPhysicsBody>();
-        pb.enabled = true;
-        hat = null;
-    }
 
 }
 
