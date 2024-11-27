@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ public class Health : MonoBehaviour
     public HealthBar health;
 
     private ParticleSystem pSys;
+
+    public Action DeathEvent;
 
     private void Start()
     {
@@ -26,7 +29,7 @@ public class Health : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            Die();
+            StartCoroutine(Die());
         }
         StartCoroutine(PlayHitParticles());
         
@@ -37,10 +40,18 @@ public class Health : MonoBehaviour
         pSys?.Stop();
     }
 
-    private void Die()
+    private IEnumerator Die()
     {
         // Handle the object's death (e.g., disable it, play animation, etc.)
         Debug.Log($"{gameObject.name} has died!");
+        DeathEvent?.Invoke();
+        if (gameObject.layer == LayerMask.NameToLayer("Player")){
+            GetComponent<CharacterMovement>().acceleration = 0f;
+            yield return null;
+        } else{
+            yield return new WaitForSeconds(2.5f);
         gameObject.SetActive(false); // Example action on death
+        }
+        
     }
 }

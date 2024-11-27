@@ -42,21 +42,32 @@ public class Throwable : MonoBehaviour
     }
     
     //For some reason i was struggling to use LayerMask.name to layer (player)
-    private static int player_layer = 6;
-    //When thrown deal damage based on the force it collides with
+    private List<Health> collided;
     private void OnCollisionEnter(Collision collision)
     {
         if(held){return;}
         print(collision.gameObject.name);
         // Check if the collided object is in the player layer
-        if (collision.gameObject.layer == player_layer && collision.gameObject != holder){
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy")){
             // Get the Health component from the collided object
             Health health = collision.gameObject.GetComponent<Health>();
             if (health != null)
             {
-                float damage = baseDamage * collision.impulse.magnitude;
-                health.ApplyDamage(damage);
+                if(!collided.Contains(health)){
+                    float damage = baseDamage * collision.impulse.magnitude;
+                    health.ApplyDamage(damage);
+                    collided.Add(health);
+                    //Start a timer to remove the collision
+                    StartCoroutine(OnCollision(health));
+                }
+                
             }
+
         }
+    }
+    private IEnumerator OnCollision(Health obj){
+        yield return new WaitForSeconds(0.35f);
+        collided.Remove(obj);
+        yield return null;
     }
 }

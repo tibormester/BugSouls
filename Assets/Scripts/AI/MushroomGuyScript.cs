@@ -29,6 +29,7 @@ public class MushroomGuyScript : MonoBehaviour
     public float stuckTime = 0f;                       //Elapsed time "stuck"
     private Vector3 stuckPos;  
 
+    public float damage = 5f;
 
     public void FixedUpdate(){
         if(health.currentHealth <= 0.5f * health.maxHealth && hat){
@@ -76,21 +77,21 @@ public class MushroomGuyScript : MonoBehaviour
     }
     public IEnumerator LeapAttack(){
         //Tilt head down
-        for (int i = 0; i < 5; i++){
-            rb.AddTorque(Vector3.right * -5f, ForceMode.Impulse);
+        for (int i = 0; i < 10; i++){
+            rb.AddTorque(Vector3.right * -25f, ForceMode.Impulse);
             yield return null;
         }
         //Launch forward
         hit = null;
         Vector3 direction = target.transform.position - transform.position;
-        for (int i = 0; i < 15; i++){
-            rb.AddForce(direction.normalized * 25f, ForceMode.Impulse);
+        for (int i = 0; i < 25; i++){
+            rb.AddForce(direction.normalized * 10f, ForceMode.Impulse);
             yield return null;
         }
         //Apply damage and knockback
         if(hit){
-            hit.ApplyDamage(25);
-            target.GetComponent<Rigidbody>()?.AddForce(direction.normalized * 15f, ForceMode.Impulse);
+            hit.ApplyDamage(damage);
+            target.GetComponent<Rigidbody>()?.AddForce(direction.normalized * 5f, ForceMode.Impulse);
             hit = null;
         }
         yield return null;
@@ -112,7 +113,7 @@ public class MushroomGuyScript : MonoBehaviour
         hat.transform.SetParent(this.gameObject.transform.parent);
         Rigidbody rb = hat.AddComponent<Rigidbody>();
         hat.AddComponent<Throwable>();
-        hat.transform.localScale = Vector3.one * 0.7f;
+        hat.transform.localScale = transform.localScale;
         rb.useGravity = false;
         rb.drag = 0.5f;
         rb.angularDrag = 1f;
