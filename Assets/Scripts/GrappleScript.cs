@@ -6,7 +6,7 @@ public class GrappleScript : MonoBehaviour
 {
     private Rigidbody rb;
     private CustomPhysicsBody pb;
-    private bool grappling = false;
+    public bool grappling = false;
     private Vector3 hookedOffset;
     private Transform hookedObject;
     public float grappleStrength = 5f;

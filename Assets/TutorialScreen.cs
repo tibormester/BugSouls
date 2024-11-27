@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections; // Add this to use IEnumerator
 
 public class TutorialScreen : MonoBehaviour
 {
@@ -8,9 +9,29 @@ public class TutorialScreen : MonoBehaviour
     private Image uiImage;         // Reference to the UI Image component
     private int currentImageIndex; // Index of the current image
 
+    private GrappleScript playerGrappleScript;
+    private bool isWaiting = false; // Flag to prevent multiple coroutines
+
     void Start()
     {
         uiImage = GetComponent<Image>();
+        
+        GameObject player = GameObject.FindWithTag("Player");
+
+        if (player != null)
+        {
+            // Get the GrappleScript component from the player GameObject
+            playerGrappleScript = player.GetComponent<GrappleScript>();
+
+            if (playerGrappleScript == null)
+            {
+                Debug.LogError("Can't find the GrappleScript component on the player GameObject.");
+            }
+        }
+        else
+        {
+            Debug.LogError("Player GameObject not found. Make sure it is tagged 'Player'.");
+        }
 
         if (uiImage == null)
         {
@@ -34,25 +55,70 @@ public class TutorialScreen : MonoBehaviour
     void Update()
     {
         // Check for left mouse button click
-        if (Input.GetMouseButtonDown(0))
+        if (currentImageIndex == 0 && Input.GetMouseButtonDown(0))
         {
             ShowNextImage();
         }
+        else if (currentImageIndex == 1 && Input.GetKeyDown(KeyCode.W)) // Moved forward
+        {
+            if (!isWaiting) // Prevent multiple coroutines
+            {
+                StartCoroutine(WaitAndShowNextImage(3f));
+            }
+        }
+        else if (currentImageIndex == 2 && Input.GetKeyDown(KeyCode.Space))
+        {
+            if (!isWaiting)
+            {
+                StartCoroutine(WaitAndShowNextImage(2f));
+            }
+        }
+        else if (currentImageIndex == 3 && playerGrappleScript.currentWeapon != null)
+        {
+        
+                Debug.Log("Player has a weapon equipped.");
+                if (!isWaiting)
+            {
+                StartCoroutine(WaitAndShowNextImage(1f));
+            }
+            
+        }
+        else if (currentImageIndex == 4 && Input.GetMouseButtonDown(0))
+        {
+            if (!isWaiting)
+            {
+                StartCoroutine(WaitAndShowNextImage(2f));
+            }
+        }
+        else if (currentImageIndex == 5 && playerGrappleScript.grappling)
+        {
+            if (!isWaiting)
+            {
+                StartCoroutine(WaitAndShowNextImage(1f));
+            }
+        }
     }
 
-   void ShowNextImage()
-{
-    currentImageIndex++;
-
-    if (currentImageIndex >= imagesToShow.Length)
+    // Coroutine to wait and then show the next image
+    IEnumerator WaitAndShowNextImage(float waitTime)
     {
-        uiImage.enabled = false;
-        // Stop updating after the last image
-        return;
+        isWaiting = true;
+        yield return new WaitForSeconds(waitTime);
+        ShowNextImage();
+        isWaiting = false;
     }
 
-    uiImage.sprite = imagesToShow[currentImageIndex];
-}
-}
+    void ShowNextImage()
+    {
+        currentImageIndex++;
 
+        if (currentImageIndex >= imagesToShow.Length)
+        {
+            uiImage.enabled = false;
+            // Stop updating after the last image
+            return;
+        }
 
+        uiImage.sprite = imagesToShow[currentImageIndex];
+    }
+}
