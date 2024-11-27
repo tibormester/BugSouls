@@ -5,12 +5,15 @@ public class Health : MonoBehaviour
 {
     public float maxHealth = 100f;
     public float currentHealth;
+    public HealthBar health;
 
     private ParticleSystem particleSystem;
 
     private void Start()
     {
         currentHealth = maxHealth; // Initialize health
+        health.setMaxHealth(maxHealth);
+        health.setHealth(currentHealth);
         particleSystem = GetComponent<ParticleSystem>();
     }
 
@@ -18,6 +21,7 @@ public class Health : MonoBehaviour
     {
         currentHealth -= damageAmount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth); // Ensure health doesn't go below 0
+        health.setHealth(currentHealth);
 
         if (currentHealth <= 0)
         {
