@@ -45,11 +45,11 @@ public class Health : MonoBehaviour
         // Handle the object's death (e.g., disable it, play animation, etc.)
         Debug.Log($"{gameObject.name} has died!");
         DeathEvent?.Invoke();
+        GetComponent<CharacterMovement>().acceleration = 0f;
         if (gameObject.layer == LayerMask.NameToLayer("Player")){
-            GetComponent<CharacterMovement>().acceleration = 0f;
             yield return null;
         } else{
-            yield return new WaitForSeconds(2.5f);
+            yield return new WaitForSeconds(0.5f);
         gameObject.SetActive(false); // Example action on death
         }
         

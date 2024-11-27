@@ -38,6 +38,7 @@ public class Throwable : MonoBehaviour
     }
     public void Thrown(Vector3 velocity){
         held = false;
+        collided.Clear();
         rb.AddForce(velocity, ForceMode.VelocityChange);
     }
     
@@ -46,7 +47,7 @@ public class Throwable : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if(held){return;}
-        print(collision.gameObject.name);
+        Debug.LogWarning(collision.gameObject.name);
         // Check if the collided object is in the player layer
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy")){
             // Get the Health component from the collided object
@@ -56,18 +57,11 @@ public class Throwable : MonoBehaviour
                 if(!collided.Contains(health)){
                     float damage = baseDamage * collision.impulse.magnitude;
                     health.ApplyDamage(damage);
-                    collided.Add(health);
-                    //Start a timer to remove the collision
-                    StartCoroutine(OnCollision(health));
+                    collided.Add(health); //So we dont double collide or the enemy takes damage walking over it
                 }
                 
             }
 
         }
-    }
-    private IEnumerator OnCollision(Health obj){
-        yield return new WaitForSeconds(0.35f);
-        collided.Remove(obj);
-        yield return null;
     }
 }
