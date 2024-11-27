@@ -135,7 +135,7 @@ public class CustomPhysicsBody : MonoBehaviour
             }
          }
     }
-    private void Reorientate(){
+    public void Reorientate(){
         groundNormal = Vector3.up;
     }
     private void ApplyGravity(){

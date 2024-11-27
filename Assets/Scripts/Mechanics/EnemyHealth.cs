@@ -1,28 +1,26 @@
 using System.Collections;
 using UnityEngine;
 
-public class Health : MonoBehaviour
+public class EnemyHealth : MonoBehaviour
 {
     public float maxHealth = 100f;
     public float currentHealth;
-    public HealthBar health;
+    [SerializeField] FloatingHealthBar healthBar;
 
-    private ParticleSystem pSys;
+    private ParticleSystem particleSystem;
 
     private void Start()
     {
         currentHealth = maxHealth; // Initialize health
-        health = GetComponent<HealthBar>();
-        pSys = GetComponent<ParticleSystem>();
-        health?.setMaxHealth(maxHealth);
-        health?.setHealth(currentHealth);
+        particleSystem = GetComponent<ParticleSystem>();
+        healthBar = GetComponentInChildren<FloatingHealthBar>();
     }
 
     public void ApplyDamage(float damageAmount)
     {
         currentHealth -= damageAmount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth); // Ensure health doesn't go below 0
-        health?.setHealth(currentHealth);
+        healthBar.UpdateHealthBar(currentHealth, maxHealth);
 
         if (currentHealth <= 0)
         {
@@ -32,9 +30,9 @@ public class Health : MonoBehaviour
         
     }
     private IEnumerator PlayHitParticles(){
-        pSys?.Play();
+        particleSystem?.Play();
         yield return new WaitForSeconds(0.3f);
-        pSys?.Stop();
+        particleSystem?.Stop();
     }
 
     private void Die()

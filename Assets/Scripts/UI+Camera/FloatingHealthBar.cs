@@ -1,0 +1,23 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class FloatingHealthBar : MonoBehaviour
+{
+    [SerializeField] private Slider slider;
+    [SerializeField] private Camera cam;
+    [SerializeField] private Transform target;
+    [SerializeField] private Vector3 offset;
+    public void UpdateHealthBar(float currVal, float maxVal)
+    {
+        slider.value = currVal / maxVal;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        transform.rotation = cam.transform.rotation;
+        transform.position = target.position + offset;
+    }
+}

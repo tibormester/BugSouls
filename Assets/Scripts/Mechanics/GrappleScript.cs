@@ -163,6 +163,9 @@ public class GrappleScript : MonoBehaviour
         float diff = (hitpoint - transform.position).magnitude;
         currentWeb.transform.localScale = new Vector3(1,1,diff);//Scale
 
+        //pb.Reorientate();
+
+        /**
         if (grappleTicks > 20 && pb.IsGrounded()){
             grappling = false;
             grappleTicks = 0;
@@ -170,6 +173,7 @@ public class GrappleScript : MonoBehaviour
             Destroy(currentWeb);
             currentWeb = null;
         }
+        **/
     }
 
     public float throwStrength = 25f;
