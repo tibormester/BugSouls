@@ -83,22 +83,14 @@ public class TutorialScreen : MonoBehaviour
             }
             
         }
-        else if (currentImageIndex == 4 && Input.GetKeyDown(KeyCode.I)) //inventory
-        {
-            
-            if (!isWaiting)
-            {
-                StartCoroutine(WaitAndShowNextImage(4f));
-            }
-        }
-        else if (currentImageIndex == 5 && Input.GetMouseButtonDown(0)) //attack
+        else if (currentImageIndex == 4 && Input.GetMouseButtonDown(0)) //attack
         {
             if (!isWaiting)
             {
                 StartCoroutine(WaitAndShowNextImage(2f));
             }
         }
-        else if (currentImageIndex == 6 && playerGrappleScript.grappling) //grapple
+        else if (currentImageIndex == 5 && playerGrappleScript.grappling) //grapple
         {
             if (!isWaiting)
             {
