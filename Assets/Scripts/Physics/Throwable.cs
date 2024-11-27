@@ -43,7 +43,7 @@ public class Throwable : MonoBehaviour
     }
     
     //For some reason i was struggling to use LayerMask.name to layer (player)
-    private List<Health> collided;
+    private List<Health> collided = new();
     private void OnCollisionEnter(Collision collision)
     {
         if(held){return;}
