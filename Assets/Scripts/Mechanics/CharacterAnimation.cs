@@ -62,7 +62,7 @@ public class CharacterAnimation : MonoBehaviour
                 }
                 //If we aren't stuck in an animation, it should play the next one
                 if (ChangeAnimation(weaponType + "Combo" + combo)){
-                    gs.currentWeapon.ToggleActive(true);
+                    
                     if (animationDurations.TryGetValue(weaponType + "Combo" + combo, out expiration)){
                         expiration += 0.75f; //flat padding for maintaining a combo
                     }
@@ -70,6 +70,7 @@ public class CharacterAnimation : MonoBehaviour
                         Debug.Log("Couldn't find animaiton expiration: " + weaponType + "Combo" + combo);
                         expiration = 2.75f; //Default combo timer
                     }
+                    gs.currentWeapon.ToggleActive(true, expiration - 0.75f);
                     //Increment the combo
                     combo = combo < 3 ? combo + 1 : 1;
                     comboQueued = false;

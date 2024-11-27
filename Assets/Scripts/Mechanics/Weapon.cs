@@ -12,7 +12,6 @@ public class Weapon : MonoBehaviour
     private List<Health> hitting = new(); 
     private void OnCollisionEnter(Collision collision)
     {
-        print(collision.gameObject.name);
         // Check if the collided object is in the player layer
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy")){
             // Get the Health component from the collided object
@@ -45,6 +44,7 @@ public class Weapon : MonoBehaviour
         
         //Stop the swing and apply all the damage
         foreach(var health in hitting ){
+            Debug.LogWarning("Hitting " + health.name);
             // Apply damage
             health.ApplyDamage(damage);
             //Apply some knockback

@@ -7,21 +7,22 @@ public class Health : MonoBehaviour
     public float currentHealth;
     public HealthBar health;
 
-    private ParticleSystem particleSystem;
+    private ParticleSystem pSys;
 
     private void Start()
     {
         currentHealth = maxHealth; // Initialize health
-        health.setMaxHealth(maxHealth);
-        health.setHealth(currentHealth);
-        particleSystem = GetComponent<ParticleSystem>();
+        health = GetComponent<HealthBar>();
+        pSys = GetComponent<ParticleSystem>();
+        health?.setMaxHealth(maxHealth);
+        health?.setHealth(currentHealth);
     }
 
     public void ApplyDamage(float damageAmount)
     {
         currentHealth -= damageAmount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth); // Ensure health doesn't go below 0
-        health.setHealth(currentHealth);
+        health?.setHealth(currentHealth);
 
         if (currentHealth <= 0)
         {
@@ -31,9 +32,9 @@ public class Health : MonoBehaviour
         
     }
     private IEnumerator PlayHitParticles(){
-        particleSystem?.Play();
+        pSys?.Play();
         yield return new WaitForSeconds(0.3f);
-        particleSystem?.Stop();
+        pSys?.Stop();
     }
 
     private void Die()
