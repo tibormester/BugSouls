@@ -38,25 +38,31 @@ public class Throwable : MonoBehaviour
     }
     public void Thrown(Vector3 velocity){
         held = false;
+        collided.Clear();
         rb.AddForce(velocity, ForceMode.VelocityChange);
     }
     
     //For some reason i was struggling to use LayerMask.name to layer (player)
-    private static int player_layer = 6;
-    //When thrown deal damage based on the force it collides with
+    private List<Health> collided = new();
     private void OnCollisionEnter(Collision collision)
     {
         if(held){return;}
-        print(collision.gameObject.name);
+        Debug.LogWarning(collision.gameObject.name);
         // Check if the collided object is in the player layer
-        if (collision.gameObject.layer == player_layer && collision.gameObject != holder){
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy")){
             // Get the Health component from the collided object
             Health health = collision.gameObject.GetComponent<Health>();
             if (health != null)
             {
-                float damage = baseDamage * collision.impulse.magnitude;
-                health.ApplyDamage(damage);
+                if(!collided.Contains(health) && rb.velocity.sqrMagnitude > 1f){
+
+                    float damage = Mathf.Clamp(baseDamage * collision.impulse.magnitude, 0f, 65f);
+                    health.ApplyDamage(damage);
+                    collided.Add(health); //So we dont double collide or the enemy takes damage walking over it
+                }
+                
             }
+
         }
     }
 }

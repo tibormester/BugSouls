@@ -1,4 +1,7 @@
+using System;
 using System.Collections;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Health : MonoBehaviour
@@ -9,26 +12,32 @@ public class Health : MonoBehaviour
 
     private ParticleSystem pSys;
 
+    public Action DeathEvent;
+
     private void Start()
     {
         currentHealth = maxHealth; // Initialize health
-        health = GetComponent<HealthBar>();
+        //health = GetComponent<HealthBar>();
         pSys = GetComponent<ParticleSystem>();
         health?.setMaxHealth(maxHealth);
         health?.setHealth(currentHealth);
     }
+    
 
     public void ApplyDamage(float damageAmount)
     {
         currentHealth -= damageAmount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth); // Ensure health doesn't go below 0
+        
         health?.setHealth(currentHealth);
 
         if (currentHealth <= 0)
         {
-            Die();
+            StartCoroutine(Die());
         }
-        StartCoroutine(PlayHitParticles());
+        if(damageAmount > 0f){
+            StartCoroutine(PlayHitParticles());
+        }
         
     }
     private IEnumerator PlayHitParticles(){
@@ -37,10 +46,32 @@ public class Health : MonoBehaviour
         pSys?.Stop();
     }
 
-    private void Die()
+    private IEnumerator Die()
     {
         // Handle the object's death (e.g., disable it, play animation, etc.)
         Debug.Log($"{gameObject.name} has died!");
-        gameObject.SetActive(false); // Example action on death
+        DeathEvent?.Invoke();
+        GetComponent<CharacterMovement>().acceleration = 0f;
+        if (gameObject.layer == LayerMask.NameToLayer("Player")){
+            yield return null;
+        } else{
+            yield return new WaitForSeconds(0.01f);
+
+            Corpsify(gameObject); //Removes this script btw
+            //gameObject.SetActive(false); // Example action on death
+        }
+        
+    }
+    public void Corpsify(GameObject enemy){
+        Throwable throwable = enemy.AddComponent<Throwable>();
+        throwable.baseDamage = 1f / enemy.GetComponent<Rigidbody>().mass; //Make sure heavy corpses dont one shot anything
+        enemy.layer = LayerMask.NameToLayer("Throwable");
+        enemy.transform.localScale *= 0.85f; //Shrink slightly
+
+        Destroy(enemy.GetComponent<CharacterMovement>());
+        Destroy(enemy.GetComponent<Health>());
+        Destroy(enemy.GetComponent<ParticleSystem>());
+
+
     }
 }

@@ -40,7 +40,11 @@ public class Weapon : MonoBehaviour
         hitting.Clear();
 
         //Wait until the swing is over
-        yield return new WaitForSeconds(0.85f * duration);
+        yield return new WaitForSeconds(0.65f * duration);
+        //Stop the windtrail earlier because the cooldown will be slower than the swing
+        windTrail?.SetActive(false);
+        //Some delay for emphasis (totatlly not because this is easier to implement)
+        yield return new WaitForSeconds(0.2f * duration);
         
         //Stop the swing and apply all the damage
         foreach(var health in hitting ){
@@ -55,7 +59,7 @@ public class Weapon : MonoBehaviour
                 rb.AddForce(direction, ForceMode.Impulse);
             }
         }
-        windTrail?.SetActive(false);
+       
         hitting.Clear();
         yield return null;
     }

@@ -4,5 +4,17 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/LoadingScene.unity
+    guid: be462ffcd2eb54aa487b82e138ac966f
+  - enabled: 1
+    path: Assets/Scenes/SicklySpider.unity
+    guid: dc27684b04e6342b6b641ad839b3111e
+  - enabled: 1
+    path: Assets/Scenes/MushroomCombatScene.unity
+    guid: dbe199820f51e4444917fbd8f304f060
+  - enabled: 1
+    path: Assets/Scenes/SpiderBoss.unity
+    guid: 6662a505b5a1f4cc0b0e6d22178eedd3
   m_configObjects: {}

@@ -165,7 +165,7 @@ public class GrappleScript : MonoBehaviour
 
         //pb.Reorientate();
 
-        /**
+        //Unstick when on ground
         if (grappleTicks > 20 && pb.IsGrounded()){
             grappling = false;
             grappleTicks = 0;
@@ -173,7 +173,7 @@ public class GrappleScript : MonoBehaviour
             Destroy(currentWeb);
             currentWeb = null;
         }
-        **/
+        
     }
 
     public float throwStrength = 25f;

@@ -27,6 +27,7 @@ public class CharacterAnimation : MonoBehaviour
 
 
     // Start is called before the first frame update
+    private bool dying = false;
     void Start()
     {
         charMove = GetComponent<CharacterMovement>();
@@ -35,6 +36,8 @@ public class CharacterAnimation : MonoBehaviour
 
         minRunningSpeed2 = (charMove.moveSpeed * 1.1f) * (charMove.moveSpeed * 1.1f);
         gs = GetComponent<GrappleScript>();
+
+        GetComponent<Health>().DeathEvent += () => {charAnimator.CrossFade("death 1" , 0.1f); dying = true;};
 
         UpdateAnimData();
     }
@@ -137,6 +140,9 @@ public class CharacterAnimation : MonoBehaviour
     public static List<string> nonCancellable = new List<string>();
 
     public bool ChangeAnimation(string animationName){
+        if (dying){
+            return false;
+        }
         if( currentAnimation == animationName){
             return false;
         }
@@ -163,7 +169,7 @@ public class CharacterAnimation : MonoBehaviour
     // Updates the dictionary of animation clip times, mainly for attack animations
     private Dictionary<string, float> animationDurations = new Dictionary<string, float>();
     public void UpdateAnimData()
-    {
+    {   
         AnimationClip[] clips = charAnimator.runtimeAnimatorController.animationClips;
         foreach (AnimationClip clip in clips)
         {

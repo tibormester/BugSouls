@@ -21,7 +21,6 @@ public class CustomPhysicsBody : MonoBehaviour
         ApplyGravity();
     }
     [Header("Ground Detection")]
-    public LayerMask groundMask;
     public float checkDistance = 150f;
     public float velocityCheckDistance = 2f;
     public float groundedDistance = 0.1f;
@@ -42,11 +41,12 @@ public class CustomPhysicsBody : MonoBehaviour
             freeFall = true;
         }
     }
+    public LayerMask groundMask;
     private bool TerrainRaycast(){//Return's true when finding terrain, false if not
         RaycastHit hitInfo;
         //We want to check infront of the player to enable them to climb up walls
         Debug.DrawRay(transform.position, body.velocity.normalized * velocityCheckDistance, Color.red);
-
+        //var groundMask = LayerMask.NameToLayer("Terrain");
         if ((body.velocity.sqrMagnitude > 3f && Physics.Raycast(transform.position, body.velocity.normalized, out hitInfo, velocityCheckDistance, groundMask)) ||//Forward
             Physics.Raycast(transform.position, -groundNormal, out hitInfo, checkDistance, groundMask) ||//Ground Down
             //Physics.Raycast(transform.position, body.velocity.normalized -body.transform.up, out hitInfo, velocityCheckDistance, groundMask) ||//Diaganol down

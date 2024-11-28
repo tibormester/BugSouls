@@ -33,7 +33,9 @@ public class CharacterMovement : MonoBehaviour
     public float additional_deacceleration = 10f;
     [Tooltip("Angular velocity applied to orientation to match towards movement direction")]
     public float rotationSpringForce = 0.5f;
+    public float maxSpeed = 99f;
     //Takes in a desired input vector in world coordinates, projects it into local coordinates, removes vertical velocity, scales to movement speed, rotates towards movement direction
+
     public void Move(Vector3 world_direction, float distance = 999f){
         moveDirection += world_direction.normalized * distance;
     }
@@ -43,7 +45,7 @@ public class CharacterMovement : MonoBehaviour
     private void horizontalVelocity(Vector3 world_vector){
         //Take a global direction and get the local horizontal component as a target horizontal velocity
         Vector3 localDirection = rb.transform.InverseTransformDirection(world_vector);  //Make it local
-        Vector3 targetHorizontalVelocity = new Vector3(localDirection.x, 0f, localDirection.z).normalized * moveSpeed; //remove vertical and scale to move speed
+        Vector3 targetHorizontalVelocity = new Vector3(localDirection.x, 0f, localDirection.z).normalized * Mathf.Min(moveSpeed, maxSpeed); //remove vertical and scale to move speed
 
         //Get the local horizontal rb velocity
         Vector3 localHorizontalVelocity = rb.transform.InverseTransformDirection(rb.velocity);
