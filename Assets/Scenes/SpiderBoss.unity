@@ -6315,8 +6315,9 @@ MonoBehaviour:
     m_Bits: 8
   weapon: {fileID: 0}
   doubleTapLimit: 100
-  dashCooldown: 100
-  dashStrength: 16
+  dashCooldown: 1
+  dashStrength: 2.5
+  canDash: 1
 --- !u!81 &987985290
 AudioListener:
   m_ObjectHideFlags: 0

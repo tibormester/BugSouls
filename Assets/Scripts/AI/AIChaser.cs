@@ -43,6 +43,7 @@ public class NavMeshAgentChaser : MonoBehaviour
 
         originalAccel = charMovement.acceleration;
         stuckPos = transform.position;
+        GetComponent<Health>().DeathEvent += () => Destroy(this);
     }
 
     void Update()
