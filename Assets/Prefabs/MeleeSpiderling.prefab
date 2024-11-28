@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5247622928907538057}
   - component: {fileID: 2228267484618858481}
   - component: {fileID: 8412769184600811830}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MeleeSpiderling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80,11 +80,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   checkDistance: 150
   velocityCheckDistance: 2
-  groundedDistance: 0.1
-  feetDistance: 0.2
+  groundedDistance: 1
+  feetDistance: 0.4
   isGrounded: 1
   groundNormal: {x: 0, y: 1, z: 0}
   groundDistance: 0
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 8
   ground: {fileID: 0}
   coyoteTime: 0.1
   gravity: -32
@@ -129,7 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
-  currentHealth: 0
+  currentHealth: 10
   health: {fileID: 0}
 --- !u!114 &5247622928907538057
 MonoBehaviour:
@@ -154,7 +157,7 @@ MonoBehaviour:
   maxChaseDistance: 100
   maxStuckTime: 4
   maxStuckDistance: 1
-  originalAccel: 5
+  originalAccel: 15
   stuckTime: 0
   damage: 5
   hit: {fileID: 0}
@@ -5016,9 +5019,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6052071225354136618, guid: 6a57cecd139c8984b85894e2498c1342, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6a57cecd139c8984b85894e2498c1342, type: 3}
       propertyPath: m_Name
       value: spiderboss NO SKELETON
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6a57cecd139c8984b85894e2498c1342, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7833998180420683084, guid: 6a57cecd139c8984b85894e2498c1342, type: 3}
       propertyPath: m_Materials.Array.data[0]

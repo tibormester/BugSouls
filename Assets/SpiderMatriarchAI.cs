@@ -1,7 +1,8 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class MeleeSpiderlingAI : MonoBehaviour{
+public class SpiderMatriarchAI : MonoBehaviour{
     public Health health;
     public CharacterMovement charMovement;
     public CustomPhysicsBody pb;
@@ -27,12 +28,73 @@ public class MeleeSpiderlingAI : MonoBehaviour{
 
     public float damage = 5f;
 
-    public void FixedUpdate(){
-        /** Maybe have them be suicide bombers?
-        if(health.currentHealth <= 0.5f * health.maxHealth && ){
+    public GameObject spiderlingPrefab;
+    public GameObject hat;
+    private Vector3 hatLocalPos;
+    private Quaternion hatLocalRot;
+
+    public IEnumerator DropHat(){
+        hatLocalPos = hat.transform.localPosition;
+        hatLocalRot = hat.transform.localRotation;
+        var h = hat;
+        hat.layer = LayerMask.NameToLayer("Throwable");
+        hat.transform.SetParent(this.gameObject.transform.parent);
+        Rigidbody rb = hat.AddComponent<Rigidbody>();
+        var throwable = hat.AddComponent<Throwable>();
+        throwable.baseDamage = 0f;
+        hat.transform.localScale = Vector3.one * 17f;
+        rb.useGravity = false;
+        rb.drag = 0.5f;
+        rb.angularDrag = 1f;
+        rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+        CustomPhysicsBody pb = hat.GetComponent<CustomPhysicsBody>();
+        pb.enabled = true;
+        hat = null;
+        yield return null;
+        for (int i = 0; i < 5; i++){
+            rb.AddForce((-3 * transform.forward + transform.up) * 1.5f, ForceMode.Impulse);
+            yield return null;
         }
-        **/
-        if (target != null){
+        yield return new WaitForSeconds(5f);
+        hatTarget = h;
+    }
+    private IEnumerator PickupHat(GameObject hat){
+        health.ApplyDamage(-.25f * health.maxHealth);
+        hat.layer = LayerMask.NameToLayer("Enemy");
+        //Reset the hats transfrom
+        hat.transform.SetParent(gameObject.transform);
+        hat.transform.localPosition = hatLocalPos;
+        hat.transform.localRotation = hatLocalRot;
+
+        Destroy(hat.GetComponent<Rigidbody>());
+        Destroy(hat.GetComponent<Throwable>());
+
+        hat.GetComponent<CustomPhysicsBody>().enabled = false;
+        this.hat = hat;
+        hatTarget = null;
+        yield return null;
+    }
+
+    public GameObject hatTarget;
+    public void FixedUpdate(){
+        
+        if(health.currentHealth <= 0.5f * health.maxHealth && hat != null){
+            var spider1 = Instantiate(spiderlingPrefab, transform.position + Vector3.right, transform.rotation);
+            var spider2 = Instantiate(spiderlingPrefab, transform.position + Vector3.left, transform.rotation);
+            spider1.GetComponent<MeleeSpiderlingAI>().target = target;
+            spider2.GetComponent<MeleeSpiderlingAI>().target = target;
+            StartCoroutine(DropHat());
+        }
+        //Prioritize regaining the crown
+        if (hatTarget != null){
+            charMovement.acceleration = originalAccel * backupAccelMultiplier;
+            charMovement.Move((hatTarget.transform.position - transform.position).normalized);
+            charMovement.look_direction = hatTarget.transform.position - transform.position;
+            if(Vector3.Distance(hatTarget.transform.position, transform.position) < 3f){
+                StartCoroutine(PickupHat(hatTarget));
+            }
+
+        } else if (target != null){
             //The target is close enoguh to chase
             if (Vector3.Distance(target.position, transform.position) < maxChaseDistance){
                 charMovement.acceleration = originalAccel;
@@ -75,14 +137,14 @@ public class MeleeSpiderlingAI : MonoBehaviour{
     public IEnumerator LeapAttack(){
         //Tilt head down
         for (int i = 0; i < 10; i++){
-            rb.AddTorque(Vector3.right * 5f, ForceMode.Impulse);
+            rb.AddTorque(Vector3.right * 45f, ForceMode.Impulse);
             yield return null;
         }
         //Launch forward
         hit = null;
         Vector3 direction = target.transform.position - transform.position;
         for (int i = 0; i < 25; i++){
-            rb.AddForce(direction.normalized * 1f, ForceMode.Impulse);
+            rb.AddForce(direction.normalized * 15f, ForceMode.Impulse);
             yield return null;
         }
         //Apply damage and knockback

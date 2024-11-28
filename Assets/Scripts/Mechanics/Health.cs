@@ -32,7 +32,9 @@ public class Health : MonoBehaviour
         {
             StartCoroutine(Die());
         }
-        StartCoroutine(PlayHitParticles());
+        if(damageAmount > 0f){
+            StartCoroutine(PlayHitParticles());
+        }
         
     }
     private IEnumerator PlayHitParticles(){

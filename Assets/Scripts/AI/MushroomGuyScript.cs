@@ -17,6 +17,7 @@ public class MushroomGuyScript : MonoBehaviour
         pb = GetComponent<CustomPhysicsBody>();
         charMovement = GetComponent<CharacterMovement>();
         rb = GetComponent<Rigidbody>();
+        health.DeathEvent += () => Destroy(this);
     } 
     public Transform target;
     public float minEngageDistance = 2f, maxEngageDistance = 3f;
