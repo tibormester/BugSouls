@@ -40,30 +40,41 @@ public class SceneDescriptor : MonoBehaviour{
     }
 
     private IEnumerator LoadSceneAsync(GraphEdge edge){
-        // Begin asynchronous loading of the next scene
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(edge.sceneName, LoadSceneMode.Additive);
-        yield return new WaitUntil( () => asyncLoad.isDone);
-
+        //Check if the scene needs to be loaded
+        Scene nextScene = SceneManager.GetSceneByName(edge.sceneName);
+        if (!nextScene.IsValid()){//Of course unity has to be special and doesn't want to just return null or include better documentation
+            // Begin asynchronous loading of the next scene
+            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(edge.sceneName, LoadSceneMode.Additive);
+            yield return new WaitUntil( () => asyncLoad.isDone);
+            nextScene = SceneManager.GetSceneByName(edge.sceneName);
+        }
         // Move the player to the next scene and set it to active
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName(edge.sceneName));
-        SceneDescriptor nextSceneDescriptor = FindObjectOfType<SceneDescriptor>();
+        //Stop this scene from processing
+        PauseScene();
+        SceneManager.SetActiveScene(nextScene);
+        //Find the nextScene's scene descriptor
+        SceneDescriptor nextSceneDescriptor = nextScene.GetRootGameObjects()
+                .Select(go => go.GetComponent<SceneDescriptor>())
+                .FirstOrDefault();
+        nextSceneDescriptor.PauseScene(true);
         nextSceneDescriptor?.RecievePlayer(player, edge.entranceLocation.position, edge.entranceLocation.rotation);
         //Remove the link to the player (so we dont accidentally destroy it)
         player = null;
-        //Stop this scene from processing
-        PauseScene();
     }
 
     public void RecievePlayer(GameObject transientPlayer, Vector3 position, Quaternion rotation){
         // Replace existing player with the incoming player
         
-        SceneManager.MoveGameObjectToScene(player, SceneManager.GetActiveScene());//This should be the active scene
+        SceneManager.MoveGameObjectToScene(player, gameObject.scene);
         if (player != null){
+            //If there is an exisitng player remove it to make room for the new player
             Destroy(player);
         }
+        //Put the new player at the right position
         transientPlayer.transform.position = position;
         transientPlayer.transform.rotation = rotation;
         player = transientPlayer;
+        player.SetActive(true);
         // Adjust the camera to target the new player
         cam.target = player.transform;
         PlayerEntered?.Invoke(player.transform);//Let all AI's know we got a new player transform in town
