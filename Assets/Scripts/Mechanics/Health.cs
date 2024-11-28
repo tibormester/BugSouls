@@ -63,8 +63,10 @@ public class Health : MonoBehaviour
         
     }
     public void Corpsify(GameObject enemy){
-        enemy.AddComponent<Throwable>();
+        Throwable throwable = enemy.AddComponent<Throwable>();
+        throwable.baseDamage = 1f / enemy.GetComponent<Rigidbody>().mass; //Make sure heavy corpses dont one shot anything
         enemy.layer = LayerMask.NameToLayer("Throwable");
+        enemy.transform.localScale *= 0.85f; //Shrink slightly
 
         Destroy(enemy.GetComponent<CharacterMovement>());
         Destroy(enemy.GetComponent<Health>());

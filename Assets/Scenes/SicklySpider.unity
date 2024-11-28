@@ -370,6 +370,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3254188504543058443, guid: d9a2cb2a70d84f54490c77278d9beacf, type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4171412588976218629, guid: d9a2cb2a70d84f54490c77278d9beacf, type: 3}
       propertyPath: m_Name
       value: Beetle twoHandSword
@@ -7060,8 +7064,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.8867924, g: 0.72460485, b: 0.34718758, a: 1}
-  m_Intensity: 0.5
-  m_Range: 15
+  m_Intensity: 1
+  m_Range: 35
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10

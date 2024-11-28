@@ -7,7 +7,7 @@ public class EnemyHealth : MonoBehaviour
     public float currentHealth;
     [SerializeField] FloatingHealthBar healthBar;
 
-    private ParticleSystem particleSystem;
+    new private ParticleSystem particleSystem;
 
     private void Start()
     {
