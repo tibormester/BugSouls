@@ -136,8 +136,8 @@ public class SpiderMatriarchAI : MonoBehaviour{
     }
     public IEnumerator LeapAttack(){
         //Tilt head down
-        for (int i = 0; i < 10; i++){
-            rb.AddTorque(Vector3.right * 45f, ForceMode.Impulse);
+        for (int i = 0; i < 25; i++){
+            rb.AddTorque(Vector3.right * 40f, ForceMode.Impulse);
             yield return null;
         }
         //Launch forward

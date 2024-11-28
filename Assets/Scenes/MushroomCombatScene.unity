@@ -536,8 +536,9 @@ MonoBehaviour:
     m_Bits: 8
   weapon: {fileID: 0}
   doubleTapLimit: 100
-  dashCooldown: 100
-  dashStrength: 16
+  dashCooldown: 1
+  dashStrength: 1
+  canDash: 1
 --- !u!81 &211838369
 AudioListener:
   m_ObjectHideFlags: 0
@@ -7330,7 +7331,7 @@ ParticleSystem:
     sphericalDirectionAmount: 1
     randomPositionAmount: 0
     radius:
-      value: 1.6
+      value: 1
       mode: 0
       spread: 0
       speed:

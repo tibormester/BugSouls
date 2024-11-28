@@ -15598,8 +15598,9 @@ MonoBehaviour:
     m_Bits: 8
   weapon: {fileID: 0}
   doubleTapLimit: 100
-  dashCooldown: 100
-  dashStrength: 16
+  dashCooldown: 1
+  dashStrength: 1
+  canDash: 1
 --- !u!1 &973540140
 GameObject:
   m_ObjectHideFlags: 0

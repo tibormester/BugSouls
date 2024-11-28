@@ -6316,7 +6316,7 @@ MonoBehaviour:
   weapon: {fileID: 0}
   doubleTapLimit: 100
   dashCooldown: 1
-  dashStrength: 2.5
+  dashStrength: 1
   canDash: 1
 --- !u!81 &987985290
 AudioListener:
@@ -7026,7 +7026,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cc9a5d18fccef114481e31df23dc128a, type: 2}
+  - {fileID: 2100000, guid: e1a646b5124094da0a465213ac0358e2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -11956,7 +11956,7 @@ MonoBehaviour:
   hat: {fileID: 1839358965}
   hatTarget: {fileID: 0}
   hit: {fileID: 0}
-  attackCooldown: 2.5
+  attackCooldown: 3
 --- !u!1001 &1559790803
 PrefabInstance:
   m_ObjectHideFlags: 0
