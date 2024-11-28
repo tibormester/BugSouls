@@ -6666,7 +6666,7 @@ Transform:
   m_GameObject: {fileID: 1205652771}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: -355.5, y: -191.23, z: -16.84}
+  m_LocalPosition: {x: -355.5, y: -191.23, z: -13.44}
   m_LocalScale: {x: 3, y: 1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13011,9 +13011,9 @@ MonoBehaviour:
     entranceLocation: {fileID: 1205652772}
   prevEdge:
     collider: {fileID: 0}
-    sceneName: 
+    sceneName: SpiderBoss
     locked: 0
-    entranceLocation: {fileID: 0}
+    entranceLocation: {fileID: 1939541433}
   cachedPlayer: {fileID: 0}
 --- !u!4 &2135078394
 Transform:
