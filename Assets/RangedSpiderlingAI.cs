@@ -114,8 +114,11 @@ public class RangedSpiderlingAI : MonoBehaviour{
         //Each tick, check the ray cast towards the target location for the object 
         while(launchTicks < maxLaunchTicks){
             // Raycast from the current target Location out by the launch speed to the new target location
-            if (Physics.Raycast(targetLocation - ray.direction, ray.direction, out hit, LaunchSpeed + 1f, LayerMask.GetMask(new string[]{"Player"}))){
-                    
+            if (Physics.Raycast(targetLocation - ray.direction, ray.direction, out hit, LaunchSpeed + 1f, LayerMask.GetMask(new string[]{"Player", "Terrain", "Default"}))){
+                    if (hit.collider.gameObject.layer != LayerMask.NameToLayer("Player")){
+                        Destroy(newWeb);
+                        yield break;
+                    }
                     //Update the web to go to the hit location
                     newWeb.transform.LookAt(hit.point);
                     difference = (hit.point- transform.position).magnitude;
