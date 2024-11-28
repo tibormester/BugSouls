@@ -5656,7 +5656,7 @@ MonoBehaviour:
   maxStuckDistance: 1
   originalAccel: 15
   stuckTime: 0
-  damage: 5
+  damage: 15
   hit: {fileID: 0}
   attackCooldown: 1.5
 --- !u!114 &545854758
@@ -6356,6 +6356,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
+--- !u!114 &986642007 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8481718335275603277, guid: 982fe2dbfe22f8749b06cec6b30e4b14, type: 3}
+  m_PrefabInstance: {fileID: 635940408}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcb98f5bb4d40cb488a5136cbdb2a187, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1105483802 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8699652204047898494, guid: 234cb92cd8b00486b8e4be66d5c1c178, type: 3}
@@ -6691,6 +6702,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3398685495301442426, guid: 03f418c58e484aa40a2d3deaaaa7d58a, type: 3}
+      propertyPath: health
+      value: 
+      objectReference: {fileID: 986642007}
     - target: {fileID: 5267136708173236989, guid: 03f418c58e484aa40a2d3deaaaa7d58a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.78
@@ -16438,7 +16453,7 @@ MonoBehaviour:
   maxStuckDistance: 1
   originalAccel: 15
   stuckTime: 0
-  damage: 5
+  damage: 15
   hit: {fileID: 0}
   attackCooldown: 1.5
 --- !u!114 &1667029582
@@ -17249,7 +17264,7 @@ MonoBehaviour:
   maxStuckDistance: 1
   originalAccel: 5
   stuckTime: 0
-  damage: 50
+  damage: 35
   hit: {fileID: 0}
   attackCooldown: 1.5
 --- !u!64 &1806384797

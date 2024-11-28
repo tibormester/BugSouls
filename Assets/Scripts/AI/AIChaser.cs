@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class NavMeshAgentChaser : MonoBehaviour
@@ -44,6 +45,11 @@ public class NavMeshAgentChaser : MonoBehaviour
         originalAccel = charMovement.acceleration;
         stuckPos = transform.position;
         GetComponent<Health>().DeathEvent += () => Destroy(this);
+        SceneDescriptor sd = gameObject.scene.GetRootGameObjects().Select(go => go.GetComponent<SceneDescriptor>()).FirstOrDefault(desc => desc != null);
+        sd.PlayerEntered += RecievePlayer;
+    } 
+    public void RecievePlayer(Transform player){
+        target = player;
     }
 
     void Update()

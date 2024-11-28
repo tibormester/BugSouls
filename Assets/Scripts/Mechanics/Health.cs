@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -21,11 +22,13 @@ public class Health : MonoBehaviour
         health?.setMaxHealth(maxHealth);
         health?.setHealth(currentHealth);
     }
+    
 
     public void ApplyDamage(float damageAmount)
     {
         currentHealth -= damageAmount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth); // Ensure health doesn't go below 0
+        
         health?.setHealth(currentHealth);
 
         if (currentHealth <= 0)

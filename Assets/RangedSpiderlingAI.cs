@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public class RangedSpiderlingAI : MonoBehaviour{
@@ -14,7 +15,12 @@ public class RangedSpiderlingAI : MonoBehaviour{
         charMovement = GetComponent<CharacterMovement>();
         rb = GetComponent<Rigidbody>();
         health.DeathEvent += () => Destroy(this);
+        SceneDescriptor sd = gameObject.scene.GetRootGameObjects().Select(go => go.GetComponent<SceneDescriptor>()).FirstOrDefault(desc => desc != null);
+        sd.PlayerEntered += RecievePlayer;
     } 
+    public void RecievePlayer(Transform player){
+        target = player;
+    }
     public Transform target;
     public float minEngageDistance = 15f, maxEngageDistance = 50f;
     public float backupAccelMultiplier = 0.8f;

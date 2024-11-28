@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
@@ -18,7 +19,12 @@ public class MushroomGuyScript : MonoBehaviour
         charMovement = GetComponent<CharacterMovement>();
         rb = GetComponent<Rigidbody>();
         health.DeathEvent += () => Destroy(this);
+        SceneDescriptor sd = gameObject.scene.GetRootGameObjects().Select(go => go.GetComponent<SceneDescriptor>()).FirstOrDefault(desc => desc != null);
+        sd.PlayerEntered += RecievePlayer;
     } 
+    public void RecievePlayer(Transform player){
+        target = player;
+    }
     public Transform target;
     public float minEngageDistance = 2f, maxEngageDistance = 3f;
     public float backupAccelMultiplier = 2f;

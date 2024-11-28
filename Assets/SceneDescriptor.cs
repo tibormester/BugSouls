@@ -72,6 +72,15 @@ public class SceneDescriptor : MonoBehaviour{
         if (held != null){
             SceneManager.MoveGameObjectToScene(held.gameObject, gameObject.scene);
         }
+        //Move the health bar reference to the current scene's canvas
+        //Ik this is very messy but the deadline is in 4 days
+        HealthBar hbar = gameObject.scene.GetRootGameObjects().Select(go => go.GetComponentInChildren<HealthBar>()).FirstOrDefault(desc => desc != null);
+        Health health = transientPlayer.GetComponent<Health>();
+        health.health = hbar;
+        health.health.setMaxHealth(health.maxHealth);
+        health.health.setHealth(health.currentHealth);
+
+
         SceneManager.MoveGameObjectToScene(transientPlayer, gameObject.scene);
         // Replace existing player with the incoming player
         if (player != null && player != transientPlayer){
