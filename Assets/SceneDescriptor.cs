@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -51,33 +52,42 @@ public class SceneDescriptor : MonoBehaviour{
         // Move the player to the next scene and set it to active
         //Stop this scene from processing
         PauseScene();
-        SceneManager.SetActiveScene(nextScene);
         //Find the nextScene's scene descriptor
         SceneDescriptor nextSceneDescriptor = nextScene.GetRootGameObjects()
-                .Select(go => go.GetComponent<SceneDescriptor>())
-                .FirstOrDefault();
-        nextSceneDescriptor.PauseScene(true);
-        nextSceneDescriptor?.RecievePlayer(player, edge.entranceLocation.position, edge.entranceLocation.rotation);
+                .Select(go => go.GetComponent<SceneDescriptor>()) //Find the screen descriptor components
+                .FirstOrDefault(desc => desc != null);// return the first one that isnt null
+
+        nextSceneDescriptor.RecievePlayer(player, edge.entranceLocation.position, edge.entranceLocation.rotation);
+        //Set the lighting to be from the next scene now that it is loaded and stuff
+        SceneManager.SetActiveScene(nextScene);
+        
         //Remove the link to the player (so we dont accidentally destroy it)
         player = null;
     }
 
     public void RecievePlayer(GameObject transientPlayer, Vector3 position, Quaternion rotation){
+        SceneManager.MoveGameObjectToScene(transientPlayer, gameObject.scene);
+        //If the player is holding something, bring this with them... the location should update in the next frame
+        Throwable held = transientPlayer.GetComponent<GrappleScript>().currentHeld;
+        if (held != null){
+            SceneManager.MoveGameObjectToScene(held.gameObject, gameObject.scene);
+        }
+        SceneManager.MoveGameObjectToScene(transientPlayer, gameObject.scene);
         // Replace existing player with the incoming player
-        
-        SceneManager.MoveGameObjectToScene(player, gameObject.scene);
-        if (player != null){
+        if (player != null && player != transientPlayer){
             //If there is an exisitng player remove it to make room for the new player
             Destroy(player);
         }
         //Put the new player at the right position
         transientPlayer.transform.position = position;
         transientPlayer.transform.rotation = rotation;
+
         player = transientPlayer;
         player.SetActive(true);
         // Adjust the camera to target the new player
         cam.target = player.transform;
         PlayerEntered?.Invoke(player.transform);//Let all AI's know we got a new player transform in town
+
         //Start the scene if it was paused (if it wasn't this shouldnt change anything)
         PauseScene(true);
     }
@@ -102,7 +112,7 @@ public class SceneDescriptor : MonoBehaviour{
     }
 }
 
-[System.Serializable]
+[Serializable]
 public struct GraphEdge
 {
     public Collider collider; // Collider for detecting player interaction

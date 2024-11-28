@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -37,6 +38,15 @@ public class CameraController : MonoBehaviour
         targetMovement = target.gameObject.GetComponent<CharacterMovement>();
         cam = GetComponent<Camera>();
         Cursor.lockState = CursorLockMode.Locked;// Lock and hide Cursor
+        prevNormal = targetMovement.physicsBody.groundNormal;
+        runSpeed = targetMovement.moveSpeed;
+        SceneDescriptor sd = gameObject.scene.GetRootGameObjects().Select(go => go.GetComponent<SceneDescriptor>()).FirstOrDefault(desc => desc != null);
+        sd.PlayerEntered += RecievePlayer;
+    }
+
+    private void RecievePlayer(Transform newTarget){
+        target = newTarget;
+        targetMovement = target.gameObject.GetComponent<CharacterMovement>();
         prevNormal = targetMovement.physicsBody.groundNormal;
         runSpeed = targetMovement.moveSpeed;
     }
