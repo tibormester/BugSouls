@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,6 +9,10 @@ public class SceneDescriptor : MonoBehaviour{
     public GameObject player; // Reference to the player object
     public CameraController cam; // Reference to the camera controller
     public List<GraphEdge> exits; // Exits connecting to other scenes
+
+    //When we restart a scene, remeber how we entered and where we entered from
+    public GraphEdge prevEdge;
+    public GameObject cachedPlayer;
 
     public event Action<Transform> PlayerEntered; //When a player enters, broadcast this event so AI scripts can update and track the new transform
 
@@ -23,12 +26,12 @@ public class SceneDescriptor : MonoBehaviour{
         foreach (var exit in exits){
             exit.SubscribeToCollision(OnExitEntered);
         }
+
+        //TODO INIT null prevEdge
     }
 
     private void ReloadCurrentScene(){
-        //Since this is additive, it should reload the current scene
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        //I want to cache the initial game state on enter and restore it here
+        StartCoroutine(LoadSceneAsync(prevEdge, true));
     }
 
     public void OnExitEntered(GraphEdge edge, GameObject collidingObject){
@@ -40,33 +43,57 @@ public class SceneDescriptor : MonoBehaviour{
         StartCoroutine(LoadSceneAsync(edge));
     }
 
-    private IEnumerator LoadSceneAsync(GraphEdge edge){
+    private IEnumerator LoadSceneAsync(GraphEdge edge, bool reload = false){
         //Check if the scene needs to be loaded
         Scene nextScene = SceneManager.GetSceneByName(edge.sceneName);
-        if (!nextScene.IsValid()){//Of course unity has to be special and doesn't want to just return null or include better documentation
+        if (!nextScene.IsValid() || reload){//Of course unity has to be special and doesn't want to just return null or include better documentation
             // Begin asynchronous loading of the next scene
             AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(edge.sceneName, LoadSceneMode.Additive);
             yield return new WaitUntil( () => asyncLoad.isDone);
-            nextScene = SceneManager.GetSceneByName(edge.sceneName);
+            //Because scene management in unity is painful, we need this loop to make sure we get the new scene when restarting
+            for (int i = 0; i < SceneManager.sceneCount; i++){
+                Scene scene = SceneManager.GetSceneAt(i);
+                if(scene.name == edge.sceneName && scene != gameObject.scene){
+                    nextScene = SceneManager.GetSceneByName(edge.sceneName);
+                }
+            }
         }
+        
         // Move the player to the next scene and set it to active
         //Stop this scene from processing
         PauseScene();
+        //Cache the player and prev scene for loading
+
         //Find the nextScene's scene descriptor
         SceneDescriptor nextSceneDescriptor = nextScene.GetRootGameObjects()
                 .Select(go => go.GetComponent<SceneDescriptor>()) //Find the screen descriptor components
                 .FirstOrDefault(desc => desc != null);// return the first one that isnt null
 
-        nextSceneDescriptor.RecievePlayer(player, edge.entranceLocation.position, edge.entranceLocation.rotation);
+        //Tell the next scene where to restart from
+        nextSceneDescriptor.prevEdge = edge;
+        //Send the nextSecne the player or the cached player if restarting
+        nextSceneDescriptor.RecievePlayer(reload ? cachedPlayer : player, edge.entranceLocation.position, edge.entranceLocation.rotation);
         //Set the lighting to be from the next scene now that it is loaded and stuff
         SceneManager.SetActiveScene(nextScene);
         
         //Remove the link to the player (so we dont accidentally destroy it)
+        player.GetComponent<Health>().DeathEvent -= ReloadCurrentScene;
         player = null;
+        
+        if(reload){
+            SceneManager.UnloadScene(gameObject.scene);
+         //I Dont want to use the asynch and have to worry about waiting till its done
+        } else{
+            //If we aren't reloading we dont want to keep the cache
+            //Otherwise itll get enabled when the player returns
+            Destroy(cachedPlayer);//No need to store this anymore
+        }
     }
 
     public void RecievePlayer(GameObject transientPlayer, Vector3 position, Quaternion rotation){
+        
         SceneManager.MoveGameObjectToScene(transientPlayer, gameObject.scene);
+
         //If the player is holding something, bring this with them... the location should update in the next frame
         Throwable held = transientPlayer.GetComponent<GrappleScript>().currentHeld;
         if (held != null){
@@ -76,12 +103,11 @@ public class SceneDescriptor : MonoBehaviour{
         //Ik this is very messy but the deadline is in 4 days
         HealthBar hbar = gameObject.scene.GetRootGameObjects().Select(go => go.GetComponentInChildren<HealthBar>()).FirstOrDefault(desc => desc != null);
         Health health = transientPlayer.GetComponent<Health>();
+        health.DeathEvent += ReloadCurrentScene;
         health.health = hbar;
         health.health.setMaxHealth(health.maxHealth);
         health.health.setHealth(health.currentHealth);
 
-
-        SceneManager.MoveGameObjectToScene(transientPlayer, gameObject.scene);
         // Replace existing player with the incoming player
         if (player != null && player != transientPlayer){
             //If there is an exisitng player remove it to make room for the new player
@@ -99,6 +125,10 @@ public class SceneDescriptor : MonoBehaviour{
 
         //Start the scene if it was paused (if it wasn't this shouldnt change anything)
         PauseScene(true);
+
+        //Create an inactive copy of the player and store it incase we need to restart the next scene
+        cachedPlayer = (GameObject)Instantiate(transientPlayer, gameObject.scene);
+        cachedPlayer.SetActive(false);
     }
 
     private bool AreAllEnemiesCleared(){

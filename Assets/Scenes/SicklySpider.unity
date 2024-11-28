@@ -97,7 +97,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: d29620c489a0b41cd89850ef1ffa56a8, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 20a3d3323fe05174a8df5378be8d8092, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -6890,6 +6890,9 @@ MonoBehaviour:
     sceneName: MushroomCombatScene
     locked: 0
     entranceLocation: {fileID: 1898358933}
+  prevScene:
+    m_Handle: 0
+  cachedPlayer: {fileID: 0}
 --- !u!4 &1288860002
 Transform:
   m_ObjectHideFlags: 0
