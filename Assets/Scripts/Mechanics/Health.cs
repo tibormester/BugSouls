@@ -16,7 +16,7 @@ public class Health : MonoBehaviour
     private void Start()
     {
         currentHealth = maxHealth; // Initialize health
-        health = GetComponent<HealthBar>();
+        //health = GetComponent<HealthBar>();
         pSys = GetComponent<ParticleSystem>();
         health?.setMaxHealth(maxHealth);
         health?.setHealth(currentHealth);
