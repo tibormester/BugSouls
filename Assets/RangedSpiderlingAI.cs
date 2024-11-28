@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -94,8 +95,8 @@ public class RangedSpiderlingAI : MonoBehaviour{
         yield return null;
     }
     public GameObject webPrototype;
-    public int LaunchSpeed = 1;
-    public int maxLaunchTicks = 350;
+    public float LaunchSpeed = 0.5f;
+    public int maxLaunchTicks = 200;
 
     public IEnumerator SpitAttack(Vector3 attackLocation){
         GameObject newWeb = Instantiate(webPrototype, transform);
@@ -113,7 +114,7 @@ public class RangedSpiderlingAI : MonoBehaviour{
         //Each tick, check the ray cast towards the target location for the object 
         while(launchTicks < maxLaunchTicks){
             // Raycast from the current target Location out by the launch speed to the new target location
-            if (Physics.Raycast(targetLocation - ray.direction, ray.direction, out hit, LaunchSpeed + 1f, LayerMask.NameToLayer("Player"))){
+            if (Physics.Raycast(targetLocation - ray.direction, ray.direction, out hit, LaunchSpeed + 1f, LayerMask.GetMask(new string[]{"Player"}))){
                     
                     //Update the web to go to the hit location
                     newWeb.transform.LookAt(hit.point);
@@ -125,11 +126,11 @@ public class RangedSpiderlingAI : MonoBehaviour{
                     var prev = hit.rigidbody.GetComponent<CharacterMovement>().acceleration;
                     if (prev > 1f){ //If we are already slowed, slowing again might loose the base acceleration
                     //Ideally I would construct a stat object that would hold a stack of modifiers
-                        hit.rigidbody.GetComponent<CharacterMovement>().acceleration = 1f;
+                        hit.rigidbody.GetComponent<CharacterMovement>().maxSpeed = 3f;
                     }
-                    yield return new  WaitForSeconds(0.25f);
+                    yield return new  WaitForSeconds(1.25f);
                     if (prev > 1f){
-                        hit.rigidbody.GetComponent<CharacterMovement>().acceleration = prev;
+                        hit.rigidbody.GetComponent<CharacterMovement>().maxSpeed = prev;
                     }
                     Destroy(newWeb);
                     yield break;

@@ -6483,7 +6483,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5470889672144252839, guid: 2c5c27c21e55a4879a3da1f37a8838b7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.49
+      value: 9.15
       objectReference: {fileID: 0}
     - target: {fileID: 5470889672144252839, guid: 2c5c27c21e55a4879a3da1f37a8838b7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6523,12 +6523,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8123981377613142136, guid: 2c5c27c21e55a4879a3da1f37a8838b7, type: 3}
       propertyPath: feetDistance
-      value: 0.6
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8123981377613142136, guid: 2c5c27c21e55a4879a3da1f37a8838b7, type: 3}
+      propertyPath: groundedDistance
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8129763311436219990, guid: 2c5c27c21e55a4879a3da1f37a8838b7, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 210538771}
+    - target: {fileID: 8129763311436219990, guid: 2c5c27c21e55a4879a3da1f37a8838b7, type: 3}
+      propertyPath: LaunchSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8129763311436219990, guid: 2c5c27c21e55a4879a3da1f37a8838b7, type: 3}
+      propertyPath: maxLaunchTicks
+      value: 200
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11940,7 +11952,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5470889672144252839, guid: 2c5c27c21e55a4879a3da1f37a8838b7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.49
+      value: 9.15
       objectReference: {fileID: 0}
     - target: {fileID: 5470889672144252839, guid: 2c5c27c21e55a4879a3da1f37a8838b7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -11980,12 +11992,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8123981377613142136, guid: 2c5c27c21e55a4879a3da1f37a8838b7, type: 3}
       propertyPath: feetDistance
-      value: 0.6
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8123981377613142136, guid: 2c5c27c21e55a4879a3da1f37a8838b7, type: 3}
+      propertyPath: groundedDistance
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8129763311436219990, guid: 2c5c27c21e55a4879a3da1f37a8838b7, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 210538771}
+    - target: {fileID: 8129763311436219990, guid: 2c5c27c21e55a4879a3da1f37a8838b7, type: 3}
+      propertyPath: LaunchSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8129763311436219990, guid: 2c5c27c21e55a4879a3da1f37a8838b7, type: 3}
+      propertyPath: maxLaunchTicks
+      value: 200
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

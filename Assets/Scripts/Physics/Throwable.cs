@@ -54,7 +54,8 @@ public class Throwable : MonoBehaviour
             Health health = collision.gameObject.GetComponent<Health>();
             if (health != null)
             {
-                if(!collided.Contains(health)){
+                if(!collided.Contains(health) && rb.velocity.sqrMagnitude > 1f){
+
                     float damage = baseDamage * collision.impulse.magnitude;
                     health.ApplyDamage(damage);
                     collided.Add(health); //So we dont double collide or the enemy takes damage walking over it

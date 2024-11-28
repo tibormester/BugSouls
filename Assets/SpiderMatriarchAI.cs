@@ -41,7 +41,7 @@ public class SpiderMatriarchAI : MonoBehaviour{
         hat.transform.SetParent(this.gameObject.transform.parent);
         Rigidbody rb = hat.AddComponent<Rigidbody>();
         var throwable = hat.AddComponent<Throwable>();
-        throwable.baseDamage = 0f;
+        throwable.baseDamage = 15f;
         hat.transform.localScale = Vector3.one * 17f;
         rb.useGravity = false;
         rb.drag = 0.5f;
