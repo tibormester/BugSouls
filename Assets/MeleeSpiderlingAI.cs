@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
@@ -71,6 +72,9 @@ public class MeleeSpiderlingAI : MonoBehaviour{
                         if(attackTimer <= 0f){
                             StartCoroutine(LeapAttack());
                             attackTimer = attackCooldown;
+                            strafeDirection *= -1f;
+                        } else{
+                            charMovement.Move(transform.right * strafeDirection );
                         }
                     }
                 }
@@ -78,32 +82,60 @@ public class MeleeSpiderlingAI : MonoBehaviour{
         }
         attackTimer = attackTimer < 0f ? 0f : attackTimer - Time.fixedDeltaTime;
     }
+    private float strafeDirection = 1f;
     public IEnumerator LeapAttack(){
+        //Check if we are already colliding
+        damaged = false;
+        if(hit){
+            ApplyDamage(hit);
+        }
+        //Damage target if we end up colliding
+        PlayerCollision += ApplyDamage;
+
+
         //Tilt head down
         for (int i = 0; i < 10; i++){
             rb.AddTorque(Vector3.right * 5f, ForceMode.Impulse);
             yield return null;
         }
         //Launch forward
-        hit = null;
         Vector3 direction = target.transform.position - transform.position;
-        for (int i = 0; i < 25; i++){
-            rb.AddForce(direction.normalized * 1f, ForceMode.Impulse);
+        for (int i = 0; i < 10; i++){
+            rb.AddForce(direction.normalized * 1.5f, ForceMode.Impulse);
             yield return null;
         }
-        //Apply damage and knockback
-        if(hit){
-            hit.ApplyDamage(damage);
-            target.GetComponent<Rigidbody>()?.AddForce(direction.normalized * 1f, ForceMode.Impulse);
-            hit = null;
-        }
+
+        //Stop attempting to damage the target on collision
+        PlayerCollision -= ApplyDamage;
+        //reset the bool flag so we can damage next cycle
         yield return null;
     }
-    private void OnCollisionEnter(Collision other) {
+    private bool damaged = false;
+    private void ApplyDamage(Health hit){
+        if (damaged){
+            return;
+        }
+        var direction = hit.transform.position - transform.position;
+        direction = Vector3.ProjectOnPlane(direction, hit.transform.up); //flatten so we dont hop on hit
+        hit.ApplyDamage(damage);
+        hit.GetComponent<Rigidbody>()?.AddForce(direction.normalized * 1f, ForceMode.Impulse);
+        damaged = true;
+    }
+    public event Action<Health> PlayerCollision;
+    void OnCollisionEnter(Collision other) {
         Rigidbody collision = other.rigidbody;
         if (collision){
             if(collision.gameObject.layer == LayerMask.NameToLayer("Player")){
                 hit = collision.GetComponent<Health>();
+                PlayerCollision?.Invoke(hit);
+            }
+        }
+    }
+    void OnCollisionExit(Collision other) {
+        Rigidbody collision = other.rigidbody;
+        if (collision){
+            if(collision.gameObject.layer == LayerMask.NameToLayer("Player")){
+                hit = null;
             }
         }
     }

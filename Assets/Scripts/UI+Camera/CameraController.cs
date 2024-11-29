@@ -132,7 +132,7 @@ public class CameraController : MonoBehaviour
 
     private KeyCode lastMove;
     private int doubleTapTimer = 0;
-    public int doubleTapLimit = 30;
+    public int doubleTapLimit = 18;
     public float dashCooldown = 1.5f;
     public float dashStrength = 2f;
     void Movement(){
@@ -157,25 +157,25 @@ public class CameraController : MonoBehaviour
         if(canDash){
             if (Input.GetKeyDown(KeyCode.S)){
                 if(lastMove == KeyCode.S && doubleTapTimer > 0){
-                    StartCoroutine(Dash(target.transform.up + -3 * target.transform.forward));
+                    StartCoroutine(Dash(target.transform.up + -9 * target.transform.forward));
                 }
                 doubleTapTimer = doubleTapLimit;
                 lastMove = KeyCode.S;
             } else if (Input.GetKeyDown(KeyCode.A)){
                 if(lastMove == KeyCode.A && doubleTapTimer > 0){
-                    StartCoroutine(Dash(target.transform.up + -3 * target.transform.right));
+                    StartCoroutine(Dash(target.transform.up + -9 * target.transform.right));
                 }
                 doubleTapTimer = doubleTapLimit;
                 lastMove = KeyCode.A;
             } else if (Input.GetKeyDown(KeyCode.D)){
                 if(lastMove == KeyCode.D && doubleTapTimer > 0){
-                    StartCoroutine(Dash(target.transform.up + 3 * target.transform.right));
+                    StartCoroutine(Dash(target.transform.up + 9 * target.transform.right));
                 }
                 doubleTapTimer = doubleTapLimit;
                 lastMove = KeyCode.D;
             } else if (Input.GetKeyDown(KeyCode.W)){
                 if(lastMove == KeyCode.W && doubleTapTimer > 0){
-                    StartCoroutine(Dash(target.transform.up + 3 * target.transform.forward));
+                    StartCoroutine(Dash(target.transform.up + 9 * target.transform.forward));
                 }
                 doubleTapTimer = doubleTapLimit;
                 lastMove = KeyCode.W;
