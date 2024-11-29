@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -11,12 +13,12 @@ public class Weapon : MonoBehaviour
 
     private List<Health> hitting = new(); 
     private void OnTriggerEnter(Collider other){
-
         // Check if the collided object is in the player layer
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemy")){
             // Get the Health component from the collided object
             Health health = other.gameObject.GetComponent<Health>();
             if (health != null){
+                EnemyHit?.Invoke(health);
                 hitting.Add(health);
             }
         }
@@ -40,42 +42,44 @@ public class Weapon : MonoBehaviour
     public float knockBack = 1f;
     public GameObject windTrail;
     public IEnumerator Swinging(float duration){
+        //Wait through the windup
         yield return new WaitForSeconds(0.15f * duration);
-        //Start the effects and refresh our list of hits
-        foreach(var collider in GetComponentsInChildren<Collider>()){   
-            collider.enabled = true;
-            collider.isTrigger = true;
-        }
-        windTrail?.SetActive(true);
-
-        //Wait until the swing is over
+        ToggleActiveSword(true);
+        //Activate collider triggers and wind trail
         yield return new WaitForSeconds(0.65f * duration);
-        //Stop the windtrail earlier because the cooldown will be slower than the swing
-        windTrail?.SetActive(false);
+        ToggleActiveSword(false);
+        //End before cooldown is over
+    }
+    private void ToggleActiveSword(bool active = true){
         foreach(var collider in GetComponentsInChildren<Collider>()){   
-            collider.enabled = false;
-            collider.isTrigger = false;
+            collider.enabled = active;
+            collider.isTrigger = active;
         }
-        //Some delay for emphasis (totatlly not because this is easier to implement)
-        yield return new WaitForSeconds(0.2f * duration);
-        
-        //Stop the swing and apply all the damage
-        foreach(var health in hitting ){
-            health.ApplyDamage(damage);
+        windTrail?.SetActive(active);
+        if (active){
+            EnemyHit += Attack;
+        } else {
+            EnemyHit -= Attack;
         }
+    }
 
-        for(int i = 0; i < 15; i++){
-            foreach(var health in hitting ){
-                //Apply some knockback
-                var rb = health.GetComponent<Rigidbody>();
-                if(rb){
-                    Vector3 direction =  rb.transform.position - player.transform.position;
-                    direction = direction.normalized * knockBack;
-                    rb.AddForce(direction, ForceMode.Impulse);
-                }
-            }
-            yield return null;
+    public event Action<Health> EnemyHit;
+    private void Attack(Health health){ //Wraps the corountine so we can add and subtract it from the event without ambiguity
+        StartCoroutine(ApplyDamage(health));
+    }
+
+    private IEnumerator ApplyDamage(Health health){
+        var wait = new WaitForSeconds(0.05f);
+        var rb = health.GetComponent<Rigidbody>();
+        health.ApplyDamage(damage);
+        if(rb == null){
+            yield break;
         }
-        yield return null;
+        for(int i = 0; i < 15; i++){
+            Vector3 direction =  rb.transform.position - player.transform.position;
+            direction = direction.normalized * knockBack;
+            rb.AddForce(direction, ForceMode.Impulse);
+            yield return wait;
+        }
     }
 }
