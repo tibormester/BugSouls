@@ -63,23 +63,23 @@ public class TutorialScreen : MonoBehaviour
         {
             if (!isWaiting) // Prevent multiple coroutines
             {
-                StartCoroutine(WaitAndShowNextImage(3f));
+                StartCoroutine(WaitAndShowNextImage(0.1f));
             }
         }
         else if (currentImageIndex == 2 && Input.GetKeyDown(KeyCode.Space)) //jump
         {
             if (!isWaiting)
             {
-                StartCoroutine(WaitAndShowNextImage(2f));
+                StartCoroutine(WaitAndShowNextImage(0.1f));
             }
         }
-        else if (currentImageIndex == 3 && playerGrappleScript.currentWeapon != null) //equip weapon
+        else if (currentImageIndex == 3 && (playerGrappleScript.currentWeapon != null || playerGrappleScript.currentHeld != null)) //equip weapon
         {
         
                 Debug.Log("Player has a weapon equipped.");
                 if (!isWaiting)
             {
-                StartCoroutine(WaitAndShowNextImage(1f));
+                StartCoroutine(WaitAndShowNextImage(0.1f));
             }
             
         }
@@ -87,14 +87,14 @@ public class TutorialScreen : MonoBehaviour
         {
             if (!isWaiting)
             {
-                StartCoroutine(WaitAndShowNextImage(2f));
+                StartCoroutine(WaitAndShowNextImage(0.1f));
             }
         }
         else if (currentImageIndex == 5 && playerGrappleScript.grappling) //grapple
         {
             if (!isWaiting)
             {
-                StartCoroutine(WaitAndShowNextImage(1f));
+                StartCoroutine(WaitAndShowNextImage(0.1f));
             }
         }
     }

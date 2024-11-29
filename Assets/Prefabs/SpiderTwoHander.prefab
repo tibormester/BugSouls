@@ -182,7 +182,7 @@ MonoBehaviour:
   checkDistance: 150
   velocityCheckDistance: 2
   groundedDistance: 1
-  feetDistance: 0.5
+  feetDistance: 0.2
   isGrounded: 1
   groundNormal: {x: 0, y: 1, z: 0}
   groundDistance: 0
@@ -207,7 +207,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  player: {fileID: 0}
   type: 1
   knockBack: 5
   windTrail: {fileID: 6297366991176673045}

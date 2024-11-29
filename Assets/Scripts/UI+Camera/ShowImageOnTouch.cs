@@ -24,7 +24,7 @@ public class ShowImageOnTouch : MonoBehaviour
     private IEnumerator DisplayImage()
     {
         imageToShow.SetActive(true); // Show the image
-        yield return new WaitForSeconds(3f); // Wait for 3 seconds
+        yield return new WaitForSeconds(2f); // Wait for 3 seconds
         imageToShow.SetActive(false); // Hide the image
     }
 }
