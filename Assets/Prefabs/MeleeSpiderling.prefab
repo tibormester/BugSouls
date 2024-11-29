@@ -111,6 +111,7 @@ MonoBehaviour:
   acceleration: 6
   additional_deacceleration: 10
   rotationSpringForce: 0.5
+  maxSpeed: 99
   drag: 0.3
   look_direction: {x: 0, y: 0, z: 1}
   jumpVelocity: 8

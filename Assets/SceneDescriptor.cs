@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -26,7 +27,15 @@ public class SceneDescriptor : MonoBehaviour{
         foreach (var exit in exits){
             exit.SubscribeToCollision(OnExitEntered);
         }
+        if (cachedPlayer == null && player != null){
+            cachedPlayer = (GameObject)Instantiate(player, gameObject.scene);
+            cachedPlayer.SetActive(false);
+        }
+        if(prevEdge.Equals(default(GraphEdge))){//I've never written code as ugly as this before
+            prevEdge.entranceLocation = transform;
+            prevEdge.sceneName = gameObject.scene.name;
 
+        }
         //TODO INIT null prevEdge
     }
 
@@ -70,7 +79,8 @@ public class SceneDescriptor : MonoBehaviour{
                 .FirstOrDefault(desc => desc != null);// return the first one that isnt null
 
         //Tell the next scene where to restart from
-        nextSceneDescriptor.prevEdge = edge;
+        nextSceneDescriptor.prevEdge = edge; //Maybe the transform location gets moved but i thought that was a struct so it would be values, and transforms are structs too?
+
         //Send the nextSecne the player or the cached player if restarting
         nextSceneDescriptor.RecievePlayer(reload ? cachedPlayer : player, edge.entranceLocation.position, edge.entranceLocation.rotation);
         //Set the lighting to be from the next scene now that it is loaded and stuff
@@ -81,12 +91,12 @@ public class SceneDescriptor : MonoBehaviour{
         player = null;
         
         if(reload){
-            SceneManager.UnloadScene(gameObject.scene);
-         //I Dont want to use the asynch and have to worry about waiting till its done
-        } else{
-            //If we aren't reloading we dont want to keep the cache
-            //Otherwise itll get enabled when the player returns
+            AsyncOperation asyncLoad = SceneManager.UnloadSceneAsync(gameObject.scene);
+            yield return new WaitUntil( () => asyncLoad.isDone); //Does this even get caled?
+            //I Dont want to use the asynch and have to worry about waiting till its done
+        } else{ //If we reload the scene gets destroyed anyways
             Destroy(cachedPlayer);//No need to store this anymore
+            cachedPlayer = null;
         }
     }
 
@@ -127,6 +137,9 @@ public class SceneDescriptor : MonoBehaviour{
         PauseScene(true);
 
         //Create an inactive copy of the player and store it incase we need to restart the next scene
+        if (cachedPlayer != null){
+            Destroy(cachedPlayer);
+        }
         cachedPlayer = (GameObject)Instantiate(transientPlayer, gameObject.scene);
         cachedPlayer.SetActive(false);
     }
@@ -159,7 +172,7 @@ public struct GraphEdge
     public bool locked; // Is this exit locked?
     public Transform entranceLocation; //A position and rotation in the next scene's local coordinates where the player should be
 
-    public void SubscribeToCollision(System.Action<GraphEdge, GameObject> callback){
+    public void SubscribeToCollision(Action<GraphEdge, GameObject> callback){
         var triggerHandler = collider.gameObject.AddComponent<TriggerHandler>();
         GraphEdge self = this;
         triggerHandler.onExitEnteredEvent += (collidingObject) => callback(self, collidingObject);
