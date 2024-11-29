@@ -82,7 +82,7 @@ MonoBehaviour:
   checkDistance: 150
   velocityCheckDistance: 2
   groundedDistance: 1
-  feetDistance: 0.4
+  feetDistance: 0.1
   isGrounded: 1
   groundNormal: {x: 0, y: 1, z: 0}
   groundDistance: 0
@@ -5161,5 +5161,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4, y: 5, z: 5}
-  m_Center: {x: 0, y: 2.3, z: -1.3}
+  m_Size: {x: 4, y: 8, z: 5}
+  m_Center: {x: 0, y: 4, z: -1.3}

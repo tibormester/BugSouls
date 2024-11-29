@@ -74,9 +74,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ec40ad7cf03041c19d1774c2b469dd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 8
   checkDistance: 800
   velocityCheckDistance: 3
   groundedDistance: 0.6
@@ -84,10 +81,13 @@ MonoBehaviour:
   isGrounded: 1
   groundNormal: {x: 0, y: 1, z: 0}
   groundDistance: 0
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 8
   ground: {fileID: 0}
   coyoteTime: 0.1
   gravity: -18
-  coyoteOrientationTime: 1
+  coyoteOrientationTime: 0.05
   aerialTimeLimit: 0
 --- !u!114 &8797441506459066540
 MonoBehaviour:
@@ -107,6 +107,7 @@ MonoBehaviour:
   acceleration: 18
   additional_deacceleration: 12
   rotationSpringForce: 1.9
+  maxSpeed: 99
   drag: 0.3
   look_direction: {x: 0, y: 0, z: 1}
   jumpVelocity: 32
@@ -156,6 +157,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
+  health: {fileID: 0}
+  healthBar: {fileID: 0}
 --- !u!114 &2139677527264990497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,6 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6ced817639bc4ca7a04e86c3709683e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grappling: 0
   grappleStrength: 45
   grappleDistance: 2
   grappleMaximum: 100
@@ -190,7 +194,7 @@ MonoBehaviour:
   currentHeld: {fileID: 0}
   currentWeapon: {fileID: 0}
   grappleTicks: 0
-  LaunchSpeed: 5
+  LaunchSpeed: 1
   maxLaunchTicks: 250
   launching: 0
   throwStrength: 25

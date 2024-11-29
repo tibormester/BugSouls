@@ -36,7 +36,12 @@ public class SceneDescriptor : MonoBehaviour{
             prevEdge.sceneName = gameObject.scene.name;
 
         }
-        //TODO INIT null prevEdge
+
+        StartCoroutine(DelayedStart());
+    }
+    private IEnumerator DelayedStart(){
+        yield return null;
+        PlayerEntered?.Invoke(player.transform);
     }
 
     private void ReloadCurrentScene(){

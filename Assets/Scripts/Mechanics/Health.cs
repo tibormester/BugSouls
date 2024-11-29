@@ -73,7 +73,7 @@ public class Health : MonoBehaviour
         Throwable throwable = enemy.AddComponent<Throwable>();
         Rigidbody rb = enemy.GetComponent<Rigidbody>();
         if (healthBar){
-            DestroyImmediate(healthBar); //For somereason on death it doesnt shrink to nothing
+            Destroy(healthBar.gameObject); //For somereason on death it doesnt shrink to nothing
         }
         throwable.baseDamage = 1f / rb.mass; //Make sure heavy corpses dont one shot anything
         enemy.layer = LayerMask.NameToLayer("Throwable");
