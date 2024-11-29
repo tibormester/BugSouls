@@ -13,6 +13,7 @@ public class Health : MonoBehaviour
     private ParticleSystem pSys;
 
     public Action DeathEvent;
+    public Action Damaged;
 
     public Transform healthBar; //A red cube where the scale along the z axis represents the fill
 
@@ -39,6 +40,7 @@ public class Health : MonoBehaviour
             healthBar.transform.localScale = new Vector3(healthBar.transform.localScale.x,healthBar.transform.localScale.y, currentHealth/maxHealth);
         
         if(damageAmount > 0f){
+            Damaged?.Invoke();
             StartCoroutine(PlayHitParticles());
         }
         if (currentHealth <= 0){
