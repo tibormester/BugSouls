@@ -7,7 +7,6 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     public float damage = 10f; // Damage amount
-    public GameObject player; //Could do get component in parent since weapons get reparented to the player
     public enum WeaponType {dagger, twoHandSword}; // Type of sword, used for animations
     public WeaponType type;
 
@@ -84,7 +83,7 @@ public class Weapon : MonoBehaviour
             yield break;
         }
         for(int i = 0; i < 15; i++){
-            Vector3 direction =  rb.transform.position - player.transform.position;
+            Vector3 direction =  rb.transform.position - transform.position;
             direction = direction.normalized * knockBack;
             rb.AddForce(direction, ForceMode.Impulse);
             yield return wait;
