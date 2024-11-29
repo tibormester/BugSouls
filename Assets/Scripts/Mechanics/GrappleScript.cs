@@ -210,7 +210,7 @@ public class GrappleScript : MonoBehaviour
     public int PickupSpeed = 5;
     public Transform PlayerHand;
     private IEnumerator PickUp(GameObject item, GameObject web){
-        Debug.Log("picking object: " + item.transform.name);
+        var wait = new WaitForFixedUpdate();
         Throwable throwable = item.GetComponent<Throwable>();
         Weapon weapon = item.GetComponent<Weapon>();
         Rigidbody rb = item.GetComponent<Rigidbody>();
@@ -241,7 +241,7 @@ public class GrappleScript : MonoBehaviour
                 web.transform.LookAt(item.transform.position);
                 web.transform.localScale = new Vector3(0,0, distance - PickupSpeed);
             }
-            yield return null;
+            yield return wait;
             //Just in case, dont want to get stuck with a web on our screen, delete both the web and item and give up
             counter++;
             if(counter > 9999){
@@ -262,32 +262,22 @@ public class GrappleScript : MonoBehaviour
                 Rigidbody currentWeaponRb = currentWeapon.GetComponent<Rigidbody>();
                 currentWeapon.transform.SetParent(null);
                 currentWeaponRb.isKinematic = false;
+                Weapon wp = currentWeapon.GetComponent<Weapon>();
+                wp.StopAllCoroutines();
+                wp.ToggleActiveSword(false);
+                currentWeapon.StopAllCoroutines();//In case it is swinging, we dont want it to stop and diable its colliders
                 foreach (var collider in currentWeaponRb.GetComponentsInChildren<Collider>())
                 {
                     collider.enabled = true;
                 }
             }
-            //Weapons need to just get swung, and only during their swing should they detect collisions, aftwerwards
-            //They need to apply damage, trigger particle affects, and do a little stagger
+            //Disable the weapon's colliders so that way it doesnt collide with the ground while walking
             currentWeapon = weapon;
-            rb.isKinematic = true;
-            /**
-            //Otherwise the weapon collides with the player and and the ground
-            //I wish unity had a better way of dyanmically adjusting colliders
-            //IK it is porbably because of the backend collider data structure but it would be convenient
-
-            //SO the bug where even after adding these exlusions is that the player rigidbody inherits all child colliders
-            //This means collision has to be excluding at the collider level, not the rigidbody level
-            string[] layers = new string[2];
-            layers[0] = "Player";
-            layers[1] = "Terrain";
-            rb.excludeLayers = LayerMask.GetMask(layers);
-            **/
-            //Dont forget to renable when dropping
             foreach (var collider in rb.GetComponentsInChildren<Collider>()){
                 collider.enabled = false;
             }
             //Relocate to the player
+            rb.isKinematic = true;
             weapon.transform.SetParent(targetTransform, false);
             weapon.transform.localPosition = Vector3.zero;
             weapon.transform.localRotation = Quaternion.identity;

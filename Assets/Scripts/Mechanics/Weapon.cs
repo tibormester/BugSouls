@@ -25,8 +25,8 @@ public class Weapon : MonoBehaviour
     }
     private void OnTriggerExit(Collider other){
         // Check if the collided object is in the player layer
-        var rb =other.attachedRigidbody;
-        if (rb.gameObject.layer == LayerMask.NameToLayer("Enemy")){
+        var rb = other.attachedRigidbody;
+        if (rb && rb.gameObject.layer == LayerMask.NameToLayer("Enemy")){
             // Get the Health component from the collided object
             Health health = rb.GetComponent<Health>();
             if (health != null && hitting.Contains(health)){
@@ -51,7 +51,7 @@ public class Weapon : MonoBehaviour
         ToggleActiveSword(false);
         //End before cooldown is over
     }
-    private void ToggleActiveSword(bool active = true){
+    public void ToggleActiveSword(bool active = true){
         foreach(var collider in GetComponentsInChildren<Collider>()){   
             collider.enabled = active;
             collider.isTrigger = active;
