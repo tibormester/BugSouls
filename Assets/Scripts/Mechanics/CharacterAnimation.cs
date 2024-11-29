@@ -85,9 +85,9 @@ public class CharacterAnimation : MonoBehaviour
                 }
             }
 
-            float debugAnimDuration;
+            //float debugAnimDuration;
             
-            Debug.Log("Combo: " + combo + ", Expiration: " + expiration + " , Combo Queued: " + comboQueued + ", Animation: " + currentAnimation + ", Duration: " + (animationDurations.TryGetValue(currentAnimation, out debugAnimDuration) ? debugAnimDuration : "Unkown"));
+            //Debug.Log("Combo: " + combo + ", Expiration: " + expiration + " , Combo Queued: " + comboQueued + ", Animation: " + currentAnimation + ", Duration: " + (animationDurations.TryGetValue(currentAnimation, out debugAnimDuration) ? debugAnimDuration : "Unkown"));
         }
         
          
@@ -186,7 +186,7 @@ public class CharacterAnimation : MonoBehaviour
                 nonCancellable.Add(clip.name);
             }
 
-            Debug.Log("Animation: " + clip.name + ", Duration: " + (clip.length / speedMultiplier));
+            //Debug.Log("Animation: " + clip.name + ", Duration: " + (clip.length / speedMultiplier));
         }
     }
 

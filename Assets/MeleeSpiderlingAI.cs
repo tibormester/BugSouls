@@ -17,7 +17,7 @@ public class MeleeSpiderlingAI : MonoBehaviour{
         health.DeathEvent += () => Destroy(this);
         SceneDescriptor sd = gameObject.scene.GetRootGameObjects().Select(go => go.GetComponent<SceneDescriptor>()).FirstOrDefault(desc => desc != null);
         sd.PlayerEntered += RecievePlayer;
-        PlayerCollision += (hit) => Debug.LogError("Player Collision");
+        PlayerCollision += (hit) => Debug.Log("Player Collision");
     } 
     public void RecievePlayer(Transform player){
         target = player;
@@ -85,33 +85,42 @@ public class MeleeSpiderlingAI : MonoBehaviour{
     }
     private float strafeDirection = 1f;
     public IEnumerator LeapAttack(){
+        var wait = new WaitForFixedUpdate();
         //Check if we are already colliding
         damaged = false;
+        Debug.Log("Subscribed Apply Damage");
+        PlayerCollision += ApplyDamage;
         if(hit != null){
+            Debug.Log("Already hitting");
             ApplyDamage(hit);
         }
-        PlayerCollision += ApplyDamage;
+        
         //Damage target if we end up colliding
         //Tilt head down
         for (int i = 0; i < 10; i++){
             rb.AddTorque(Vector3.right * 5f, ForceMode.Impulse);
-            yield return null;
+            yield return wait;
         }
         //Launch forward
         Vector3 direction = target.transform.position - transform.position;
         for (int i = 0; i < 10; i++){
             rb.AddForce(direction.normalized * 1.5f, ForceMode.Impulse);
-            yield return null;
+            yield return wait;
         }
 
+        yield return new WaitForSeconds(0.5f);//Need to wait for the spider to get launched
         //Stop attempting to damage the target on collision
         PlayerCollision -= ApplyDamage;
+
+        Debug.Log("UNSubscribed Apply Damage");
         //reset the bool flag so we can damage next cycle
         yield return null;
     }
     private bool damaged = false;
     public Action<Health> PlayerCollision;
     private void ApplyDamage(Health health){
+
+        Debug.LogWarning("Apply Damage");
         if (damaged){
             return;
         }
