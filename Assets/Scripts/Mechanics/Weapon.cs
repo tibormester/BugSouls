@@ -14,9 +14,10 @@ public class Weapon : MonoBehaviour
     private List<Health> hitting = new(); 
     private void OnTriggerEnter(Collider other){
         // Check if the collided object is in the player layer
-        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy")){
+        var rb =other.attachedRigidbody;
+        if (rb != null && rb.gameObject.layer == LayerMask.NameToLayer("Enemy")){
             // Get the Health component from the collided object
-            Health health = other.gameObject.GetComponent<Health>();
+            Health health = rb.GetComponent<Health>();
             if (health != null){
                 EnemyHit?.Invoke(health);
                 hitting.Add(health);
@@ -25,9 +26,10 @@ public class Weapon : MonoBehaviour
     }
     private void OnTriggerExit(Collider other){
         // Check if the collided object is in the player layer
-        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy")){
+        var rb =other.attachedRigidbody;
+        if (rb.gameObject.layer == LayerMask.NameToLayer("Enemy")){
             // Get the Health component from the collided object
-            Health health = other.gameObject.GetComponent<Health>();
+            Health health = rb.GetComponent<Health>();
             if (health != null && hitting.Contains(health)){
                 hitting.Remove(health);
             }
