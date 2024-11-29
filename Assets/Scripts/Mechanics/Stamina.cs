@@ -7,14 +7,13 @@ public class Stamina : MonoBehaviour
 {
     public CustomPhysicsBody physicsBody;
     public StaminaBar stamina;
-    public Animator player;
+    public CameraController player;
     public float maxStamina = 50f;
     public float currStamina;
     // Start is called before the first frame update
     void Start()
     {
         physicsBody = GetComponent<CustomPhysicsBody>();
-        player = GetComponent<Animator>();
         stamina.setMaxStamina(maxStamina);
         currStamina = maxStamina;
         stamina.setStamina(maxStamina);
@@ -29,7 +28,7 @@ public class Stamina : MonoBehaviour
             if(currStamina <= 0) 
             {
                 currStamina = 0;
-                player.SetBool("isWalking", true);
+                player.sprintFactor = 0;
                 
             }
             stamina.setStamina(currStamina);
@@ -41,7 +40,7 @@ public class Stamina : MonoBehaviour
             }
             
         }
-        else if(Input.GetKeyDown(KeyCode.Space) && physicsBody.IsGrounded())
+        else if(Input.GetButtonDown("Jump") && physicsBody.IsGrounded() && currStamina >= 5)
         {
             currStamina -= 5;
             if(currStamina <= 0) currStamina = 0;
@@ -55,7 +54,7 @@ public class Stamina : MonoBehaviour
                 stamina.setStamina(currStamina);
                 if(currStamina == 0)
                 {
-                    player.SetBool("isWalking", true);
+                    player.sprintFactor = 0;
                 }
             }
             
