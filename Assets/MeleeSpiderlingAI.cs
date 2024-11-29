@@ -17,6 +17,7 @@ public class MeleeSpiderlingAI : MonoBehaviour{
         health.DeathEvent += () => Destroy(this);
         SceneDescriptor sd = gameObject.scene.GetRootGameObjects().Select(go => go.GetComponent<SceneDescriptor>()).FirstOrDefault(desc => desc != null);
         sd.PlayerEntered += RecievePlayer;
+        PlayerCollision += (hit) => Debug.LogError("Player Collision");
     } 
     public void RecievePlayer(Transform player){
         target = player;
@@ -86,13 +87,11 @@ public class MeleeSpiderlingAI : MonoBehaviour{
     public IEnumerator LeapAttack(){
         //Check if we are already colliding
         damaged = false;
-        if(hit){
+        if(hit != null){
             ApplyDamage(hit);
         }
-        //Damage target if we end up colliding
         PlayerCollision += ApplyDamage;
-
-
+        //Damage target if we end up colliding
         //Tilt head down
         for (int i = 0; i < 10; i++){
             rb.AddTorque(Vector3.right * 5f, ForceMode.Impulse);
@@ -111,23 +110,26 @@ public class MeleeSpiderlingAI : MonoBehaviour{
         yield return null;
     }
     private bool damaged = false;
-    private void ApplyDamage(Health hit){
+    public Action<Health> PlayerCollision;
+    private void ApplyDamage(Health health){
         if (damaged){
             return;
         }
-        var direction = hit.transform.position - transform.position;
-        direction = Vector3.ProjectOnPlane(direction, hit.transform.up); //flatten so we dont hop on hit
-        hit.ApplyDamage(damage);
-        hit.GetComponent<Rigidbody>()?.AddForce(direction.normalized * 1f, ForceMode.Impulse);
+        var direction = health.transform.position - transform.position;
+        direction = Vector3.ProjectOnPlane(direction, health.transform.up); //flatten so we dont hop on hit
+        health.ApplyDamage(damage);
+        health.GetComponent<Rigidbody>()?.AddForce(direction.normalized * 1f, ForceMode.Impulse);
         damaged = true;
     }
-    public event Action<Health> PlayerCollision;
     void OnCollisionEnter(Collision other) {
         Rigidbody collision = other.rigidbody;
         if (collision){
             if(collision.gameObject.layer == LayerMask.NameToLayer("Player")){
-                hit = collision.GetComponent<Health>();
-                PlayerCollision?.Invoke(hit);
+                var health = collision.GetComponent<Health>();
+                if (health != null){
+                    PlayerCollision?.Invoke(health);
+                    hit = health;
+                }   
             }
         }
     }
@@ -135,7 +137,10 @@ public class MeleeSpiderlingAI : MonoBehaviour{
         Rigidbody collision = other.rigidbody;
         if (collision){
             if(collision.gameObject.layer == LayerMask.NameToLayer("Player")){
-                hit = null;
+                var hitHealth = collision.GetComponent<Health>();
+                if(hitHealth != null && hitHealth == hit){
+                    hit = null;
+                }
             }
         }
     }
