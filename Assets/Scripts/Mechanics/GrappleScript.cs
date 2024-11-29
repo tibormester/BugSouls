@@ -114,6 +114,9 @@ public class GrappleScript : MonoBehaviour
                 else if(hit.rigidbody != null &&  (
                         hit.rigidbody.gameObject.GetComponent<Weapon>() != null ||
                         hit.rigidbody.gameObject.GetComponent<Throwable>() != null)  ){
+                    if(hit.rigidbody.gameObject.GetComponent<Throwable>() != null && currentHeld != null){
+                        Throw(0.1f);
+                    }
                     //Update the web to go to the hit location
                     newWeb.transform.LookAt(hit.point);
                     difference = (hit.point- transform.position).magnitude;
@@ -177,7 +180,7 @@ public class GrappleScript : MonoBehaviour
     }
 
     public float throwStrength = 25f;
-    private void Throw(){
+    private void Throw( float strengthMultiplier = 1f){
         if(currentHeld != null){
             //This throws from the player towards the intersection along the camera ray
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // Cast ray from camera, can also use cam.transform.forward for a different direction
@@ -190,7 +193,7 @@ public class GrappleScript : MonoBehaviour
                 ray.direction = (ray.GetPoint(10 * throwStrength) - transform.position).normalized;
                 ray.origin = transform.position;
             }
-            currentHeld.GetComponent<Throwable>().Thrown(ray.direction * throwStrength);
+            currentHeld.GetComponent<Throwable>().Thrown(ray.direction * throwStrength * strengthMultiplier);
             currentHeld = null;
         }
     }
