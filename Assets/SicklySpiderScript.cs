@@ -9,22 +9,29 @@ public class SicklySpiderScript : MonoBehaviour
     public Health health;
     public MeleeSpiderlingAI ai;
     public TextMeshPro text;
+    public CharacterMovement charMovement;
     public List<string> dialogue;
     void Start(){
         text = GetComponent<TextMeshPro>();
-        Coroutine corountine = StartCoroutine(ReadDialogue());
+        charMovement = transform.parent.GetComponent<CharacterMovement>();
 
         //Setup the spider to stop talking and attack if damaged
         health = transform.parent.GetComponent<Health>();
         ai = transform.parent.GetComponent<MeleeSpiderlingAI>();
         ai.enabled = false;
 
+        Coroutine corountine = StartCoroutine(ReadDialogue());
+
         health.Damaged += () => {
             ai.enabled = true;
             StopCoroutine(corountine);
+            text.text = "";
         };
 
         
+    }
+    private void Update(){
+        text.transform.LookAt(ai.target);
     }
     public IEnumerator ReadDialogue(){
         //time after each character
@@ -34,6 +41,7 @@ public class SicklySpiderScript : MonoBehaviour
         foreach(string line in dialogue){
             foreach(char letter in line){
                 text.text += letter;
+                charMovement.look_direction = ai.target.position - transform.parent.position;
                 yield return charWait;
             }
             yield return lineWait;
