@@ -10,26 +10,25 @@ public class VineBossAI : MonoBehaviour
     void Start()
     {
         vineBossanimator = GetComponent<Animator>();
-        StartCoroutine(ChangeAnimation());
+        StartCoroutine(ChangeAnimation()); //start with boss entry first
     }
 
     IEnumerator ChangeAnimation()
     {
         while (true)
         {
-            // Generate a random integer between 0 and 4 (inclusive)
+            //only the attacks, not the boss entry or die animation
             int randomAnim = Random.Range(0, 5);
 
-            // Set the AnimIndex parameter to trigger the transition
+            // set to a random attack
             vineBossanimator.SetInteger("attackselector", randomAnim);
 
             // Wait for a frame to allow the Animator to process the change
             yield return null;
 
-            // Reset the parameter to prevent unintended transitions
+            // resetting to some number out of bounds so we dont do any weird attack
             vineBossanimator.SetInteger("attackselector", -1);
 
-            // Wait for the specified interval before changing again
             yield return new WaitForSeconds(changeInterval);
         }
     }
