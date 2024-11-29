@@ -764,7 +764,7 @@ MonoBehaviour:
     entranceLocation: {fileID: 1542653647}
   - collider: {fileID: 2102384810}
     sceneName: SpiderBoss
-    locked: 1
+    locked: 0
     entranceLocation: {fileID: 1482392301}
   prevEdge:
     collider: {fileID: 0}

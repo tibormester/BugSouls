@@ -91,7 +91,8 @@ public class GrappleScript : MonoBehaviour
             // Raycast from the current target Location out by the launch speed to the new target location
             if (Physics.Raycast(targetLocation, ray.direction, out hit, LaunchSpeed, ~LayerMask.NameToLayer("Player"))){
                 //Check what we hit, if its the terrain start grappling to it (bring player to terrain)
-                if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Terrain")){ 
+                if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Terrain") || 
+                    hit.collider.gameObject.layer == LayerMask.NameToLayer("Enemy")){ 
                     if(currentWeb != null){
                         Destroy(currentWeb);
                     }
@@ -101,7 +102,7 @@ public class GrappleScript : MonoBehaviour
                     newWeb.transform.localScale = new Vector3(1,1, difference);
                     //Store the hit location
                     currentWeb = newWeb;
-                    hookedObject = hit.collider.gameObject.transform;
+                    hookedObject = hit.rigidbody != null ? hit.rigidbody.transform : hit.collider.gameObject.transform;
                     hookedOffset = hookedObject.InverseTransformPoint(hit.point);
                     //Start the grappling with a tiny hop
                     grappling = true;
@@ -156,8 +157,13 @@ public class GrappleScript : MonoBehaviour
         Vector3 difference = hookedObject.TransformPoint(hookedOffset) - transform.position;
         difference = difference - grappleDistance*difference.normalized; //Stop a little away from the surface
         Debug.DrawLine(transform.position, transform.position + difference, Color.red);
-        rb.AddForce(difference.normalized * grappleStrength, ForceMode.Acceleration);
 
+        if(hookedObject.gameObject.layer == LayerMask.NameToLayer("Enemy")){
+            rb.AddForce(difference.normalized * 2* grappleStrength, ForceMode.Acceleration);
+            hookedObject.GetComponent<Rigidbody>()?.AddForce(-difference.normalized *grappleStrength, ForceMode.Acceleration);
+        } else{
+            rb.AddForce(difference.normalized * grappleStrength, ForceMode.Acceleration);
+        }
         //Update the spawned grapple web
         //If the player moves, we gotta keep reorientating and updating the length, lets spawn this fromm the center of the player?
         var hitpoint = hookedObject.TransformPoint(hookedOffset);
