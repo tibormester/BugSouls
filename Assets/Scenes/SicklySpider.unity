@@ -469,7 +469,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7066080473075973534, guid: 03f418c58e484aa40a2d3deaaaa7d58a, type: 3}
       propertyPath: coyoteOrientationTime
-      value: 0.25
+      value: 0.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

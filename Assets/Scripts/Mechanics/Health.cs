@@ -57,20 +57,29 @@ public class Health : MonoBehaviour
         } else{
             yield return new WaitForSeconds(0.01f);
 
-            Corpsify(gameObject); //Removes this script btw
+            StartCoroutine(Corpsify(gameObject)); //Removes this script btw
             //gameObject.SetActive(false); // Example action on death
         }
         
     }
-    public void Corpsify(GameObject enemy){
+    public IEnumerator Corpsify(GameObject enemy){
         Throwable throwable = enemy.AddComponent<Throwable>();
-        throwable.baseDamage = 1f / enemy.GetComponent<Rigidbody>().mass; //Make sure heavy corpses dont one shot anything
+        Rigidbody rb = enemy.GetComponent<Rigidbody>();
+        throwable.baseDamage = 1f / rb.mass; //Make sure heavy corpses dont one shot anything
         enemy.layer = LayerMask.NameToLayer("Throwable");
-        enemy.transform.localScale *= 0.85f; //Shrink slightly
-
+        Vector3 scale = enemy.transform.localScale;
+        int max_frames = 50;
+        float shrunkSize = 0.7f;
         Destroy(enemy.GetComponent<CharacterMovement>());
+        for (int i = max_frames; i > 0; i--){   
+            //TODO: Make death shrivel the corpse
+            rb.AddTorque(Vector3.right, ForceMode.Impulse);
+            enemy.transform.localScale = scale * (shrunkSize + (1f - shrunkSize)*((float)i/(float)max_frames)); //scale * (0.7 + 0.3*Interpolator(from 1 to 0))
+            yield return null;
+        }
         Destroy(enemy.GetComponent<Health>());
         Destroy(enemy.GetComponent<ParticleSystem>());
+        yield return null;
 
 
     }
