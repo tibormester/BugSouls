@@ -58,6 +58,7 @@ public class Weapon : MonoBehaviour
             collider.isTrigger = active;
         }
         windTrail?.SetActive(active);
+        damaged.Clear();
         if (active){
             EnemyHit += Attack;
         } else {
@@ -67,9 +68,14 @@ public class Weapon : MonoBehaviour
 
     public event Action<Health> EnemyHit;
     private void Attack(Health health){ //Wraps the corountine so we can add and subtract it from the event without ambiguity
+        if(damaged.Contains(health)){
+            return;
+        } else {
+            damaged.Add(health);
+        }
         StartCoroutine(ApplyDamage(health));
     }
-
+    private List<Health> damaged = new();
     private IEnumerator ApplyDamage(Health health){
         var wait = new WaitForSeconds(0.05f);
         var rb = health.GetComponent<Rigidbody>();

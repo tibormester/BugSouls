@@ -72,6 +72,10 @@ public class RangedSpiderlingAI : MonoBehaviour{
                         if(attackTimer <= 0f){
                             StartCoroutine(SpitAttack(target.position));
                             attackTimer = attackCooldown;
+                            strafeDirection *= -1f;
+                        } else{
+                            charMovement.acceleration = originalAccel * backupAccelMultiplier;
+                            charMovement.Move(transform.right * strafeDirection);
                         }
                     }
                 }
@@ -79,6 +83,7 @@ public class RangedSpiderlingAI : MonoBehaviour{
         }
         attackTimer = attackTimer < 0f ? 0f : attackTimer - Time.fixedDeltaTime;
     }
+    private float strafeDirection = -1f;
     public IEnumerator LeapAttack(){
         //Tilt head down
         for (int i = 0; i < 10; i++){
@@ -105,6 +110,7 @@ public class RangedSpiderlingAI : MonoBehaviour{
     public int maxLaunchTicks = 200;
 
     public IEnumerator SpitAttack(Vector3 attackLocation){
+        var wait = new WaitForFixedUpdate();
         GameObject newWeb = Instantiate(webPrototype, transform);
         //TODO: initialize local variables
         Ray ray = new Ray(transform.position, attackLocation - transform.position);
@@ -135,7 +141,7 @@ public class RangedSpiderlingAI : MonoBehaviour{
                     var prev = hit.rigidbody.GetComponent<CharacterMovement>().acceleration;
                     if (prev > 1f){ //If we are already slowed, slowing again might loose the base acceleration
                     //Ideally I would construct a stat object that would hold a stack of modifiers
-                        hit.rigidbody.GetComponent<CharacterMovement>().maxSpeed = 3f;
+                        hit.rigidbody.GetComponent<CharacterMovement>().maxSpeed = 1.5f;
                     }
                     yield return new  WaitForSeconds(1.25f);
                     if (prev > 1f){
@@ -152,7 +158,7 @@ public class RangedSpiderlingAI : MonoBehaviour{
             newWeb.transform.LookAt(targetLocation);
             difference = (targetLocation- transform.position).magnitude;
             newWeb.transform.localScale = new Vector3(1,1, difference);
-            yield return null;
+            yield return wait;
         }
         //If the launch process times out, destroy the web
         Destroy(newWeb);

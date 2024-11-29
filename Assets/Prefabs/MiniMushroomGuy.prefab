@@ -90,8 +90,8 @@ MonoBehaviour:
   pb: {fileID: 0}
   rb: {fileID: 0}
   target: {fileID: 0}
-  minEngageDistance: 2
-  maxEngageDistance: 4
+  minEngageDistance: 3
+  maxEngageDistance: 7
   backupAccelMultiplier: 1.2
   maxChaseDistance: 30
   maxStuckTime: 4
@@ -100,7 +100,7 @@ MonoBehaviour:
   stuckTime: 0
   damage: 15
   hit: {fileID: 0}
-  attackCooldown: 1.5
+  attackCooldown: 3
 --- !u!114 &351742870367157693
 MonoBehaviour:
   m_ObjectHideFlags: 0

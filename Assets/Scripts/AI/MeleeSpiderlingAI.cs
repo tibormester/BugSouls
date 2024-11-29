@@ -88,23 +88,21 @@ public class MeleeSpiderlingAI : MonoBehaviour{
         var wait = new WaitForFixedUpdate();
         //Check if we are already colliding
         damaged = false;
-        Debug.Log("Subscribed Apply Damage");
         PlayerCollision += ApplyDamage;
         if(hit != null){
-            Debug.Log("Already hitting");
             ApplyDamage(hit);
         }
         
         //Damage target if we end up colliding
         //Tilt head down
         for (int i = 0; i < 10; i++){
-            rb.AddTorque(Vector3.right * 5f, ForceMode.Impulse);
+            rb.AddTorque(transform.right * 5f, ForceMode.VelocityChange);
             yield return wait;
         }
         //Launch forward
         Vector3 direction = target.transform.position - transform.position;
         for (int i = 0; i < 10; i++){
-            rb.AddForce(direction.normalized * 1.5f, ForceMode.Impulse);
+            rb.AddForce(direction.normalized * 1.5f, ForceMode.VelocityChange);
             yield return wait;
         }
 
@@ -112,7 +110,6 @@ public class MeleeSpiderlingAI : MonoBehaviour{
         //Stop attempting to damage the target on collision
         PlayerCollision -= ApplyDamage;
 
-        Debug.Log("UNSubscribed Apply Damage");
         //reset the bool flag so we can damage next cycle
         yield return null;
     }
