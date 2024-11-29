@@ -14,6 +14,8 @@ public class Health : MonoBehaviour
 
     public Action DeathEvent;
 
+    public Transform healthBar; //A red cube where the scale along the z axis represents the fill
+
     private void Start()
     {
         currentHealth = maxHealth; // Initialize health
@@ -21,6 +23,8 @@ public class Health : MonoBehaviour
         pSys = GetComponent<ParticleSystem>();
         health?.setMaxHealth(maxHealth);
         health?.setHealth(currentHealth);
+        if(healthBar)
+            healthBar.transform.localScale = new Vector3(healthBar.transform.localScale.x,healthBar.transform.localScale.y, currentHealth/maxHealth);
     }
     
 
@@ -31,18 +35,21 @@ public class Health : MonoBehaviour
         
         health?.setHealth(currentHealth);
 
-        if (currentHealth <= 0)
-        {
-            StartCoroutine(Die());
-        }
+        if(healthBar)
+            healthBar.transform.localScale = new Vector3(healthBar.transform.localScale.x,healthBar.transform.localScale.y, currentHealth/maxHealth);
+        
         if(damageAmount > 0f){
             StartCoroutine(PlayHitParticles());
         }
+        if (currentHealth <= 0){
+            StartCoroutine(Die());
+        }
+        
         
     }
     private IEnumerator PlayHitParticles(){
         pSys?.Play();
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
         pSys?.Stop();
     }
 
@@ -65,6 +72,9 @@ public class Health : MonoBehaviour
     public IEnumerator Corpsify(GameObject enemy){
         Throwable throwable = enemy.AddComponent<Throwable>();
         Rigidbody rb = enemy.GetComponent<Rigidbody>();
+        if (healthBar){
+            DestroyImmediate(healthBar); //For somereason on death it doesnt shrink to nothing
+        }
         throwable.baseDamage = 1f / rb.mass; //Make sure heavy corpses dont one shot anything
         enemy.layer = LayerMask.NameToLayer("Throwable");
         Vector3 scale = enemy.transform.localScale;

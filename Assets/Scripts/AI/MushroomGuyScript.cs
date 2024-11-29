@@ -41,6 +41,7 @@ public class MushroomGuyScript : MonoBehaviour
     public void FixedUpdate(){
         if(health.currentHealth <= 0.5f * health.maxHealth && hat){
             DropHat();
+            health.ApplyDamage(-0.5f * health.maxHealth);
         }
         if (target != null){
             //The target is close enoguh to chase
