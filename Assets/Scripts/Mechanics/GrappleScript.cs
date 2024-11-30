@@ -309,9 +309,10 @@ public class GrappleScript : MonoBehaviour
             weapon.transform.localRotation = Quaternion.identity;
         }else if(throwable != null){
             currentHeld = throwable;
-            currentHeld.PickedUp(gameObject);
+            currentHeld.PickedUp(heldTransform, heldOffset);
         }
         yield return null;
     }
-
+    public GameObject heldTransform;
+    public Vector3 heldOffset = new Vector3(0.3f, 0.1f, 0.2f);
 }

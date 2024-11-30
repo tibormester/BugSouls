@@ -15,9 +15,10 @@ public class Throwable : MonoBehaviour
 
     private bool held = false;
 
-    public void PickedUp(GameObject parent){
+    public void PickedUp(GameObject parent, Vector3 localPosition){
         held = true; //Used for collision detection
         transform.SetParent(parent.transform, true);
+        transform.localPosition = localPosition;
         rb.excludeLayers = LayerMask.GetMask(new string[]{"Player"});
         rb.isKinematic = true;
     }

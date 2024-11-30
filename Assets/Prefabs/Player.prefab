@@ -202,12 +202,16 @@ MonoBehaviour:
   currentHeld: {fileID: 0}
   currentWeapon: {fileID: 0}
   grappleTicks: 0
+  maxChargeTime: 2
+  chargeVector: {x: -0.05, y: -0.2, z: -0.5}
   LaunchSpeed: 1
   maxLaunchTicks: 250
   launching: 0
   throwStrength: 25
   PickupSpeed: 1
   PlayerHand: {fileID: 2272101935276854352}
+  heldTransform: {fileID: 2882459128181347332}
+  heldOffset: {x: 0.5, y: 0.5, z: 1}
 --- !u!199 &3110807798758749745
 ParticleSystemRenderer:
   serializedVersion: 6
