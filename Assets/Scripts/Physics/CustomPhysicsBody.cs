@@ -44,6 +44,8 @@ public class CustomPhysicsBody : MonoBehaviour
     }
     public LayerMask groundMask;
     private bool TerrainRaycast(){//Return's true when finding terrain, false if not
+        if (body == null) return false;
+        
         RaycastHit hitInfo;
         //We want to check infront of the player to enable them to climb up walls
         Debug.DrawRay(transform.position, body.velocity.normalized * velocityCheckDistance, Color.red);
