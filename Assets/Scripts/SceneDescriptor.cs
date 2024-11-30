@@ -23,8 +23,11 @@ public class SceneDescriptor : MonoBehaviour{
         yield return null;
         
         if (cachedPlayer == null && player != null){
+            //normally this is done during the transition, so if not then we are probably running this scene in the editor
+            //This will never run in build i think
             cachedPlayer = (GameObject)Instantiate(player, gameObject.scene);
             cachedPlayer.SetActive(false);
+            player.GetComponent<Health>().DeathEvent += ReloadCurrentScene;
         }
         if(prevEdge.sceneName == ""){
             prevEdge.entranceLocation = transform;

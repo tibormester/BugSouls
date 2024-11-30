@@ -135,7 +135,7 @@ public class RangedSpiderlingAI : MonoBehaviour{
                     hit.rigidbody.GetComponent<Health>().ApplyDamage(damage);
 
                     CharacterMovement characterMovement = hit.rigidbody.GetComponent<CharacterMovement>();
-                    characterMovement.StartCoroutine(ApplySlowStatus(characterMovement, 2f, 1f));
+                    characterMovement.StartCoroutine(ApplySlowStatus(characterMovement, 1.5f, 2f));
                    
                     Destroy(newWeb);
                     yield break;
