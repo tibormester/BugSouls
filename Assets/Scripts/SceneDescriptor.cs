@@ -122,12 +122,13 @@ public class SceneDescriptor : MonoBehaviour{
             Destroy(cachedPlayer); 
         }
         cachedPlayer = (GameObject)Instantiate(transientPlayer, gameObject.scene);
-        cachedPlayer.SetActive(false);
+        
         //Add an event handler to the current player so we can reload the scene on death
         health.DeathEvent += ReloadCurrentScene;
         
         //Start the scene if it was paused (if it wasn't this shouldnt change anything)
         PauseScene(true);
+        cachedPlayer.SetActive(false); //Set the savepoint player to inactive
     }
 
     private bool AreAllEnemiesCleared(){
