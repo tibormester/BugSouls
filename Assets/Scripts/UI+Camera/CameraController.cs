@@ -46,7 +46,7 @@ public class CameraController : MonoBehaviour
         targetMovement = target.gameObject.GetComponent<CharacterMovement>();
         prevNormal = targetMovement.physicsBody.groundNormal;
         //Ensure u cant do stuff when u die
-        target.GetComponent<Health>().DeathEvent += () => Destroy(this);
+        target.GetComponent<Health>().DeathEvent += () => allowMovement = false;
     }
     public LayerMask throwable;
     public LayerMask terrain;
@@ -60,8 +60,8 @@ public class CameraController : MonoBehaviour
     }
 
     void LateUpdate(){
+        MouseInputs();
         if (allowMovement){
-            MouseInputs();
             Movement();
             
             if(Input.GetButtonDown("Jump")){
