@@ -128,35 +128,35 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 394236250}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1020062893827687887, guid: d9a2cb2a70d84f54490c77278d9beacf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.06763065
       objectReference: {fileID: 0}
     - target: {fileID: 1020062893827687887, guid: d9a2cb2a70d84f54490c77278d9beacf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.29544008
       objectReference: {fileID: 0}
     - target: {fileID: 1020062893827687887, guid: d9a2cb2a70d84f54490c77278d9beacf, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 15.321478
       objectReference: {fileID: 0}
     - target: {fileID: 1020062893827687887, guid: d9a2cb2a70d84f54490c77278d9beacf, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.5416749
       objectReference: {fileID: 0}
     - target: {fileID: 1020062893827687887, guid: d9a2cb2a70d84f54490c77278d9beacf, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.4545193
       objectReference: {fileID: 0}
     - target: {fileID: 1020062893827687887, guid: d9a2cb2a70d84f54490c77278d9beacf, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.45451978
       objectReference: {fileID: 0}
     - target: {fileID: 1020062893827687887, guid: d9a2cb2a70d84f54490c77278d9beacf, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: 0.54167545
       objectReference: {fileID: 0}
     - target: {fileID: 1020062893827687887, guid: d9a2cb2a70d84f54490c77278d9beacf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -183,22 +183,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9a2cb2a70d84f54490c77278d9beacf, type: 3}
---- !u!4 &163965325 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1020062893827687887, guid: d9a2cb2a70d84f54490c77278d9beacf, type: 3}
-  m_PrefabInstance: {fileID: 163965324}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &163965326 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9220669937548059425, guid: d9a2cb2a70d84f54490c77278d9beacf, type: 3}
-  m_PrefabInstance: {fileID: 163965324}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ef214240248a4ba1ae865c3dd70a8f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &211838367
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,7 +232,6 @@ MonoBehaviour:
     m_Bits: 896
   mouseSensitivityX: 2560
   mouseSensitivityY: 2560
-  sprintFactor: 2.5
   throwable:
     serializedVersion: 2
     m_Bits: 128
@@ -544,11 +527,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
---- !u!4 &394236250 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2272101935276854352, guid: 03f418c58e484aa40a2d3deaaaa7d58a, type: 3}
-  m_PrefabInstance: {fileID: 1579500882}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &569973583
 GameObject:
   m_ObjectHideFlags: 0
@@ -581,12 +559,12 @@ MonoBehaviour:
   player: {fileID: 1579500884}
   cam: {fileID: 211838368}
   exits:
-  - collider: {fileID: 1105809608}
+  - colliders: []
     sceneName: SicklySpider
     locked: 0
     entranceLocation: {fileID: 1542653647}
   prevEdge:
-    collider: {fileID: 0}
+    colliders: []
     sceneName: 
     locked: 0
     entranceLocation: {fileID: 0}
@@ -1436,7 +1414,7 @@ PrefabInstance:
     - target: {fileID: 1848241750196380289, guid: 03f418c58e484aa40a2d3deaaaa7d58a, type: 3}
       propertyPath: currentWeapon
       value: 
-      objectReference: {fileID: 163965326}
+      objectReference: {fileID: 0}
     - target: {fileID: 2882459128181347332, guid: 03f418c58e484aa40a2d3deaaaa7d58a, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1495,10 +1473,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 2272101935276854352, guid: 03f418c58e484aa40a2d3deaaaa7d58a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 163965325}
+    m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2882459128181347332, guid: 03f418c58e484aa40a2d3deaaaa7d58a, type: 3}
       insertIndex: -1
@@ -6516,6 +6491,10 @@ PrefabInstance:
       propertyPath: maxHealth
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1725547510204702768, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
+      propertyPath: m_AngularDrag
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 1793763935076435911, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
       propertyPath: gravity
       value: -24
@@ -6528,6 +6507,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Beetle (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 2572901030770951931, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2786938085173400070, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 4015855153607170739, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
       propertyPath: damage
       value: 5
@@ -6536,6 +6523,30 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1579500883}
+    - target: {fileID: 4015855153607170739, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
+      propertyPath: chargeForce
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4015855153607170739, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
+      propertyPath: attackCooldown
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5210277025029261016, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380944228397077873, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7391800837636780473, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7409617270630763797, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6922,6 +6933,10 @@ PrefabInstance:
       propertyPath: maxHealth
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1725547510204702768, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
+      propertyPath: m_AngularDrag
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 1793763935076435911, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
       propertyPath: gravity
       value: -24
@@ -6934,6 +6949,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Beetle (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 2572901030770951931, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2786938085173400070, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 4015855153607170739, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
       propertyPath: damage
       value: 5
@@ -6942,6 +6965,30 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1579500883}
+    - target: {fileID: 4015855153607170739, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
+      propertyPath: chargeForce
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4015855153607170739, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
+      propertyPath: attackCooldown
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5210277025029261016, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380944228397077873, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7391800837636780473, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7409617270630763797, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6999,6 +7046,10 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1725547510204702768, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
+      propertyPath: m_AngularDrag
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 1793763935076435911, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
       propertyPath: gravity
       value: -24
@@ -7011,10 +7062,42 @@ PrefabInstance:
       propertyPath: m_Name
       value: Beetle (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2572901030770951931, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2786938085173400070, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 4015855153607170739, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 1579500883}
+    - target: {fileID: 4015855153607170739, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
+      propertyPath: chargeForce
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4015855153607170739, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
+      propertyPath: attackCooldown
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5210277025029261016, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380944228397077873, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7391800837636780473, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7409617270630763797, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7028,6 +7111,7 @@ SceneRoots:
   - {fileID: 211838371}
   - {fileID: 1578211992}
   - {fileID: 1579500882}
+  - {fileID: 163965324}
   - {fileID: 1888497672}
   - {fileID: 1936063814}
   - {fileID: 345356870}

@@ -50,7 +50,7 @@ public class SceneDescriptor : MonoBehaviour{
     private Canvas canvas;
     private IEnumerator ReloadCoroutine(){
 
-        canvas.GetComponent<Text>().text = "You Went Splat!";
+        canvas.GetComponent<Text>().text = "\n\nYou Went Splat!";
 
         yield return new WaitForSeconds(0.2f);
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Mouse0));
