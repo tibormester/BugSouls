@@ -54,7 +54,7 @@ public class Throwable : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy") && collision.rigidbody != null){
             Health health = collision.rigidbody.gameObject.GetComponent<Health>();
             if (health != null){
-                OnCollision.Invoke(health);
+                OnCollision?.Invoke(health);
                 
             }
         }
