@@ -45,10 +45,34 @@ public class GrappleScript : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Q)){
             if (currentHeld != null){
-                Throw();
+                //Start a routine to count how long we charge the throw for (and animate it)
+                StartCoroutine(ThrowingInput());
             }
         }
     }
+    public float maxChargeTime = 2f;
+    public Vector3 chargeVector = new Vector3(-0.05f, -0.2f, -0.5f);
+
+    private IEnumerator ThrowingInput(){
+        var localPosition = currentHeld.transform.localPosition;
+        var elapsed = 0f;
+        float percentage = 0f;
+        Vector3 originalScale = currentHeld.transform.localScale;
+        while(!Input.GetKeyUp(KeyCode.Q)){
+            percentage = elapsed / maxChargeTime;
+            currentHeld.transform.localPosition = localPosition + (chargeVector * Mathf.Clamp(percentage, 0f, 1.5f));
+            
+            if (percentage >= 2.0){
+                //Ideally id have another animation to inidicate its at max charge percentage, but this should be cool enough
+                currentHeld.transform.localScale = originalScale * 0.9f;
+            }
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        currentHeld.transform.localScale = originalScale;
+        Throw(Mathf.Clamp(percentage, 0, 2));
+    }
+
     void FixedUpdate(){
         //If we have a web, pull us towards it
         if(grappling){
@@ -285,8 +309,9 @@ public class GrappleScript : MonoBehaviour
             weapon.transform.localRotation = Quaternion.identity;
         }else if(throwable != null){
             currentHeld = throwable;
-            currentHeld.PickedUp(gameObject, new Vector3(1.1f, 0.2f, 1.1f));
+            currentHeld.PickedUp(gameObject);
         }
         yield return null;
     }
+
 }

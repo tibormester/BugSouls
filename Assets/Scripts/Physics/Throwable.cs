@@ -9,21 +9,22 @@ public class Throwable : MonoBehaviour
  
     private Rigidbody rb;
     public float baseDamage = 1f;
-    public float velocityMultiplier = 1f;
     void Start(){
         rb = GetComponent<Rigidbody>();   
     }
 
     private bool held = false;
 
-    public void PickedUp(GameObject parent, Vector3 localPosition){
+    public void PickedUp(GameObject parent){
         held = true; //Used for collision detection
         transform.SetParent(parent.transform, true);
+        rb.excludeLayers = LayerMask.GetMask(new string[]{"Player"});
         rb.isKinematic = true;
     }
     public void Thrown(Vector3 velocity){
         held = false;
         transform.SetParent(null, true);
+        rb.excludeLayers = LayerMask.GetMask(new string[]{});
         rb.isKinematic = false;
         StartCoroutine(Throwing(velocity));
     }
@@ -39,14 +40,15 @@ public class Throwable : MonoBehaviour
     
     //For some reason i was struggling to use LayerMask.name to layer (player)
     private List<Health> collided = new();
-    private Action<Health> OnCollision;
+    public Action<Health> OnCollision;
     public void Collide(Health health){
-        StartCoroutine(Collision(health));
+        if(!collided.Contains(health))
+            StartCoroutine(Collision(health));
     }
     public IEnumerator Collision(Health health){
         health.ApplyDamage(baseDamage);
         collided.Add(health);
-        //Do something?
+        //Do something like knockback? But the physics simulation already does enough knockback...
         yield return null;
     }
     private void OnCollisionEnter(Collision collision){
