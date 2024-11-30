@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -27,20 +28,22 @@ public class SceneDescriptor : MonoBehaviour{
         foreach (var exit in exits){
             exit.SubscribeToCollision(OnExitEntered);
         }
-        if (cachedPlayer == null && player != null){
-            cachedPlayer = (GameObject)Instantiate(player, gameObject.scene);
-            cachedPlayer.SetActive(false);
-        }
-        if(prevEdge.Equals(default(GraphEdge))){//I've never written code as ugly as this before
-            prevEdge.entranceLocation = transform;
-            prevEdge.sceneName = gameObject.scene.name;
 
-        }
 
         StartCoroutine(DelayedStart());
     }
     private IEnumerator DelayedStart(){
         yield return null;
+        
+        if (cachedPlayer == null && player != null){
+            cachedPlayer = (GameObject)Instantiate(player, gameObject.scene);
+            cachedPlayer.SetActive(false);
+        }
+        if(prevEdge.sceneName == ""){//I've never written code as ugly as this before
+            prevEdge.entranceLocation = transform;
+            prevEdge.sceneName = gameObject.scene.name;
+        }
+
         PlayerEntered?.Invoke(player.transform);
     }
 
@@ -68,7 +71,7 @@ public class SceneDescriptor : MonoBehaviour{
             for (int i = 0; i < SceneManager.sceneCount; i++){
                 Scene scene = SceneManager.GetSceneAt(i);
                 if(scene.name == edge.sceneName && scene != gameObject.scene){
-                    nextScene = SceneManager.GetSceneByName(edge.sceneName);
+                    nextScene = scene;
                 }
             }
         }
@@ -105,7 +108,7 @@ public class SceneDescriptor : MonoBehaviour{
         }
     }
 
-    public void RecievePlayer(GameObject transientPlayer, Vector3 position, Quaternion rotation){
+    public void RecievePlayer(GameObject transientPlayer, Vector3 position, Quaternion rotation, bool reload = false){
         
         SceneManager.MoveGameObjectToScene(transientPlayer, gameObject.scene);
 
@@ -142,8 +145,8 @@ public class SceneDescriptor : MonoBehaviour{
         PauseScene(true);
 
         //Create an inactive copy of the player and store it incase we need to restart the next scene
-        if (cachedPlayer != null){
-            Destroy(cachedPlayer);
+        if (cachedPlayer != null && cachedPlayer.gameObject.scene == gameObject.scene){
+            Destroy(cachedPlayer); 
         }
         cachedPlayer = (GameObject)Instantiate(transientPlayer, gameObject.scene);
         cachedPlayer.SetActive(false);

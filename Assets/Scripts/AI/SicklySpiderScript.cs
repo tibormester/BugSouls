@@ -10,7 +10,7 @@ public class SicklySpiderScript : MonoBehaviour
     public MeleeSpiderlingAI ai;
     public TextMeshPro text;
     public CharacterMovement charMovement;
-    public List<string> dialogue;
+    public string[] dialogue = new string[] {};
     void Start(){
         text = GetComponent<TextMeshPro>();
         charMovement = transform.parent.GetComponent<CharacterMovement>();
