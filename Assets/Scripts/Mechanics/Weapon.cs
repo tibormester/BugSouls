@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -9,8 +8,14 @@ public class Weapon : MonoBehaviour
     public float damage = 10f; // Damage amount
     public enum WeaponType {dagger, twoHandSword}; // Type of sword, used for animations
     public WeaponType type;
+    public AudioSource audioSource;
+    public AudioClip OnSwing;
 
     private List<Health> hitting = new(); 
+
+    private void Start(){
+        audioSource = GetComponent<AudioSource>();
+    }
     private void OnTriggerEnter(Collider other){
         // Check if the collided object is in the player layer
         var rb =other.attachedRigidbody;
@@ -46,6 +51,10 @@ public class Weapon : MonoBehaviour
         //Wait through the windup
         yield return new WaitForSeconds(0.15f * duration);
         ToggleActiveSword(true);
+        if(audioSource){
+            audioSource.clip = OnSwing;
+            audioSource?.PlayDelayed(0.1f);
+        }
         //Activate collider triggers and wind trail
         yield return new WaitForSeconds(0.65f * duration);
         ToggleActiveSword(false);

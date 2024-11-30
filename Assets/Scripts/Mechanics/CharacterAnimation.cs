@@ -40,6 +40,8 @@ public class CharacterAnimation : MonoBehaviour
         GetComponent<Health>().DeathEvent += () => {charAnimator.CrossFade("death 1" , 0.1f); dying = true;};
 
         UpdateAnimData();
+        //Ensure u cant do stuff when u die
+        gs.GetComponent<Health>().DeathEvent += () => Destroy(this);
     }
 
 

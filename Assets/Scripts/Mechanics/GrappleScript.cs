@@ -22,6 +22,8 @@ public class GrappleScript : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         pb = GetComponent<CustomPhysicsBody>();
+        //Ensure u cant do stuff when u die
+        pb.GetComponent<Health>().DeathEvent += () => Destroy(this);
     }
 
     // Update is called once per frame

@@ -2,8 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SceneDescriptor : MonoBehaviour{
     public GameObject player; // Reference to the player object
@@ -18,6 +20,9 @@ public class SceneDescriptor : MonoBehaviour{
 
     private void Start(){
         StartCoroutine(DelayedStart());
+        canvas = gameObject.scene.GetRootGameObjects()
+                .Select(go => go.GetComponent<Canvas>()) //Find the screen descriptor components
+                .FirstOrDefault(desc => desc != null);// return the first one that isnt null
     }
     private IEnumerator DelayedStart(){
         yield return null;
@@ -40,12 +45,24 @@ public class SceneDescriptor : MonoBehaviour{
     }
 
     private void ReloadCurrentScene(){
+        StartCoroutine(ReloadCoroutine());
+    }
+    private Canvas canvas;
+    private IEnumerator ReloadCoroutine(){
+
+        canvas.GetComponent<Text>().text = "You Went Splat!";
+
+        yield return new WaitForSeconds(0.2f);
+        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Mouse0));
         StartCoroutine(LoadSceneAsync(prevEdge, true));
     }
 
     public void OnExitEntered(GraphEdge edge, GameObject collidingObject){
         if (collidingObject != player) return; // Ensure it's the player
         if (edge.locked && !AreAllEnemiesCleared()) return; // Check if exit is locked
+        if(collidingObject.GetComponent<Health>().currentHealth <= 0f){
+            return;//Bug where corpse gets pushed through a door, (could be a feature)
+        }
         StartCoroutine(LoadSceneAsync(edge));
     }
 

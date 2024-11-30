@@ -17,11 +17,15 @@ public class Health : MonoBehaviour
 
     public Transform healthBar; //A red cube where the scale along the z axis represents the fill
 
+    public AudioClip hit;
+    public AudioClip death;
+    public AudioSource audioSource;
     private void Start()
     {
         if (currentHealth == 0){
             currentHealth = maxHealth; // Initialize health
         }
+        audioSource = GetComponent<AudioSource>();
         //health = GetComponent<HealthBar>();
         pSys = GetComponent<ParticleSystem>();
         health?.setMaxHealth(maxHealth);
@@ -32,7 +36,10 @@ public class Health : MonoBehaviour
     
 
     public void ApplyDamage(float damageAmount)
-    {
+    {   
+        if (currentHealth <= 0f){
+            return; //Prevents dying twice
+        }
         currentHealth -= damageAmount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth); // Ensure health doesn't go below 0
         
@@ -41,12 +48,20 @@ public class Health : MonoBehaviour
         if(healthBar)
             healthBar.transform.localScale = new Vector3(healthBar.transform.localScale.x,healthBar.transform.localScale.y, currentHealth/maxHealth);
         
-        if(damageAmount > 0f){
+        if( damageAmount > 0f){
             Damaged?.Invoke();
+            if(audioSource){
+                audioSource.clip = hit;
+                audioSource.Play();
+            }
             StartCoroutine(PlayHitParticles());
         }
         if (currentHealth <= 0){
             StartCoroutine(Die());
+            if(audioSource){
+                audioSource.clip = death;
+                audioSource.Play();
+            }
         }
         
         
@@ -62,7 +77,7 @@ public class Health : MonoBehaviour
         // Handle the object's death (e.g., disable it, play animation, etc.)
         Debug.Log($"{gameObject.name} has died!");
         DeathEvent?.Invoke();
-        GetComponent<CharacterMovement>().acceleration = 0f;
+        GetComponent<CharacterMovement>().maxSpeed = 0f;
         if (gameObject.layer == LayerMask.NameToLayer("Player")){
             yield return null;
         } else{

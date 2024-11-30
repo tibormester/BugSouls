@@ -7,7 +7,7 @@ public class TutorialScreen : MonoBehaviour
     public Sprite[] imagesToShow; // Array of images to display
 
     private Image uiImage;         // Reference to the UI Image component
-    private int currentImageIndex; // Index of the current image
+    public int currentImageIndex = 1; // Index of the current image
 
     private GrappleScript playerGrappleScript;
     private bool isWaiting = false; // Flag to prevent multiple coroutines
@@ -42,7 +42,7 @@ public class TutorialScreen : MonoBehaviour
         // Initialize the first image
         if (imagesToShow != null && imagesToShow.Length > 0)
         {
-            currentImageIndex = 0;
+            //currentImageIndex = 0;
             uiImage.sprite = imagesToShow[currentImageIndex];
             uiImage.enabled = true; // Ensure the image is enabled
         }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public static class ExtensionMethods
 {
+    //Found this on github when we were gonna do a more vertigo inducing setting
     public static Vector3 SmoothedNormal(this RaycastHit aHit)
     {
         var MC = aHit.collider as MeshCollider;
