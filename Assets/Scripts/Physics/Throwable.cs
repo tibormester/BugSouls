@@ -40,13 +40,14 @@ public class Throwable : MonoBehaviour
     
     //For some reason i was struggling to use LayerMask.name to layer (player)
     private List<Health> collided = new();
-    public Action<Health> OnCollision;
-    public void Collide(Health health){
+    public Action<Health,Vector3> OnCollision;
+    public void Collide(Health health, Vector3 impulse){
         if(!collided.Contains(health))
-            StartCoroutine(Collision(health));
+            StartCoroutine(Collision(health, impulse));
     }
-    public IEnumerator Collision(Health health){
-        health.ApplyDamage(baseDamage);
+    public float forceMultiplier = 0.5f;
+    public IEnumerator Collision(Health health, Vector3 impulse){
+        health.ApplyDamage(baseDamage * Mathf.Clamp(impulse.magnitude * forceMultiplier, 1f, 5f));
         collided.Add(health);
         //Do something like knockback? But the physics simulation already does enough knockback...
         yield return null;
@@ -56,7 +57,7 @@ public class Throwable : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy") && collision.rigidbody != null){
             Health health = collision.rigidbody.gameObject.GetComponent<Health>();
             if (health != null){
-                OnCollision?.Invoke(health);
+                OnCollision?.Invoke(health, collision.impulse);
                 
             }
         }
