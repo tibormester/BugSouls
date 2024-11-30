@@ -7,7 +7,7 @@ public class TutorialScreen : MonoBehaviour
     public Sprite[] imagesToShow; // Array of images to display
 
     private Image uiImage;         // Reference to the UI Image component
-    public int currentImageIndex = 1; // Index of the current image
+    public int currentImageIndex = 0; // Index of the current image
 
     private GrappleScript playerGrappleScript;
     private bool isWaiting = false; // Flag to prevent multiple coroutines
