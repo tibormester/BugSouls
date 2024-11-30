@@ -8125,12 +8125,13 @@ MonoBehaviour:
   player: {fileID: 210538770}
   cam: {fileID: 987985289}
   exits:
-  - collider: {fileID: 1939541430}
+  - colliders:
+    - {fileID: 1939541430}
     sceneName: MushroomCombatScene
     locked: 0
     entranceLocation: {fileID: 1205652772}
   prevEdge:
-    collider: {fileID: 0}
+    colliders: []
     sceneName: SpiderBoss
     locked: 0
     entranceLocation: {fileID: 1939541433}

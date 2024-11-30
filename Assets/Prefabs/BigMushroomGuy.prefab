@@ -96,7 +96,7 @@ MonoBehaviour:
   maxChaseDistance: 99
   maxStuckTime: 0.5
   maxStuckDistance: 0.2
-  originalAccel: 10
+  originalAccel: 4
   stuckTime: 0
   damage: 35
   hit: {fileID: 0}
@@ -142,8 +142,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   physicsBody: {fileID: 0}
   moveDirection: {x: 0, y: 0, z: 0}
-  moveSpeed: 8
-  acceleration: 6
+  moveSpeed: 4
+  acceleration: 1
   additional_deacceleration: 10
   rotationSpringForce: 0.5
   maxSpeed: 99

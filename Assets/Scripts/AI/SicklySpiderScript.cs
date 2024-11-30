@@ -27,7 +27,7 @@ public class SicklySpiderScript : MonoBehaviour
             StopCoroutine(corountine);
             text.text = "";
         };
-
+        health.DeathEvent += () => Destroy(this);
         
     }
     private void Update(){

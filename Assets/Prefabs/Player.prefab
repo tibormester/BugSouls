@@ -105,9 +105,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   physicsBody: {fileID: 7066080473075973534}
   moveDirection: {x: 0, y: 0, z: 0}
-  moveSpeed: 10
-  acceleration: 18
-  additional_deacceleration: 12
+  moveSpeed: 8
+  acceleration: 26
+  additional_deacceleration: 32
   rotationSpringForce: 1.9
   maxSpeed: 99
   drag: 0.3
