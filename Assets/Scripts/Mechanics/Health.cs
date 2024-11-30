@@ -79,8 +79,7 @@ public class Health : MonoBehaviour
         if (healthBar){
             Destroy(healthBar.gameObject); //For somereason on death it doesnt shrink to nothing
         }
-        throwable.baseDamage = 1f / rb.mass; //Make sure heavy corpses dont one shot anything
-        enemy.layer = LayerMask.NameToLayer("Throwable");
+        SetLayerRecursively(enemy, LayerMask.NameToLayer("Throwable"));
         Vector3 scale = enemy.transform.localScale;
         int max_frames = 50;
         float shrunkSize = 0.7f;
@@ -96,5 +95,19 @@ public class Health : MonoBehaviour
         yield return null;
 
 
+    }
+
+    public static void SetLayerRecursively(GameObject gameObject, int layer)
+    {
+        if (gameObject == null) return;
+
+        // Change the layer of the current GameObject
+        gameObject.layer = layer;
+
+        // Recursively change the layer of all child GameObjects
+        foreach (Transform child in gameObject.transform)
+        {
+            SetLayerRecursively(child.gameObject, layer);
+        }
     }
 }
