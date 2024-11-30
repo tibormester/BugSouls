@@ -35,10 +35,6 @@ public class RangedSpiderlingAI : MonoBehaviour{
     public float damage = 5f;
 
     public void FixedUpdate(){
-        /** Maybe have them be suicide bombers?
-        if(health.currentHealth <= 0.5f * health.maxHealth && ){
-        }
-        **/
         if (target != null){
             //The target is close enoguh to chase
             if (Vector3.Distance(target.position, transform.position) < maxChaseDistance){
@@ -138,15 +134,9 @@ public class RangedSpiderlingAI : MonoBehaviour{
 
                     hit.rigidbody.GetComponent<Health>().ApplyDamage(damage);
 
-                    var prev = hit.rigidbody.GetComponent<CharacterMovement>().acceleration;
-                    if (prev > 1f){ //If we are already slowed, slowing again might loose the base acceleration
-                    //Ideally I would construct a stat object that would hold a stack of modifiers
-                        hit.rigidbody.GetComponent<CharacterMovement>().maxSpeed = 1.5f;
-                    }
-                    yield return new  WaitForSeconds(1.25f);
-                    if (prev > 1f){
-                        hit.rigidbody.GetComponent<CharacterMovement>().maxSpeed = prev;
-                    }
+                    CharacterMovement characterMovement = hit.rigidbody.GetComponent<CharacterMovement>();
+                    characterMovement.StartCoroutine(ApplySlowStatus(characterMovement, 2f, 1f));
+                   
                     Destroy(newWeb);
                     yield break;
             } //If we didnt hit anything keep moving the target location forward
@@ -164,7 +154,11 @@ public class RangedSpiderlingAI : MonoBehaviour{
         Destroy(newWeb);
         yield return null;
     }
-    
+    private IEnumerator ApplySlowStatus(CharacterMovement character, float duration = 1.5f, float maxSpeed = 1.5f){
+        character.maxSpeed = maxSpeed;
+        yield return new  WaitForSeconds(duration);
+        character.maxSpeed = 99f; //Use this default value because without a modifier stack system we would introduce more bugs (and not the intended ones)
+    }
     private void OnCollisionEnter(Collision other) {
         Rigidbody collision = other.rigidbody;
         if (collision){

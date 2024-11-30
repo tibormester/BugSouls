@@ -28,18 +28,14 @@ public class CameraController : MonoBehaviour
 
     private Vector3 front;
     private Vector3 prevNormal;
-
     private Camera cam;
 
-    public float sprintFactor = 2.5f;
-    private float runSpeed;
     void Start(){
         front = target.transform.forward;
         targetMovement = target.gameObject.GetComponent<CharacterMovement>();
         cam = GetComponent<Camera>();
         Cursor.lockState = CursorLockMode.Locked;// Lock and hide Cursor
         prevNormal = targetMovement.physicsBody.groundNormal;
-        runSpeed = targetMovement.moveSpeed;
         SceneDescriptor sd = gameObject.scene.GetRootGameObjects().Select(go => go.GetComponent<SceneDescriptor>()).FirstOrDefault(desc => desc != null);
         sd.PlayerEntered += RecievePlayer;
     }
@@ -48,36 +44,26 @@ public class CameraController : MonoBehaviour
         target = newTarget;
         targetMovement = target.gameObject.GetComponent<CharacterMovement>();
         prevNormal = targetMovement.physicsBody.groundNormal;
-        runSpeed = targetMovement.moveSpeed;
     }
     public LayerMask throwable;
     public LayerMask terrain;
     public Weapon weapon;
-    private bool sprinting = false;
     void Update(){
         Ray ray = cam.ScreenPointToRay(Input.mousePosition); // Cast ray from camera, can also use cam.transform.forward for a different direction
-        if(!sprinting){
+        if(!targetMovement.sprinting){
             targetMovement.look_direction = ray.direction;
         }
         //Change swinging a sword to mouse button 0 and throwing gets moved to the grapple script
-
-        
     }
 
     void LateUpdate(){
-        if (allowMovement)
-        {
-        MouseInputs();
-        Movement();
-        
-        if(Input.GetButtonDown("Jump")){
-            targetMovement.Jump();
-        }
-        if(Input.GetKey(KeyCode.LeftShift)){
-            sprinting = true;
-        } else{
-            sprinting = false;
-        }
+        if (allowMovement){
+            MouseInputs();
+            Movement();
+            
+            if(Input.GetButtonDown("Jump")){
+                targetMovement.Jump();
+            }
         }
     }
     void MouseInputs(){
@@ -132,7 +118,7 @@ public class CameraController : MonoBehaviour
 
     private KeyCode lastMove;
     private int doubleTapTimer = 0;
-    public int doubleTapLimit = 18;
+    public int doubleTapLimit = 12;
     public float dashCooldown = 1.5f;
     public float dashStrength = 2f;
     void Movement(){
@@ -141,11 +127,11 @@ public class CameraController : MonoBehaviour
         float vertical = Input.GetAxisRaw("Vertical");
         // Calculate the movement direction relative to the camera
         Vector3 camera_relative = ((vertical * transform.forward) + (horizontal * transform.right)).normalized;
-        if(sprinting){
+        if(Input.GetKey(KeyCode.LeftShift)){
             targetMovement.look_direction = camera_relative;
-            targetMovement.moveSpeed = sprintFactor * runSpeed;
+            targetMovement.sprinting = true;
         } else{
-            targetMovement.moveSpeed = runSpeed;
+            targetMovement.sprinting = false;
         }
         if (moved || camera_relative.sqrMagnitude < 0.1f){//Some script so that the movement gets accumulated until the fixed update frame, but if the movement is stopped, cancel the accumulation
             moved = false;
@@ -157,25 +143,25 @@ public class CameraController : MonoBehaviour
         if(canDash){
             if (Input.GetKeyDown(KeyCode.S)){
                 if(lastMove == KeyCode.S && doubleTapTimer > 0){
-                    StartCoroutine(Dash(target.transform.up + -9 * target.transform.forward));
+                    targetMovement.StartCoroutine(Dash(target.transform.up + -9 * target.transform.forward));
                 }
                 doubleTapTimer = doubleTapLimit;
                 lastMove = KeyCode.S;
             } else if (Input.GetKeyDown(KeyCode.A)){
                 if(lastMove == KeyCode.A && doubleTapTimer > 0){
-                    StartCoroutine(Dash(target.transform.up + -9 * target.transform.right));
+                    targetMovement.StartCoroutine(Dash(target.transform.up + -9 * target.transform.right));
                 }
                 doubleTapTimer = doubleTapLimit;
                 lastMove = KeyCode.A;
             } else if (Input.GetKeyDown(KeyCode.D)){
                 if(lastMove == KeyCode.D && doubleTapTimer > 0){
-                    StartCoroutine(Dash(target.transform.up + 9 * target.transform.right));
+                    targetMovement.StartCoroutine(Dash(target.transform.up + 9 * target.transform.right));
                 }
                 doubleTapTimer = doubleTapLimit;
                 lastMove = KeyCode.D;
             } else if (Input.GetKeyDown(KeyCode.W)){
                 if(lastMove == KeyCode.W && doubleTapTimer > 0){
-                    StartCoroutine(Dash(target.transform.up + 9 * target.transform.forward));
+                    targetMovement.StartCoroutine(Dash(target.transform.up + 9 * target.transform.forward));
                 }
                 doubleTapTimer = doubleTapLimit;
                 lastMove = KeyCode.W;
@@ -185,12 +171,13 @@ public class CameraController : MonoBehaviour
     }
     public bool canDash = true;
     public IEnumerator Dash(Vector3 direction){
+        var wait = new WaitForFixedUpdate();
         doubleTapTimer = 0;
         canDash = false;
         var rb = targetMovement.GetComponent<Rigidbody>();
         for (int i = 0; i < 15; i ++){
             rb.AddForce(direction.normalized * dashStrength , ForceMode.Impulse);
-            yield return null;
+            yield return wait;
         }
         
         yield return new WaitForSeconds(dashCooldown);

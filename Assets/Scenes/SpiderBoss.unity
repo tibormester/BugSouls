@@ -6323,7 +6323,6 @@ MonoBehaviour:
     m_Bits: 896
   mouseSensitivityX: 2560
   mouseSensitivityY: 2560
-  sprintFactor: 2.5
   throwable:
     serializedVersion: 2
     m_Bits: 128

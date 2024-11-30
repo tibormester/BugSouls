@@ -34,6 +34,8 @@ public class CharacterMovement : MonoBehaviour
     [Tooltip("Angular velocity applied to orientation to match towards movement direction")]
     public float rotationSpringForce = 0.5f;
     public float maxSpeed = 99f;
+    public float sprintSpeed = 14f;
+    public bool sprinting = false;
     //Takes in a desired input vector in world coordinates, projects it into local coordinates, removes vertical velocity, scales to movement speed, rotates towards movement direction
 
     public void Move(Vector3 world_direction, float distance = 999f){
@@ -45,7 +47,8 @@ public class CharacterMovement : MonoBehaviour
     private void horizontalVelocity(Vector3 world_vector){
         //Take a global direction and get the local horizontal component as a target horizontal velocity
         Vector3 localDirection = rb.transform.InverseTransformDirection(world_vector);  //Make it local
-        Vector3 targetHorizontalVelocity = new Vector3(localDirection.x, 0f, localDirection.z).normalized * Mathf.Min(moveSpeed, maxSpeed); //remove vertical and scale to move speed
+        float targetSpeed = Mathf.Min(sprinting ? sprintSpeed : moveSpeed, maxSpeed);
+        Vector3 targetHorizontalVelocity = new Vector3(localDirection.x, 0f, localDirection.z).normalized * targetSpeed; //remove vertical and scale to move speed
 
         //Get the local horizontal rb velocity
         Vector3 localHorizontalVelocity = rb.transform.InverseTransformDirection(rb.velocity);
@@ -62,7 +65,7 @@ public class CharacterMovement : MonoBehaviour
 
         //If we can keep accelerating towards the move direction do it
         float currentSpeed = Vector3.Dot(localHorizontalVelocity, targetHorizontalVelocity.normalized);
-        if ( currentSpeed < moveSpeed){
+        if ( currentSpeed < targetSpeed){
             Vector3 localDelta = (targetHorizontalVelocity -  localHorizontalVelocity).normalized * accel;
             rb.AddForce(rb.transform.TransformDirection(localDelta), ForceMode.Acceleration);
         }

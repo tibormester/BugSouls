@@ -28,7 +28,6 @@ public class Stamina : MonoBehaviour
             if(currStamina <= 0) 
             {
                 currStamina = 0;
-                player.sprintFactor = 0;
                 
             }
             stamina.setStamina(currStamina);
@@ -54,7 +53,7 @@ public class Stamina : MonoBehaviour
                 stamina.setStamina(currStamina);
                 if(currStamina == 0)
                 {
-                    player.sprintFactor = 0;
+                    
                 }
             }
             
