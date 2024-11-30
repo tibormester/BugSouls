@@ -2154,12 +2154,13 @@ MonoBehaviour:
   player: {fileID: 216255161}
   cam: {fileID: 1319225620}
   exits:
-  - collider: {fileID: 1400756456}
+  - colliders:
+    - {fileID: 1400756456}
     sceneName: MushroomCombatScene
     locked: 0
     entranceLocation: {fileID: 1898358933}
   prevEdge:
-    collider: {fileID: 0}
+    colliders: []
     sceneName: SicklySpider
     locked: 0
     entranceLocation: {fileID: 556700279}
@@ -2524,7 +2525,7 @@ GameObject:
   - component: {fileID: 1400756457}
   - component: {fileID: 1400756456}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: AntHoleExit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
