@@ -232,6 +232,7 @@ MonoBehaviour:
     m_Bits: 896
   mouseSensitivityX: 2560
   mouseSensitivityY: 2560
+  playerStamina: {fileID: 1579500894}
   throwable:
     serializedVersion: 2
     m_Bits: 128
@@ -6499,9 +6500,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   physicsBody: {fileID: 0}
   stamina: {fileID: 1616323623}
-  player: {fileID: 211838368}
+  player: {fileID: 1579500895}
   maxStamina: 50
   currStamina: 0
+--- !u!114 &1579500895 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8797441506459066540, guid: 03f418c58e484aa40a2d3deaaaa7d58a, type: 3}
+  m_PrefabInstance: {fileID: 1579500882}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1579500884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5e2f908878444795b552d5a1eb1ea38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1616323623 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6994168716302758183, guid: 982fe2dbfe22f8749b06cec6b30e4b14, type: 3}
