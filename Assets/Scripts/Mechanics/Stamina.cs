@@ -7,7 +7,7 @@ public class Stamina : MonoBehaviour
 {
     public CustomPhysicsBody physicsBody;
     public StaminaBar stamina;
-    public CameraController player;
+    public CharacterMovement player;
     public float maxStamina = 50f;
     public float currStamina;
     // Start is called before the first frame update
@@ -24,40 +24,39 @@ public class Stamina : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.LeftShift) && (Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("d") || Input.GetKey("s")))
         {
-            currStamina -= 5 * Time.deltaTime;
+            currStamina -= 5f * Time.deltaTime;
             if(currStamina <= 0) 
             {
                 currStamina = 0;
+                player.sprintSpeed = player.moveSpeed;
                 
             }
-            stamina.setStamina(currStamina);
-            if(Input.GetKeyDown(KeyCode.Space) && physicsBody.IsGrounded())
-            {
-                currStamina -= 5;
-                if(currStamina < 0) currStamina = 0;
+            else{
+                player.sprintSpeed = 14f;
                 stamina.setStamina(currStamina);
-            }
-            
-        }
-        else if(Input.GetButtonDown("Jump") && physicsBody.IsGrounded() && currStamina >= 5)
-        {
-            currStamina -= 5;
-            if(currStamina <= 0) currStamina = 0;
-            stamina.setStamina(currStamina);
-        }
-        else
-        {
-            if(currStamina <= maxStamina)
-            {
-                currStamina += 2.5f * Time.deltaTime;
-                stamina.setStamina(currStamina);
-                if(currStamina == 0)
+                if(Input.GetKeyDown(KeyCode.Space) && physicsBody.IsGrounded())
                 {
-                    
+                    currStamina -= 5f;
+                    if(currStamina < 0) currStamina = 0;
+                    stamina.setStamina(currStamina);
                 }
             }
             
         }
+        else if(currStamina >= 5f && Input.GetButtonDown("Jump") && physicsBody.IsGrounded())
+        {
+            currStamina -= 5f;
+            if(currStamina <= 0) currStamina = 0;
+            stamina.setStamina(currStamina);
+        }
+        
+        if(currStamina <= maxStamina)
+        {
+            currStamina += 2.5f * Time.deltaTime;
+            stamina.setStamina(currStamina);
+        }
+            
+        
 
     }
 }
