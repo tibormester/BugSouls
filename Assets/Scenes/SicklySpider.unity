@@ -1063,7 +1063,13 @@ MonoBehaviour:
   ai: {fileID: 0}
   text: {fileID: 0}
   charMovement: {fileID: 0}
-  dialogue: []
+  dialogue:
+  - You're... still whole? It's too late for me, but maybe not for the nest.
+  - The matriarch... she fought the corruption, but even she fell. Her mind... no
+    longer her own.
+  - The vine... it has grown through the tree's heart. It twists our home into a
+    nightmare.
+  - Go, Ant. Burn it all down. Free us... or share our fate.
 --- !u!114 &636345547 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6994168716302758183, guid: 982fe2dbfe22f8749b06cec6b30e4b14, type: 3}
