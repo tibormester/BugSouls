@@ -63,7 +63,12 @@ public class SceneDescriptor : MonoBehaviour{
         if(collidingObject.GetComponent<Health>().currentHealth <= 0f){
             return;//Bug where corpse gets pushed through a door, (could be a feature)
         }
-        StartCoroutine(LoadSceneAsync(edge));
+        if(edge.sceneName == gameObject.scene.name){
+            player.transform.position = edge.entranceLocation.transform.position;
+            player.transform.rotation = edge.entranceLocation.transform.rotation;
+        }else{
+            StartCoroutine(LoadSceneAsync(edge));
+        }
     }
 
     private IEnumerator LoadSceneAsync(GraphEdge edge, bool reload = false){
