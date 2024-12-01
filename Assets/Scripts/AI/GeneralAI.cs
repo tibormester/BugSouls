@@ -60,15 +60,15 @@ public class GeneralAI : MonoBehaviour{
 
     public List<AIBehaviour> AIBehaviours;
 
-    public Dictionary<string, object> data; //Store local runtime behaviour data, like cooldown timers
+    public Dictionary<string, object> data = new(); //Store local runtime behaviour data, like cooldown timers
 
     public IEnumerator ProcessBehaviours(){
         while(true){ //Each update find the first valid behaviour, do it to completion, then start searching again
             foreach( AIBehaviour behaviour in AIBehaviours){
                 if (behaviour.CanStart(this)){
-                    BehaviourStarted.Invoke(behaviour);
+                    BehaviourStarted?.Invoke(behaviour);
                     yield return StartCoroutine(behaviour.Behaviour(this));
-                    BehaviourFinished.Invoke(behaviour);
+                    BehaviourFinished?.Invoke(behaviour);
                     break;
                 }
             }
@@ -77,12 +77,14 @@ public class GeneralAI : MonoBehaviour{
 
     //Collisions are used to detect attacks, We only register a single collision
     public Action<Health, Collision> CollisionEvent;
-    public int CollisionEventLayer = LayerMask.NameToLayer("Player"); //TODO (Once have wifi, change to accept Other layers too)
+
+    public int CollisionEventLayer = -1; //TODO (Once have wifi, change to accept Other layers too)
+    
     public List<Health> colliding = new(); //Stores currently colliding objects //Should be public get protected set but i dont have wifi
     void OnCollisionEnter(Collision collision) {
         Rigidbody rb = collision.rigidbody;
         if (rb){
-            if( rb.gameObject.layer == CollisionEventLayer){
+            if( rb.gameObject.layer ==  LayerMask.NameToLayer("Player") ){
                 var health = rb.GetComponent<Health>();
                 if (health != null){
                     CollisionEvent?.Invoke(health, collision);
@@ -94,11 +96,9 @@ public class GeneralAI : MonoBehaviour{
     void OnCollisionExit(Collision collision) {
         Rigidbody rb = collision.rigidbody;
         if (rb){
-            if(rb.gameObject.layer == CollisionEventLayer){
-                var health = rb.GetComponent<Health>();
-                if(health != null && colliding.Contains(health)){
-                    colliding.Remove(health);
-                }
+            var health = rb.GetComponent<Health>();
+            if(health != null && colliding.Contains(health)){
+                colliding.Remove(health);
             }
         }
     }

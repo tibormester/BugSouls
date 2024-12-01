@@ -8,7 +8,7 @@ using UnityEngine.Assertions.Must;
 
 [CreateAssetMenu(fileName = "LeapAttack", menuName = "Behaviours/Attacks/Leap", order = 0)]
 public class LeapAttack : AIBehaviour {
-    public static string coolDownTag = "LeapAttack.CoolingDown";
+    public static string coolDownTag = "LeapAttack.ready";
 
     public float Damage = 0;
     public float Knockback = 0;
@@ -17,7 +17,11 @@ public class LeapAttack : AIBehaviour {
     public float FollowThroughDuration = 0.5f;
 
     public override void InitializeLocalData(GeneralAI ai){
-        ai.data[coolDownTag] = false;
+        ai.data[coolDownTag] = true;
+    }
+
+    public override bool CanStart(GeneralAI ai){
+        return (bool)ai.data[coolDownTag];
     }
 
 
@@ -87,8 +91,8 @@ public class LeapAttack : AIBehaviour {
 
     
     private IEnumerator CoolDownTimer(GeneralAI ai){
-        ai.data[coolDownTag] = true;
-        yield return new WaitForSeconds(CoolDown);
         ai.data[coolDownTag] = false;
+        yield return new WaitForSeconds(CoolDown);
+        ai.data[coolDownTag] = true;
     }
 }

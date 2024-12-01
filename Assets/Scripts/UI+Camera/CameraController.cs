@@ -32,7 +32,10 @@ public class CameraController : MonoBehaviour
 
     private CharacterAnimation characterAnimation;
 
-    public Stamina playerStamina;
+    public StaminaBar stamina;
+    
+    public float maxStamina = 50f;
+    public float currStamina;
 
     void Start(){
         front = target.transform.forward;
@@ -42,6 +45,12 @@ public class CameraController : MonoBehaviour
         prevNormal = targetMovement.physicsBody.groundNormal;
         SceneDescriptor sd = gameObject.scene.GetRootGameObjects().Select(go => go.GetComponent<SceneDescriptor>()).FirstOrDefault(desc => desc != null);
         sd.PlayerEntered += RecievePlayer;
+        //Ugly
+        stamina = gameObject.scene.GetRootGameObjects().Select(go => go.GetComponent<Canvas>()).FirstOrDefault(desc => desc != null).GetComponentInChildren<StaminaBar>();
+        stamina.setMaxStamina(maxStamina);
+        currStamina = maxStamina;
+        stamina.setStamina(maxStamina);
+
         if (target)
         {
             characterAnimation = target.GetComponent<CharacterAnimation>();
@@ -70,11 +79,17 @@ public class CameraController : MonoBehaviour
         MouseInputs();
         if (allowMovement){
             Movement();
-            if(Input.GetButtonDown("Jump") && playerStamina.currStamina >= 5){
+            if(Input.GetButtonDown("Jump") && currStamina >= 5){
                 targetMovement.Jump();
+                currStamina -= 5f;
             } else{
                 characterAnimation.jumping = false;
             }
+        }
+        //Stamina regen
+        if(currStamina <= maxStamina){
+            currStamina += 2.5f * Time.deltaTime;
+            stamina.setStamina(currStamina);
         }
     }
     void MouseInputs(){
@@ -141,6 +156,14 @@ public class CameraController : MonoBehaviour
         if(Input.GetKey(KeyCode.LeftShift)){
             targetMovement.look_direction = camera_relative;
             targetMovement.sprinting = true;
+            //Sprint held and movement input given
+            if(camera_relative.sqrMagnitude > 0.1f){
+                currStamina -= 5f * Time.deltaTime;
+                if(currStamina <= 0){
+                    currStamina = 0;
+                    targetMovement.sprinting = false;
+                }
+            }
         } else{
             targetMovement.sprinting = false;
         }
@@ -151,40 +174,28 @@ public class CameraController : MonoBehaviour
         accum += camera_relative;
 
         doubleTapTimer = doubleTapTimer < 0 ? 0 : doubleTapTimer - 1; 
-        if(canDash && playerStamina.currStamina >= 3f){
+        if(canDash && currStamina >= 3f){
             if (Input.GetKeyDown(KeyCode.S)){
                 if(lastMove == KeyCode.S && doubleTapTimer > 0){
                     targetMovement.StartCoroutine(Dash(target.transform.up + -9 * target.transform.forward));
-                    playerStamina.currStamina -= 3f;
-                    if(playerStamina.currStamina <= 0) playerStamina.currStamina = 0;
-                    playerStamina.stamina.setStamina(playerStamina.currStamina);
                 }
                 doubleTapTimer = doubleTapLimit;
                 lastMove = KeyCode.S;
             } else if (Input.GetKeyDown(KeyCode.A)){
                 if(lastMove == KeyCode.A && doubleTapTimer > 0){
                     targetMovement.StartCoroutine(Dash(target.transform.up + -9 * target.transform.right));
-                    playerStamina.currStamina -= 3f;
-                    if(playerStamina.currStamina <= 0) playerStamina.currStamina = 0;
-                    playerStamina.stamina.setStamina(playerStamina.currStamina);
                 }
                 doubleTapTimer = doubleTapLimit;
                 lastMove = KeyCode.A;
             } else if (Input.GetKeyDown(KeyCode.D)){
                 if(lastMove == KeyCode.D && doubleTapTimer > 0){
                     targetMovement.StartCoroutine(Dash(target.transform.up + 9 * target.transform.right));
-                    playerStamina.currStamina -= 3f;
-                    if(playerStamina.currStamina <= 0) playerStamina.currStamina = 0;
-                    playerStamina.stamina.setStamina(playerStamina.currStamina);
                 }
                 doubleTapTimer = doubleTapLimit;
                 lastMove = KeyCode.D;
             } else if (Input.GetKeyDown(KeyCode.W)){
                 if(lastMove == KeyCode.W && doubleTapTimer > 0){
                     targetMovement.StartCoroutine(Dash(target.transform.up + 9 * target.transform.forward));
-                    playerStamina.currStamina -= 3f;
-                    if(playerStamina.currStamina <= 0) playerStamina.currStamina = 0;
-                    playerStamina.stamina.setStamina(playerStamina.currStamina);
                 }
                 doubleTapTimer = doubleTapLimit;
                 lastMove = KeyCode.W;
@@ -194,6 +205,10 @@ public class CameraController : MonoBehaviour
     }
     public bool canDash = true;
     public IEnumerator Dash(Vector3 direction){
+        //Lower stamina
+        currStamina -= 3f;
+        if(currStamina <= 0) currStamina = 0;
+
         int dashLength = 15;
         float dashMultiplier = 1f;
         if(! targetMovement.physicsBody.IsGrounded()){
