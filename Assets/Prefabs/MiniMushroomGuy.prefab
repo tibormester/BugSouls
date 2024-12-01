@@ -5464,9 +5464,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8699652204047898494, guid: 234cb92cd8b00486b8e4be66d5c1c178, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7131222286977840308}
-    - targetCorrespondingSourceObject: {fileID: 8699652204047898494, guid: 234cb92cd8b00486b8e4be66d5c1c178, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 4659460029916727352}
   m_SourcePrefab: {fileID: 100100000, guid: 234cb92cd8b00486b8e4be66d5c1c178, type: 3}
 --- !u!4 &1154923274030797355 stripped
@@ -5479,33 +5476,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8699652204047898494, guid: 234cb92cd8b00486b8e4be66d5c1c178, type: 3}
   m_PrefabInstance: {fileID: 1697195034296890816}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7131222286977840308
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8013867954593243838}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ec40ad7cf03041c19d1774c2b469dd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  checkDistance: 150
-  velocityCheckDistance: 2
-  groundedDistance: 0.1
-  feetDistance: 0.2
-  isGrounded: 1
-  groundNormal: {x: 0, y: 1, z: 0}
-  groundDistance: 0
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 8
-  ground: {fileID: 0}
-  coyoteTime: 0.1
-  gravity: -32
-  coyoteOrientationTime: 0.3
-  aerialTimeLimit: 0
 --- !u!64 &4659460029916727352
 MeshCollider:
   m_ObjectHideFlags: 0
