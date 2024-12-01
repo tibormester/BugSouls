@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SpiderBoss.unity
     guid: 6662a505b5a1f4cc0b0e6d22178eedd3
+  - enabled: 1
+    path: Assets/Scenes/TutorialScene.unity
+    guid: 1a652ca19ed954d3293b7fa05f7bcc74
   m_configObjects: {}

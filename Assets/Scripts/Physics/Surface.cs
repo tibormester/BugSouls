@@ -5,6 +5,7 @@ using UnityEngine;
 public class Surface : MonoBehaviour
 {
     // Start is called before the first frame update
+    // Never used :(
     public Status MakeStatus(GameObject obj){
         
         return new SlidingStatus(obj);

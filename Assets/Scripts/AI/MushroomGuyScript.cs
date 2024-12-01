@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,10 +42,16 @@ public class MushroomGuyScript : MonoBehaviour
     public void FixedUpdate(){
         if(health.currentHealth <= 0.5f * health.maxHealth && hat){
             DropHat();
+            health.ApplyDamage(-0.5f * health.maxHealth);
         }
-        if (target != null){
+        if (target != null ){
+            if (hat == null){
+                charMovement.acceleration = originalAccel * backupAccelMultiplier * 1.3f;
+                charMovement.Move((transform.position - target.position).normalized);
+                charMovement.look_direction = -1 *(target.position - transform.position);
+            }
             //The target is close enoguh to chase
-            if (Vector3.Distance(target.position, transform.position) < maxChaseDistance){
+            else if (Vector3.Distance(target.position, transform.position) < maxChaseDistance){
                 charMovement.acceleration = originalAccel;
                 //We are too far away too attack, so get closer
                 if (Vector3.Distance(target.position, transform.position) > maxEngageDistance){
@@ -75,6 +82,9 @@ public class MushroomGuyScript : MonoBehaviour
                         if(attackTimer <= 0f){
                             StartCoroutine(LeapAttack());
                             attackTimer = attackCooldown;
+                        } else{
+                            charMovement.acceleration = originalAccel * backupAccelMultiplier;
+                            charMovement.Move(transform.right);
                         }
                     }
                 }
@@ -83,31 +93,75 @@ public class MushroomGuyScript : MonoBehaviour
         attackTimer = attackTimer < 0f ? 0f : attackTimer - Time.fixedDeltaTime;
     }
     public IEnumerator LeapAttack(){
+        var wait = new WaitForFixedUpdate();
+        //Check if we are already colliding
+        damaged = false;
+        PlayerCollision += ApplyDamage;
+        if(hit != null){
+            ApplyDamage(hit);
+        }
+        
+        //Damage target if we end up colliding
         //Tilt head down
-        for (int i = 0; i < 10; i++){
-            rb.AddTorque(Vector3.right * -25f, ForceMode.Impulse);
-            yield return null;
+        var oStr = charMovement.orientationSpringStrength; //Not safe, because what if this is called twice without reseting between?
+        charMovement.orientationSpringStrength = 3f;
+        var mSpd = charMovement.maxSpeed;
+        charMovement.maxSpeed = 0f;
+        for (int i = 0; i < 20; i++){
+            rb.AddTorque(transform.right * 5f, ForceMode.VelocityChange);
+            yield return wait;
         }
+        charMovement.maxSpeed = mSpd;
         //Launch forward
-        hit = null;
-        Vector3 direction = target.transform.position - transform.position;
-        for (int i = 0; i < 25; i++){
-            rb.AddForce(direction.normalized * 10f, ForceMode.Impulse);
-            yield return null;
+        for (int i = 0; i < 10; i++){
+            Vector3 direction = target.transform.position - transform.position;
+            rb.AddForce(direction.normalized * 3f, ForceMode.VelocityChange);
+            rb.AddTorque(transform.right * 4f, ForceMode.VelocityChange);
+            yield return wait;
         }
-        //Apply damage and knockback
-        if(hit){
-            hit.ApplyDamage(damage);
-            target.GetComponent<Rigidbody>()?.AddForce(direction.normalized * 5f, ForceMode.Impulse);
-            hit = null;
-        }
+        charMovement.orientationSpringStrength = oStr;
+
+        yield return new WaitForSeconds(0.5f);//Need to wait for the spider to get launched
+        //Stop attempting to damage the target on collision
+        PlayerCollision -= ApplyDamage;
+
+        //reset the bool flag so we can damage next cycle
         yield return null;
     }
-    private void OnCollisionEnter(Collision other) {
+    private bool damaged = false;
+    public Action<Health> PlayerCollision;
+    private void ApplyDamage(Health health){
+
+        Debug.LogWarning("Apply Damage");
+        if (damaged){
+            return;
+        }
+        var direction = health.transform.position - transform.position;
+        direction = Vector3.ProjectOnPlane(direction, health.transform.up); //flatten so we dont hop on hit
+        health.ApplyDamage(damage);
+        health.GetComponent<Rigidbody>()?.AddForce(direction.normalized * 1f, ForceMode.Impulse);
+        damaged = true;
+    }
+    void OnCollisionEnter(Collision other) {
         Rigidbody collision = other.rigidbody;
         if (collision){
             if(collision.gameObject.layer == LayerMask.NameToLayer("Player")){
-                hit = collision.GetComponent<Health>();
+                var health = collision.GetComponent<Health>();
+                if (health != null){
+                    PlayerCollision?.Invoke(health);
+                    hit = health;
+                }   
+            }
+        }
+    }
+    void OnCollisionExit(Collision other) {
+        Rigidbody collision = other.rigidbody;
+        if (collision){
+            if(collision.gameObject.layer == LayerMask.NameToLayer("Player")){
+                var hitHealth = collision.GetComponent<Health>();
+                if(hitHealth != null && hitHealth == hit){
+                    hit = null;
+                }
             }
         }
     }
@@ -120,7 +174,7 @@ public class MushroomGuyScript : MonoBehaviour
         hat.transform.SetParent(this.gameObject.transform.parent);
         Rigidbody rb = hat.AddComponent<Rigidbody>();
         hat.AddComponent<Throwable>();
-        hat.transform.localScale = transform.localScale;
+        hat.transform.localScale = transform.localScale * 0.7f;
         rb.useGravity = false;
         rb.drag = 0.5f;
         rb.angularDrag = 1f;

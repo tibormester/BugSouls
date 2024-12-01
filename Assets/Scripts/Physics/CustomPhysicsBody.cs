@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class CustomPhysicsBody : MonoBehaviour
@@ -43,6 +44,8 @@ public class CustomPhysicsBody : MonoBehaviour
     }
     public LayerMask groundMask;
     private bool TerrainRaycast(){//Return's true when finding terrain, false if not
+        if (body == null) return false;
+        
         RaycastHit hitInfo;
         //We want to check infront of the player to enable them to climb up walls
         Debug.DrawRay(transform.position, body.velocity.normalized * velocityCheckDistance, Color.red);
@@ -146,4 +149,11 @@ public class CustomPhysicsBody : MonoBehaviour
             //body.velocity += gravity * Time.fixedDeltaTime * groundNormal;
         }
     }
+    /**
+    private void OnDrawGizmosSelected() {
+        // Draw a marker (a sphere handle)
+        Handles.color = Color.red;
+        Handles.SphereHandleCap(0, transform.position + new Vector3(0,-feetDistance,0), Quaternion.identity, 0.05f, EventType.Repaint);
+
+    }**/
 }

@@ -22,6 +22,8 @@ public class GrappleScript : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         pb = GetComponent<CustomPhysicsBody>();
+        //Ensure u cant do stuff when u die
+        pb.GetComponent<Health>().DeathEvent += () => Destroy(this);
     }
 
     // Update is called once per frame
@@ -43,10 +45,34 @@ public class GrappleScript : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Q)){
             if (currentHeld != null){
-                Throw();
+                //Start a routine to count how long we charge the throw for (and animate it)
+                StartCoroutine(ThrowingInput());
             }
         }
     }
+    public float maxChargeTime = 2f;
+    public Vector3 chargeVector = new Vector3(-0.05f, -0.2f, -0.5f);
+
+    private IEnumerator ThrowingInput(){
+        var localPosition = currentHeld.transform.localPosition;
+        var elapsed = 0f;
+        float percentage = 0f;
+        Vector3 originalScale = currentHeld.transform.localScale;
+        while(!Input.GetKeyUp(KeyCode.Q)){
+            percentage = elapsed / maxChargeTime;
+            currentHeld.transform.localPosition = localPosition + (chargeVector * Mathf.Clamp(percentage, 0f, 1.5f));
+            
+            if (percentage >= 2.0){
+                //Ideally id have another animation to inidicate its at max charge percentage, but this should be cool enough
+                currentHeld.transform.localScale = originalScale * 0.9f;
+            }
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        currentHeld.transform.localScale = originalScale;
+        Throw(Mathf.Clamp(percentage, 0, 2));
+    }
+
     void FixedUpdate(){
         //If we have a web, pull us towards it
         if(grappling){
@@ -91,7 +117,8 @@ public class GrappleScript : MonoBehaviour
             // Raycast from the current target Location out by the launch speed to the new target location
             if (Physics.Raycast(targetLocation, ray.direction, out hit, LaunchSpeed, ~LayerMask.NameToLayer("Player"))){
                 //Check what we hit, if its the terrain start grappling to it (bring player to terrain)
-                if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Terrain")){ 
+                if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Terrain") || 
+                    hit.collider.gameObject.layer == LayerMask.NameToLayer("Enemy")){ 
                     if(currentWeb != null){
                         Destroy(currentWeb);
                     }
@@ -101,7 +128,7 @@ public class GrappleScript : MonoBehaviour
                     newWeb.transform.localScale = new Vector3(1,1, difference);
                     //Store the hit location
                     currentWeb = newWeb;
-                    hookedObject = hit.collider.gameObject.transform;
+                    hookedObject = hit.rigidbody != null ? hit.rigidbody.transform : hit.collider.gameObject.transform;
                     hookedOffset = hookedObject.InverseTransformPoint(hit.point);
                     //Start the grappling with a tiny hop
                     grappling = true;
@@ -114,6 +141,9 @@ public class GrappleScript : MonoBehaviour
                 else if(hit.rigidbody != null &&  (
                         hit.rigidbody.gameObject.GetComponent<Weapon>() != null ||
                         hit.rigidbody.gameObject.GetComponent<Throwable>() != null)  ){
+                    if(hit.rigidbody.gameObject.GetComponent<Throwable>() != null && currentHeld != null){
+                        Throw(0.1f);
+                    }
                     //Update the web to go to the hit location
                     newWeb.transform.LookAt(hit.point);
                     difference = (hit.point- transform.position).magnitude;
@@ -153,8 +183,13 @@ public class GrappleScript : MonoBehaviour
         Vector3 difference = hookedObject.TransformPoint(hookedOffset) - transform.position;
         difference = difference - grappleDistance*difference.normalized; //Stop a little away from the surface
         Debug.DrawLine(transform.position, transform.position + difference, Color.red);
-        rb.AddForce(difference.normalized * grappleStrength, ForceMode.Acceleration);
 
+        if(hookedObject.gameObject.layer == LayerMask.NameToLayer("Enemy")){
+            rb.AddForce(difference.normalized * 2* grappleStrength, ForceMode.Acceleration);
+            hookedObject.GetComponent<Rigidbody>()?.AddForce(-difference.normalized *grappleStrength, ForceMode.Acceleration);
+        } else{
+            rb.AddForce(difference.normalized * grappleStrength, ForceMode.Acceleration);
+        }
         //Update the spawned grapple web
         //If the player moves, we gotta keep reorientating and updating the length, lets spawn this fromm the center of the player?
         var hitpoint = hookedObject.TransformPoint(hookedOffset);
@@ -177,7 +212,7 @@ public class GrappleScript : MonoBehaviour
     }
 
     public float throwStrength = 25f;
-    private void Throw(){
+    private void Throw( float strengthMultiplier = 1f){
         if(currentHeld != null){
             //This throws from the player towards the intersection along the camera ray
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // Cast ray from camera, can also use cam.transform.forward for a different direction
@@ -190,7 +225,7 @@ public class GrappleScript : MonoBehaviour
                 ray.direction = (ray.GetPoint(10 * throwStrength) - transform.position).normalized;
                 ray.origin = transform.position;
             }
-            currentHeld.GetComponent<Throwable>().Thrown(ray.direction * throwStrength);
+            currentHeld.GetComponent<Throwable>().Thrown(ray.direction * throwStrength * strengthMultiplier);
             currentHeld = null;
         }
     }
@@ -201,7 +236,7 @@ public class GrappleScript : MonoBehaviour
     public int PickupSpeed = 5;
     public Transform PlayerHand;
     private IEnumerator PickUp(GameObject item, GameObject web){
-        Debug.Log("picking object: " + item.transform.name);
+        var wait = new WaitForFixedUpdate();
         Throwable throwable = item.GetComponent<Throwable>();
         Weapon weapon = item.GetComponent<Weapon>();
         Rigidbody rb = item.GetComponent<Rigidbody>();
@@ -232,7 +267,7 @@ public class GrappleScript : MonoBehaviour
                 web.transform.LookAt(item.transform.position);
                 web.transform.localScale = new Vector3(0,0, distance - PickupSpeed);
             }
-            yield return null;
+            yield return wait;
             //Just in case, dont want to get stuck with a web on our screen, delete both the web and item and give up
             counter++;
             if(counter > 9999){
@@ -253,39 +288,31 @@ public class GrappleScript : MonoBehaviour
                 Rigidbody currentWeaponRb = currentWeapon.GetComponent<Rigidbody>();
                 currentWeapon.transform.SetParent(null);
                 currentWeaponRb.isKinematic = false;
+                Weapon wp = currentWeapon.GetComponent<Weapon>();
+                wp.StopAllCoroutines();
+                wp.ToggleActiveSword(false);
+                currentWeapon.StopAllCoroutines();//In case it is swinging, we dont want it to stop and diable its colliders
                 foreach (var collider in currentWeaponRb.GetComponentsInChildren<Collider>())
                 {
                     collider.enabled = true;
                 }
             }
-            //Weapons need to just get swung, and only during their swing should they detect collisions, aftwerwards
-            //They need to apply damage, trigger particle affects, and do a little stagger
+            //Disable the weapon's colliders so that way it doesnt collide with the ground while walking
             currentWeapon = weapon;
-            rb.isKinematic = true;
-            /**
-            //Otherwise the weapon collides with the player and and the ground
-            //I wish unity had a better way of dyanmically adjusting colliders
-            //IK it is porbably because of the backend collider data structure but it would be convenient
-
-            //SO the bug where even after adding these exlusions is that the player rigidbody inherits all child colliders
-            //This means collision has to be excluding at the collider level, not the rigidbody level
-            string[] layers = new string[2];
-            layers[0] = "Player";
-            layers[1] = "Terrain";
-            rb.excludeLayers = LayerMask.GetMask(layers);
-            **/
-            //Dont forget to renable when dropping
             foreach (var collider in rb.GetComponentsInChildren<Collider>()){
                 collider.enabled = false;
             }
             //Relocate to the player
+            rb.isKinematic = true;
             weapon.transform.SetParent(targetTransform, false);
             weapon.transform.localPosition = Vector3.zero;
             weapon.transform.localRotation = Quaternion.identity;
         }else if(throwable != null){
             currentHeld = throwable;
-            currentHeld.PickedUp(gameObject, new Vector3(1.1f, 0.2f, 1.1f));
+            currentHeld.PickedUp(heldTransform, heldOffset);
         }
         yield return null;
     }
+    public GameObject heldTransform;
+    public Vector3 heldOffset = new Vector3(0.3f, 0.1f, 0.2f);
 }

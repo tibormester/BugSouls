@@ -1,13 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.Animations;
-using UnityEditorInternal;
-using TMPro;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Runtime.CompilerServices;
-using System;
 
 
 public class CharacterAnimation : MonoBehaviour
@@ -40,6 +32,8 @@ public class CharacterAnimation : MonoBehaviour
         GetComponent<Health>().DeathEvent += () => {charAnimator.CrossFade("death 1" , 0.1f); dying = true;};
 
         UpdateAnimData();
+        //Ensure u cant do stuff when u die
+        gs.GetComponent<Health>().DeathEvent += () => Destroy(this);
     }
 
 
@@ -47,6 +41,7 @@ public class CharacterAnimation : MonoBehaviour
     private int combo = 1;//1,2,3
     private float expiration = -1f; //counts down seconds until it is below zero
     private bool comboQueued = false;
+    public bool jumping = false;
     void Update()
     {    
         //TODO implement an input buffer
@@ -85,9 +80,9 @@ public class CharacterAnimation : MonoBehaviour
                 }
             }
 
-            float debugAnimDuration;
+            //float debugAnimDuration;
             
-            Debug.Log("Combo: " + combo + ", Expiration: " + expiration + " , Combo Queued: " + comboQueued + ", Animation: " + currentAnimation + ", Duration: " + (animationDurations.TryGetValue(currentAnimation, out debugAnimDuration) ? debugAnimDuration : "Unkown"));
+            //Debug.Log("Combo: " + combo + ", Expiration: " + expiration + " , Combo Queued: " + comboQueued + ", Animation: " + currentAnimation + ", Duration: " + (animationDurations.TryGetValue(currentAnimation, out debugAnimDuration) ? debugAnimDuration : "Unkown"));
         }
         
          
@@ -100,7 +95,6 @@ public class CharacterAnimation : MonoBehaviour
         float angle = Vector3.SignedAngle(horizontalVelocity, transform.forward, transform.up);
         
         bool grounded = cusPhysBod.IsGrounded();
-        bool jumping = verticalVelocity > 3f;
 
         // Debug.Log("angle from straight: " + angle);
         
@@ -186,7 +180,7 @@ public class CharacterAnimation : MonoBehaviour
                 nonCancellable.Add(clip.name);
             }
 
-            Debug.Log("Animation: " + clip.name + ", Duration: " + (clip.length / speedMultiplier));
+            //Debug.Log("Animation: " + clip.name + ", Duration: " + (clip.length / speedMultiplier));
         }
     }
 

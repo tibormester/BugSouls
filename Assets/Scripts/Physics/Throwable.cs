@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,64 +6,61 @@ using UnityEngine;
 public class Throwable : MonoBehaviour
 {
     // Start is called before the first frame update
-    private CustomPhysicsBody physicsBody;
+ 
     private Rigidbody rb;
     public float baseDamage = 1f;
-    public float velocityMultiplier = 1f;
     void Start(){
-        rb = GetComponent<Rigidbody>();
-        physicsBody = GetComponent<CustomPhysicsBody>();
-        
+        rb = GetComponent<Rigidbody>();   
     }
 
-    // This probably needs to be fixed update since its a rigidbody
-    void Update() {
-        if (held){
-            //rb.rotation = holderrb.rotation;
-
-            rb.position = holderrb.position + holderrb.transform.TransformDirection(relative);
-            rb.velocity = holderrb.velocity;
-            rb.angularVelocity = holderrb.angularVelocity;
-        }
-    }
     private bool held = false;
-    private GameObject holder;
-    private Vector3 relative = Vector3.zero;
-    private Rigidbody holderrb;
 
     public void PickedUp(GameObject parent, Vector3 localPosition){
-        held = true;
-        holder = parent;
-        relative = localPosition;
-        holderrb = holder.GetComponent<Rigidbody>();
+        held = true; //Used for collision detection
+        transform.SetParent(parent.transform, true);
+        transform.localPosition = localPosition;
+        rb.excludeLayers = LayerMask.GetMask(new string[]{"Player"});
+        rb.isKinematic = true;
     }
     public void Thrown(Vector3 velocity){
         held = false;
+        transform.SetParent(null, true);
+        rb.excludeLayers = LayerMask.GetMask(new string[]{});
+        rb.isKinematic = false;
+        StartCoroutine(Throwing(velocity));
+    }
+    private IEnumerator Throwing(Vector3 velocity){
         collided.Clear();
+        OnCollision += Collide;
         rb.AddForce(velocity, ForceMode.VelocityChange);
+        yield return new WaitForSeconds(0.2f); //Let the force go into effect
+        yield return new WaitUntil( () => rb.velocity.sqrMagnitude < 0.2f );
+        OnCollision -= Collide;
+        collided.Clear();
     }
     
     //For some reason i was struggling to use LayerMask.name to layer (player)
     private List<Health> collided = new();
-    private void OnCollisionEnter(Collision collision)
-    {
+    public Action<Health,Vector3> OnCollision;
+    public void Collide(Health health, Vector3 impulse){
+        if(!collided.Contains(health))
+            StartCoroutine(Collision(health, impulse));
+    }
+    public float forceMultiplier = 0.5f;
+    public IEnumerator Collision(Health health, Vector3 impulse){
+        health.ApplyDamage(baseDamage * Mathf.Clamp(impulse.magnitude * forceMultiplier, 1f, 5f));
+        collided.Add(health);
+        //Do something like knockback? But the physics simulation already does enough knockback...
+        yield return null;
+    }
+    private void OnCollisionEnter(Collision collision){
         if(held){return;}
-        Debug.LogWarning(collision.gameObject.name);
-        // Check if the collided object is in the player layer
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy")){
-            // Get the Health component from the collided object
-            Health health = collision.gameObject.GetComponent<Health>();
-            if (health != null)
-            {
-                if(!collided.Contains(health) && rb.velocity.sqrMagnitude > 1f){
-
-                    float damage = Mathf.Clamp(baseDamage * collision.impulse.magnitude, 0f, 65f);
-                    health.ApplyDamage(damage);
-                    collided.Add(health); //So we dont double collide or the enemy takes damage walking over it
-                }
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy") && collision.rigidbody != null){
+            Health health = collision.rigidbody.gameObject.GetComponent<Health>();
+            if (health != null){
+                OnCollision?.Invoke(health, collision.impulse);
                 
             }
-
         }
     }
 }
