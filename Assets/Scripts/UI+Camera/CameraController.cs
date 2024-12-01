@@ -32,6 +32,8 @@ public class CameraController : MonoBehaviour
 
     private CharacterAnimation characterAnimation;
 
+    public Stamina playerStamina;
+
     void Start(){
         front = target.transform.forward;
         targetMovement = target.gameObject.GetComponent<CharacterMovement>();
@@ -68,7 +70,7 @@ public class CameraController : MonoBehaviour
         MouseInputs();
         if (allowMovement){
             Movement();
-            if(Input.GetButtonDown("Jump")){
+            if(Input.GetButtonDown("Jump") && playerStamina.currStamina >= 5){
                 targetMovement.Jump();
             } else{
                 characterAnimation.jumping = false;
@@ -149,28 +151,40 @@ public class CameraController : MonoBehaviour
         accum += camera_relative;
 
         doubleTapTimer = doubleTapTimer < 0 ? 0 : doubleTapTimer - 1; 
-        if(canDash){
+        if(canDash && playerStamina.currStamina >= 3f){
             if (Input.GetKeyDown(KeyCode.S)){
                 if(lastMove == KeyCode.S && doubleTapTimer > 0){
                     targetMovement.StartCoroutine(Dash(target.transform.up + -9 * target.transform.forward));
+                    playerStamina.currStamina -= 3f;
+                    if(playerStamina.currStamina <= 0) playerStamina.currStamina = 0;
+                    playerStamina.stamina.setStamina(playerStamina.currStamina);
                 }
                 doubleTapTimer = doubleTapLimit;
                 lastMove = KeyCode.S;
             } else if (Input.GetKeyDown(KeyCode.A)){
                 if(lastMove == KeyCode.A && doubleTapTimer > 0){
                     targetMovement.StartCoroutine(Dash(target.transform.up + -9 * target.transform.right));
+                    playerStamina.currStamina -= 3f;
+                    if(playerStamina.currStamina <= 0) playerStamina.currStamina = 0;
+                    playerStamina.stamina.setStamina(playerStamina.currStamina);
                 }
                 doubleTapTimer = doubleTapLimit;
                 lastMove = KeyCode.A;
             } else if (Input.GetKeyDown(KeyCode.D)){
                 if(lastMove == KeyCode.D && doubleTapTimer > 0){
                     targetMovement.StartCoroutine(Dash(target.transform.up + 9 * target.transform.right));
+                    playerStamina.currStamina -= 3f;
+                    if(playerStamina.currStamina <= 0) playerStamina.currStamina = 0;
+                    playerStamina.stamina.setStamina(playerStamina.currStamina);
                 }
                 doubleTapTimer = doubleTapLimit;
                 lastMove = KeyCode.D;
             } else if (Input.GetKeyDown(KeyCode.W)){
                 if(lastMove == KeyCode.W && doubleTapTimer > 0){
                     targetMovement.StartCoroutine(Dash(target.transform.up + 9 * target.transform.forward));
+                    playerStamina.currStamina -= 3f;
+                    if(playerStamina.currStamina <= 0) playerStamina.currStamina = 0;
+                    playerStamina.stamina.setStamina(playerStamina.currStamina);
                 }
                 doubleTapTimer = doubleTapLimit;
                 lastMove = KeyCode.W;
