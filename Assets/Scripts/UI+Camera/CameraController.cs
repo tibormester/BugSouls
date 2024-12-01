@@ -130,7 +130,7 @@ public class CameraController : MonoBehaviour
     private KeyCode lastMove;
     private int doubleTapTimer = 0;
     public int doubleTapLimit = 12;
-    public float dashCooldown = 1.5f;
+    public float dashCooldown = 0.25f; //Since we have stamina shorten the cd
     public float dashStrength = 2f;
     void Movement(){
         // Get input for movement, use raw so that there is no input delay with switching directions
@@ -194,12 +194,19 @@ public class CameraController : MonoBehaviour
     }
     public bool canDash = true;
     public IEnumerator Dash(Vector3 direction){
+        int dashLength = 15;
+        float dashMultiplier = 1f;
+        if(! targetMovement.physicsBody.IsGrounded()){
+            //When in the air increase dash speed and length
+            dashLength = 25;
+            dashMultiplier = 1.5f;
+        }
         var wait = new WaitForFixedUpdate();
         doubleTapTimer = 0;
         canDash = false;
         var rb = targetMovement.GetComponent<Rigidbody>();
         for (int i = 0; i < 15; i ++){
-            rb.AddForce(direction.normalized * dashStrength , ForceMode.Impulse);
+            rb.AddForce(direction.normalized * dashStrength * dashMultiplier, ForceMode.Impulse);
             yield return wait;
         }
         
