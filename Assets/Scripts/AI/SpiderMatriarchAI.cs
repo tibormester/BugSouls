@@ -91,8 +91,8 @@ public class SpiderMatriarchAI : MonoBehaviour{
         if(health.currentHealth <= 0.5f * health.maxHealth && hat != null){
             var spider1 = Instantiate(spiderlingPrefab, transform.position + Vector3.right, transform.rotation);
             var spider2 = Instantiate(spiderlingPrefab, transform.position + Vector3.left, transform.rotation);
-            spider1.GetComponent<MeleeSpiderlingAI>().target = target;
-            spider2.GetComponent<MeleeSpiderlingAI>().target = target;
+            spider1.GetComponent<GeneralAI>().target = target;
+            spider2.GetComponent<GeneralAI>().target = target;
             StartCoroutine(DropHat());
         }
         //Prioritize regaining the crown
