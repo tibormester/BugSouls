@@ -15,19 +15,20 @@ public class Tutorial : MonoBehaviour
     }
     public IEnumerator TutorialText(){
         var wait = new WaitForSeconds(0.5f);
-        yield return ReadLine("Double Tap WASD to Dash,\nPress SPACE BAR to Jump");
+        yield return ReadLine("\n\nDouble Tap WASD to Dash,\nPress SPACE BAR to Jump");
         yield return  new WaitUntil(() => Input.GetKeyDown(KeyCode.Space)); 
         yield return wait;
-        yield return ReadLine("Press E to Shoot Webs,\nHold Q to Throw Items");
+        yield return ReadLine("\n\nPress E to Shoot Webs,\nHold Q to Throw Items");
         yield return  new WaitUntil(() => Input.GetKeyDown(KeyCode.E)); 
         yield return  new WaitUntil(() => Input.GetKeyUp(KeyCode.Q));
         yield return wait;
-        yield return ReadLine("Spider Ants Can Walk Up Walls and Swing From Webs, \nPress SPACE BAR to Dismount From Webs");
+        yield return ReadLine("\n\nSpider Ants Can Walk Up Walls and Swing From Webs, \nPress SPACE BAR to Dismount From Webs");
         yield return  new WaitUntil(() => Input.GetKeyUp(KeyCode.Space));
         yield return wait;
-        yield return ReadLine("Left Click to Attack");
+        yield return ReadLine("\n\nLeft Click to Attack");
         yield return  new WaitUntil(() => Input.GetKeyUp(KeyCode.Mouse0));
         yield return wait;
+        text.text = "";
     }
 
     public IEnumerator ReadLine(string line){

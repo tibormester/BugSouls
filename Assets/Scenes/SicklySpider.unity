@@ -879,7 +879,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 2.12}
+  m_AnchoredPosition: {x: 0, y: 3.36}
   m_SizeDelta: {x: 8, y: 4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &621248197
@@ -965,7 +965,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -0.5308881, y: 0, z: -0.4387474, w: -0.62179136}
+  m_margin: {x: -0.5308881, y: 0.99500203, z: -0.4387474, w: -0.62179136}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   _SortingLayer: 0
@@ -1032,17 +1032,7 @@ MonoBehaviour:
   ai: {fileID: 0}
   text: {fileID: 0}
   charMovement: {fileID: 0}
-  dialogue:
-  - It looks like the corruption hasn't found you yet! (Press Tab To Continue)
-  - It's too late for my nest, the vine puppets our matriarch, but with your help
-    maybe we could free her?
-  - Here, take my web shooter. You can use it to grab things from a distance. (Press
-    E to shoot webs)
-  - 'Grab my sword, I put it on the box over there. '
-  - Now use my web shooter to repell out of your ant hole. It used to be able to
-    stick to anything...
-  - The corruption has coated the tree's bark and leaves with a substance that keeps
-    my webs sliding off of it. Thats how they suprised the Matriarh.
+  dialogue: []
 --- !u!1 &694012669
 GameObject:
   m_ObjectHideFlags: 0

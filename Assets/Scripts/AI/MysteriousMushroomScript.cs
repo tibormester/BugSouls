@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class SicklySpiderScript : MonoBehaviour
+public class MysteriousMushroomScript : MonoBehaviour
 {
     // Start is called before the first frame update
     public Health health;
-    public MeleeSpiderlingAI ai;
+    public MushroomGuyScript ai;
     public TextMeshPro text;
     public CharacterMovement charMovement;
     public string[] dialogue = new string[] {
-        "You're... still whole? It's too late for me, but maybe not for the nest.\n(Press Tab To Talk)",
-        "The matriarch... she fought the corruption, but even she fell. Her mind... no longer her own.",
-        "The vine... it has grown through the tree's heart. It twists our home into a nightmare.",
-        "Go, spiderling. Burn it all down. Free us... or share our fate.",
+        "Ah, the spider ant stirs. Foolish, or brave? Perhaps both.",
+        "The vine whispers promises. I heard them... but I shut my ears. Did you?",
+        "Keep distance, the tree's roots. There, the truth festers. But beware, it does not let go easily.",
+        "Remember, to sever the vine, you must strike at its heart. Not all roots can be pulled",
     };
     void Start(){
         text = GetComponent<TextMeshPro>();
@@ -22,7 +22,7 @@ public class SicklySpiderScript : MonoBehaviour
 
         //Setup the spider to stop talking and attack if damaged
         health = transform.parent.GetComponent<Health>();
-        ai = transform.parent.GetComponent<MeleeSpiderlingAI>();
+        ai = transform.parent.GetComponent<MushroomGuyScript>();
         ai.enabled = false;
 
         Coroutine corountine = StartCoroutine(ReadDialogue());
@@ -53,13 +53,13 @@ public class SicklySpiderScript : MonoBehaviour
             text.text = "";
         }
         yield return new WaitForSeconds(10f);
-        foreach(string line in new string[]{"Get out of here I can't hold off the corruption much longer!",
-                "Matriarch forgive me.", "Aghh!"}){
+        foreach(string line in new string[]{"What are you still doing here?", "Don't you have places to be?",
+                "Did you not hear me?", "You're ruining my rest, leave!", "Leave, I won't ask again!"}){
             foreach(char letter in line){
                 text.text += letter;
                 yield return charWait;
             }
-            yield return new WaitForSeconds(4f);
+            yield return new WaitForSeconds(10f);
             text.text = "";
         }
         ai.enabled = true;

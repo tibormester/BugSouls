@@ -3,18 +3,17 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class SicklySpiderScript : MonoBehaviour
+public class BeetleBattlerScript : MonoBehaviour
 {
     // Start is called before the first frame update
     public Health health;
-    public MeleeSpiderlingAI ai;
+    public BeetleAI ai;
     public TextMeshPro text;
     public CharacterMovement charMovement;
     public string[] dialogue = new string[] {
-        "You're... still whole? It's too late for me, but maybe not for the nest.\n(Press Tab To Talk)",
-        "The matriarch... she fought the corruption, but even she fell. Her mind... no longer her own.",
-        "The vine... it has grown through the tree's heart. It twists our home into a nightmare.",
-        "Go, spiderling. Burn it all down. Free us... or share our fate.",
+        "Finally, someone who hasn't fallen to that wretched plant.",
+        "The vine took everything—my brood, my honor. It won't take my rage.",
+        "Fight me, ant. Will you give me a warriors end?",
     };
     void Start(){
         text = GetComponent<TextMeshPro>();
@@ -22,7 +21,7 @@ public class SicklySpiderScript : MonoBehaviour
 
         //Setup the spider to stop talking and attack if damaged
         health = transform.parent.GetComponent<Health>();
-        ai = transform.parent.GetComponent<MeleeSpiderlingAI>();
+        ai = transform.parent.GetComponent<BeetleAI>();
         ai.enabled = false;
 
         Coroutine corountine = StartCoroutine(ReadDialogue());
@@ -32,9 +31,13 @@ public class SicklySpiderScript : MonoBehaviour
             StopCoroutine(corountine);
             text.text = "";
         };
-        health.DeathEvent += () => Destroy(this);
+        health.DeathEvent += () => {
+            Instantiate(beetleSwordPrefab, transform.position + Vector3.up, transform.rotation);
+            Destroy(this);
+        };
         
     }
+    public GameObject beetleSwordPrefab;
     private void Update(){
         text.transform.LookAt(ai.target);
     }
@@ -50,16 +53,6 @@ public class SicklySpiderScript : MonoBehaviour
                 yield return charWait;
             }
             yield return lineWait;
-            text.text = "";
-        }
-        yield return new WaitForSeconds(10f);
-        foreach(string line in new string[]{"Get out of here I can't hold off the corruption much longer!",
-                "Matriarch forgive me.", "Aghh!"}){
-            foreach(char letter in line){
-                text.text += letter;
-                yield return charWait;
-            }
-            yield return new WaitForSeconds(4f);
             text.text = "";
         }
         ai.enabled = true;
