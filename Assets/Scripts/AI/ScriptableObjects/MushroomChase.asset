@@ -9,8 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c28a7da955e04afabbd7c12fd45b7df, type: 3}
-  m_Name: FleeBehaviour
+  m_Script: {fileID: 11500000, guid: c945cff10588b4bbda4ff029ce512488, type: 3}
+  m_Name: MushroomChase
   m_EditorClassIdentifier: 
-  FleeAcceleration: 25
-  FleeMoveSpeed: 18
+  maxChaseDistance: 100
+  minEngageDistance: 2
+  maxEngageDistance: 3
+  MoveSpeed: 6
+  Acceleration: 3
+  BackupMoveSpeed: 8
+  BackupAcceleration: 2

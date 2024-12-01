@@ -6,7 +6,7 @@ public class MatriarchDialogueScript : MonoBehaviour
 {
     // Start is called before the first frame update
     public Health health;
-    public SpiderMatriarchAI ai;
+    public GeneralAI ai;
     public TextMeshPro text;
     public CharacterMovement charMovement;
     public string[] dialogue = new string[] {
@@ -19,7 +19,7 @@ public class MatriarchDialogueScript : MonoBehaviour
 
         //Setup the spider to stop talking and attack if damaged
         health = transform.parent.GetComponent<Health>();
-        ai = transform.parent.GetComponent<SpiderMatriarchAI>();
+        ai = transform.parent.GetComponent<GeneralAI>();
 
         health.DeathEvent += () => {
             StartCoroutine(ReadDialogue());

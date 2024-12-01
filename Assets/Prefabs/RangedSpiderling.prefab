@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 2694224898805167355}
   - component: {fileID: 5260717183916513402}
   - component: {fileID: 1420535609818601610}
-  - component: {fileID: 8129763311436219990}
   - component: {fileID: 6820923853962224825}
+  - component: {fileID: 41890986813102020}
   m_Layer: 9
   m_Name: RangedSpiderling
   m_TagString: Untagged
@@ -4940,37 +4940,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &8129763311436219990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7067859078703700404}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47bddaeeec55e4d39a345505c5805cc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: {fileID: 0}
-  charMovement: {fileID: 0}
-  pb: {fileID: 0}
-  rb: {fileID: 0}
-  target: {fileID: 0}
-  minEngageDistance: 15
-  maxEngageDistance: 50
-  backupAccelMultiplier: 0.8
-  maxChaseDistance: 100
-  maxStuckTime: 5
-  maxStuckDistance: 0.2
-  originalAccel: 4
-  stuckTime: 0
-  damage: 5
-  webPrototype: {fileID: 582823826365179364, guid: fcd9d8a0826d544ee9ac432e0f9e76bb, type: 3}
-  LaunchSpeed: 1
-  maxLaunchTicks: 350
-  hit: {fileID: 0}
-  attackCooldown: 2
 --- !u!82 &6820923853962224825
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5067,6 +5036,30 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &41890986813102020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7067859078703700404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77ea0d019e7814115829a294b90663cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: {fileID: 0}
+  movement: {fileID: 0}
+  pb: {fileID: 0}
+  rb: {fileID: 0}
+  droppable: {fileID: 0}
+  target: {fileID: 0}
+  AIBehaviours:
+  - {fileID: 11400000, guid: 755feee3f0b824c4c9c4f9f0fe793f1e, type: 2}
+  - {fileID: 11400000, guid: 2271980e7877349cabe93abbe7bc6bb1, type: 2}
+  - {fileID: 11400000, guid: 034903a0320d94f5daa6e25decb0d331, type: 2}
+  CollisionEventLayer: -1
+  colliding: []
 --- !u!1 &7514408016275734170
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,7 +7,7 @@ public class BeetleBattlerScript : MonoBehaviour
 {
     // Start is called before the first frame update
     public Health health;
-    public BeetleAI ai;
+    public GeneralAI ai;
     public TextMeshPro text;
     public CharacterMovement charMovement;
     public string[] dialogue = new string[] {
@@ -21,13 +21,13 @@ public class BeetleBattlerScript : MonoBehaviour
 
         //Setup the spider to stop talking and attack if damaged
         health = transform.parent.GetComponent<Health>();
-        ai = transform.parent.GetComponent<BeetleAI>();
-        ai.enabled = false;
+        ai = transform.parent.GetComponent<GeneralAI>();
+        ai.processing = false;
 
         Coroutine corountine = StartCoroutine(ReadDialogue());
 
         health.Damaged += () => {
-            ai.enabled = true;
+            ai.processing = true;
             StopCoroutine(corountine);
             text.text = "";
         };

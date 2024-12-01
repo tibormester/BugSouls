@@ -41,7 +41,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6242039117865080877}
-  - component: {fileID: 331495131064386025}
   - component: {fileID: 351742870367157693}
   - component: {fileID: 2610709328205033915}
   - component: {fileID: 5723651046297540974}
@@ -50,6 +49,7 @@ GameObject:
   - component: {fileID: 3664349592518199945}
   - component: {fileID: 2346710558462944489}
   - component: {fileID: 3443737698635204369}
+  - component: {fileID: 7622366779814880939}
   m_Layer: 9
   m_Name: BigMushroomGuy
   m_TagString: Untagged
@@ -73,35 +73,6 @@ Transform:
   - {fileID: 1154923274030797355}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &331495131064386025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3522994712192022450}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4266e0a43688c49378977759955cfc06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hat: {fileID: 8013867954593243838}
-  health: {fileID: 0}
-  charMovement: {fileID: 0}
-  pb: {fileID: 0}
-  rb: {fileID: 0}
-  target: {fileID: 0}
-  minEngageDistance: 3
-  maxEngageDistance: 8
-  backupAccelMultiplier: 0.8
-  maxChaseDistance: 99
-  maxStuckTime: 0.5
-  maxStuckDistance: 0.2
-  originalAccel: 4
-  stuckTime: 0
-  damage: 35
-  hit: {fileID: 0}
-  attackCooldown: 5
 --- !u!114 &351742870367157693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5120,6 +5091,30 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7622366779814880939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3522994712192022450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77ea0d019e7814115829a294b90663cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: {fileID: 0}
+  movement: {fileID: 0}
+  pb: {fileID: 0}
+  rb: {fileID: 0}
+  droppable: {fileID: 0}
+  target: {fileID: 0}
+  AIBehaviours:
+  - {fileID: 11400000, guid: 1f591b4fced5846c6872a6357e8d9fd6, type: 2}
+  - {fileID: 11400000, guid: 5ea6363ec17154ff1abf1ff8409c96a4, type: 2}
+  - {fileID: 11400000, guid: 3603404c7cb1248d587bd1e1a377fcbd, type: 2}
+  CollisionEventLayer: -1
+  colliding: []
 --- !u!1 &6910500638941741262
 GameObject:
   m_ObjectHideFlags: 0

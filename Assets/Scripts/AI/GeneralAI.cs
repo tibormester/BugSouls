@@ -18,6 +18,8 @@ public class GeneralAI : MonoBehaviour{
     //Player, probably turn into an array for multiplayer
     public Transform target;
 
+    public bool processing = true;
+
     public void Start(){
         //Cache local components
         health = GetComponent<Health>();
@@ -72,6 +74,7 @@ public class GeneralAI : MonoBehaviour{
                     break;
                 }
             }
+            yield return new WaitUntil(() => processing); //Because disabling the monobehaviour doesn't pause the coroutines
         }
     }
 

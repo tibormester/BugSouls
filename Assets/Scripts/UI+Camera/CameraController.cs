@@ -220,7 +220,7 @@ public class CameraController : MonoBehaviour
         doubleTapTimer = 0;
         canDash = false;
         var rb = targetMovement.GetComponent<Rigidbody>();
-        for (int i = 0; i < 15; i ++){
+        for (int i = 0; i < dashLength; i ++){
             rb.AddForce(direction.normalized * dashStrength * dashMultiplier, ForceMode.Impulse);
             yield return wait;
         }

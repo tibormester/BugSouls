@@ -97,10 +97,10 @@ GameObject:
   - component: {fileID: 8831786704473570947}
   - component: {fileID: 6582882608529452521}
   - component: {fileID: 3158055088714610806}
-  - component: {fileID: 900744989394319735}
   - component: {fileID: 8599696485702546565}
   - component: {fileID: 6713742200217979279}
   - component: {fileID: 804204460667533603}
+  - component: {fileID: 8125672280459888399}
   m_Layer: 9
   m_Name: SpiderMatriarch
   m_TagString: Untagged
@@ -250,37 +250,6 @@ MonoBehaviour:
   hit: {fileID: 8300000, guid: c9dad65fdd22e4e35a4bf5defde9fbcd, type: 3}
   death: {fileID: 8300000, guid: 956de8e15cd894e15bda4c06e7090d26, type: 3}
   audioSource: {fileID: 0}
---- !u!114 &900744989394319735
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7658753652155766538}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdde431a19a2e4e8387d1d18346767ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: {fileID: 0}
-  charMovement: {fileID: 0}
-  pb: {fileID: 0}
-  rb: {fileID: 0}
-  target: {fileID: 0}
-  minEngageDistance: 3
-  maxEngageDistance: 6
-  backupAccelMultiplier: 2
-  maxChaseDistance: 100
-  maxStuckTime: 4
-  maxStuckDistance: 1
-  originalAccel: 7
-  stuckTime: 0
-  damage: 35
-  spiderlingPrefab: {fileID: 773944327014275907, guid: 66bb12184f94c4ab5b68b42574dbdeed, type: 3}
-  hat: {fileID: 3349144923173070614}
-  hatTarget: {fileID: 0}
-  hit: {fileID: 0}
-  attackCooldown: 3
 --- !u!199 &8599696485702546565
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -5174,6 +5143,30 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8125672280459888399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7658753652155766538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77ea0d019e7814115829a294b90663cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: {fileID: 0}
+  movement: {fileID: 0}
+  pb: {fileID: 0}
+  rb: {fileID: 0}
+  droppable: {fileID: 0}
+  target: {fileID: 0}
+  AIBehaviours:
+  - {fileID: 11400000, guid: 755feee3f0b824c4c9c4f9f0fe793f1e, type: 2}
+  - {fileID: 11400000, guid: 2271980e7877349cabe93abbe7bc6bb1, type: 2}
+  - {fileID: 11400000, guid: 034903a0320d94f5daa6e25decb0d331, type: 2}
+  CollisionEventLayer: -1
+  colliding: []
 --- !u!1 &8750895319602424838
 GameObject:
   m_ObjectHideFlags: 0

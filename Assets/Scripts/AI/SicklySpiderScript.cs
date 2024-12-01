@@ -6,7 +6,7 @@ public class SicklySpiderScript : MonoBehaviour
 {
     // Start is called before the first frame update
     public Health health;
-    public MeleeSpiderlingAI ai;
+    public GeneralAI ai;
     public TextMeshPro text;
     public CharacterMovement charMovement;
     public string[] dialogue = new string[] {
@@ -21,17 +21,16 @@ public class SicklySpiderScript : MonoBehaviour
 
         //Setup the spider to stop talking and attack if damaged
         health = transform.parent.GetComponent<Health>();
-        ai = transform.parent.GetComponent<MeleeSpiderlingAI>();
-        ai.enabled = false;
+        ai = transform.parent.GetComponent<GeneralAI>();
+        ai.processing = false;
 
         Coroutine corountine = StartCoroutine(ReadDialogue());
 
         health.Damaged += () => {
-            ai.enabled = true;
-            StopCoroutine(corountine);
+            ai.processing = true;
             text.text = "";
+            Destroy(this);
         };
-        health.DeathEvent += () => Destroy(this);
         
     }
     private void Update(){
