@@ -30,6 +30,8 @@ public class CameraController : MonoBehaviour
     private Vector3 prevNormal;
     private Camera cam;
 
+    private CharacterAnimation characterAnimation;
+
     void Start(){
         front = target.transform.forward;
         targetMovement = target.gameObject.GetComponent<CharacterMovement>();
@@ -38,7 +40,10 @@ public class CameraController : MonoBehaviour
         prevNormal = targetMovement.physicsBody.groundNormal;
         SceneDescriptor sd = gameObject.scene.GetRootGameObjects().Select(go => go.GetComponent<SceneDescriptor>()).FirstOrDefault(desc => desc != null);
         sd.PlayerEntered += RecievePlayer;
-        
+        if (target)
+        {
+            characterAnimation = target.GetComponent<CharacterAnimation>();
+        }
     }
 
     private void RecievePlayer(Transform newTarget){
@@ -47,6 +52,7 @@ public class CameraController : MonoBehaviour
         prevNormal = targetMovement.physicsBody.groundNormal;
         //Ensure u cant do stuff when u die
         target.GetComponent<Health>().DeathEvent += () => allowMovement = false;
+        characterAnimation = target.GetComponent<CharacterAnimation>();
     }
     public LayerMask throwable;
     public LayerMask terrain;
@@ -58,14 +64,14 @@ public class CameraController : MonoBehaviour
         }
         //Change swinging a sword to mouse button 0 and throwing gets moved to the grapple script
     }
-
     void LateUpdate(){
         MouseInputs();
         if (allowMovement){
             Movement();
-            
             if(Input.GetButtonDown("Jump")){
                 targetMovement.Jump();
+            } else{
+                characterAnimation.jumping = false;
             }
         }
     }
@@ -107,7 +113,7 @@ public class CameraController : MonoBehaviour
         RaycastHit hitinfo; 
         if(Physics.Raycast(target.position, transform.rotation*offset, out hitinfo, offset.magnitude, ~cameraColiderIgnore))
         {
-            transform.position = target.position + transform.rotation * (offset.normalized * (hitinfo.distance - 0.1f));
+            transform.position = target.position + transform.rotation * (offset.normalized * (hitinfo.distance - 1f));
         }else{
             transform.position = target.position + transform.rotation * offset;
         }

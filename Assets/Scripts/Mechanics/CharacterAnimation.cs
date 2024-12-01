@@ -49,6 +49,7 @@ public class CharacterAnimation : MonoBehaviour
     private int combo = 1;//1,2,3
     private float expiration = -1f; //counts down seconds until it is below zero
     private bool comboQueued = false;
+    public bool jumping = false;
     void Update()
     {    
         //TODO implement an input buffer
@@ -102,7 +103,6 @@ public class CharacterAnimation : MonoBehaviour
         float angle = Vector3.SignedAngle(horizontalVelocity, transform.forward, transform.up);
         
         bool grounded = cusPhysBod.IsGrounded();
-        bool jumping = verticalVelocity > 3f;
 
         // Debug.Log("angle from straight: " + angle);
         

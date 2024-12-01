@@ -7,11 +7,13 @@ public class CharacterMovement : MonoBehaviour
     // Components
     private Rigidbody rb;
     public CustomPhysicsBody physicsBody;
+    private CharacterAnimation characterAnimation;
 
     void Start(){
         // Get the CharacterController component attached to the player
         rb = GetComponent<Rigidbody>(); //Useful because this transfomr might be different from the gameobject if the move or jump functions are called outside of fixedupdate
         physicsBody = GetComponent<CustomPhysicsBody>();
+        characterAnimation = GetComponent<CharacterAnimation>();
     }
     
     void FixedUpdate() {
@@ -92,6 +94,7 @@ public class CharacterMovement : MonoBehaviour
     private float timer = -1f;
     public void Jump(){ //Starts the jump timer, so for each fixed update applies the jump velocity for the jump duration
         if (physicsBody.IsGrounded()) {
+            characterAnimation.jumping = true;
             if (timer == -1f){
                 timer = 0f;
             }   
