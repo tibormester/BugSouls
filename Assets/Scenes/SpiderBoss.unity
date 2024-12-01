@@ -7822,6 +7822,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28613bee536f94d7b9b84e41d5970f17, type: 3}
+--- !u!65 &1738501545 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 6291206089714515281, guid: 28613bee536f94d7b9b84e41d5970f17, type: 3}
+  m_PrefabInstance: {fileID: 1738501544}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1886460456
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8335,7 +8340,7 @@ MonoBehaviour:
   cam: {fileID: 987985289}
   exits:
   - colliders:
-    - {fileID: 0}
+    - {fileID: 1738501545}
     sceneName: MushroomCombatScene
     locked: 0
     entranceLocation: {fileID: 1205652772}

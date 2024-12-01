@@ -149,11 +149,11 @@ public class CustomPhysicsBody : MonoBehaviour
             //body.velocity += gravity * Time.fixedDeltaTime * groundNormal;
         }
     }
-
+    /**
     private void OnDrawGizmosSelected() {
         // Draw a marker (a sphere handle)
         Handles.color = Color.red;
         Handles.SphereHandleCap(0, transform.position + new Vector3(0,-feetDistance,0), Quaternion.identity, 0.05f, EventType.Repaint);
 
-    }
+    }**/
 }

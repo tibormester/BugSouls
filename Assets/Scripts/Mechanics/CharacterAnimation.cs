@@ -1,13 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.Animations;
-using UnityEditorInternal;
-using TMPro;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Runtime.CompilerServices;
-using System;
 
 
 public class CharacterAnimation : MonoBehaviour

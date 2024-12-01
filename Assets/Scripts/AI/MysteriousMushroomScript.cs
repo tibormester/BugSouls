@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -11,7 +10,7 @@ public class MysteriousMushroomScript : MonoBehaviour
     public TextMeshPro text;
     public CharacterMovement charMovement;
     public string[] dialogue = new string[] {
-        "Ah, the spider ant stirs. Foolish, or brave? Perhaps both.",
+        "Ah, the spider ant stirs. Foolish, or brave? Perhaps both.\n(Press TAB to talk)",
         "The vine whispers promises. I heard them... but I shut my ears. Did you?",
         "Keep distance, the tree's roots. There, the truth festers. But beware, it does not let go easily.",
         "Remember, to sever the vine, you must strike at its heart. Not all roots can be pulled",
