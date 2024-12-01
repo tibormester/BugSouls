@@ -5506,14 +5506,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7834515696165794951, guid: 830961499e99d4857afe852b662c12fe, type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 216255159}
-    - target: {fileID: 7834515696165794951, guid: 830961499e99d4857afe852b662c12fe, type: 3}
-      propertyPath: playerStamina
-      value: 
-      objectReference: {fileID: 216255172}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

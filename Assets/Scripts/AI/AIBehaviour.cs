@@ -24,7 +24,7 @@ public abstract class AIBehaviour : ScriptableObject {
     }
 
     //Applies damage with knockback flattened by the victim's up (so they dont get launched into the air) 
-    private void ApplyDamage(GeneralAI attacker, Health victim, float damage = 1f, float knockback = 0f){
+    protected void ApplyDamage(GeneralAI attacker, Health victim, float damage = 1f, float knockback = 0f){
         victim.ApplyDamage(damage);
         if(knockback != 0f){
             var direction = victim.transform.position - attacker.transform.position;
