@@ -39,10 +39,9 @@ public class CameraController : MonoBehaviour
 
     void Start(){
         front = target.transform.forward;
-        targetMovement = target.gameObject.GetComponent<CharacterMovement>();
         cam = GetComponent<Camera>();
         Cursor.lockState = CursorLockMode.Locked;// Lock and hide Cursor
-        prevNormal = targetMovement.physicsBody.groundNormal;
+        if(target) RecievePlayer(target);
         SceneDescriptor sd = gameObject.scene.GetRootGameObjects().Select(go => go.GetComponent<SceneDescriptor>()).FirstOrDefault(desc => desc != null);
         sd.PlayerEntered += RecievePlayer;
         //Ugly
@@ -50,14 +49,8 @@ public class CameraController : MonoBehaviour
         stamina.setMaxStamina(maxStamina);
         currStamina = maxStamina;
         stamina.setStamina(maxStamina);
-
-        if (target)
-        {
-            characterAnimation = target.GetComponent<CharacterAnimation>();
-        }
     }
-
-    private void RecievePlayer(Transform newTarget){
+    public void RecievePlayer(Transform newTarget){
         target = newTarget;
         targetMovement = target.gameObject.GetComponent<CharacterMovement>();
         prevNormal = targetMovement.physicsBody.groundNormal;

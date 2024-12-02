@@ -32,6 +32,7 @@ public class SceneDescriptor : MonoBehaviour{
             cachedPlayer = (GameObject)Instantiate(player, gameObject.scene);
             cachedPlayer.SetActive(false);
             player.GetComponent<Health>().DeathEvent += ReloadCurrentScene;
+            Camera.main.GetComponent<CameraController>().RecievePlayer(player.transform);
         }
         if(prevEdge.sceneName == ""){
             prevEdge.entranceLocation = transform;
