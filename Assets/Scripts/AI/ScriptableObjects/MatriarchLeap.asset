@@ -16,7 +16,7 @@ MonoBehaviour:
   Knockback: 3
   CoolDown: 5
   angle: 35
-  RotationSpeed: 1
+  RotationSpeed: 0.1
   WindUpDuration: 0.5
   ChargeDuration: 0.2
   ChargeSpeed: 1

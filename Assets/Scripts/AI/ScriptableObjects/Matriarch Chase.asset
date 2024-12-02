@@ -16,6 +16,6 @@ MonoBehaviour:
   minEngageDistance: 5
   maxEngageDistance: 8
   MoveSpeed: 6
-  Acceleration: 4
+  Acceleration: 7
   BackupMoveSpeed: 6
-  BackupAcceleration: 2
+  BackupAcceleration: 5

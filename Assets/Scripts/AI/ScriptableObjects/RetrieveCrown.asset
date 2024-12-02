@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delay: 4
   MoveSpeed: 25
-  Acceleration: 3
+  Acceleration: 8
   PickupRange: 5
