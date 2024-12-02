@@ -23,4 +23,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Final Boss.unity
     guid: 26734a719978f6745a85d5cc816455f5
+  - enabled: 1
+    path: Assets/Scenes/BeetleBossRoom.unity
+    guid: 10cf7c708b1ae43ceb86b9f62e37230f
+  - enabled: 1
+    path: Assets/Scenes/BeetleRoom.unity
+    guid: 0da6f94a57dbd43d9a358f25dea843c7
   m_configObjects: {}

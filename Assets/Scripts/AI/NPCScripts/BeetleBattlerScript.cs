@@ -45,17 +45,17 @@ public class BeetleBattlerScript : MonoBehaviour
         //time after each character
         var charWait = new WaitForSeconds(0.01f);
         //how to get to the next line
-        var lineWait = new WaitUntil( () => Input.GetKeyDown(KeyCode.Tab)); 
+        var lineWait = new WaitForSeconds(1.5f);
         foreach(string line in dialogue){
             foreach(char letter in line){
                 text.text += letter;
-                charMovement.look_direction = ai.target.position - transform.parent.position;
+                if(ai.target)charMovement.look_direction = ai.target.position - transform.parent.position;
                 yield return charWait;
             }
             yield return lineWait;
             text.text = "";
         }
-        ai.enabled = true;
+        ai.processing = true;
     }
 
 
