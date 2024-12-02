@@ -112,7 +112,7 @@ public class VineBossAIV2 : MonoBehaviour
 
         while (!dying)
         {
-            if (Vector3.Distance(target.position, CenterOfMass.position) < 0.5f * ShockWaveRadius){
+            if (!ShockWaveCooldown && Vector3.Distance(target.position, CenterOfMass.position) < 0.25f * ShockWaveRadius){
                 if(Random.Range(1f,100f) > 99.5f) {
                     StartCoroutine(ShockWave());
                     Debug.Log("Attacking with a shockwave");
@@ -234,15 +234,16 @@ public class VineBossAIV2 : MonoBehaviour
     public float ShockWaveDuration = 2.5f;
     public float ShockWaveRadius = 50f;
 
+    bool ShockWaveCooldown = false;
     public IEnumerator ShockWave(){
+        ShockWaveCooldown = true;
         var shockWave = Instantiate(visual, CenterOfMass.position, Quaternion.identity);
         var wait = new WaitForFixedUpdate();
         for (float i = 0f; i < ShockWaveDuration; i += Time.fixedDeltaTime){
             var radius = (i/ShockWaveDuration) * ShockWaveRadius;
             shockWave.transform.localScale = Vector3.one * radius;
             var diff = target.position - shockWave.transform.position;
-            var distance2 = diff.sqrMagnitude;
-            if(distance2 <= radius * radius){
+            if(diff.magnitude <= radius * 0.45f){
                 var rb = target.GetComponent<Rigidbody>();
                 rb.AddForce(diff.normalized * ShockWaveStrength, ForceMode.VelocityChange);
                 var health = target.GetComponent<Health>();
@@ -251,7 +252,8 @@ public class VineBossAIV2 : MonoBehaviour
             yield return wait;
         }
         Destroy(shockWave);
-        
+        yield return new WaitForSeconds(16f);
+        ShockWaveCooldown = false;
     }
 
 }
