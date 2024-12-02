@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da3a04420865e4cef865b31bf087722f, type: 3}
   m_Name: BeetleCharge
   m_EditorClassIdentifier: 
-  Damage: 15
+  Damage: 5
   Knockback: 2
-  CoolDown: 2.5
-  angle: -25
-  RotationSpeed: 0.05
-  WindUpDuration: 0.3
-  ChargeDuration: 0.35
-  ChargeSpeed: 5
+  CoolDown: 1.5
+  angle: 0
+  RotationSpeed: 0
+  WindUpDuration: 0.6
+  ChargeDuration: 0.4
+  ChargeSpeed: 1
   FollowThroughDuration: 0.2

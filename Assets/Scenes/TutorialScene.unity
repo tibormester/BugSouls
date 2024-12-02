@@ -2380,6 +2380,67 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &910308459
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1020062893827687887, guid: 5c59c2ae86e0948149a56b33868cd3f4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.363
+      objectReference: {fileID: 0}
+    - target: {fileID: 1020062893827687887, guid: 5c59c2ae86e0948149a56b33868cd3f4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 1020062893827687887, guid: 5c59c2ae86e0948149a56b33868cd3f4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 33.423
+      objectReference: {fileID: 0}
+    - target: {fileID: 1020062893827687887, guid: 5c59c2ae86e0948149a56b33868cd3f4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.38831374
+      objectReference: {fileID: 0}
+    - target: {fileID: 1020062893827687887, guid: 5c59c2ae86e0948149a56b33868cd3f4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.656682
+      objectReference: {fileID: 0}
+    - target: {fileID: 1020062893827687887, guid: 5c59c2ae86e0948149a56b33868cd3f4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.17372733
+      objectReference: {fileID: 0}
+    - target: {fileID: 1020062893827687887, guid: 5c59c2ae86e0948149a56b33868cd3f4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.62273586
+      objectReference: {fileID: 0}
+    - target: {fileID: 1020062893827687887, guid: 5c59c2ae86e0948149a56b33868cd3f4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 17.075
+      objectReference: {fileID: 0}
+    - target: {fileID: 1020062893827687887, guid: 5c59c2ae86e0948149a56b33868cd3f4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 85.369
+      objectReference: {fileID: 0}
+    - target: {fileID: 1020062893827687887, guid: 5c59c2ae86e0948149a56b33868cd3f4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 131.873
+      objectReference: {fileID: 0}
+    - target: {fileID: 4171412588976218629, guid: 5c59c2ae86e0948149a56b33868cd3f4, type: 3}
+      propertyPath: m_Name
+      value: SturdyStick
+      objectReference: {fileID: 0}
+    - target: {fileID: 7232127987290041949, guid: 5c59c2ae86e0948149a56b33868cd3f4, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5c59c2ae86e0948149a56b33868cd3f4, type: 3}
 --- !u!1 &1012147430
 GameObject:
   m_ObjectHideFlags: 0
@@ -3000,7 +3061,7 @@ MonoBehaviour:
     entranceLocation: {fileID: 556700279}
   - colliders:
     - {fileID: 8873165954313993813}
-    sceneName: SicklySpider
+    sceneName: BeetleRoom
     locked: 0
     entranceLocation: {fileID: 1898358933}
   prevEdge:
@@ -4358,7 +4419,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1898358933}
   m_Layer: 0
-  m_Name: MushroomSceneEntrance
+  m_Name: BeetleRoomEntrance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4372,9 +4433,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1898358932}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.00097492145, y: -0.7071061, z: -0.00097492145, w: 0.7071061}
-  m_LocalPosition: {x: -335.29, y: -194.61, z: 12.12}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: -355.5, y: -191.32, z: 16.55}
+  m_LocalScale: {x: 1.7, y: 2.4, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1288860002}
@@ -5550,3 +5611,4 @@ SceneRoots:
   - {fileID: 285538763}
   - {fileID: 8873165954313993812}
   - {fileID: 1895009575}
+  - {fileID: 910308459}

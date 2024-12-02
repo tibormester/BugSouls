@@ -46,7 +46,7 @@ public class MysteriousMushroomScript : MonoBehaviour
         foreach(string line in dialogue){
             foreach(char letter in line){
                 text.text += letter;
-                charMovement.look_direction = ai.target.position - transform.parent.position;
+                if(ai.target)charMovement.look_direction = ai.target.position - transform.parent.position;
                 yield return charWait;
             }
             yield return lineWait;
@@ -57,12 +57,13 @@ public class MysteriousMushroomScript : MonoBehaviour
                 "Did you not hear me?", "You're ruining my rest, leave!", "Leave, I won't ask again!"}){
             foreach(char letter in line){
                 text.text += letter;
+                if(ai.target)charMovement.look_direction = ai.target.position - transform.parent.position;
                 yield return charWait;
             }
             yield return new WaitForSeconds(10f);
             text.text = "";
         }
-        ai.enabled = true;
+        ai.processing = true;
     }
 
 

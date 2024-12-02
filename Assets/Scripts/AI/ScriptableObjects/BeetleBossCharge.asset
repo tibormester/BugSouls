@@ -9,13 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c945cff10588b4bbda4ff029ce512488, type: 3}
-  m_Name: BeetleChase
+  m_Script: {fileID: 11500000, guid: da3a04420865e4cef865b31bf087722f, type: 3}
+  m_Name: BeetleBossCharge
   m_EditorClassIdentifier: 
-  maxChaseDistance: 100
-  minEngageDistance: 3
-  maxEngageDistance: 6
-  MoveSpeed: 12
-  Acceleration: 8
-  BackupMoveSpeed: 4
-  BackupAcceleration: 8
+  Damage: 25
+  Knockback: 4
+  CoolDown: 4
+  angle: 0
+  RotationSpeed: 0
+  WindUpDuration: 1
+  ChargeDuration: 0.6
+  ChargeSpeed: 0.5
+  FollowThroughDuration: 0.3

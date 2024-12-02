@@ -43,7 +43,7 @@ public class SicklySpiderScript : MonoBehaviour
         foreach(string line in dialogue){
             foreach(char letter in line){
                 text.text += letter;
-                charMovement.look_direction = ai.target.position - transform.parent.position;
+                if(ai.target)charMovement.look_direction = ai.target.position - transform.parent.position;
                 yield return charWait;
             }
             yield return lineWait;
@@ -54,6 +54,7 @@ public class SicklySpiderScript : MonoBehaviour
                 "Matriarch forgive me.", "Aghh!"}){
             foreach(char letter in line){
                 text.text += letter;
+                if(ai.target)charMovement.look_direction = ai.target.position - transform.parent.position;
                 yield return charWait;
             }
             yield return new WaitForSeconds(4f);
