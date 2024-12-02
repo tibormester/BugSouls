@@ -9,6 +9,7 @@ public class Throwable : MonoBehaviour
  
     private Rigidbody rb;
     public float baseDamage = 1f;
+    public bool orientated = false;
     void Start(){
         rb = GetComponent<Rigidbody>();   
     }
@@ -19,6 +20,7 @@ public class Throwable : MonoBehaviour
         held = true; //Used for collision detection
         transform.SetParent(parent.transform, true);
         transform.localPosition = localPosition;
+        if(orientated) transform.localRotation = Quaternion.identity;
         rb.excludeLayers = LayerMask.GetMask(new string[]{"Player"});
         rb.isKinematic = true;
     }
@@ -46,9 +48,13 @@ public class Throwable : MonoBehaviour
         if(!collided.Contains(health))
             StartCoroutine(Collision(health, impulse));
     }
-    public float forceMultiplier = 0.5f;
+    public float MaxMultiplier = 5f;
+    public float ExpectedForce = 1f;
+    public float MinMultiplier = 0.1f;
+    public float forceMultiplier = 0.02f; //impulses are around 10s to 50s to 150s depending on charge time becomes 0.2x,  1x, 3x 
     public IEnumerator Collision(Health health, Vector3 impulse){
-        health.ApplyDamage(baseDamage * Mathf.Clamp(impulse.magnitude * forceMultiplier, 1f, 5f));
+        Debug.LogWarning("collided with impulse: " + impulse.magnitude);
+        health.ApplyDamage(baseDamage * Mathf.Clamp(impulse.magnitude * forceMultiplier, MinMultiplier, MaxMultiplier));
         collided.Add(health);
         //Do something like knockback? But the physics simulation already does enough knockback...
         yield return null;
