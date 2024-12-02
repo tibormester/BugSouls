@@ -2379,7 +2379,7 @@ MonoBehaviour:
     entranceLocation: {fileID: 1898358933}
   - colliders:
     - {fileID: 1932000758}
-    sceneName: BeetleBoss
+    sceneName: BeetleBossRoom
     locked: 0
     entranceLocation: {fileID: 763783108}
   prevEdge:
