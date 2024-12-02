@@ -30,6 +30,7 @@ public class VineBossAIV2 : MonoBehaviour
 
     private bool firstTime = true;
     private bool firstTimeAttack = true;
+    private bool lastAttackWasSwarm = false;
     private bool swarmDead = true;
     private string currentAnimation = "bossIdle";
     private float timeSinceAttack = 0f;
@@ -94,7 +95,7 @@ public class VineBossAIV2 : MonoBehaviour
                 foreach (GameObject bug in swarm)
                 {
                     Health dummy;
-                    if (bug.TryGetComponent<Health>(out dummy) && bug.transform.position.y > 400f)
+                    if (bug.TryGetComponent<Health>(out dummy) && bug.transform.position.y > 450f)
                     {
                         allDead = false;
                     }
@@ -111,11 +112,12 @@ public class VineBossAIV2 : MonoBehaviour
                     firstTimeAttack = false;
                     SwarmAttack();
 
+
                     Debug.Log("Attacking with swarm");
                 } else {
-                    int randomAnim = Random.Range(0, numAttacks + 1);
+                    int randomAnim = Random.Range(0, numAttacks + (lastAttackWasSwarm ? 0 : 2));
 
-                    if (randomAnim == numAttacks)
+                    if (randomAnim >= numAttacks)
                     {
                         SwarmAttack();
 
@@ -123,6 +125,7 @@ public class VineBossAIV2 : MonoBehaviour
                     }
                     else
                     {
+                        lastAttackWasSwarm = false;
                         ChangeAnimation(attackNames[randomAnim]);
                         attackTime = attackDurations[randomAnim];
                         Debug.Log("Attacking with " + attackNames[randomAnim]);
@@ -143,6 +146,7 @@ public class VineBossAIV2 : MonoBehaviour
     public void SwarmAttack()
     {
         swarmDead = false;
+        lastAttackWasSwarm = true;
 
         for (int i = 0; i < swarmCount; i++) {
             GameObject bug = Instantiate(swarmBug);
