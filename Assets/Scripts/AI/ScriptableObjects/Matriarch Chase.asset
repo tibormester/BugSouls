@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Matriarch Chase
   m_EditorClassIdentifier: 
   maxChaseDistance: 100
-  minEngageDistance: 1
-  maxEngageDistance: 4
-  MoveSpeed: 12
-  Acceleration: 12
-  BackupMoveSpeed: 12
-  BackupAcceleration: 12
+  minEngageDistance: 5
+  maxEngageDistance: 8
+  MoveSpeed: 6
+  Acceleration: 4
+  BackupMoveSpeed: 6
+  BackupAcceleration: 2

@@ -31,7 +31,6 @@ public class SicklySpiderScript : MonoBehaviour
             text.text = "";
             Destroy(this);
         };
-        
     }
     private void Update(){
         text.transform.LookAt(ai.target);
@@ -60,7 +59,7 @@ public class SicklySpiderScript : MonoBehaviour
             yield return new WaitForSeconds(4f);
             text.text = "";
         }
-        ai.enabled = true;
+        ai.processing = true;
     }
 
 

@@ -20,4 +20,4 @@ MonoBehaviour:
   WindUpDuration: 0.1
   ChargeDuration: 0.1
   ChargeSpeed: 2
-  FollowThroughDuration: 0.2
+  FollowThroughDuration: 0.3

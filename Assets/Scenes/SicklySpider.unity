@@ -1202,7 +1202,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 773944327014275907, guid: 66bb12184f94c4ab5b68b42574dbdeed, type: 3}
       propertyPath: m_Name
-      value: MeleeSpiderling
+      value: SicklySpider
       objectReference: {fileID: 0}
     - target: {fileID: 831133483123042725, guid: 66bb12184f94c4ab5b68b42574dbdeed, type: 3}
       propertyPath: m_Mass

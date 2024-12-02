@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: RetrieveCrown
   m_EditorClassIdentifier: 
   delay: 4
-  MoveSpeed: 15
-  Acceleration: 2
+  MoveSpeed: 25
+  Acceleration: 3
   PickupRange: 5

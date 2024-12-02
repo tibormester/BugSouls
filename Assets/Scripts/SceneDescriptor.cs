@@ -133,7 +133,7 @@ public class SceneDescriptor : MonoBehaviour{
         player.SetActive(true);
         // Adjust the camera to target the new player
         cam.target = player.transform;
-        PlayerEntered?.Invoke(player.transform);//Let all AI's know we got a new player transform in town
+        
         //Move the health bar reference to the current scene's canvas
         //Ik this is very messy but the deadline is in 4 days
         HealthBar hbar = gameObject.scene.GetRootGameObjects().Select(go => go.GetComponentInChildren<HealthBar>()).FirstOrDefault(desc => desc != null);
@@ -153,6 +153,7 @@ public class SceneDescriptor : MonoBehaviour{
         //Start the scene if it was paused (if it wasn't this shouldnt change anything)
         PauseScene(true);
         cachedPlayer.SetActive(false); //Set the savepoint player to inactive
+        PlayerEntered?.Invoke(player.transform);//Let all AI's know we got a new player transform in town (Do this after theyre active so they can start their coroutines)
     }
 
     private bool AreAllEnemiesCleared(){
