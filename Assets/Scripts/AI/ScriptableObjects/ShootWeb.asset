@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca5d6ad0eb7f4d82b20135f6b841010, type: 3}
   m_Name: ShootWeb
   m_EditorClassIdentifier: 
-  webPrototype: {fileID: 0}
+  webPrototype: {fileID: 582823826365179364, guid: fcd9d8a0826d544ee9ac432e0f9e76bb, type: 3}
   LaunchSpeed: 0.5
   maxLaunchTicks: 200
   damage: 5

@@ -988,10 +988,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2882459128181347332, guid: 03f418c58e484aa40a2d3deaaaa7d58a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 216255172}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03f418c58e484aa40a2d3deaaaa7d58a, type: 3}
 --- !u!4 &216255159 stripped
 Transform:
@@ -1003,18 +1000,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2882459128181347332, guid: 03f418c58e484aa40a2d3deaaaa7d58a, type: 3}
   m_PrefabInstance: {fileID: 216255158}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &216255172
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 216255161}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84a32b6bd8c8c3d4f9c42fa4d5ebad5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &242261527
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3007,7 +2992,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 216255161}
-  cam: {fileID: 1319225620}
   exits:
   - colliders:
     - {fileID: 1854973235}
@@ -3148,17 +3132,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1319225620 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7834515696165794951, guid: 830961499e99d4857afe852b662c12fe, type: 3}
-  m_PrefabInstance: {fileID: 7431843922513667783}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08120324d771a421c8a02bbf5b675c05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1399457652
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4058,13 +4031,6 @@ MonoBehaviour:
   ai: {fileID: 0}
   text: {fileID: 0}
   charMovement: {fileID: 0}
-  dialogue:
-  - Ah, the spider ant stirs. Foolish, or brave? Perhaps both.
-  - The vine whispers promises. I heard them... but I shut my ears. Did you?
-  - Keep distance, the tree's roots. There, the truth festers. But beware, it does
-    not let go easily.
-  - Remember, to sever the vine, you must strike at its heart. Not all roots can
-    be pulled
 --- !u!114 &1785753532
 MonoBehaviour:
   m_ObjectHideFlags: 0

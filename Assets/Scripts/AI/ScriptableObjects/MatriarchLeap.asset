@@ -18,6 +18,6 @@ MonoBehaviour:
   angle: 35
   RotationSpeed: 0.1
   WindUpDuration: 0.2
-  ChargeDuration: 0.2
+  ChargeDuration: 0.4
   ChargeSpeed: 2
   FollowThroughDuration: 0.1
