@@ -15,7 +15,7 @@ MonoBehaviour:
   Damage: 5
   Knockback: 1
   CoolDown: 2.5
-  angle: -25
+  angle: -5
   RotationSpeed: 0.05
   WindUpDuration: 0.3
   ChargeDuration: 0.35
