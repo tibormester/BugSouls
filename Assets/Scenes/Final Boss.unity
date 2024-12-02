@@ -6659,6 +6659,7 @@ MonoBehaviour:
   swarmBug: {fileID: 0}
   swarmLineStart: {fileID: 0}
   swarmLineEnd: {fileID: 0}
+  spine: {fileID: 0}
   gameOverScreen: {fileID: 0}
   gameOverText: {fileID: 0}
   secondsToFade: 2
@@ -6944,6 +6945,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2103213553 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4711670096504617916, guid: 07bed154c6d01e445b783fe21659abb5, type: 3}
+  m_PrefabInstance: {fileID: 6907949674904242401}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6907949674904242401
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7008,6 +7014,10 @@ PrefabInstance:
       propertyPath: health
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6380785092032781317, guid: 07bed154c6d01e445b783fe21659abb5, type: 3}
+      propertyPath: spine
+      value: 
+      objectReference: {fileID: 2103213553}
     - target: {fileID: 6380785092032781317, guid: 07bed154c6d01e445b783fe21659abb5, type: 3}
       propertyPath: gameOver
       value: 

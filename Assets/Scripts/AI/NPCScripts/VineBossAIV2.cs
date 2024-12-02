@@ -10,6 +10,7 @@ using static UnityEngine.GraphicsBuffer;
 public class VineBossAIV2 : MonoBehaviour
 {
     private Animator vineBossAnimator;
+    private Health health;
     public float attackInterval = 5f;       
 
     // Attack properties
@@ -24,6 +25,7 @@ public class VineBossAIV2 : MonoBehaviour
     public GameObject swarmBug;
     public GameObject swarmLineStart;
     public GameObject swarmLineEnd;
+    public GameObject spine;
     public Image gameOverScreen;
     public TextMeshProUGUI gameOverText;
     public float secondsToFade = 2f;
@@ -54,10 +56,19 @@ public class VineBossAIV2 : MonoBehaviour
         swarmLineStartPos = swarmLineStart.transform.position;
         swarmLineEndPos = swarmLineEnd.transform.position;
 
-
-        GetComponent<Health>().DeathEvent += () => { 
+        health = GetComponent<Health>();
+        health.DeathEvent += () => { 
             vineBossAnimator.CrossFade("die", 0.1f); dying = true; 
             
+        };
+
+        health.Damaged += () => {
+            if (Vector3.Distance(spine.transform.position, target.transform.position) < 25f)
+            {
+                var direction = target.transform.position - spine.transform.position;
+                direction = Vector3.ProjectOnPlane(direction, target.transform.up); //flatten so we dont hop on hit
+                target.GetComponent<Rigidbody>()?.AddForce(direction.normalized * 4f * knockbackForce, ForceMode.Impulse);
+            }
         };
 
         AnimationClip[] clips = vineBossAnimator.runtimeAnimatorController.animationClips;
