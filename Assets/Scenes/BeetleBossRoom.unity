@@ -636,7 +636,7 @@ MonoBehaviour:
     entranceLocation: {fileID: 1542653647}
   prevEdge:
     colliders: []
-    sceneName: MushroomCombatScene
+    sceneName: 
     locked: 0
     entranceLocation: {fileID: 0}
   cachedPlayer: {fileID: 0}
@@ -6839,10 +6839,18 @@ PrefabInstance:
       propertyPath: currentHealth
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 1725547510204702768, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
+      propertyPath: m_Mass
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 2572901030770951931, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
       propertyPath: m_Name
       value: BeetleBoss
       objectReference: {fileID: 0}
+    - target: {fileID: 5804967923690742224, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
+      propertyPath: AIBehaviours.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: b9c6c68a9c601497ab1ea81f907f7763, type: 2}
     - target: {fileID: 5804967923690742224, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
       propertyPath: AIBehaviours.Array.data[1]
       value: 

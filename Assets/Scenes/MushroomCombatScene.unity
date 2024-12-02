@@ -623,7 +623,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1579500884}
-  cam: {fileID: 0}
   exits:
   - colliders:
     - {fileID: 2108571562}
@@ -637,7 +636,7 @@ MonoBehaviour:
     entranceLocation: {fileID: 1482392301}
   prevEdge:
     colliders: []
-    sceneName: MushroomCombatScene
+    sceneName: 
     locked: 0
     entranceLocation: {fileID: 0}
   cachedPlayer: {fileID: 0}

@@ -2384,7 +2384,7 @@ MonoBehaviour:
     entranceLocation: {fileID: 763783108}
   prevEdge:
     colliders: []
-    sceneName: SicklySpider
+    sceneName: 
     locked: 0
     entranceLocation: {fileID: 556700279}
   cachedPlayer: {fileID: 0}

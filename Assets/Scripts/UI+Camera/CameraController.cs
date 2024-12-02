@@ -55,8 +55,9 @@ public class CameraController : MonoBehaviour
         front = target.transform.forward;
         targetMovement = target.gameObject.GetComponent<CharacterMovement>();
         prevNormal = targetMovement.physicsBody.groundNormal;
-        //Ensure u cant do stuff when u die
-        target.GetComponent<Health>().DeathEvent += () => allowMovement = false;
+        //Ensure u cant do stuff when u die (but only in the scene u died in...)
+        target.GetComponent<Health>().DeathEvent += () => allowMovement = (target.gameObject.scene == gameObject.scene) ? false : true;
+
         characterAnimation = target.GetComponent<CharacterAnimation>();
     }
     public LayerMask throwable;
