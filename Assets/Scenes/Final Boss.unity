@@ -680,7 +680,11 @@ PrefabInstance:
     - target: {fileID: 5866666021909216657, guid: e7bf84a0ba526c644b08829b1479d482, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: ef9cba35d44a866488f83a17b371867b, type: 2}
+      objectReference: {fileID: 9100000, guid: ddbca93445fa33f46acef2d8e4112a80, type: 2}
+    - target: {fileID: 5866666021909216657, guid: e7bf84a0ba526c644b08829b1479d482, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6507502907054725139, guid: e7bf84a0ba526c644b08829b1479d482, type: 3}
       propertyPath: m_Layer
       value: 9
@@ -708,10 +712,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e7bf84a0ba526c644b08829b1479d482, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1709388190}
+      addedObject: {fileID: 1709388191}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e7bf84a0ba526c644b08829b1479d482, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1709388191}
+      addedObject: {fileID: 1709388196}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e7bf84a0ba526c644b08829b1479d482, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1709388194}
@@ -928,7 +932,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1554336520}
-  cam: {fileID: 363647155}
   exits:
   - colliders: []
     sceneName: MushroomCombatScene
@@ -956,6 +959,63 @@ Transform:
   - {fileID: 835000131}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1433152690
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1020062893827687887, guid: d9a2cb2a70d84f54490c77278d9beacf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -203.36174
+      objectReference: {fileID: 0}
+    - target: {fileID: 1020062893827687887, guid: d9a2cb2a70d84f54490c77278d9beacf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 455.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 1020062893827687887, guid: d9a2cb2a70d84f54490c77278d9beacf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 52.301
+      objectReference: {fileID: 0}
+    - target: {fileID: 1020062893827687887, guid: d9a2cb2a70d84f54490c77278d9beacf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1020062893827687887, guid: d9a2cb2a70d84f54490c77278d9beacf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1020062893827687887, guid: d9a2cb2a70d84f54490c77278d9beacf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1020062893827687887, guid: d9a2cb2a70d84f54490c77278d9beacf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1020062893827687887, guid: d9a2cb2a70d84f54490c77278d9beacf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1020062893827687887, guid: d9a2cb2a70d84f54490c77278d9beacf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1020062893827687887, guid: d9a2cb2a70d84f54490c77278d9beacf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4171412588976218629, guid: d9a2cb2a70d84f54490c77278d9beacf, type: 3}
+      propertyPath: m_Name
+      value: BeetleTwoHandSword
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d9a2cb2a70d84f54490c77278d9beacf, type: 3}
 --- !u!1 &1554336520 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2882459128181347332, guid: 03f418c58e484aa40a2d3deaaaa7d58a, type: 3}
@@ -5768,25 +5828,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e7bf84a0ba526c644b08829b1479d482, type: 3}
   m_PrefabInstance: {fileID: 533103042}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1709388190
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1709388187}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d99ffa70f5a04734e9e886cd97f7aedb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  changeInterval: 1
-  attackRange: 2
-  damage: 10
-  knockbackForce: 5
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!114 &1709388191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5829,7 +5870,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -5855,6 +5896,26 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6092732707855781668, guid: e7bf84a0ba526c644b08829b1479d482, type: 3}
+--- !u!114 &1709388196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1709388187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f07a2039855aaa4fad9ea126e254945, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  changeInterval: 5
+  attackRange: 2
+  damage: 10
+  knockbackForce: 5
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  target: {fileID: 0}
 --- !u!1001 &1767572595
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6187,3 +6248,4 @@ SceneRoots:
   - {fileID: 46480388}
   - {fileID: 1289030381}
   - {fileID: 533103042}
+  - {fileID: 1433152690}

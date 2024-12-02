@@ -40,8 +40,8 @@ ModelImporter:
       name: Aleko_huge_finalboss_mcp
       takeName: Aleko_huge_finalboss_mcp
       internalID: 5709279821502227143
-      firstFrame: 3634
-      lastFrame: 3839
+      firstFrame: 250
+      lastFrame: 306
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
