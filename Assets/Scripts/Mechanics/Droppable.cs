@@ -44,11 +44,21 @@ public class Droppable : MonoBehaviour{
         item.transform.SetParent(this.gameObject.transform.parent); //Maybe set to null?
         item.transform.localScale = globalScale * ScaleMultiplier;
 
-        Rigidbody rb = AddRigidBody(); //Adds it with some init stuff
-        Throwable throwable = item.AddComponent<Throwable>();
-
+        Rigidbody rb = item.GetComponent<Rigidbody>();
+        if(rb){
+            rb.useGravity = true;
+            rb.isKinematic = false;
+        }else{
+            rb = AddRigidBody(); //Adds it with some init stuff
+        }
+        Throwable throwable = item.GetComponent<Throwable>();
+        if(throwable){
+            throwable.enabled = true;
+        }else{
+            throwable = item.AddComponent<Throwable>();
+        }
+        
         StartCoroutine(LaunchItem(rb));
-
         item = null;
     }
     public IEnumerator LaunchItem(Rigidbody rb){

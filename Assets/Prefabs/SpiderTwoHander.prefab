@@ -115,7 +115,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1020062893827687887}
   - component: {fileID: 342742967120045438}
-  - component: {fileID: 1552727717842586786}
   - component: {fileID: 9220669937548059425}
   - component: {fileID: 3145144119128958344}
   m_Layer: 8
@@ -168,33 +167,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!114 &1552727717842586786
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4171412588976218629}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ec40ad7cf03041c19d1774c2b469dd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  checkDistance: 150
-  velocityCheckDistance: 2
-  groundedDistance: 1
-  feetDistance: 0.2
-  isGrounded: 1
-  groundNormal: {x: 0, y: 1, z: 0}
-  groundDistance: 0
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 0
-  ground: {fileID: 0}
-  coyoteTime: 0.1
-  gravity: -32
-  coyoteOrientationTime: 0.3
-  aerialTimeLimit: 0
 --- !u!114 &9220669937548059425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,7 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ef214240248a4ba1ae865c3dd70a8f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 15
   type: 1
   audioSource: {fileID: 0}
   OnSwing: {fileID: 8300000, guid: 81cd392c494d74ba3b96c6b1ca0b8288, type: 3}
