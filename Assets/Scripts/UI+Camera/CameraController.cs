@@ -38,9 +38,9 @@ public class CameraController : MonoBehaviour
     public float currStamina;
 
     void Start(){
-        front = target.transform.forward;
         cam = GetComponent<Camera>();
         Cursor.lockState = CursorLockMode.Locked;// Lock and hide Cursor
+
         if(target) RecievePlayer(target);
         SceneDescriptor sd = gameObject.scene.GetRootGameObjects().Select(go => go.GetComponent<SceneDescriptor>()).FirstOrDefault(desc => desc != null);
         sd.PlayerEntered += RecievePlayer;
@@ -52,6 +52,7 @@ public class CameraController : MonoBehaviour
     }
     public void RecievePlayer(Transform newTarget){
         target = newTarget;
+        front = target.transform.forward;
         targetMovement = target.gameObject.GetComponent<CharacterMovement>();
         prevNormal = targetMovement.physicsBody.groundNormal;
         //Ensure u cant do stuff when u die
@@ -62,12 +63,14 @@ public class CameraController : MonoBehaviour
     public LayerMask terrain;
     public Weapon weapon;
     void Update(){
+        if(!target)return;
         Ray ray = cam.ScreenPointToRay(Input.mousePosition); // Cast ray from camera, can also use cam.transform.forward for a different direction
         if(!targetMovement.sprinting && allowMovement){
             targetMovement.look_direction = ray.direction;
         }
     }
     void LateUpdate(){
+        if(!target)return;
         MouseInputs();
         if (allowMovement){
             Movement();
