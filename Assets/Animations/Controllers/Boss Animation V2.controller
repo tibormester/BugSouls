@@ -123,9 +123,6 @@ AnimatorStateMachine:
     m_State: {fileID: 2683299009125160784}
     m_Position: {x: 870, y: 180, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: -1791325236558292383}
-    m_Position: {x: 660, y: 180, z: 0}
-  - serializedVersion: 1
     m_State: {fileID: -5872763388962944546}
     m_Position: {x: 240, y: 180, z: 0}
   - serializedVersion: 1
@@ -150,32 +147,6 @@ AnimatorStateMachine:
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 3561214974136825835}
---- !u!1102 &-1791325236558292383
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: eatBothHands
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 1
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 119fbd6a41296b345be9f9dceff93734, type: 2}
-  m_Tag: 
-  m_SpeedParameter: baseSpeed
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1102 &-340049157028975414
 AnimatorState:
   serializedVersion: 6

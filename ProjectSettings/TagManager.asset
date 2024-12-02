@@ -6,6 +6,7 @@ TagManager:
   tags:
   - twoHandSword
   - dagger
+  - BossHand
   layers:
   - Default
   - TransparentFX
