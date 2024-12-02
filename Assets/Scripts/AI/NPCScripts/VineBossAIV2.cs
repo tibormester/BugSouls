@@ -33,7 +33,7 @@ public class VineBossAIV2 : MonoBehaviour
         SceneDescriptor sd = gameObject.scene.GetRootGameObjects().Select(go => go.GetComponent<SceneDescriptor>()).FirstOrDefault(desc => desc != null);
         sd.PlayerEntered += RecievePlayer;
 
-        GetComponent<Health>().DeathEvent += () => { vineBossAnimator.CrossFade("Die", 0.1f); dying = true; };
+        GetComponent<Health>().DeathEvent += () => { vineBossAnimator.CrossFade("die", 0.1f); dying = true; };
 
         AnimationClip[] clips = vineBossAnimator.runtimeAnimatorController.animationClips;
 
@@ -73,7 +73,7 @@ public class VineBossAIV2 : MonoBehaviour
             firstTime = false;
         }
 
-        while (true)
+        while (!dying)
         {
             if (timeSinceAttack >= attackInterval && timeSinceAttack >= attackTime * 0.9f) {
                 int randomAnim = Random.Range(0, 6);
