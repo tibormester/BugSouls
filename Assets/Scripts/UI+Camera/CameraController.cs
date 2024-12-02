@@ -70,10 +70,9 @@ public class CameraController : MonoBehaviour
     public Weapon weapon;
     void Update(){
         Ray ray = cam.ScreenPointToRay(Input.mousePosition); // Cast ray from camera, can also use cam.transform.forward for a different direction
-        if(!targetMovement.sprinting){
+        if(!targetMovement.sprinting && allowMovement){
             targetMovement.look_direction = ray.direction;
         }
-        //Change swinging a sword to mouse button 0 and throwing gets moved to the grapple script
     }
     void LateUpdate(){
         MouseInputs();

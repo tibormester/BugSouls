@@ -13,15 +13,13 @@ public class Droppable : MonoBehaviour{
     public Vector3 popVector= Vector3.up;
     public int popDuration = 5;
 
-    public Health health;
-
+    public Action<GameObject> DroppedItem;
     //Runs every tick and triggers the drop action, by default is when health hits 50% (also heals)
     public Func<Droppable,bool> When = DefaultTrigger;
 
     public static bool DefaultTrigger(Droppable drop){
         var health = drop.GetComponent<Health>();
         if(health && drop.item && health.currentHealth / health.maxHealth <= 0.5f){
-            health.ApplyDamage(0.3f * health.maxHealth);
             var ai = drop.GetComponent<GeneralAI>();
             if(ai){
                 ai.data[FleeBehaviour.fleeingTag]=true;
@@ -31,16 +29,20 @@ public class Droppable : MonoBehaviour{
         return false;
     }
 
+    //Im guessing this is the same efficiecny starting a coroutine with yield return WaitUntil(When)
     public void FixedUpdate(){
         if(When.Invoke(this)){
-            Drop();
+            var i = item;
+            Drop(); //sets item to null
+            DroppedItem?.Invoke(i);
         }
     }
 
     public void Drop(){
         item.layer = LayerMask.NameToLayer("Throwable");
+        var globalScale = item.transform.lossyScale;
         item.transform.SetParent(this.gameObject.transform.parent); //Maybe set to null?
-        item.transform.localScale = transform.localScale * ScaleMultiplier;
+        item.transform.localScale = globalScale * ScaleMultiplier;
 
         Rigidbody rb = AddRigidBody(); //Adds it with some init stuff
         Throwable throwable = item.AddComponent<Throwable>();

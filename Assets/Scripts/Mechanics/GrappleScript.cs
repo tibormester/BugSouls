@@ -92,9 +92,15 @@ public class GrappleScript : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // Cast ray from camera, can also use cam.transform.forward for a different direction
         RaycastHit hit;
         //Ray cast to see if we are looking at something and then construct a ray from the player to that
-        if (Physics.Raycast(ray, out hit, maxLaunchTicks * LaunchSpeed, ~LayerMask.NameToLayer("Player"))){
+        //Length of the projection of the difference in camera and player position along the camera's z-axis
+        float minDistance =  Vector3.Dot(transform.position - Camera.main.transform.position, ray.direction);
+        //Use a sphere cast to give a little more margin for error when aiming
+        if (Physics.SphereCast(ray.origin, 0.1f, ray.direction, out hit, maxLaunchTicks * LaunchSpeed, ~LayerMask.NameToLayer("Player")) && hit.distance >= minDistance){
             ray.direction = (hit.point - transform.position).normalized;
             ray.origin = transform.position;
+            //Do a depth test to make sure we hit something infront of the player...
+
+
         } else{ //Change the ray to point at the maximum launch distance
             ray.direction = (ray.GetPoint(LaunchSpeed * maxLaunchTicks) - transform.position).normalized;
             ray.origin = transform.position;
@@ -117,7 +123,7 @@ public class GrappleScript : MonoBehaviour
             // Raycast from the current target Location out by the launch speed to the new target location
             if (Physics.Raycast(targetLocation, ray.direction, out hit, LaunchSpeed, ~LayerMask.NameToLayer("Player"))){
                 //Check what we hit, if its the terrain start grappling to it (bring player to terrain)
-                if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Terrain") || 
+                if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Terrain") || hit.collider.gameObject.layer == LayerMask.NameToLayer("Grappleable") || 
                     hit.collider.gameObject.layer == LayerMask.NameToLayer("Enemy")){ 
                     if(currentWeb != null){
                         Destroy(currentWeb);

@@ -5109,8 +5109,9 @@ MonoBehaviour:
   rb: {fileID: 0}
   droppable: {fileID: 0}
   target: {fileID: 0}
+  processing: 1
   AIBehaviours:
-  - {fileID: 11400000, guid: 90b6f2cf36e424845b8fdf8916cfa566, type: 2}
+  - {fileID: 11400000, guid: 1f591b4fced5846c6872a6357e8d9fd6, type: 2}
   - {fileID: 11400000, guid: 90b6f2cf36e424845b8fdf8916cfa566, type: 2}
   - {fileID: 11400000, guid: 5ea6363ec17154ff1abf1ff8409c96a4, type: 2}
   - {fileID: 11400000, guid: 034903a0320d94f5daa6e25decb0d331, type: 2}
