@@ -231,6 +231,6 @@ public class CameraController : MonoBehaviour
     private Vector3 accum = Vector3.zero;
     void FixedUpdate(){
         moved = true;
-        targetMovement.Move(accum);
+        targetMovement?.Move(accum);
     }
 }

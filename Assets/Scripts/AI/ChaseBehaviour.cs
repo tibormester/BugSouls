@@ -32,6 +32,8 @@ public class ChaseBehaviour : AIBehaviour{
         Vector3 difference = (ai.target.position - ai.transform.position);
         float distance = difference.magnitude;
         Vector3 normalized = difference / distance;
+
+        yield return new WaitUntil(() => ai.movement != null);
         //Look at the target
         ai.movement.look_direction = difference;
         //If we are far away move forward
