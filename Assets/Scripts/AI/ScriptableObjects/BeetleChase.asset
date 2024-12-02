@@ -9,12 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cca5d6ad0eb7f4d82b20135f6b841010, type: 3}
-  m_Name: ShootWeb
+  m_Script: {fileID: 11500000, guid: c945cff10588b4bbda4ff029ce512488, type: 3}
+  m_Name: BeetleChase
   m_EditorClassIdentifier: 
-  webPrototype: {fileID: 582823826365179364, guid: fcd9d8a0826d544ee9ac432e0f9e76bb, type: 3}
-  LaunchSpeed: 0.5
-  maxLaunchTicks: 200
-  damage: 5
-  WindUp: 0.2
-  CoolDown: 2.5
+  maxChaseDistance: 100
+  minEngageDistance: 1
+  maxEngageDistance: 6
+  MoveSpeed: 12
+  Acceleration: 8
+  BackupMoveSpeed: 4
+  BackupAcceleration: 8

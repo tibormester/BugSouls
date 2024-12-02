@@ -541,10 +541,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2882459128181347332, guid: 03f418c58e484aa40a2d3deaaaa7d58a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 216255162}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03f418c58e484aa40a2d3deaaaa7d58a, type: 3}
 --- !u!4 &216255159 stripped
 Transform:
@@ -556,18 +553,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2882459128181347332, guid: 03f418c58e484aa40a2d3deaaaa7d58a, type: 3}
   m_PrefabInstance: {fileID: 216255158}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &216255162
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 216255161}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84a32b6bd8c8c3d4f9c42fa4d5ebad5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &238499484 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5638708678738990789, guid: 12e3bc20d77552241be20892cbd8f6d7, type: 3}
@@ -2382,7 +2367,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 216255161}
-  cam: {fileID: 0}
   exits:
   - colliders:
     - {fileID: 473715199}

@@ -15,7 +15,7 @@ MonoBehaviour:
   maxChaseDistance: 100
   minEngageDistance: 5
   maxEngageDistance: 8
-  MoveSpeed: 6
-  Acceleration: 7
+  MoveSpeed: 8
+  Acceleration: 8
   BackupMoveSpeed: 6
   BackupAcceleration: 5
