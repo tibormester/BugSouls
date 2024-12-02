@@ -17,21 +17,34 @@ public class VineBossAIV2 : MonoBehaviour
     public LayerMask playerLayer;          // Layer mask to identify the player
 
     public Transform target;
+    public bool dying = false;
+    public static int swarmCount = 5;
+    public GameObject swarmBug;
+    public GameObject swarmLineStart;
+    public GameObject swarmLineEnd;
+    private Vector3 swarmLineStartPos;
+    private Vector3 swarmLineEndPos;
+
 
     private static int numAttacks = 5;
 
-    public bool dying = false;
     private bool firstTime = true;
+    private bool firstTimeAttack = true;
+    private bool swarmDead = true;
     private string currentAnimation = "bossIdle";
     private float timeSinceAttack = 0f;
     private string[] attackNames = new string[numAttacks];
     private float[] attackDurations = new float[numAttacks];
+    private GameObject[] swarm = new GameObject[swarmCount];
 
     void Start()
     {
         vineBossAnimator = GetComponent<Animator>();
         SceneDescriptor sd = gameObject.scene.GetRootGameObjects().Select(go => go.GetComponent<SceneDescriptor>()).FirstOrDefault(desc => desc != null);
         sd.PlayerEntered += RecievePlayer;
+        swarmLineStartPos = swarmLineStart.transform.position;
+        swarmLineEndPos = swarmLineEnd.transform.position;
+
 
         GetComponent<Health>().DeathEvent += () => { vineBossAnimator.CrossFade("die", 0.1f); dying = true; };
 
@@ -76,10 +89,29 @@ public class VineBossAIV2 : MonoBehaviour
         while (!dying)
         {
             if (timeSinceAttack >= attackInterval && timeSinceAttack >= attackTime * 0.9f) {
-                int randomAnim = Random.Range(0, numAttacks);
-                ChangeAnimation(attackNames[randomAnim]);
-                attackTime = attackDurations[randomAnim];
-                Debug.Log("Attacking with " + attackNames[randomAnim]);
+
+                if (firstTimeAttack)
+                {
+                    firstTimeAttack = false;
+                    SwarmAttack();
+
+                    Debug.Log("Attacking with swarm");
+                } else {
+                    int randomAnim = Random.Range(0, numAttacks + 1);
+
+                    if (randomAnim == numAttacks)
+                    {
+                        SwarmAttack();
+
+                        Debug.Log("Attacking with swarm");
+                    }
+                    else
+                    {
+                        ChangeAnimation(attackNames[randomAnim]);
+                        attackTime = attackDurations[randomAnim];
+                        Debug.Log("Attacking with " + attackNames[randomAnim]);
+                    }
+                }
 
                 timeSinceAttack = 0f;
             } else {
@@ -90,6 +122,24 @@ public class VineBossAIV2 : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    public void SwarmAttack()
+    {
+        swarmDead = false;
+
+        for (int i = 0; i < swarmCount; i++) {
+            GameObject bug = Instantiate(swarmBug);
+            
+            float x = i * ((swarmLineEndPos.x - swarmLineStartPos.x) / ((float) swarmCount)) + swarmLineStartPos.x;
+            bug.transform.position = new Vector3(x, swarmLineStartPos.y, swarmLineStartPos.z);
+            bug.transform.LookAt(target.position);
+
+
+
+            swarm[i] = bug;
+        }
+
     }
 
     public bool ChangeAnimation(string animationName)
