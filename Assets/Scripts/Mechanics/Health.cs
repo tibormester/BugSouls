@@ -78,19 +78,18 @@ public class Health : MonoBehaviour
         Debug.Log($"{gameObject.name} has died!");
         DeathEvent?.Invoke();
         GetComponent<CharacterMovement>().maxSpeed = 0f;
-        if (gameObject.layer == LayerMask.NameToLayer("Player")){
-            yield return null;
-        } else{
-            yield return new WaitForSeconds(0.01f);
 
-            StartCoroutine(Corpsify(gameObject)); //Removes this script btw
-            //gameObject.SetActive(false); // Example action on death
-        }
+        yield return new WaitForSeconds(0.01f);
+
+        StartCoroutine(Corpsify(gameObject)); //Removes this script btw
+        //gameObject.SetActive(false); // Example action on death
+    
         
     }
     public IEnumerator Corpsify(GameObject enemy){
         Throwable throwable = enemy.AddComponent<Throwable>();
         Rigidbody rb = enemy.GetComponent<Rigidbody>();
+        rb.drag = 0.5f;
         if (healthBar){
             Destroy(healthBar.gameObject); //For somereason on death it doesnt shrink to nothing
         }

@@ -32,7 +32,7 @@ public class MatriarchDialogueScript : MonoBehaviour
         droppable.DroppedItem += (GameObject crown) => {
             foreach (var direction in SpawnLocations){
                 var spider = Instantiate(SpiderlingPrefab, gameObject.transform.parent.position + gameObject.transform.TransformDirection(direction), gameObject.transform.parent.rotation);
-                spider.GetComponent<GeneralAI>().target = ai.target;
+                spider.GetComponent<GeneralAI>().RecievePlayer(ai.target);
             }
         };
         //Heal whenever we pickup the crown and if we are out of heals stop trying to retrieve it

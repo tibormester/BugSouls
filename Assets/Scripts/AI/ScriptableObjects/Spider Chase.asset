@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Spider Chase
   m_EditorClassIdentifier: 
   maxChaseDistance: 100
-  minEngageDistance: 3
-  maxEngageDistance: 8
-  MoveSpeed: 6
-  Acceleration: 6
-  BackupMoveSpeed: 6
-  BackupAcceleration: 2
+  minEngageDistance: 1
+  maxEngageDistance: 4
+  MoveSpeed: 8
+  Acceleration: 8
+  BackupMoveSpeed: 8
+  BackupAcceleration: 8

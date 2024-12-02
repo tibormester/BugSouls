@@ -16,8 +16,8 @@ MonoBehaviour:
   Knockback: 10
   CoolDown: 4
   angle: -30
-  RotationSpeed: 0.08
-  WindUpDuration: 0.6
+  RotationSpeed: 0.1
+  WindUpDuration: 0.8
   ChargeDuration: 0.45
   ChargeSpeed: 1.2
   FollowThroughDuration: 0.3

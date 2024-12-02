@@ -8,7 +8,6 @@ using UnityEngine.UI;
 
 public class SceneDescriptor : MonoBehaviour{
     public GameObject player; // Reference to the player object
-    public CameraController cam; // Reference to the camera controller
     public List<GraphEdge> exits; // Exits connecting to other scenes
 
     //When we restart a scene, remeber how we entered and where we entered from
@@ -32,6 +31,7 @@ public class SceneDescriptor : MonoBehaviour{
             cachedPlayer = (GameObject)Instantiate(player, gameObject.scene);
             cachedPlayer.SetActive(false);
             player.GetComponent<Health>().DeathEvent += ReloadCurrentScene;
+            Camera.main.GetComponent<CameraController>().RecievePlayer(player.transform);
         }
         if(prevEdge.sceneName == ""){
             prevEdge.entranceLocation = transform;
@@ -131,9 +131,7 @@ public class SceneDescriptor : MonoBehaviour{
 
         player = transientPlayer;
         player.SetActive(true);
-        // Adjust the camera to target the new player
-        cam.target = player.transform;
-        PlayerEntered?.Invoke(player.transform);//Let all AI's know we got a new player transform in town
+        
         //Move the health bar reference to the current scene's canvas
         //Ik this is very messy but the deadline is in 4 days
         HealthBar hbar = gameObject.scene.GetRootGameObjects().Select(go => go.GetComponentInChildren<HealthBar>()).FirstOrDefault(desc => desc != null);
@@ -153,6 +151,7 @@ public class SceneDescriptor : MonoBehaviour{
         //Start the scene if it was paused (if it wasn't this shouldnt change anything)
         PauseScene(true);
         cachedPlayer.SetActive(false); //Set the savepoint player to inactive
+        PlayerEntered?.Invoke(player.transform);//Let all AI's know we got a new player transform in town (Do this after theyre active so they can start their coroutines)
     }
 
     private bool AreAllEnemiesCleared(){
@@ -169,9 +168,6 @@ public class SceneDescriptor : MonoBehaviour{
         foreach (var obj in gameObject.scene.GetRootGameObjects()){
             obj.SetActive(unPause);
         }
-        if(unPause){
-            cam.gameObject.tag = "MainCamera";
-        } 
     }
 }
 
