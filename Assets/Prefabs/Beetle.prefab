@@ -602,7 +602,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.25
+      scalar: 0.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -983,8 +983,8 @@ ParticleSystem:
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
-    radiusThickness: 0.1
-    donutRadius: 1
+    radiusThickness: 0
+    donutRadius: 3
     m_Position: {x: 0, y: 1.26, z: -2.43}
     m_Rotation: {x: 90, y: 0, z: 0}
     m_Scale: {x: 1, y: 1, z: 1}
@@ -1185,7 +1185,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 20
+      scalar: 50
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -5187,7 +5187,9 @@ MonoBehaviour:
   target: {fileID: 0}
   processing: 1
   AIBehaviours:
-  - {fileID: 11400000, guid: 1f591b4fced5846c6872a6357e8d9fd6, type: 2}
+  - {fileID: 11400000, guid: dfe318116d171a544b16e38a19941db1, type: 2}
+  - {fileID: 11400000, guid: cd7a6b53fb5ead646820d7e5770895cf, type: 2}
+  - {fileID: 11400000, guid: 4cdc811fa13996e42a42670a14c750e5, type: 2}
   CollisionEventLayer: -1
   colliding: []
 --- !u!114 &8709236721289258936
