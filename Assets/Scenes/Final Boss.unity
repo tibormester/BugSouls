@@ -6506,6 +6506,11 @@ MonoBehaviour:
   gameOverScreen: {fileID: 0}
   gameOverText: {fileID: 0}
   secondsToFade: 2
+  CenterOfMass: {fileID: 0}
+  visual: {fileID: 0}
+  ShockWaveStrength: 2
+  ShockWaveDuration: 2.5
+  ShockWaveRadius: 50
 --- !u!4 &1709388197
 Transform:
   m_ObjectHideFlags: 0
@@ -6842,6 +6847,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1919554362 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1933538897907381893, guid: 07bed154c6d01e445b783fe21659abb5, type: 3}
+  m_PrefabInstance: {fileID: 6907949674904242401}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2003994867
 GameObject:
   m_ObjectHideFlags: 0
@@ -7009,6 +7019,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2103213553}
     - target: {fileID: 6380785092032781317, guid: 07bed154c6d01e445b783fe21659abb5, type: 3}
+      propertyPath: visual
+      value: 
+      objectReference: {fileID: 4735595942347808866, guid: 0eb85944836a64568a244d032940c2ab, type: 3}
+    - target: {fileID: 6380785092032781317, guid: 07bed154c6d01e445b783fe21659abb5, type: 3}
       propertyPath: gameOver
       value: 
       objectReference: {fileID: 1238863431}
@@ -7016,6 +7030,10 @@ PrefabInstance:
       propertyPath: swarmBug
       value: 
       objectReference: {fileID: 2572901030770951931, guid: 53f631bfa8abde549b1ef86975996693, type: 3}
+    - target: {fileID: 6380785092032781317, guid: 07bed154c6d01e445b783fe21659abb5, type: 3}
+      propertyPath: CenterOfMass
+      value: 
+      objectReference: {fileID: 1919554362}
     - target: {fileID: 6380785092032781317, guid: 07bed154c6d01e445b783fe21659abb5, type: 3}
       propertyPath: gameOverText
       value: 
@@ -7033,20 +7051,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1238863431}
     - target: {fileID: 6380785092032781317, guid: 07bed154c6d01e445b783fe21659abb5, type: 3}
+      propertyPath: knockbackForce
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 6380785092032781317, guid: 07bed154c6d01e445b783fe21659abb5, type: 3}
       propertyPath: swarmLineStart
       value: 
       objectReference: {fileID: 2026818027}
     - target: {fileID: 6380785092032781317, guid: 07bed154c6d01e445b783fe21659abb5, type: 3}
       propertyPath: ShockWaveRadius
-      value: 50
+      value: 125
       objectReference: {fileID: 0}
     - target: {fileID: 6380785092032781317, guid: 07bed154c6d01e445b783fe21659abb5, type: 3}
       propertyPath: ShockWaveDuration
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6380785092032781317, guid: 07bed154c6d01e445b783fe21659abb5, type: 3}
       propertyPath: ShockWaveStrength
-      value: 25
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7081,3 +7103,4 @@ SceneRoots:
   - {fileID: 849692857}
   - {fileID: 2026818028}
   - {fileID: 2054669668}
+  - {fileID: 1709388197}
