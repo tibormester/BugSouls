@@ -693,7 +693,7 @@ MonoBehaviour:
     entranceLocation: {fileID: 1482392301}
   prevEdge:
     colliders: []
-    sceneName: MushroomCombatScene
+    sceneName: 
     locked: 0
     entranceLocation: {fileID: 0}
   cachedPlayer: {fileID: 0}

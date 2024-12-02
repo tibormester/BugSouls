@@ -250,7 +250,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseDamage: 3
+  orientated: 0
+  MaxMultiplier: 5
+  MinMultiplier: 0.1
   forceMultiplier: 0.5
+  FriendlyFire: 0
 --- !u!54 &139283253
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1415,7 +1419,7 @@ GameObject:
   m_Component:
   - component: {fileID: 763783108}
   m_Layer: 0
-  m_Name: TutorialLoop
+  m_Name: BeetleBossRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1430,7 +1434,7 @@ Transform:
   m_GameObject: {fileID: 763783107}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -372.75, y: -172.17, z: -12}
+  m_LocalPosition: {x: -355.9396, y: -191.10846, z: -14.34}
   m_LocalScale: {x: 1.7, y: 2.4, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2375,12 +2379,12 @@ MonoBehaviour:
     entranceLocation: {fileID: 1898358933}
   - colliders:
     - {fileID: 1932000758}
-    sceneName: TutorialScene
+    sceneName: BeetleBoss
     locked: 0
     entranceLocation: {fileID: 763783108}
   prevEdge:
     colliders: []
-    sceneName: SicklySpider
+    sceneName: 
     locked: 0
     entranceLocation: {fileID: 556700279}
   cachedPlayer: {fileID: 0}
@@ -3068,7 +3072,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseDamage: 2
+  orientated: 0
+  MaxMultiplier: 5
+  MinMultiplier: 0.1
   forceMultiplier: 0.5
+  FriendlyFire: 0
 --- !u!54 &1860298726
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3450,7 +3458,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseDamage: 5
+  orientated: 0
+  MaxMultiplier: 5
+  MinMultiplier: 0.1
   forceMultiplier: 0.5
+  FriendlyFire: 0
 --- !u!54 &2136907089
 Rigidbody:
   m_ObjectHideFlags: 0
