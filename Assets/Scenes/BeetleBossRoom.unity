@@ -1375,8 +1375,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1482392300}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -355.5, y: -191.32, z: 16.94}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -355.9396, y: -191.10846, z: -14.34}
   m_LocalScale: {x: 1.7, y: 2.4, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1406,8 +1406,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1542653646}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: -376.59, y: -174, z: 11.6}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -333.41, y: -195.12, z: 13.16}
   m_LocalScale: {x: 1.7, y: 2.4, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6843,6 +6843,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BeetleBoss
       objectReference: {fileID: 0}
+    - target: {fileID: 5804967923690742224, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
+      propertyPath: AIBehaviours.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 51549db18436f4c88ac6d1edda336ec5, type: 2}
     m_RemovedComponents:
     - {fileID: 8709236721289258936, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
     m_RemovedGameObjects:
