@@ -204,12 +204,12 @@ public class CameraController : MonoBehaviour
         currStamina -= 3f;
         if(currStamina <= 0) currStamina = 0;
 
-        int dashLength = 15;
-        float dashMultiplier = 1f;
+        var dlength = dashLength;
+        var dstrength = dashStrength;
         if(! targetMovement.physicsBody.IsGrounded()){
             //When in the air increase dash speed and length
-            dashLength = 25;
-            dashMultiplier = 1.5f;
+            dlength *= (int)dashMultiplier;
+            dstrength *= dashMultiplier ;
         }
         var wait = new WaitForFixedUpdate();
         doubleTapTimer = 0;
@@ -223,6 +223,8 @@ public class CameraController : MonoBehaviour
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
     }
+    public int dashLength = 15;
+    public float dashMultiplier = 1.5f;
 
     private bool moved = false;
     private Vector3 accum = Vector3.zero;
