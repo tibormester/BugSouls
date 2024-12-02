@@ -17,7 +17,7 @@ MonoBehaviour:
   CoolDown: 2.5
   angle: -5
   RotationSpeed: 0.05
-  WindUpDuration: 0.3
+  WindUpDuration: 0.1
   ChargeDuration: 0.35
   ChargeSpeed: 4
   FollowThroughDuration: 0.2

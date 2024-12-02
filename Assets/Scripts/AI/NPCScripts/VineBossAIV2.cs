@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Linq;
 using System.Net.NetworkInformation;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using static UnityEngine.GraphicsBuffer;
 
 public class VineBossAIV2 : MonoBehaviour
@@ -22,6 +24,12 @@ public class VineBossAIV2 : MonoBehaviour
     public GameObject swarmBug;
     public GameObject swarmLineStart;
     public GameObject swarmLineEnd;
+    public Image gameOverScreen;
+    public TextMeshProUGUI gameOverText;
+    public float secondsToFade = 2f;
+
+
+
     private Vector3 swarmLineStartPos;
     private Vector3 swarmLineEndPos;
 
@@ -47,7 +55,10 @@ public class VineBossAIV2 : MonoBehaviour
         swarmLineEndPos = swarmLineEnd.transform.position;
 
 
-        GetComponent<Health>().DeathEvent += () => { vineBossAnimator.CrossFade("die", 0.1f); dying = true; };
+        GetComponent<Health>().DeathEvent += () => { 
+            vineBossAnimator.CrossFade("die", 0.1f); dying = true; 
+            
+        };
 
         AnimationClip[] clips = vineBossAnimator.runtimeAnimatorController.animationClips;
 
@@ -141,6 +152,20 @@ public class VineBossAIV2 : MonoBehaviour
 
             yield return null;
         }
+
+        yield return new WaitForSeconds(3f);
+        float fadeToBlack = 0f;
+        while (dying && fadeToBlack < 1f)
+        {
+
+            gameOverScreen.color = new Color(0, 0, 0, fadeToBlack);
+            gameOverText.color = new Color(1f, 1f, 1f, fadeToBlack);
+            fadeToBlack += Time.deltaTime * 1f / secondsToFade;
+
+            yield return null;
+        }
+
+        Time.timeScale = 0f;
     }
 
     public void SwarmAttack()
