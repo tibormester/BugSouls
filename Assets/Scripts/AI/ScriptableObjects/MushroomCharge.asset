@@ -9,13 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c945cff10588b4bbda4ff029ce512488, type: 3}
-  m_Name: Spider Chase
+  m_Script: {fileID: 11500000, guid: da3a04420865e4cef865b31bf087722f, type: 3}
+  m_Name: MushroomCharge
   m_EditorClassIdentifier: 
-  maxChaseDistance: 100
-  minEngageDistance: 3
-  maxEngageDistance: 8
-  MoveSpeed: 6
-  Acceleration: 6
-  BackupMoveSpeed: 6
-  BackupAcceleration: 2
+  Damage: 15
+  Knockback: 2
+  CoolDown: 2.5
+  angle: -25
+  RotationSpeed: 0.05
+  WindUpDuration: 0.3
+  ChargeDuration: 0.35
+  ChargeSpeed: 1
+  FollowThroughDuration: 0.2

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e907f1b9d2744b1988c873cfc76f5cd, type: 3}
   m_Name: Spider Strafe
   m_EditorClassIdentifier: 
-  StrafeMoveSpeed: 16
-  StrafeAcceleration: 9
+  StrafeMoveSpeed: 4
+  StrafeAcceleration: 12

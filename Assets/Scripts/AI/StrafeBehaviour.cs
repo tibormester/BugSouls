@@ -21,6 +21,10 @@ public class StrafeBehaviour : AIBehaviour {
     }
 
     public override IEnumerator Behaviour(GeneralAI ai){
+        //Look at the player
+        Vector3 diff = ai.target.transform.position - ai.transform.position;
+        ai.movement.look_direction = diff;
+
         float direction = (float)ai.data[directionTag]; //TODO: Change this to TryGetOrDefault 1f
         ai.movement.acceleration = StrafeAcceleration;
         ai.movement.moveSpeed = StrafeMoveSpeed;

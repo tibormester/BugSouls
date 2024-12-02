@@ -39,14 +39,16 @@ public class GeneralAI : MonoBehaviour{
             behaviour.InitializeLocalData(this);
         }
 
-        //Starts the Enemy's AI
-        StartCoroutine(ProcessBehaviours());
+        
         
     }
     //Place to add listeners for player events
     public virtual void RecievePlayer(Transform player){
         target = player;
         target.GetComponent<Health>().DeathEvent += OnPlayerKilled;
+        //Starts the Enemy's AI
+        StartCoroutine(ProcessBehaviours());
+        //Has to be here otherwise it doesnt restart
     }
     //When we die
     public virtual void OnDeath(){

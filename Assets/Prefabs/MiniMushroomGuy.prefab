@@ -50,6 +50,7 @@ GameObject:
   - component: {fileID: 2346710558462944489}
   - component: {fileID: 1807322404060456750}
   - component: {fileID: 4951375626939411636}
+  - component: {fileID: 2221269924859935616}
   m_Layer: 9
   m_Name: MiniMushroomGuy
   m_TagString: Untagged
@@ -5111,12 +5112,28 @@ MonoBehaviour:
   target: {fileID: 0}
   processing: 1
   AIBehaviours:
-  - {fileID: 11400000, guid: 1f591b4fced5846c6872a6357e8d9fd6, type: 2}
   - {fileID: 11400000, guid: 90b6f2cf36e424845b8fdf8916cfa566, type: 2}
+  - {fileID: 11400000, guid: 1f591b4fced5846c6872a6357e8d9fd6, type: 2}
   - {fileID: 11400000, guid: 5ea6363ec17154ff1abf1ff8409c96a4, type: 2}
-  - {fileID: 11400000, guid: 034903a0320d94f5daa6e25decb0d331, type: 2}
+  - {fileID: 11400000, guid: 3603404c7cb1248d587bd1e1a377fcbd, type: 2}
   CollisionEventLayer: -1
   colliding: []
+--- !u!114 &2221269924859935616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3522994712192022450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 928807b9139ab43d386c74feac107419, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 8013867954593243838}
+  ScaleMultiplier: 1
+  popVector: {x: 0, y: 1.2, z: 0.2}
+  popDuration: 5
 --- !u!1 &6910500638941741262
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c945cff10588b4bbda4ff029ce512488, type: 3}
-  m_Name: Spider Chase
+  m_Name: BigMushroomChase
   m_EditorClassIdentifier: 
   maxChaseDistance: 100
   minEngageDistance: 3
-  maxEngageDistance: 8
-  MoveSpeed: 6
-  Acceleration: 6
-  BackupMoveSpeed: 6
-  BackupAcceleration: 2
+  maxEngageDistance: 6
+  MoveSpeed: 3
+  Acceleration: 8
+  BackupMoveSpeed: 4
+  BackupAcceleration: 1

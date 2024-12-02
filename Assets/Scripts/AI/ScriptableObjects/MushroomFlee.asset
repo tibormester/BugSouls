@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c28a7da955e04afabbd7c12fd45b7df, type: 3}
   m_Name: MushroomFlee
   m_EditorClassIdentifier: 
-  FleeAcceleration: 25
+  FleeAcceleration: 24
   FleeMoveSpeed: 18

@@ -57,12 +57,25 @@ public class LeapAttack : AIBehaviour {
 
         ai.movement.maxSpeed = 0.5f;
         float timer = 0f;
-        Quaternion targetRotation = Quaternion.Euler(angle, ai.transform.localEulerAngles.y, ai.transform.localEulerAngles.z);
         while (timer < WindUpDuration + ChargeDuration){
+            Vector3 direction = ai.target.transform.position - ai.transform.position;
+            ai.movement.look_direction = direction;
+
+            //Quaternion.FromToRotation(ai.transform.forward, directionToTarget);
+
+            Quaternion flatRotation = Quaternion.LookRotation(direction, Vector3.up);
+            Quaternion targetRotation = Quaternion.Euler(angle, flatRotation.eulerAngles.y, 0);
+
             // Calculate angle difference
-            Quaternion currentRotation = ai.transform.localRotation;
+            Quaternion currentRotation = ai.transform.rotation;
+
             Quaternion rotationDelta = targetRotation * Quaternion.Inverse(currentRotation);
-            // Extract the x axis
+            // Step 4: Apply the rotation with a check to ensure proper direction
+            if (Quaternion.Dot(ai.transform.rotation, targetRotation) > 0){
+                // Flip the quaternion to ensure shortest path
+                rotationDelta = new Quaternion(-rotationDelta.x, -rotationDelta.y, -rotationDelta.z, -rotationDelta.w);
+            }
+            // Get a single angle + the difference
             rotationDelta.ToAngleAxis(out float angleDifference, out Vector3 axis);
             // Apply torque if axis isnt zero
             if (axis != Vector3.zero){
@@ -71,7 +84,6 @@ public class LeapAttack : AIBehaviour {
             }
             if(timer > WindUpDuration){
                 ai.movement.maxSpeed = 99f;
-                Vector3 direction = ai.target.transform.position - ai.transform.position;
                 ai.rb.AddForce(direction.normalized * ChargeSpeed, ForceMode.VelocityChange);
             }
             timer += Time.fixedDeltaTime;

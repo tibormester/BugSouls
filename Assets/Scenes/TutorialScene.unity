@@ -4320,6 +4320,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BigMushroomGuy
       objectReference: {fileID: 0}
+    - target: {fileID: 3664349592518199945, guid: 2c1959e56a36d4a108a470b39b57b3d8, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 40cbcb73428a6834e88e5c27c888c1de, type: 2}
     - target: {fileID: 6242039117865080877, guid: 2c1959e56a36d4a108a470b39b57b3d8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.39

@@ -12,7 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da3a04420865e4cef865b31bf087722f, type: 3}
   m_Name: Spider Leap
   m_EditorClassIdentifier: 
-  Damage: 15
-  Knockback: 1
-  CoolDown: 4
-  FollowThroughDuration: 0.5
+  Damage: 5
+  Knockback: 0
+  CoolDown: 3
+  angle: 25
+  RotationSpeed: 1
+  WindUpDuration: 0.1
+  ChargeDuration: 0.1
+  ChargeSpeed: 2
+  FollowThroughDuration: 0.2

@@ -5166,8 +5166,8 @@ MonoBehaviour:
   processing: 1
   AIBehaviours:
   - {fileID: 11400000, guid: 95cdd11f4fab24ecc98ca4d43c7fd62b, type: 2}
-  - {fileID: 11400000, guid: 755feee3f0b824c4c9c4f9f0fe793f1e, type: 2}
-  - {fileID: 11400000, guid: 2271980e7877349cabe93abbe7bc6bb1, type: 2}
+  - {fileID: 11400000, guid: f4b68505167c04310bd20b704a93ae86, type: 2}
+  - {fileID: 11400000, guid: 37bb2b6510b75418eb1472d714022962, type: 2}
   - {fileID: 11400000, guid: 034903a0320d94f5daa6e25decb0d331, type: 2}
   CollisionEventLayer: -1
   colliding: []
@@ -5382,6 +5382,7 @@ MonoBehaviour:
   dialogue:
   - 'The corruption... it twists, it consumes. I fought to protect... '
   - I only delayed the inevitable.
+  heals: 1
 --- !u!1 &8750895319602424838
 GameObject:
   m_ObjectHideFlags: 0

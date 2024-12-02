@@ -12,8 +12,8 @@ public class SicklySpiderScript : MonoBehaviour
     public string[] dialogue = new string[] {
         "You're... still whole? It's too late for me, but maybe not for the nest.",
         "The matriarch... she fought the corruption, but even she fell. Her mind... no longer her own.",
-        "The vine... it has grown through the tree's heart. It twists our home into a nightmare.",
-        "Go, spiderling. Burn it all down. Free us... or share our fate.",
+        "My weapons are over by those crates.\nTake them, I won't be needing them soon.",
+        "Go, Spider Ant. Burn it all down. Free us... or share our fate.",
     };
     void Start(){
         text = GetComponent<TextMeshPro>();

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: MushroomChase
   m_EditorClassIdentifier: 
   maxChaseDistance: 100
-  minEngageDistance: 2
-  maxEngageDistance: 3
-  MoveSpeed: 6
-  Acceleration: 3
-  BackupMoveSpeed: 8
-  BackupAcceleration: 2
+  minEngageDistance: 1
+  maxEngageDistance: 6
+  MoveSpeed: 12
+  Acceleration: 8
+  BackupMoveSpeed: 4
+  BackupAcceleration: 8
