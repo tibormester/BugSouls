@@ -37,18 +37,34 @@ public class Droppable : MonoBehaviour{
             DroppedItem?.Invoke(i);
         }
     }
+    public bool drop = true; // false means throw
 
     public void Drop(){
-        item.layer = LayerMask.NameToLayer("Throwable");
+        ChangeLayersRecursive(item,LayerMask.NameToLayer("Throwable") );
         var globalScale = item.transform.lossyScale;
         item.transform.SetParent(this.gameObject.transform.parent); //Maybe set to null?
         item.transform.localScale = globalScale * ScaleMultiplier;
 
-        Rigidbody rb = AddRigidBody(); //Adds it with some init stuff
-        Throwable throwable = item.AddComponent<Throwable>();
-
-        StartCoroutine(LaunchItem(rb));
-
+        Rigidbody rb = item.GetComponent<Rigidbody>();
+        if(rb){
+            rb.useGravity = true;
+            rb.isKinematic = false;
+            rb.excludeLayers = LayerMask.GetMask(new string[]{});
+        }else{
+            rb = AddRigidBody(); //Adds it with some init stuff
+        }
+        Throwable throwable = item.GetComponent<Throwable>();
+        if(throwable){
+            throwable.enabled = true;
+        }else{
+            throwable = item.AddComponent<Throwable>();
+            
+        }
+        if(drop){
+            StartCoroutine(LaunchItem(rb));
+        } else{
+            throwable.Thrown(popVector * popDuration);
+        }
         item = null;
     }
     public IEnumerator LaunchItem(Rigidbody rb){
@@ -66,6 +82,13 @@ public class Droppable : MonoBehaviour{
         rb.angularDrag = 1f;
         rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
         return rb;
+    }
+
+    public static void  ChangeLayersRecursive(GameObject obj, int layerID){
+        obj.layer = layerID;
+        foreach(Transform child in obj.transform){
+            ChangeLayersRecursive(child.gameObject, layerID);
+        }
     }
 }
 
