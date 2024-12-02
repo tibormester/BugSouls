@@ -25,6 +25,7 @@ public class Throwable : MonoBehaviour
         rb.isKinematic = true;
     }
     public void Thrown(Vector3 velocity){
+        if(!rb) rb = GetComponent<Rigidbody>();
         held = false;
         transform.SetParent(null, true);
         rb.excludeLayers = LayerMask.GetMask(new string[]{});
@@ -33,9 +34,9 @@ public class Throwable : MonoBehaviour
     }
     private IEnumerator Throwing(Vector3 velocity){
         collided.Clear();
-        OnCollision += Collide;
         rb.AddForce(velocity, ForceMode.VelocityChange);
-        yield return new WaitForSeconds(0.2f); //Let the force go into effect
+        yield return new WaitForSeconds(0.1f); //Let the force go into effect and clear the player
+        OnCollision += Collide;
         yield return new WaitUntil( () => rb.velocity.sqrMagnitude < 0.2f );
         OnCollision -= Collide;
         collided.Clear();
@@ -49,7 +50,6 @@ public class Throwable : MonoBehaviour
             StartCoroutine(Collision(health, impulse));
     }
     public float MaxMultiplier = 5f;
-    public float ExpectedForce = 1f;
     public float MinMultiplier = 0.1f;
     public float forceMultiplier = 0.02f; //impulses are around 10s to 50s to 150s depending on charge time becomes 0.2x,  1x, 3x 
     public IEnumerator Collision(Health health, Vector3 impulse){
@@ -59,9 +59,10 @@ public class Throwable : MonoBehaviour
         //Do something like knockback? But the physics simulation already does enough knockback...
         yield return null;
     }
+    public bool FriendlyFire = false;
     private void OnCollisionEnter(Collision collision){
         if(held){return;}
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy") && collision.rigidbody != null){
+        if (collision.rigidbody != null && (collision.gameObject.layer == LayerMask.NameToLayer("Enemy") || collision.gameObject.layer == LayerMask.NameToLayer("Player")) ){
             Health health = collision.rigidbody.gameObject.GetComponent<Health>();
             if (health != null){
                 OnCollision?.Invoke(health, collision.impulse);
