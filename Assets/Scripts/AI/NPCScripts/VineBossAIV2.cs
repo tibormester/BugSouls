@@ -245,6 +245,8 @@ public class VineBossAIV2 : MonoBehaviour
             var diff = target.position - shockWave.transform.position;
             if(diff.magnitude <= radius * 0.45f){
                 var rb = target.GetComponent<Rigidbody>();
+                diff = Vector3.ProjectOnPlane(diff, target.transform.up); //flatten so we dont hop on hit
+                diff += Vector3.up; //Angle up slightly
                 rb.AddForce(diff.normalized * ShockWaveStrength, ForceMode.VelocityChange);
                 var health = target.GetComponent<Health>();
                 health.ApplyDamage(Time.fixedDeltaTime);//Just to trigger particles and sound tbh
