@@ -6787,7 +6787,7 @@ PrefabInstance:
     - target: {fileID: 6380785092032781317, guid: 07bed154c6d01e445b783fe21659abb5, type: 3}
       propertyPath: swarmBug
       value: 
-      objectReference: {fileID: 435221331292017406, guid: 9a5e38e6ea787475f9cb49c5f6bcc467, type: 3}
+      objectReference: {fileID: 2572901030770951931, guid: c453a8528fe901144ac1e218c46e0004, type: 3}
     - target: {fileID: 6380785092032781317, guid: 07bed154c6d01e445b783fe21659abb5, type: 3}
       propertyPath: swarmLineEnd
       value: 

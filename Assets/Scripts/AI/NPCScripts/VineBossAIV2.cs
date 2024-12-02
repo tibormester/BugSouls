@@ -88,7 +88,23 @@ public class VineBossAIV2 : MonoBehaviour
 
         while (!dying)
         {
-            if (timeSinceAttack >= attackInterval && timeSinceAttack >= attackTime * 0.9f) {
+            if (!swarmDead)
+            {
+                bool allDead = true;
+                foreach (GameObject bug in swarm)
+                {
+                    Health dummy;
+                    if (bug.TryGetComponent<Health>(out dummy) && bug.transform.position.y > 400f)
+                    {
+                        allDead = false;
+                    }
+
+                }
+                swarmDead = allDead;
+            }
+
+
+            if (swarmDead && timeSinceAttack >= attackInterval && timeSinceAttack >= attackTime * 0.9f) {
 
                 if (firstTimeAttack)
                 {
@@ -135,6 +151,8 @@ public class VineBossAIV2 : MonoBehaviour
             bug.transform.position = new Vector3(x, swarmLineStartPos.y, swarmLineStartPos.z);
             bug.transform.LookAt(target.position);
 
+            GeneralAI bugAI = bug.GetComponent<GeneralAI>();
+            bugAI.RecievePlayer(target);
 
 
             swarm[i] = bug;
