@@ -18,9 +18,9 @@ public class VineBossAIV2 : MonoBehaviour
 
     public Transform target;
 
-    public static int numAttacks = 6;
+    private static int numAttacks = 5;
 
-    private bool dying = false;
+    public bool dying = false;
     private bool firstTime = true;
     private string currentAnimation = "bossIdle";
     private float timeSinceAttack = 0f;
@@ -33,7 +33,7 @@ public class VineBossAIV2 : MonoBehaviour
         SceneDescriptor sd = gameObject.scene.GetRootGameObjects().Select(go => go.GetComponent<SceneDescriptor>()).FirstOrDefault(desc => desc != null);
         sd.PlayerEntered += RecievePlayer;
 
-        GetComponent<Health>().DeathEvent += () => { vineBossAnimator.CrossFade("Die", 0.1f); dying = true; };
+        GetComponent<Health>().DeathEvent += () => { vineBossAnimator.CrossFade("die", 0.1f); dying = true; };
 
         AnimationClip[] clips = vineBossAnimator.runtimeAnimatorController.animationClips;
 
@@ -73,10 +73,10 @@ public class VineBossAIV2 : MonoBehaviour
             firstTime = false;
         }
 
-        while (true)
+        while (!dying)
         {
             if (timeSinceAttack >= attackInterval && timeSinceAttack >= attackTime * 0.9f) {
-                int randomAnim = Random.Range(0, 6);
+                int randomAnim = Random.Range(0, numAttacks);
                 ChangeAnimation(attackNames[randomAnim]);
                 attackTime = attackDurations[randomAnim];
                 Debug.Log("Attacking with " + attackNames[randomAnim]);
@@ -112,40 +112,4 @@ public class VineBossAIV2 : MonoBehaviour
         return true;
     }
 
-    // This method should be called via animation events at the exact frame when the attack hits
-    public void Attack()
-    {
-        // Detect the player within the attack range
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackRange, playerLayer);
-
-        foreach (var hitCollider in hitColliders)
-        {
-            // Ensure we're hitting the player
-            if (hitCollider.CompareTag("Player"))
-            {
-                // Apply damage
-                Health playerHealth = hitCollider.GetComponent<Health>();
-                if (playerHealth != null)
-                {
-                    playerHealth.ApplyDamage(damage);
-                }
-
-                // Apply knockback
-                Rigidbody playerRb = hitCollider.GetComponent<Rigidbody>();
-                if (playerRb != null)
-                {
-                    Vector3 knockbackDirection = (hitCollider.transform.position - transform.position).normalized;
-                    knockbackDirection.y = 0; // Prevent vertical knockback
-                    playerRb.AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
-                }
-            }
-        }
-    }
-
-    // Optional: Visualize the attack range in the editor
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
-    }
 }
